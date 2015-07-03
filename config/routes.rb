@@ -5,6 +5,12 @@ Rails.application.routes.draw do
 
   get 'home/show'
 
+  get 'player/index'
+
+  get 'player/input'
+
+  post 'player/create'
+
   root to: "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
