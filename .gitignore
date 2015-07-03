@@ -29,3 +29,6 @@ doc/
 
 # database
 database.yml
+
+# 環境設定
+.env

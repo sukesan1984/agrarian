@@ -6,6 +6,12 @@ gem 'rails', '4.2.0'
 # mysql
 gem 'mysql2'
 
+# ユーザー認証
+gem 'devise'
+
+# dotenv
+gem 'dotenv-rails'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
