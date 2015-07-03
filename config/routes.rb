@@ -6,10 +6,9 @@ Rails.application.routes.draw do
   get 'home/show'
 
   get 'player/index'
-
   get 'player/input'
-
   post 'player/create'
+  get 'player/list'
 
   root to: "home#index"
 

@@ -23,4 +23,8 @@ class PlayerController < ApplicationController
       @player = @players[0]
     end
   end
+
+  def list
+    @players = Player.all
+  end
 end
