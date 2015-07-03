@@ -32,3 +32,6 @@ database.yml
 
 # 環境設定
 .env
+
+#assets
+public/assets
