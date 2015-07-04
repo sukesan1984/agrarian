@@ -1,5 +1,5 @@
 <h1>エリア</h1>
-<%= @area_type %>
-<%= @type_id %>
-<%= @id %>
-<%= @name %>
+
+<% @target_routes.each do |target|%>
+    <%= link_to(target.get_name(), "/areas/" + target.get_area_id().to_s() ) %> <br>
+<% end %>

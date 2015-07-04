@@ -1,0 +1,2 @@
+class NullAreaViewModel <AreaBaseViewModel
+end

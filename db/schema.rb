@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704071918) do
+ActiveRecord::Schema.define(version: 20150704074024) do
 
   create_table "areas", force: :cascade do |t|
     t.integer  "area_type",  limit: 4
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20150704071918) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "routes", force: :cascade do |t|
+    t.integer  "area_id",           limit: 4
+    t.integer  "connected_area_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "routes", ["area_id"], name: "index_routes_on_area_id", using: :btree
 
   create_table "towns", force: :cascade do |t|
     t.string   "name",       limit: 255

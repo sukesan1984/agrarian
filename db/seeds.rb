@@ -20,3 +20,10 @@ areas = Area.first_or_create([
 roads = Road.first_or_create([
   { id: 1, name: "最初の街道" }
 ])
+
+routes = Route.first_or_create([
+  { id: 1, area_id: 10001, connected_area_id: 20001 },
+  { id: 2, area_id: 20001, connected_area_id: 10001 },
+  { id: 3, area_id: 20001, connected_area_id: 10002 },
+  { id: 4, area_id: 10002, connected_area_id: 20001 }
+])

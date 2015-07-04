@@ -6,4 +6,7 @@ class AreaBaseViewModel
   # redirect先を取得する。
   def get_redirect_to()
   end
+
+  def get_area_id()
+  end
 end
