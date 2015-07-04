@@ -16,3 +16,7 @@ areas = Area.first_or_create([
   { id: 10002, area_type: 1, type_id: 2 }, # 次の街
   { id: 20001, area_type: 2, type_id: 1 }  # 始まりの街と次の街をつなぐ街道
 ])
+
+roads = Road.first_or_create([
+  { id: 1, name: "最初の街道" }
+])

@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   get 'towns/not_found', to: 'town#not_found'
   get 'towns/:id', to: 'town#show'
 
+  # 街道
+  get 'roads/', to: 'road#index'
+  get 'roads/not_found', to: 'road#not_found'
+  get 'roads/:id', to: 'road#show'
+
   # 場所のとこ
   get 'areas/', to: 'area#index'
   get 'areas/not_found', to: 'area#not_found'
