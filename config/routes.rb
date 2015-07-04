@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   get 'towns/not_found', to: 'town#not_found'
   get 'towns/:id', to: 'town#show'
 
+  # 場所のとこ
+  get 'areas/', to: 'area#index'
+  get 'areas/not_found', to: 'area#not_found'
+  get 'areas/:id', to: 'area#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

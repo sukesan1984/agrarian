@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704053351) do
+ActiveRecord::Schema.define(version: 20150704055007) do
+
+  create_table "areas", force: :cascade do |t|
+    t.integer  "area_type",  limit: 4
+    t.integer  "type_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

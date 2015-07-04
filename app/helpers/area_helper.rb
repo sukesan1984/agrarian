@@ -1,0 +1,2 @@
+module AreaHelper
+end
