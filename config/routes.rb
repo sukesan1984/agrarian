@@ -5,12 +5,18 @@ Rails.application.routes.draw do
 
   get 'home/show'
 
+  # player 登録周り
   get 'player/index'
   get 'player/input'
   post 'player/create'
-  get 'player/list'
+  get 'player/list', to: 'player#list'
 
   root to: "home#index"
+
+  # 街のとこ
+  get 'towns/', to: 'towns#index'
+  get 'towns/not_found', to: 'town#not_found'
+  get 'towns/:id', to: 'town#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+towns = Town.first_or_create([
+  {town_id:1, name: "始まりの街"},
+  {town_id:2, name: "次の街"}
+])
+
