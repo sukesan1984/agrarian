@@ -4,7 +4,7 @@ class TownController < ApplicationController
   end
   def show 
     @id = params[:id]
-    town = Town.find_by(town_id: @id)
+    town = Town.find_by(id: @id)
     if(town == nil)
       redirect_to("/towns/not_found")
       return
