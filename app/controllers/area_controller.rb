@@ -13,6 +13,13 @@ class AreaController < ApplicationController
     end
     @area_type = area.area_type
     @type_id   = area.type_id
+
+    factory = AreaViewModelFactory.new()
+    area_view_model = factory.build(@area_type, @type_id)
+    path = area_view_model.get_redirect_to()
+    if(path != nil)
+      redirect_to(path)
+    end
   end
 
   def not_found
