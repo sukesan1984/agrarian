@@ -1,4 +1,4 @@
-<h1>エリア</h1>
+<h1><%= @current.get_name() %></h1>
 
 <% @target_routes.each do |target|%>
     <%= link_to(target.get_name(), "/areas/" + target.get_area_id().to_s() ) %> <br>

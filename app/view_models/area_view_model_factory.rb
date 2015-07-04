@@ -20,7 +20,7 @@ class AreaViewModelFactory
   def build_by_area_id(area_id)
     area = Area.find_by(id: area_id)
     if(area == nil)
-      return nil
+      return NullAreaViewModel.new()
     end
     return self.build(area_id, area.area_type, area.type_id)
   end

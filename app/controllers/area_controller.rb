@@ -6,14 +6,16 @@ class AreaController < ApplicationController
 
   def show
     @id = params[:id]
-    area = Area.find_by(id: @id)
 
-    if(area == nil)
+    factory = AreaViewModelFactory.new()
+
+    @current = factory.build_by_area_id(@id)
+
+    if(@current.is_nil)
       redirect_to("/areas/not_found")
       return
     end
 
-    factory = AreaViewModelFactory.new()
     routes = Route.where("area_id = ?", @id)
     @target_routes = Array.new()
     routes.each do |route|
