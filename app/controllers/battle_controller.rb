@@ -1,4 +1,5 @@
 class BattleController < ApplicationController
+  before_action :authenticate_user!
   def index
     unit_list_a = Array.new
     unit_list_b = Array.new
