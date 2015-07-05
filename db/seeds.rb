@@ -10,8 +10,14 @@ towns = Town.first_or_create([
   {id:1, name: "始まりの街"},
   {id:2, name: "ジット"},
   {id:3, name: "エンモルド" },
-  {id:4, name: "ゴルバン" }
+  {id:4, name: "ゴルバン" },
+  {id:5, name: "シュメット" },
+  {id:6, name: "ニムス" },
+  {id:7, name: "エジーク" },
 ])
+
+# テレス山
+# 森ヌージュ
 
 areas = Area.first_or_create([
   { id: 10001, area_type: 1, type_id: 1 }, # 始まりの街
@@ -20,7 +26,8 @@ areas = Area.first_or_create([
 ])
 
 roads = Road.first_or_create([
-  { id: 1, name: "最初の街道", road_length: 5 }
+  { id: 1, name: "古くからある道", road_length: 5 },
+  { id: 2, name: "ドラゴノーム", road_length: 10 }
 ])
 
 routes = Route.first_or_create([
