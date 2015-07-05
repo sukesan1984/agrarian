@@ -1,5 +1,9 @@
 <h1>戦闘</h1>
 
-<% @action_list.each do |action|%>
-    <%= action.to_string() %><br>
+<% @turn_result_list.each do |turn_result|%>
+======== <br>
+    ターン: <%= turn_result.get_turn_count %> <br>
+    <% turn_result.get_action_list.each do |action| %>
+        <%= action.get_result() %><br>
+    <% end %>
 <% end %>

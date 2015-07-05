@@ -10,12 +10,20 @@ class Battle::Character
     return @name
   end
 
+  def get_hp()
+    return @hp
+  end
+
   def take_damage(damage)
     @hp -= damage
-    if(@hp < 0)
+    if(@hp <= 0)
       @hp = 0
       @is_dead = true
     end
+  end
+
+  def is_dead()
+    return @is_dead
   end
 
   # いずれはパーティをとるようにするが、一旦party = characterで

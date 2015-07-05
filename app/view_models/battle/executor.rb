@@ -1,11 +1,17 @@
 class Battle::Executor
   # partyはcharacterで。
   def do_battle(party_a, party_b)
-    action_list = Array.new()
+    turn = Battle::Turn.new(party_a, party_b)
 
-    action_list.push(party_a.get_action(party_b))
-    action_list.push(party_b.get_action(party_a))
+    turn_result_list = Array.new()
+    is_turn_end = false
 
-    return action_list
+    while(!is_turn_end)
+      turn_result = turn.do_battle()
+      turn_result_list.push(turn_result)
+      is_turn_end = turn_result.is_turn_end
+    end
+
+    return turn_result_list
   end
 end
