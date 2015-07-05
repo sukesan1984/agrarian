@@ -20,7 +20,7 @@ areas = Area.first_or_create([
 ])
 
 roads = Road.first_or_create([
-  { id: 1, name: "最初の街道" }
+  { id: 1, name: "最初の街道", road_length: 5 }
 ])
 
 routes = Route.first_or_create([

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705055524) do
+ActiveRecord::Schema.define(version: 20150705143740) do
 
   create_table "areas", force: :cascade do |t|
     t.integer  "area_type",  limit: 4
@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(version: 20150705055524) do
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
 
   create_table "roads", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",        limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "road_length", limit: 4
   end
 
   create_table "routes", force: :cascade do |t|
