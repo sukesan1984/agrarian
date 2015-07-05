@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   get 'areas/not_found', to: 'area#not_found'
   get 'areas/:id', to: 'area#show'
 
+  # バトル
+  get 'battle/', to: 'battle#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
