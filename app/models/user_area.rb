@@ -1,4 +1,7 @@
 class UserArea < ActiveRecord::Base
+  belongs_to :player
+  belongs_to :area
+
   INITIAL_AREA_ID = 10001
   # 現在地を取得する。レコードがなければ生成する。
   def UserArea.get_current_or_create(player_id)

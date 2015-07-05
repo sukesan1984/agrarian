@@ -23,9 +23,11 @@ class AreaController < ApplicationController
     end
 
     player = Player.find_by(user_id:  current_user.id)
+
     if(player == nil)
       redirect_to("/player/input")
     end
+
     user_area = UserArea.get_or_create(player.id)
     user_area.area_id = @id
     user_area.save()
