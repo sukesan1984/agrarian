@@ -1,17 +1,10 @@
 class Battle::Character
+  attr_reader :name, :hp, :is_dead
   def initialize(name, atk, hp)
     @name = name
     @atk  = atk
     @hp   = hp
     @is_dead = false
-  end
-
-  def get_name()
-    return @name
-  end
-
-  def get_hp()
-    return @hp
   end
 
   def take_damage(damage)
@@ -20,10 +13,6 @@ class Battle::Character
       @hp = 0
       @is_dead = true
     end
-  end
-
-  def is_dead()
-    return @is_dead
   end
 
   # いずれはパーティをとるようにするが、一旦party = characterで

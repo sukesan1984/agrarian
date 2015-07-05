@@ -1,4 +1,5 @@
 class Battle::Action
+  attr_reader :result
   # 主体, 客体
   def initialize(
     subject_character,
@@ -12,11 +13,7 @@ class Battle::Action
     @result = self.to_string()
   end
 
-  def get_result
-    return @result
-  end
-
   def to_string
-    return @subject_character.get_name() + "が" + @object_character.get_name() + "に" + @value.to_s() + "の" + @verb + "。" + @object_character.get_name() + "の現在HP: " + @object_character.get_hp().to_s()
+    return @subject_character.name + "が" + @object_character.name + "に" + @value.to_s() + "の" + @verb + "。" + @object_character.name + "の現在HP: " + @object_character.hp.to_s()
   end
 end

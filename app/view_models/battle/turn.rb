@@ -21,21 +21,10 @@ class Battle::Turn
 end
 
 class Battle::TurnResult
+  attr_reader :action_list, :is_turn_end, :turn_count
   def initialize(action_list, turn_count, is_turn_end)
     @action_list = action_list
     @is_turn_end = is_turn_end
     @turn_count  = turn_count
-  end
-
-  def get_action_list()
-    return @action_list
-  end
-
-  def is_turn_end()
-    return @is_turn_end
-  end
-
-  def get_turn_count()
-    return @turn_count
   end
 end

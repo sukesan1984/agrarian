@@ -2,8 +2,8 @@
 
 <% @turn_result_list.each do |turn_result|%>
 ======== <br>
-    ターン: <%= turn_result.get_turn_count %> <br>
-    <% turn_result.get_action_list.each do |action| %>
-        <%= action.get_result() %><br>
+    ターン: <%= turn_result.turn_count %> <br>
+    <% turn_result.action_list.each do |action| %>
+        <%= action.result %><br>
     <% end %>
 <% end %>
