@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  town_id: 
+  player_id: 1
+  contents: MyString
+
+two:
+  town_id: 
+  player_id: 1
+  contents: MyString

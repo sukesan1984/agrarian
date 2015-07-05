@@ -1,7 +1,12 @@
 class TownViewModel < AreaBaseViewModel
-  def initialize(area_id, town)
+  def initialize(area_id, town, town_bulletin_boards)
     @area_id = area_id
     @town    = town
+    @town_bulletin_boards = town_bulletin_boards
+  end
+
+  def get_id
+    return @town.id
   end
 
   def get_name
@@ -15,5 +20,9 @@ class TownViewModel < AreaBaseViewModel
   def get_render_path
     return "area/town"
   end
-end
 
+  # 部分templateに渡すやつ
+  def get_render_object
+    return @town_bulletin_boards
+  end
+end

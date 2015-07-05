@@ -4,7 +4,8 @@ class AreaViewModelFactory
     when 1
       town = Town.find_by(id: type_id)
       if(town != nil)
-        return TownViewModel.new(area_id, town)
+        town_bulletin_boards = TownBulletinBoard.where("town_id = ?", town.id).order(created_at: :desc).limit(5)
+        return TownViewModel.new(area_id, town, town_bulletin_boards)
       end
     when 2
       road = Road.find_by(id: type_id)

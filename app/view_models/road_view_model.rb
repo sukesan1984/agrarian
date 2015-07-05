@@ -15,4 +15,11 @@ class RoadViewModel < AreaBaseViewModel
   def get_render_path
     return "area/road"
   end
+
+  def get_render_object
+    return {
+      id: 2,
+      contents: "fuga"
+    }
+  end
 end

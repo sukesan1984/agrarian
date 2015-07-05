@@ -1,2 +1,11 @@
-<li>ショップ</li>
-<li>銀行</li>
+<h2> 掲示板 </h2>
+
+<% object.each do |record| %>
+    <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
+<% end %>
+
+<%= form_tag('/towns/write/', method: "post") do %>
+  <%= label_tag(:q, "書き込んでね") %> 
+  <%= text_field :bbs, :contents %>
+  <%= submit_tag("投稿") %>
+<% end %>

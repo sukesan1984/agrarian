@@ -1,9 +1,10 @@
 <h1><%= @current.get_name() %></h1>
 
 <!-- エリアのタイプによって出し分ける。 -->
-<%= render @current.get_render_path() %>
+<%= render @current.get_render_path(), object: @current.get_render_object() %>
 
 <!-- 次いける部分表示する -->
+<h2>出発する</h2>
 <% @target_routes.each do |target|%>
-    <%= link_to(target.get_name(), "/areas/" + target.get_area_id().to_s() ) %> <br>
+    <li> <%= link_to(target.get_name(), "/areas/" + target.get_area_id().to_s() ) %> </li>
 <% end %>

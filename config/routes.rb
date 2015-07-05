@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'towns/', to: 'towns#index'
   get 'towns/not_found', to: 'town#not_found'
   get 'towns/:id', to: 'town#show'
+  post 'towns/write', to: 'town#write'
 
   # 街道
   get 'roads/', to: 'road#index'
