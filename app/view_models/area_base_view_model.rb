@@ -3,8 +3,7 @@ class AreaBaseViewModel
   def get_name()
   end
 
-  # redirect先を取得する。
-  def get_redirect_to()
+  def get_render_path()
   end
 
   def get_area_id()

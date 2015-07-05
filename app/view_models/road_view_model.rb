@@ -8,11 +8,11 @@ class RoadViewModel < AreaBaseViewModel
     return @road.name
   end
 
-  def get_redirect_to
-    return "/roads/" + @road.id.to_s()
-  end
-
   def get_area_id
     return @area_id
+  end
+
+  def get_render_path
+    return "area/road"
   end
 end
