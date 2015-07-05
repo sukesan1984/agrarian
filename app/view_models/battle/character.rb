@@ -1,10 +1,12 @@
 class Battle::Character
+  attr_accessor :done_action
   attr_reader :name, :hp, :is_dead
   def initialize(name, atk, hp)
     @name = name
     @atk  = atk
     @hp   = hp
     @is_dead = false
+    @done_action = false
   end
 
   def take_damage(damage)
@@ -15,9 +17,9 @@ class Battle::Character
     end
   end
 
-  # いずれはパーティをとるようにするが、一旦party = characterで
   def get_action(party)
-    party.take_damage(@atk)
-    return Battle::Action.new(self, party, "ダメージを与えた", @atk);
+    unit = party.get_attackable_unit
+    unit.take_damage(@atk)
+    return Battle::Action.new(self, unit, "ダメージを与えた", @atk);
   end
 end

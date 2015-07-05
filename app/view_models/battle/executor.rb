@@ -4,12 +4,12 @@ class Battle::Executor
     turn = Battle::Turn.new(party_a, party_b)
 
     turn_result_list = Array.new()
-    is_turn_end = false
+    is_battle_end = false
 
-    while(!is_turn_end)
+    while(!is_battle_end)
       turn_result = turn.do_battle()
       turn_result_list.push(turn_result)
-      is_turn_end = turn_result.is_turn_end
+      is_battle_end = turn_result.is_battle_end
     end
 
     return turn_result_list
