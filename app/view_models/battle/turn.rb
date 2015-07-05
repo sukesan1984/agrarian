@@ -25,15 +25,48 @@ class Battle::Turn
       @party_b.reset_done_action
     end
 
-    return Battle::TurnResult.new(action_list, @current_turn, is_battle_end)
+    return Battle::TurnResult.new(
+      action_list, 
+      @current_turn, 
+      is_battle_end,
+      @party_a,
+      @party_b)
   end
 end
 
 class Battle::TurnResult
-  attr_reader :action_list, :is_battle_end, :turn_count
-  def initialize(action_list, turn_count, is_battle_end)
+  attr_reader :action_list, :is_battle_end, :turn_count, :result_list
+  def initialize(
+    action_list, 
+    turn_count, 
+    is_battle_end,
+    party_a,
+    party_b)
+
     @action_list = action_list
     @is_battle_end = is_battle_end
     @turn_count  = turn_count
+    @party_a     = party_a
+    @party_b     = party_b
+    @result_list = self.create_result_list
+  end
+
+  def create_result_list
+    result_list = Array.new
+    if(@is_battle_end)
+      if(@party_a.is_dead)
+        result_list.push(@party_a.name + "は全滅した。")
+        result_list.push(@party_b.name + "の勝利")
+      else
+        result_list.push(@party_b.name + "は全滅した。")
+        result_list.push(@party_a.name + "の勝利")
+      end
+    else
+      result_list.push("[" + @party_a.name + "の状態" + "]")
+      result_list.concat(@party_a.current_state_list)
+      result_list.push("[" + @party_b.name + "の状態" + "]")
+      result_list.concat(@party_b.current_state_list)
+    end
+    return result_list
   end
 end

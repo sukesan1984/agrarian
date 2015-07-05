@@ -1,6 +1,8 @@
 class Battle::Party
-  def initialize(unit_list)
+  attr_reader :name
+  def initialize(unit_list, name)
     @unit_list = unit_list
+    @name      = name
   end
 
   # パーティが全滅しているかどうかを返す。
@@ -56,5 +58,15 @@ class Battle::Party
     @unit_list.each do |unit|
       unit.done_action = false
     end
+  end
+
+  # パーティ全員の状態を取得する。
+  def current_state_list()
+    state_list = Array.new
+    @unit_list.each do |unit|
+      state_list.push(unit.get_current_state)
+    end
+
+    return state_list
   end
 end
