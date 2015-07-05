@@ -8,7 +8,9 @@
 
 towns = Town.first_or_create([
   {id:1, name: "始まりの街"},
-  {id:2, name: "次の街"}
+  {id:2, name: "ジット"},
+  {id:3, name: "エンモルド" },
+  {id:4, name: "ゴルバン" }
 ])
 
 areas = Area.first_or_create([
