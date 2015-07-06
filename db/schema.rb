@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705143740) do
+ActiveRecord::Schema.define(version: 20150706110709) do
+
+  create_table "area_nodes", force: :cascade do |t|
+    t.integer  "area_id",    limit: 4
+    t.integer  "node_point", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "area_nodes", ["area_id"], name: "index_area_nodes_on_area_id", using: :btree
 
   create_table "areas", force: :cascade do |t|
     t.integer  "area_type",  limit: 4
@@ -37,13 +46,13 @@ ActiveRecord::Schema.define(version: 20150705143740) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.integer  "area_id",           limit: 4
-    t.integer  "connected_area_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "area_node_id",           limit: 4
+    t.integer  "connected_area_node_id", limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
-  add_index "routes", ["area_id"], name: "index_routes_on_area_id", using: :btree
+  add_index "routes", ["area_node_id"], name: "index_routes_on_area_node_id", using: :btree
 
   create_table "town_bulletin_boards", force: :cascade do |t|
     t.integer  "town_id",    limit: 4
@@ -62,9 +71,9 @@ ActiveRecord::Schema.define(version: 20150705143740) do
   end
 
   create_table "user_areas", primary_key: "player_id", force: :cascade do |t|
-    t.integer  "area_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "area_node_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|

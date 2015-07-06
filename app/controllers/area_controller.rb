@@ -9,17 +9,18 @@ class AreaController < ApplicationController
 
     factory = AreaViewModelFactory.new()
 
-    @current = factory.build_by_area_id(@id)
+    @current = factory.build_by_area_node_id(@id)
 
     if(@current.is_nil)
       redirect_to("/areas/not_found")
       return
     end
 
-    routes = Route.where("area_id = ?", @id)
+    # その位置でのターゲットを取得する。
+    routes = Route.where("area_node_id = ?", @current.area_node.id)
     @target_routes = Array.new()
     routes.each do |route|
-      @target_routes.push(factory.build_by_area_id(route.connected_area_id))
+      @target_routes.push(factory.build_by_area_node_id(route.connected_area_node_id))
     end
 
     player = Player.find_by(user_id:  current_user.id)
@@ -29,7 +30,7 @@ class AreaController < ApplicationController
     end
 
     user_area = UserArea.get_or_create(player.id)
-    user_area.area_id = @id
+    user_area.area_node_id = @id
     user_area.save()
   end
 

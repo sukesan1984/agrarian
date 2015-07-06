@@ -1,7 +1,9 @@
 class RoadViewModel < AreaBaseViewModel
-  def initialize(area_id, road)
+  attr_reader :area_node
+  def initialize(area_id, road, area_node)
     @area_id = area_id
     @road    = road
+    @area_node = area_node
   end
 
   def get_name

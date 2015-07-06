@@ -6,5 +6,5 @@
 <!-- 次いける部分表示する -->
 <h2>出発する</h2>
 <% @target_routes.each do |target|%>
-    <li> <%= link_to(target.get_name(), "/areas/" + target.get_area_id().to_s() ) %> </li>
+    <li> <%= link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() ) %> </li>
 <% end %>
