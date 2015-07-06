@@ -12,4 +12,7 @@ class AreaBaseViewModel
   def is_nil
     return false
   end
+
+  def next_to_area_node_id
+  end
 end

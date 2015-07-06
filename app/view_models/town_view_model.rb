@@ -19,6 +19,9 @@ class TownViewModel < AreaBaseViewModel
     return @area_id
   end
 
+  def next_to_area_node_id
+  end
+
   def get_render_path
     return "area/town"
   end

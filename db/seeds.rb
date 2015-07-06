@@ -37,6 +37,9 @@ area_noads = AreaNode.first_or_create([
   { id: 100011, area_id: 10001, node_point: 1},
   { id: 100021, area_id: 10002, node_point: 1},
   { id: 200011, area_id: 20001, node_point: 1},
+  { id: 200012, area_id: 20001, node_point: 2},
+  { id: 200013, area_id: 20001, node_point: 3},
+  { id: 200014, area_id: 20001, node_point: 4},
   { id: 200015, area_id: 20001, node_point: 5}
 ])
 
