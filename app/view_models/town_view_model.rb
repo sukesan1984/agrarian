@@ -1,5 +1,5 @@
 class TownViewModel < AreaBaseViewModel
-  attr_reader :area_node
+  attr_reader :area_node, :area_id
   def initialize(area_id, town, town_bulletin_boards, area_node)
     @area_id = area_id
     @town    = town
@@ -13,10 +13,6 @@ class TownViewModel < AreaBaseViewModel
 
   def get_name
     return @town.name
-  end
-
-  def get_area_id
-    return @area_id
   end
 
   def next_to_area_node_id

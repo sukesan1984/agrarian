@@ -1,5 +1,6 @@
 class AreaViewModelFactory
-  def build(area, area_node)
+  def build(area_node)
+    area = area_node.area
     case area.area_type
     when 1
       town = Town.find_by(id: area.type_id)
@@ -24,10 +25,9 @@ class AreaViewModelFactory
       return NullAreaViewModel.new()
     end
 
-    area = Area.find_by(id: area_node.area_id)
-    if(area == nil)
+    if(area_node.area == nil)
       return NullAreaViewModel.new()
     end
-    return self.build(area, area_node)
+    return self.build(area_node)
   end
 end

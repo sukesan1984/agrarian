@@ -6,9 +6,6 @@ class AreaBaseViewModel
   def get_render_path()
   end
 
-  def get_area_id()
-  end
-
   def is_nil
     return false
   end
