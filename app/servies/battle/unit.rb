@@ -1,4 +1,4 @@
-class Character
+class Battle::Unit
   attr_accessor :done_action
   attr_reader :name, :hp, :is_dead
   # battlize.name
