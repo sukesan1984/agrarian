@@ -2,8 +2,8 @@
 
 one:
   player_id: 1
-  area_id: 1
+  area_node_id: 100011
 
 two:
-  player_id: 1
-  area_id: 1
+  player_id: 2
+  area_node_id: 100011

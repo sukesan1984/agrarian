@@ -2,10 +2,10 @@
 
 one:
   id: 1
-  type: 1
+  area_type: 1
   type_id: 1
 
 two:
-  id: 1
-  type: 1
+  id: 2
+  area_type: 1
   type_id: 1
