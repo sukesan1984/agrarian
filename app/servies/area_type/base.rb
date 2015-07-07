@@ -1,4 +1,4 @@
-class AreaBaseViewModel
+class AreaType::Base
   # 名前を取得する。
   def get_name()
   end

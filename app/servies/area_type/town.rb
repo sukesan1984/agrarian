@@ -1,4 +1,4 @@
-class TownViewModel < AreaBaseViewModel
+class AreaType::Town < AreaType::Base
   attr_reader :area_node, :area_id
   def initialize(area_id, town, town_bulletin_boards, area_node)
     @area_id = area_id

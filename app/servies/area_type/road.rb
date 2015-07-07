@@ -1,4 +1,4 @@
-class RoadViewModel < AreaBaseViewModel
+class AreaType::Road < AreaType::Base
   attr_reader :area_node, :area_id
   def initialize(area_id, road, area_node)
     @area_id = area_id
