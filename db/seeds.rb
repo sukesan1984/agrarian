@@ -50,3 +50,8 @@ routes = Route.first_or_create([
   { id: 3, area_node_id: 200015, connected_area_node_id: 100021 },
   { id: 4, area_node_id: 100021, connected_area_node_id: 200015 }
 ])
+
+Enemy.delete_all
+enemies = Enemy.first_or_create([
+  { id: 1, name: "ゴブリン", attack: 3, defense: 3, hp: 10} 
+])

@@ -1,10 +1,15 @@
-class Battle::Character
+class Character
   attr_accessor :done_action
   attr_reader :name, :hp, :is_dead
-  def initialize(name, atk, hp)
-    @name = name
-    @atk  = atk
-    @hp   = hp
+  # battlize.name
+  # battlize.attack
+  # battlize.defense
+  # battlize.hp
+  def initialize(battlize)
+    @name     = battlize.name
+    @attack   = battlize.attack
+    @defense  = battlize.defense
+    @hp       = battlize.hp
     @is_dead = false
     @done_action = false
   end
@@ -19,8 +24,8 @@ class Battle::Character
 
   def get_action(party)
     unit = party.get_attackable_unit
-    unit.take_damage(@atk)
-    return Battle::Action.new(self, unit, "ダメージを与えた", @atk);
+    unit.take_damage(@attack)
+    return Battle::Action.new(self, unit, "ダメージを与えた", @attack);
   end
 
   def get_current_state

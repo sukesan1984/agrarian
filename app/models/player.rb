@@ -3,3 +3,4 @@ class Player < ActiveRecord::Base
   has_many :town_bulletin_boards, dependent: :destroy
   belongs_to :user
 end
+

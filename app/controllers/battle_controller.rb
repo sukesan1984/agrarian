@@ -3,9 +3,11 @@ class BattleController < ApplicationController
   def index
     unit_list_a = Array.new
     unit_list_b = Array.new
-    unit_list_a.push(Battle::Character.new("スライムA", 4, 10))
-    unit_list_a.push(Battle::Character.new("スライムB", 4, 10))
-    unit_list_b.push(Battle::Character.new("俺", 5, 50))
+    enemy1 = Enemy.find(1)
+    enemy2 = Enemy.find(1)
+    unit_list_a.push(Character.new(enemy1))
+    unit_list_a.push(Character.new(enemy2))
+    unit_list_b.push(Character.new(PlayerCharacter.new(Player.find_by(user_id: current_user.id))))
     executor = Battle::Executor.new()
     party_a = Battle::Party.new(unit_list_a, "モンスターたち" )
     party_b = Battle::Party.new(unit_list_b, "俺のパーティ")
