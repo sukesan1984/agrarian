@@ -1,6 +1,6 @@
 class UserArea < ActiveRecord::Base
   belongs_to :player
-  belongs_to :area
+  belongs_to :area_node
 
   INITIAL_AREA_NODE_ID = 100011
   # 現在地を取得する。レコードがなければ生成する。
