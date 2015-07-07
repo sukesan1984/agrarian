@@ -23,7 +23,8 @@ class AreaController < ApplicationController
       @target_routes.push(factory.build_by_area_node_id(route.connected_area_node_id))
     end
 
-    if(@current.next_to_area_node_id != nil)
+    # nilじゃなかったら、each
+    if(@current.next_to_area_node_id)
       @current.next_to_area_node_id.each do |area_node_id|
         @target_routes.push(factory.build_by_area_node_id(area_node_id))
       end
