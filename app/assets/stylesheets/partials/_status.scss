@@ -1,0 +1,19 @@
+#body{width:800;margin:0px;padding:0px;}
+#box0{
+      top:50px;
+      left:383px;
+      width:156px;
+      height:247px;
+      position:absolute;
+      border-style:solid;
+      solid-width: 1px;
+}
+#rows {
+  display: table;
+  width: 100%;
+}
+#column {
+  display: table-cell;
+  vertical-align: top;
+  width: 50%;
+}

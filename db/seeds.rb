@@ -53,5 +53,6 @@ routes = Route.first_or_create([
 
 Enemy.delete_all
 enemies = Enemy.first_or_create([
-  { id: 1, name: "ゴブリン", attack: 3, defense: 3, hp: 10} 
+  { id: 1, name: "ゴブリン", attack: 3, defense: 3, hp: 10},
+  { id: 2, name: "野犬",     attack: 1, defense: 1, hp: 5 }
 ])

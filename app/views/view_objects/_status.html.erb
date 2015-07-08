@@ -1,15 +1,12 @@
-ステータス表示 <br>
-<table>
-    <tr>
-        <td> attack </td>
-        <td> <%= status.attack %></td>
-    </tr>
-    <tr>
-        <td> defense </td>
-        <td> <%= status.defense %> </td>
-    </tr>
-    <tr>
-        <td> hit point </td>
-        <td> <%= status.hp %> / <%= status.hp_max %> </td>
-    </tr>
-</table>
+<div id="body"><div id="box0" class="status">
+        ステータス表示 <br>
+        <div id="rows">
+            <div id="column"> attack </div> <div id="column"> <%= status.attack %> </div>
+        </div>
+        <div id="rows">
+            <div id="column"> defense </div> <div id="column"> <%= status.defense %> </div>
+        </div>
+        <div id="rows">
+            <div id="column"> hit point </div> <div id="column"> <%= status.hp %> / <%= status.hp_max %> </div>
+        </div>
+</div>
