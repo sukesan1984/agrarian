@@ -1,10 +1,10 @@
 <h2> 掲示板 </h2>
 
+<%= link_to("宿屋", "/inn") %> <br>
+
 <% object.each do |record| %>
     <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
 <% end %>
-
-<%= link_to("宿屋", "/inn") %> <br>
 
 <%= form_tag('/towns/write/', method: "post") do %>
   <%= label_tag(:q, "書き込んでね") %> 
