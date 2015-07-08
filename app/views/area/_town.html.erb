@@ -4,8 +4,11 @@
     <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
 <% end %>
 
+<%= link_to("宿屋", "/inn") %> <br>
+
 <%= form_tag('/towns/write/', method: "post") do %>
   <%= label_tag(:q, "書き込んでね") %> 
   <%= text_field :bbs, :contents %>
   <%= submit_tag("投稿") %>
 <% end %>
+

@@ -16,6 +16,10 @@ class PlayerCharacter
     return @hp.current
   end
 
+  def recover_hp_all
+    @hp.recover_all
+  end
+
   def save
     @player.hp = @hp.current
     @player.save

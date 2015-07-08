@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   # バトル
   get 'battle/', to: 'battle#index'
 
+  #宿屋
+  get 'inn/', to: 'inn#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

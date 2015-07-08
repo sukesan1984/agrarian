@@ -10,6 +10,10 @@ class StatusPoint
     return self
   end
 
+  def recover_all
+    self.set_current(@max)
+  end
+
   def decrease(value)
     if(!value.is_a?(Integer))
       return
