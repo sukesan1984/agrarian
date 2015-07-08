@@ -1,11 +1,18 @@
 class PlayerCharacter
-  attr_reader :name, :attack, :defense
+  attr_reader :attack, :defense
   def initialize(player)
     @player = player
-    @name = player.name
     @attack = 5
     @defense  = 3
     @hp = StatusPoint.new(player.hp, player.hp_max)
+  end
+
+  def id
+    @player.id
+  end
+  
+  def name
+    @player.name
   end
 
   def decrease_hp(value)

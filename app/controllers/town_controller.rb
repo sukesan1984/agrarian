@@ -14,20 +14,21 @@ class TownController < ApplicationController
 
   # 掲示板に書き込む
   def write
-    player = Player.find_by(user_id:  current_user.id)
+    player_character_factory = PlayerCharacterFactory.new
+    player_character = player_character_factory.build_by_user_id(current_user.id)
 
-    if(player == nil)
+    if(player_character == nil)
       redirect_to("/player/input")
     end
 
     factory = AreaService.new()
 
-    user_area = UserArea.get_or_create(player.id)
+    user_area = UserArea.get_or_create(player_character.id)
     town_view_model = factory.build_by_area_node_id(user_area.area_node.id)
 
     contents = params[:bbs][:contents]
     TownBulletinBoard.create(
-      player_id: player.id,
+      player_id: player_character.id,
       town_id: town_view_model.get_id,
       contents: contents,
     )
