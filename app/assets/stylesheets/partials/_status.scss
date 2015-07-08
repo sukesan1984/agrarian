@@ -1,16 +1,21 @@
-#body{width:800;margin:0px;padding:0px;}
 #box0{
       top:50px;
       left:383px;
-      width:156px;
-      height:247px;
+      width:160px;
+      height:100px;
       position:absolute;
       border-style:solid;
       solid-width: 1px;
 }
+#title{
+    text-align: center;
+}
 #rows {
   display: table;
   width: 100%;
+  padding: {
+    left: 3px;
+  }
 }
 #column {
   display: table-cell;
