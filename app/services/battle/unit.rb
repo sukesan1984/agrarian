@@ -1,30 +1,34 @@
 class Battle::Unit
   attr_accessor :done_action
-  attr_reader :name, :hp, :is_dead, :defense, :attack
-  # battlize.name
-  # battlize.attack
-  # battlize.defense
-  # battlize.hp
-  def initialize(battlize)
-    @name     = battlize.name
-    @attack   = battlize.attack
-    @defense  = battlize.defense
-    @hp       = battlize.hp
+  attr_reader :name, :is_dead, :defense, :attack
+  # battlize_character.name
+  # battlize_character.attack
+  # battlize_character.defense
+  # battlize_character.hp
+  def initialize(battlize_character)
+    @battlize_character = battlize_character
+    @name     = battlize_character.name
+    @attack   = battlize_character.attack
+    @defense  = battlize_character.defense
     @is_dead = false
     @done_action = false
   end
 
+  def hp
+    return @battlize_character.hp
+  end
+
   def take_damage(damage)
-    @hp -= damage
-    if(@hp <= 0)
-      @hp = 0
-      @is_dead = true
-    end
+    @battlize_character.decrease_hp(damage)
+    @is_dead = @battlize_character.hp == 0
   end
 
   # このユニットがターンで何をするか決める。
   def get_action(party)
     unit = party.get_attackable_unit
+    if(unit.nil?)
+      return
+    end
     target_defense = unit.defense
     ave_damage = (@attack / 2.0 - target_defense / 4.0).ceil
     range = -(ave_damage / 16.0).ceil..(ave_damage/16.0).ceil
@@ -35,11 +39,16 @@ class Battle::Unit
   end
 
   def get_current_state
-    state = @name + "の現在HP: " + @hp.to_s()
+    state = @name + "の現在HP: " + @battlize_character.hp.to_s()
     if(@is_dead)
       state += " [死亡]"
     end
 
     return state
+  end
+
+  # 状態を永続化する
+  def save
+    @battlize_character.save
   end
 end

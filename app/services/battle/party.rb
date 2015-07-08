@@ -36,6 +36,7 @@ class Battle::Party
         return unit
       end
     end
+    return nil
   end
 
   # パーティを全員行動させる
@@ -45,7 +46,10 @@ class Battle::Party
 
     unit = self.get_actionable_unit
     while(unit != nil)
-      action_list.push(unit.get_action(party))
+      action = unit.get_action(party)
+      if(action != nil)
+        action_list.push(action)
+      end
       unit.done_action = true
       unit = self.get_actionable_unit
     end
@@ -68,5 +72,12 @@ class Battle::Party
     end
 
     return state_list
+  end
+
+  # 永続化する必要があるメンバーがいれば永続化する
+  def save
+    @unit_list.each do |unit|
+      unit.save
+    end
   end
 end
