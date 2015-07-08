@@ -23,6 +23,10 @@ class PlayerCharacter
     return @hp.current
   end
 
+  def hp_max
+    return @hp.max
+  end
+
   def recover_hp_all
     @hp.recover_all
   end

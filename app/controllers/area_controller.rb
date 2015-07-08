@@ -30,13 +30,13 @@ class AreaController < ApplicationController
       end
     end
     player_character_factory = PlayerCharacterFactory.new
-    player_character = player_character_factory.build_by_user_id(current_user.id)
+    @player_character = player_character_factory.build_by_user_id(current_user.id)
 
-    if(player_character == nil)
+    if(@player_character == nil)
       redirect_to("/player/input")
     end
 
-    user_area = UserArea.get_or_create(player_character.id)
+    user_area = UserArea.get_or_create(@player_character.id)
     user_area.area_node_id = @id
     user_area.save()
   end
