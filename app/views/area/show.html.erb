@@ -9,3 +9,7 @@
 <% @target_routes.each do |target|%>
     <li> <%= link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() ) %> </li>
 <% end %>
+
+<!-- アイテム一覧へ -->
+<h2>アイテム</h2>
+<%= link_to("所持品をみる", "/item") %>

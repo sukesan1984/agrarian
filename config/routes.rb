@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   #宿屋
   get 'inn/', to: 'inn#index'
 
+  #アイテム
+  get 'item/', to: 'item#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
