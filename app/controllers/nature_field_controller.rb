@@ -15,6 +15,6 @@ class NatureFieldController < ApplicationController
 
     action_factory = ActionFactory.new
     action = action_factory.build_by_action_id(area.action.id)
-    action.execute
+    @result = action.execute
   end
 end
