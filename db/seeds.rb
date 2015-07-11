@@ -56,3 +56,8 @@ enemies = Enemy.first_or_create([
   { id: 1, name: "ゴブリン", attack: 3, defense: 3, hp: 10},
   { id: 2, name: "野犬",     attack: 1, defense: 1, hp: 5 }
 ])
+
+Item.delete_all
+items = Item.first_or_create([
+  { id: 100001, name: "木切れ", description: "木の切れ端。何の木から出たものかはよくわからない。", item_type: 1, item_type_id: 1 }
+])
