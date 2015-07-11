@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711072355) do
+ActiveRecord::Schema.define(version: 20150711105300) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150711072355) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "action_id",   limit: 4
+    t.integer  "resource_id", limit: 4
   end
 
   create_table "players", force: :cascade do |t|
@@ -72,6 +73,24 @@ ActiveRecord::Schema.define(version: 20150711072355) do
   end
 
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
+
+  create_table "resource_keepers", force: :cascade do |t|
+    t.integer  "target_id",         limit: 4
+    t.integer  "current_count",     limit: 4
+    t.datetime "last_recovered_at"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "resource_keepers", ["target_id"], name: "index_resource_keepers_on_target_id", unique: true, using: :btree
+
+  create_table "resources", force: :cascade do |t|
+    t.integer  "recover_count",    limit: 4
+    t.integer  "recover_interval", limit: 4
+    t.integer  "max_count",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "roads", force: :cascade do |t|
     t.string   "name",        limit: 255

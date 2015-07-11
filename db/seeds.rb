@@ -25,12 +25,17 @@ roads = Road.first_or_create([
 
 NatureField.delete_all
 nature_fields = NatureField.first_or_create([
-  { id: 1, name: "近くの森「ヌージュ」", description: "森と呼べるのか果たして怪しいような小さな森。", action_id: 1 }
+  { id: 1, name: "近くの森「ヌージュ」", description: "森と呼べるのか果たして怪しいような小さな森。", action_id: 1, resource_id: 1 }
 ])
 
 Action.delete_all
 actions = Action.first_or_create([
   { id: 1, name: "木を切る", description: "その辺りに生えている木を切る行為。やりすぎると自然破壊につながるので注意" }
+])
+
+Resource.delete_all
+resources = Resource.first_or_create([
+  { id: 1, recover_count: 1, recover_interval: 60, max_count: 100 }
 ])
 
 # テレス山

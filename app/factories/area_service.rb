@@ -16,7 +16,16 @@ class AreaService
     when 3
       nature_field = NatureField.find_by(id: area.type_id)
       if(nature_field != nil)
-        return AreaType::NatureField.new(area.id, nature_field, area_node)
+        resource_keeper = ResourceKeeper.find_by(target_id: area_node.id)
+        if(resource_keeper.nil?)
+          resource_keeper = ResourceKeeper.create(
+            target_id: area_node.id,
+            current_count: 0,
+            last_recovered_at: Time.now
+          )
+        end
+        resource_service = ResourceService.new(nature_field.resource, resource_keeper)
+        return AreaType::NatureField.new(area.id, nature_field, area_node, resource_service)
       end
     end
 

@@ -36,6 +36,7 @@ class AreaController < ApplicationController
       redirect_to("/player/input")
     end
 
+
     user_area = UserArea.get_or_create(@player_character.id)
     user_area.area_node_id = @id
     user_area.save()
