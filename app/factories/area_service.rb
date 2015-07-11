@@ -13,6 +13,11 @@ class AreaService
       if(road != nil)
         return AreaType::Road.new(area.id, road, area_node)
       end
+    when 3
+      nature_field = NatureField.find_by(id: area.type_id)
+      if(nature_field != nil)
+        return AreaType::NatureField.new(area.id, nature_field, area_node)
+      end
     end
 
     return AreaType::Null.new()
