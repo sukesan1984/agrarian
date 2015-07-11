@@ -14,6 +14,14 @@ class AreaType::NatureField < AreaType::Base
     return @nature_field.name
   end
 
+  def has_action
+    return true
+  end
+
+  def action
+    return @nature_field.action
+  end
+
   def next_to_area_node_id
   end
 
@@ -23,7 +31,7 @@ class AreaType::NatureField < AreaType::Base
 
   def get_render_object
     return {
-      area_id: @area_id,
+      area_node_id: @area_node.id,
       description: @nature_field.description,
       action: @nature_field.action
     }

@@ -1,6 +1,6 @@
 <%= object[:description] %>
 <%= form_tag('/nature_field/action', method: "post") do %>
-    <%= hidden_field_tag(:id, object[:area_id]) %>
+    <%= hidden_field_tag(:id, object[:area_node_id]) %>
     <%= submit_tag(object[:action].name) %>
 <% end %>
 
