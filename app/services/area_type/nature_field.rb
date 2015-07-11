@@ -22,6 +22,10 @@ class AreaType::NatureField < AreaType::Base
   end
 
   def get_render_object
-    return @nature_field
+    return {
+      area_id: @area_id,
+      description: @nature_field.description,
+      action: @nature_field.action
+    }
   end
 end

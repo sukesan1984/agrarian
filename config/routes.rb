@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   #アイテム
   get 'item/', to: 'item#index'
 
+  #自然の奴
+  get 'nature_field/', to: 'nature_field#index'
+  post 'nature_field/action', to: 'nature_field#action'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
