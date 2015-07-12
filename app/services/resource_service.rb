@@ -4,6 +4,10 @@ class ResourceService
     @resource_keeper = resource_keeper
   end
 
+  def id
+    return @resource.id
+  end
+
   def item
     return @resource.item
   end

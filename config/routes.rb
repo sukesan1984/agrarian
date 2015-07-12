@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   post 'nature_field/action', to: 'nature_field#action'
 
   get 'shop/:area_node_id/:id', to: 'shop#index'
+  post 'shop/buy', to: 'shop#buy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

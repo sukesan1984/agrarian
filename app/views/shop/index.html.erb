@@ -1,7 +1,13 @@
 <h1><%= @shop.name %></h1>
 <h2><%= @shop.description %></h2>
 <% @showcases.each do |showcase| %>
-    <%= showcase[:name] %> 在庫: <%= showcase[:resource_service].current_count %> 一つ: <%= showcase[:cost] %> rails<br>
+    <%= form_tag('/shop/buy', method: "post") do %>
+        <%= showcase[:name] %> 一つ: <%= showcase[:cost] %> rails [在庫: <%= showcase[:resource_service].current_count %>]
+        <%= hidden_field_tag(:shop_id, @shop.id) %>
+        <%= hidden_field_tag(:resource_id, showcase[:resource_service].id) %>
+        <%= submit_tag("購入する") %>
+
+    <% end %>
 <% end %>
 
 

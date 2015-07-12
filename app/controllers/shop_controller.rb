@@ -1,9 +1,9 @@
 class ShopController < ApplicationController
   def index
-    id = params[:id]
+    shop_id = params[:id]
     area_node_id = params[:area_node_id]
 
-    @shop = Shop.find_by(id: id)
+    @shop = Shop.find_by(id: shop_id)
 
     resource_service_factory = ResourceServiceFactory.new
 
@@ -15,5 +15,13 @@ class ShopController < ApplicationController
         cost: showcase.cost
       })
     end
+  end
+
+  # 購入する
+  def buy
+    shop_id = params[:id]
+    resource_id = params[:resource_id]
+
+
   end
 end
