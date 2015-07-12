@@ -24,10 +24,19 @@ class ResourceService
     return after
   end
 
-  # 現在の数と最後に回復した時間を取得する。
-  def save 
+  def decrease(value)
+    after_count = self.current_count - value
+    if(after_count < 0)
+      return nil
+    end
+    
     @resource_keeper.last_recovered_at = Time.now
-    @resource_keeper.current_count = self.current_count
-    @resource_keeper.save
+    @resource_keeper.current_count = after_count
+    return self
+  end
+
+  # トランザクションでsaveを行う。
+  def save 
+    @resource_keeper.save!
   end
 end
