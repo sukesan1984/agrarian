@@ -1,4 +1,4 @@
-class AreaService
+class AreaServiceFactory
   def build(area_node)
     area = area_node.area
     case area.area_type

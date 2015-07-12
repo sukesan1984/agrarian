@@ -7,7 +7,7 @@ class AreaController < ApplicationController
   def show
     @id = params[:id]
 
-    factory = AreaService.new()
+    factory = AreaServiceFactory.new()
 
     @current = factory.build_by_area_node_id(@id)
 

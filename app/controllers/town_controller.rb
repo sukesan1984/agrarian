@@ -21,7 +21,7 @@ class TownController < ApplicationController
       redirect_to("/player/input")
     end
 
-    factory = AreaService.new()
+    factory = AreaServiceFactory.new()
 
     user_area = UserArea.get_or_create(player_character.id)
     town_view_model = factory.build_by_area_node_id(user_area.area_node.id)
