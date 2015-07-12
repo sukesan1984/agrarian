@@ -1,15 +1,19 @@
 # ResourceとActionのセットを扱うやつ
-# リソースに対して何かするのはこいつ
-class ResourceActionService
-  def initialize(resource_service, action, user_item)
+# Resourceを収穫する
+class ResourceAction::ResourceHarvestService
+  def initialize(resource_service, harvest, user_item)
     @resource_service = resource_service
-    @action           = action
+    @harvest          = harvest
     @user_item        = user_item
   end
 
   # 現在地の取得
   def current_count
     return @resource_service.current_count
+  end
+
+  def action_name
+    return @harvest.name
   end
 
   # 実行
@@ -25,7 +29,7 @@ class ResourceActionService
       @user_item.save!
     end
       return {
-        message: @action.name,
+        message: @harvest.name,
         remain: @resource_service.current_count,
         success: true
       }

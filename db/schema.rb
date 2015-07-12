@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712125122) do
+ActiveRecord::Schema.define(version: 20150712133131) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -70,12 +70,12 @@ ActiveRecord::Schema.define(version: 20150712125122) do
   end
 
   create_table "nature_fields", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "harvest_id",  limit: 4
-    t.integer  "resource_id", limit: 4
+    t.string   "name",               limit: 255
+    t.string   "description",        limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "resource_action_id", limit: 4
+    t.integer  "resource_id",        limit: 4
   end
 
   create_table "players", force: :cascade do |t|
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20150712125122) do
   end
 
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
+
+  create_table "resource_actions", force: :cascade do |t|
+    t.integer  "action_type", limit: 4
+    t.integer  "action_id",   limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "resource_keepers", force: :cascade do |t|
     t.integer  "target_id",         limit: 4

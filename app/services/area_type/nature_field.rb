@@ -34,7 +34,7 @@ class AreaType::NatureField < AreaType::Base
     return {
       area_node_id: @area_node.id,
       description: @nature_field.description,
-      harvest: @nature_field.harvest,
+      harvest: @resource_action_service.action_name,
       current_count: @resource_action_service.current_count
     }
   end

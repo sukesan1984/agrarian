@@ -35,7 +35,7 @@ roads = Road.first_or_create([
 
 NatureField.delete_all
 nature_fields = NatureField.first_or_create([
-  { id: 1, name: "近くの森「ヌージュ」", description: "森と呼べるのか果たして怪しいような小さな森。", harvest_id: 1, resource_id: 1 }
+  { id: 1, name: "近くの森「ヌージュ」", description: "森と呼べるのか果たして怪しいような小さな森。", resource_action_id: 1, resource_id: 1 }
 ])
 
 Dungeon.delete_all
@@ -52,6 +52,11 @@ Resource.delete_all
 resources = Resource.first_or_create([
   { id: 1, name: "ただの木",             item_id: 100001,  recover_count: 1, recover_interval: 60,   max_count: 100 },
   { id: 2, name: "一般的なお店の木切れ", item_id: 100001, recover_count: 10, recover_interval: 1800, max_count: 100}
+])
+
+ResourceAction.delete_all
+resource_actions = ResourceAction.first_or_create([
+  { id: 1, action_type: 1, action_id: 1 }
 ])
 
 Shop.delete_all
