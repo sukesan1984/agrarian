@@ -36,7 +36,7 @@ class ResourceService
   end
 
   # トランザクションでsaveを行う。
-  def save 
+  def save! 
     @resource_keeper.save!
   end
 end

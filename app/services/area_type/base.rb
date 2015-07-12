@@ -12,4 +12,11 @@ class AreaType::Base
 
   def next_to_area_node_id
   end
+
+  def has_resource_action
+    return false
+  end
+
+  def resource_action_execute
+  end
 end

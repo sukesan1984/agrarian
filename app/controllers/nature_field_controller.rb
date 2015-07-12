@@ -14,5 +14,11 @@ class NatureFieldController < ApplicationController
     if(area.is_nil)
       redirect_to("/")
     end
+
+    if(area.has_resource_action)
+      @result = area.resource_action_execute
+    else
+      redirect_to("/")
+    end
   end
 end

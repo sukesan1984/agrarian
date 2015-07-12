@@ -18,6 +18,14 @@ class AreaType::NatureField < AreaType::Base
   def next_to_area_node_id
   end
 
+  def has_resource_action
+    return true
+  end
+
+  def resource_action_execute
+    return @resource_action_service.execute
+  end
+
   def get_render_path
     return "area/nature_field"
   end
