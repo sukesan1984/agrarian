@@ -12,9 +12,5 @@ class NatureFieldController < ApplicationController
     if(area.is_nil)
       redirect_to("/")
     end
-
-    action_factory = ActionFactory.new
-    action = action_factory.build_by_action_id(area.action.id)
-    @result = action.execute
   end
 end

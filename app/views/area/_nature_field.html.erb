@@ -2,6 +2,6 @@
 今取れる数: <%= object[:current_count] %><br>
 <%= form_tag('/nature_field/action', method: "post") do %>
     <%= hidden_field_tag(:id, object[:area_node_id]) %>
-    <%= submit_tag(object[:action].name) %>
+    <%= submit_tag(object[:harvest].name) %>
 <% end %>
 
