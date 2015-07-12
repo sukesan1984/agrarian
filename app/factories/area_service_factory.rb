@@ -1,6 +1,7 @@
 class AreaServiceFactory
-  def initialize(resource_service_factory)
+  def initialize(resource_service_factory, resource_action_service_factory)
     @resource_service_factory = resource_service_factory
+    @resource_action_service_factory = resource_action_service_factory
   end
 
   def build(area_node)
@@ -21,7 +22,7 @@ class AreaServiceFactory
       nature_field = NatureField.find_by(id: area.type_id)
       if(nature_field != nil)
         resource_service = @resource_service_factory.build_by_target_id_and_resource(area_node.id, nature_field.resource)
-        resource_action_service = ResourceActionService.new(resource_service, nature_field.harvest)
+        resource_action_service = @resource_action_service_factory.build_by_resource_service_and_action(resource_service, nature_field.harvest)
         return AreaType::NatureField.new(area.id, nature_field, area_node, resource_action_service)
       end
     end

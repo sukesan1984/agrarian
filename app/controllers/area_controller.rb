@@ -7,8 +7,17 @@ class AreaController < ApplicationController
   def show
     @id = params[:id]
 
+    # player
+    player_character_factory = PlayerCharacterFactory.new
+    @player_character = player_character_factory.build_by_user_id(current_user.id)
+
+    if(@player_character == nil)
+      redirect_to("/player/input")
+    end
+
+    resource_service_action_factory = ResourceActionServiceFactory.new(@player_character.player)
     resource_service_factory = ResourceServiceFactory.new
-    factory = AreaServiceFactory.new(resource_service_factory)
+    factory = AreaServiceFactory.new(resource_service_factory, resource_service_action_factory)
 
     @current = factory.build_by_area_node_id(@id)
 
@@ -29,12 +38,6 @@ class AreaController < ApplicationController
       @current.next_to_area_node_id.each do |area_node_id|
         @target_routes.push(factory.build_by_area_node_id(area_node_id))
       end
-    end
-    player_character_factory = PlayerCharacterFactory.new
-    @player_character = player_character_factory.build_by_user_id(current_user.id)
-
-    if(@player_character == nil)
-      redirect_to("/player/input")
     end
 
 

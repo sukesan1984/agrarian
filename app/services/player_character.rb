@@ -1,5 +1,5 @@
 class PlayerCharacter
-  attr_reader :attack, :defense
+  attr_reader :attack, :defense, :player
   def initialize(player)
     @player = player
     @attack = 5

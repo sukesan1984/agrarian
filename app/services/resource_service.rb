@@ -3,6 +3,10 @@ class ResourceService
     @resource = resource
     @resource_keeper = resource_keeper
   end
+
+  def item
+    return @resource.item
+  end
   
   # 現在の数を取得する。
   def current_count

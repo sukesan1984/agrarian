@@ -35,7 +35,7 @@ harvests = Harvest.first_or_create([
 
 Resource.delete_all
 resources = Resource.first_or_create([
-  { id: 1, recover_count: 1, recover_interval: 60, max_count: 100 }
+  { id: 1, name: "ただの木", item_id: 100001,  recover_count: 1, recover_interval: 60, max_count: 100 }
 ])
 
 # テレス山
