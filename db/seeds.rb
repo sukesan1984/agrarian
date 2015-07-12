@@ -53,15 +53,16 @@ harvests = Harvest.first_or_create([
 
 Resource.delete_all
 resources = Resource.first_or_create([
-  { id: 1, name: "ただの木",             item_id: 100001,  recover_count: 1, recover_interval: 60,   max_count: 100 },
+  { id: 1, name: "ただの木",             item_id: 100001, recover_count: 1, recover_interval: 60,    max_count: 100 },
   { id: 2, name: "一般的なお店の木切れ", item_id: 100001, recover_count: 10, recover_interval: 1800, max_count: 100},
-  { id: 3, name: "川の水", item_id: 100002, recover_count: 10, recover_interval: 60, max_count: 1000 }
+  { id: 3, name: "川の水",               item_id: 100002, recover_count: 10, recover_interval: 60,   max_count: 1000 }
 ])
 
 ResourceAction.delete_all
 resource_actions = ResourceAction.first_or_create([
   { id: 100001, action_type: 1, action_id: 1 },
-  { id: 100002, action_type: 1, action_id: 2 }
+  { id: 100002, action_type: 1, action_id: 2 },
+  { id: 200001, action_type: 2, action_id: 1 }
 ])
 
 Shop.delete_all
