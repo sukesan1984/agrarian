@@ -1,4 +1,8 @@
 class AreaServiceFactory
+  def initialize(resource_service_factory)
+    @resource_service_factory = resource_service_factory
+  end
+
   def build(area_node)
     area = area_node.area
     case area.area_type
@@ -16,15 +20,7 @@ class AreaServiceFactory
     when 3
       nature_field = NatureField.find_by(id: area.type_id)
       if(nature_field != nil)
-        resource_keeper = ResourceKeeper.find_by(target_id: area_node.id)
-        if(resource_keeper.nil?)
-          resource_keeper = ResourceKeeper.create(
-            target_id: area_node.id,
-            current_count: 0,
-            last_recovered_at: Time.now
-          )
-        end
-        resource_service = ResourceService.new(nature_field.resource, resource_keeper)
+        resource_service = @resource_service_factory.build_by_target_id_and_resource(area_node.id, nature_field.resource)
         return AreaType::NatureField.new(area.id, nature_field, area_node, resource_service)
       end
     end
