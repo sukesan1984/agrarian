@@ -61,7 +61,7 @@ shops = Shop.first_or_create([
 
 Showcase.delete_all
 showcases = Showcase.first_or_create([
-  { id: 1, shop_id: 1, resource_id: 2, cost: 5 }
+  { id: 1, shop_id: 1, resource_id: 2, cost: 10 }
 ])
 
 # テレス山
