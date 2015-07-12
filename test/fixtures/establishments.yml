@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  town_id: 1
+  establishment_type: 1
+  establishment_id: 1
+
+two:
+  town_id: 1
+  establishment_type: 1
+  establishment_id: 1

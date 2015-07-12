@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shop_id: 1
+  resource_id: 1
+  cost: 1
+
+two:
+  shop_id: 1
+  resource_id: 1
+  cost: 1

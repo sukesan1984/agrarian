@@ -18,7 +18,11 @@ towns = Town.first_or_create([
   {id:9, name: "城塞都市「ヘイゲン」" },
   {id:10, name: "王都「ゴーランド」" },
   {id:11, name: "港町「セントレア」" }
-  
+])
+
+Establishment.delete_all
+establishments = Establishment.first_or_create([
+  {id: 1, town_id: 1, establishment_type: 1, establishment_id: 1}
 ])
 
 Road.delete_all
@@ -46,7 +50,18 @@ harvests = Harvest.first_or_create([
 
 Resource.delete_all
 resources = Resource.first_or_create([
-  { id: 1, name: "ただの木", item_id: 100001,  recover_count: 1, recover_interval: 60, max_count: 100 }
+  { id: 1, name: "ただの木",             item_id: 100001,  recover_count: 1, recover_interval: 60,   max_count: 100 },
+  { id: 2, name: "一般的なお店の木切れ", item_id: 100001, recover_count: 10, recover_interval: 1800, max_count: 100}
+])
+
+Shop.delete_all
+shops = Shop.first_or_create([
+  { id: 1, name: "雑貨屋「スタートアップ」", description: "本当にしょぼいアイテムしか売ってません。" }
+])
+
+Showcase.delete_all
+showcases = Showcase.first_or_create([
+  { id: 1, shop_id: 1, resource_id: 2, cost: 5 }
 ])
 
 # テレス山

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712073015) do
+ActiveRecord::Schema.define(version: 20150712083858) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(version: 20150712073015) do
     t.integer  "hp",         limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "establishments", force: :cascade do |t|
+    t.integer  "town_id",            limit: 4
+    t.integer  "establishment_type", limit: 4
+    t.integer  "establishment_id",   limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "harvests", force: :cascade do |t|
@@ -117,6 +125,21 @@ ActiveRecord::Schema.define(version: 20150712073015) do
   end
 
   add_index "routes", ["area_node_id"], name: "index_routes_on_area_node_id", using: :btree
+
+  create_table "shops", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "showcases", force: :cascade do |t|
+    t.integer  "shop_id",     limit: 4
+    t.integer  "resource_id", limit: 4
+    t.integer  "cost",        limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "town_bulletin_boards", force: :cascade do |t|
     t.integer  "town_id",    limit: 4
