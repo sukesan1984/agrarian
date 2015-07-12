@@ -1,4 +1,5 @@
 class UserItem < ActiveRecord::Base
+  belongs_to :item
 
   def self.find_or_create(player_id, item_id)
     user_item = UserItem.find_by(player_id: player_id, item_id: item_id)
