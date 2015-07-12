@@ -10,10 +10,15 @@ towns = Town.first_or_create([
   {id:1, name: "始まりの街"},
   {id:2, name: "ジット"},
   {id:3, name: "エンモルド" },
-  {id:4, name: "ゴルバン" },
+  {id:4, name: "荒廃した街「ゴルバン」" },
   {id:5, name: "シュメット" },
   {id:6, name: "ニムス" },
   {id:7, name: "エジーク" },
+  {id:8, name: "地方都市「アンカーラ」" },
+  {id:9, name: "城塞都市「ヘイゲン」" },
+  {id:10, name: "王都「ゴーランド」" },
+  {id:11, name: "港町「セントレア」" }
+  
 ])
 
 Road.delete_all
