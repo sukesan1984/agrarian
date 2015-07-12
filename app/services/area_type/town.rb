@@ -1,10 +1,16 @@
 class AreaType::Town < AreaType::Base
   attr_reader :area_node, :area_id
-  def initialize(area_id, town, town_bulletin_boards, area_node)
+  def initialize(
+    area_id, 
+    town, 
+    town_bulletin_boards, 
+    area_node,
+    establishment_list)
     @area_id = area_id
     @town    = town
     @town_bulletin_boards = town_bulletin_boards
     @area_node = area_node
+    @establishment_list = establishment_list
   end
 
   def get_id
@@ -24,6 +30,9 @@ class AreaType::Town < AreaType::Base
 
   # 部分templateに渡すやつ
   def get_render_object
-    return @town_bulletin_boards
+    return {
+      town_bulletin_boards: @town_bulletin_boards,
+      establishment_list: @establishment_list
+    }
   end
 end

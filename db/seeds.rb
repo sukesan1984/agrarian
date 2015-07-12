@@ -56,7 +56,7 @@ resources = Resource.first_or_create([
 
 Shop.delete_all
 shops = Shop.first_or_create([
-  { id: 1, name: "雑貨屋「スタートアップ」", description: "本当にしょぼいアイテムしか売ってません。" }
+  { id: 1, name: "雑貨屋「スタートアップ」", description: "店主「うちに投資せんかね」" }
 ])
 
 Showcase.delete_all

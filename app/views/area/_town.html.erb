@@ -1,8 +1,11 @@
-<h2> 掲示板 </h2>
-
+<h2> 施設 </h2>
 <%= link_to("宿屋", "/inn") %> <br>
+<% object[:establishment_list].each do |establishment| %>
+    <li> <%= link_to(establishment.name, "/shop/"+ establishment.id.to_s) %> </li>
+<% end %>
 
-<% object.each do |record| %>
+<h2> 掲示板 </h2>
+<% object[:town_bulletin_boards].each do |record| %>
     <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
 <% end %>
 
