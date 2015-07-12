@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712045645) do
+ActiveRecord::Schema.define(version: 20150712055637) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -78,8 +78,9 @@ ActiveRecord::Schema.define(version: 20150712045645) do
     t.integer  "target_id",         limit: 4
     t.integer  "current_count",     limit: 4
     t.datetime "last_recovered_at"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "lock_version",      limit: 4, default: 0, null: false
   end
 
   add_index "resource_keepers", ["target_id"], name: "index_resource_keepers_on_target_id", unique: true, using: :btree
