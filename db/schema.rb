@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712060742) do
+ActiveRecord::Schema.define(version: 20150712070616) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150712060742) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  add_index "user_items", ["player_id", "item_id"], name: "index_user_items_on_player_id_and_item_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
