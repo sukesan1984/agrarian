@@ -27,6 +27,10 @@ class PlayerCharacter
     return @hp.max
   end
 
+  def rails
+    return @player.rails
+  end
+
   def recover_hp_all
     @hp.recover_all
   end
