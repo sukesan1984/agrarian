@@ -8,7 +8,7 @@ class AreaType::NatureField < AreaType::Base
   end
 
   def get_id
-    return @nature_field = id
+    return @nature_field.id
   end
 
   def get_name

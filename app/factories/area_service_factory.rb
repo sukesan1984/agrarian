@@ -25,6 +25,11 @@ class AreaServiceFactory
         resource_action_service = @resource_action_service_factory.build_by_resource_service_and_action(resource_service, nature_field.harvest)
         return AreaType::NatureField.new(area.id, nature_field, area_node, resource_action_service)
       end
+    when 4
+      dungeon = Dungeon.find_by(id: area.type_id)
+      if(dungeon  != nil)
+        return AreaType::Dungeon.new(area.id, dungeon, area_node)
+      end
     end
 
     return AreaType::Null.new()

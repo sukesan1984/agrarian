@@ -25,12 +25,18 @@ Road.delete_all
 roads = Road.first_or_create([
   { id: 1, name: "古くからある道", road_length: 5 },
   { id: 2, name: "森へと続く道", road_length: 3 },
-  { id: 3, name: "ドラゴノーム", road_length: 10 }
+  { id: 3, name: "ドラゴノーム", road_length: 10 },
+  { id: 4, name: "迷いの道", road_length: 4 }
 ])
 
 NatureField.delete_all
 nature_fields = NatureField.first_or_create([
   { id: 1, name: "近くの森「ヌージュ」", description: "森と呼べるのか果たして怪しいような小さな森。", harvest_id: 1, resource_id: 1 }
+])
+
+Dungeon.delete_all
+dungeons = Dungeon.first_or_create([
+  { id: 1, name: "ゴブリンの洞窟", description: "いつの間にかゴブリンが住み着いてしまった洞窟。ゴブリンは弱いので、地元の子供達の度胸試しに使われてたりする。" }
 ])
 
 Harvest.delete_all
@@ -53,7 +59,9 @@ areas = Area.first_or_create([
   { id: 10003, area_type: 1, type_id: 3 }, # エンモルド
   { id: 20001, area_type: 2, type_id: 1 }, # 始まりの街と次の街をつなぐ街道
   { id: 20002, area_type: 2, type_id: 2 }, # 始まりの街と近くの森をつなぐ街道
-  { id: 30001, area_type: 3, type_id: 1 }  # 近くの森 
+  { id: 20004, area_type: 2, type_id: 4 }, # 森とゴブリンの洞窟をつなぐ街道
+  { id: 30001, area_type: 3, type_id: 1 }, # 近くの森 
+  { id: 40001, area_type: 4, type_id: 1 }  # ゴブリンの洞窟
 ])
 
 AreaNode.delete_all
@@ -69,19 +77,28 @@ area_noads = AreaNode.first_or_create([
   { id: 200021, area_id: 20002, node_point: 1},
   { id: 200022, area_id: 20002, node_point: 2},
   { id: 200023, area_id: 20002, node_point: 3},
-  { id: 300011, area_id: 30001, node_point: 1}
+  { id: 200041, area_id: 20004, node_point: 1},
+  { id: 200042, area_id: 20004, node_point: 2},
+  { id: 200043, area_id: 20004, node_point: 3},
+  { id: 200044, area_id: 20004, node_point: 4},
+  { id: 300011, area_id: 30001, node_point: 1},
+  { id: 400011, area_id: 40001, node_point: 1}
 ])
 
 Route.delete_all
 routes = Route.first_or_create([
-  { id: 1, area_node_id: 100011, connected_area_node_id: 200011 },
-  { id: 2, area_node_id: 200011, connected_area_node_id: 100011 },
-  { id: 3, area_node_id: 200015, connected_area_node_id: 100021 },
-  { id: 4, area_node_id: 100021, connected_area_node_id: 200015 },
-  { id: 5, area_node_id: 200013, connected_area_node_id: 200021 },
-  { id: 6, area_node_id: 200021, connected_area_node_id: 200013 },
-  { id: 7, area_node_id: 200023, connected_area_node_id: 300011 },
-  { id: 8, area_node_id: 300011, connected_area_node_id: 200023 }
+  { id: 1,  area_node_id: 100011, connected_area_node_id: 200011 },
+  { id: 2,  area_node_id: 200011, connected_area_node_id: 100011 },
+  { id: 3,  area_node_id: 200015, connected_area_node_id: 100021 },
+  { id: 4,  area_node_id: 100021, connected_area_node_id: 200015 },
+  { id: 5,  area_node_id: 200013, connected_area_node_id: 200021 },
+  { id: 6,  area_node_id: 200021, connected_area_node_id: 200013 },
+  { id: 7,  area_node_id: 200023, connected_area_node_id: 300011 },
+  { id: 8,  area_node_id: 300011, connected_area_node_id: 200023 },
+  { id: 9,  area_node_id: 300011, connected_area_node_id: 200041 },
+  { id: 10,  area_node_id: 200041, connected_area_node_id: 300011 },
+  { id: 11,  area_node_id: 200044, connected_area_node_id: 400011 },
+  { id: 12, area_node_id: 400011, connected_area_node_id: 200044 }
 ])
 
 Enemy.delete_all
