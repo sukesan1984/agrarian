@@ -1,4 +1,8 @@
 <h1><%= @shop.name %></h1>
 <h2><%= @shop.description %></h2>
+<% @showcases.each do |showcase| %>
+    <%= showcase[:name] %> 在庫: <%= showcase[:resource_service].current_count %><br>
+<% end %>
+
 
 <%= link_to("戻る", "/") %>

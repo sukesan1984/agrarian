@@ -1,7 +1,7 @@
 <h2> 施設 </h2>
 <%= link_to("宿屋", "/inn") %> <br>
 <% object[:establishment_list].each do |establishment| %>
-    <li> <%= link_to(establishment.name, "/shop/"+ establishment.id.to_s) %> </li>
+    <li> <%= link_to(establishment.name, "/shop/"+ object[:area_node_id].to_s + "/" +establishment.id.to_s) %> </li>
 <% end %>
 
 <h2> 掲示板 </h2>

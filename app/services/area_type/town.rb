@@ -31,6 +31,7 @@ class AreaType::Town < AreaType::Base
   # 部分templateに渡すやつ
   def get_render_object
     return {
+      area_node_id: @area_node.id,
       town_bulletin_boards: @town_bulletin_boards,
       establishment_list: @establishment_list
     }
