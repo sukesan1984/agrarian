@@ -22,7 +22,13 @@ class ResourceAction::ResourceHarvestService
     # トランザクション開始
     ActiveRecord::Base.transaction do
       # resourceを減らしてアイテムを増やす
-      @resource_service.decrease(1)
+      if(@resource_service.decrease(1).nil?)
+        return {
+          message: "無いよ！！",
+          remain: @resource_service.current_count,
+          success: true
+        }
+      end
       @resource_service.save!
 
       @user_item.count += 1
