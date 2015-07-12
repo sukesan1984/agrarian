@@ -21,7 +21,7 @@ class TownController < ApplicationController
       redirect_to("/player/input")
     end
 
-    resource_service_action_factory = ResourceActionServiceFactory.new(@player_character.player)
+    resource_service_action_factory = ResourceActionServiceFactory.new(player_character.player)
     resource_service_factory = ResourceServiceFactory.new
     factory = AreaServiceFactory.new(resource_service_factory, resource_service_action_factory)
 
