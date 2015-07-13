@@ -13,7 +13,9 @@ class ResourceActionServiceFactory
     when 1
       harvest = Harvest.find_by(id:resource_action.action_id)
       if(harvest)
-        return ResourceAction::ResourceHarvestService.new(resource_service, harvest, user_item)
+        lists = harvest.item_ability.item_ability_lists
+        user_items = UserItem.where("player_id = ? and item_id in (?)", @player.id, lists.map { |item_ability_list| item_ability_list.item_id })
+        return ResourceAction::ResourceHarvestService.new(resource_service, harvest, user_item, user_items)
       end
     end
   end

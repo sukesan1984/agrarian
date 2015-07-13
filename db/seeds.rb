@@ -47,15 +47,16 @@ dungeons = Dungeon.first_or_create([
 
 Harvest.delete_all
 harvests = Harvest.first_or_create([
-  { id: 1, name: "木を切る", description: "その辺りに生えている木を切る行為。やりすぎると自然破壊につながるので注意" },
-  { id: 2, name: "水を汲む", description: "水を汲む行為。雨がしばらく続かないと干ばつしてしまうかもしれない。" }
+  { id: 1, name: "木を切る", description: "その辺りに生えている木を切る行為。やりすぎると自然破壊につながるので注意", item_ability_id: 1 },
+  { id: 2, name: "水を汲む", description: "水を汲む行為。雨がしばらく続かないと干ばつしてしまうかもしれない。", item_ability_id: 2 }
 ])
 
 Resource.delete_all
 resources = Resource.first_or_create([
   { id: 1, name: "ただの木",             item_id: 100001, recover_count: 1, recover_interval: 60,    max_count: 100 },
   { id: 2, name: "一般的なお店の木切れ", item_id: 100001, recover_count: 10, recover_interval: 1800, max_count: 100},
-  { id: 3, name: "川の水",               item_id: 100002, recover_count: 10, recover_interval: 60,   max_count: 1000 }
+  { id: 3, name: "川の水",               item_id: 100002, recover_count: 10, recover_interval: 60,   max_count: 1000 },
+  { id: 4, name: "一般的なお店の木の斧", item_id: 200001, recover_count: 1, recover_interval: 600, max_count: 10 }
 ])
 
 ResourceAction.delete_all
@@ -72,7 +73,8 @@ shops = Shop.first_or_create([
 
 Showcase.delete_all
 showcases = Showcase.first_or_create([
-  { id: 1, shop_id: 1, resource_id: 2, cost: 10 }
+  { id: 1, shop_id: 1, resource_id: 2, cost: 10 },
+  { id: 2, shop_id: 1, resource_id: 4, cost: 100}
 ])
 
 # テレス山
@@ -148,4 +150,20 @@ Item.delete_all
 items = Item.first_or_create([
   { id: 100001, name: "木切れ", description: "木の切れ端。何の木から出たものかはよくわからない。", item_type: 1, item_type_id: 1 },
   { id: 100002, name: "ただの水", description: "水。川とかその辺の池から汲める。", item_type: 1, item_type_id: 2 },
+  { id: 100003, name: "バケツ", description: "バケツ。一応これで水を組むことができる", item_type: 1, item_type_id: 3 },
+  { id: 200001, name: "木の斧", description: "木でできた斧。木で木を切ることができるのかは怪しい・・・", item_type: 2, item_type_id: 1 }
 ])
+
+ItemAbility.delete_all
+item_abilities = ItemAbility.first_or_create([
+  { id: 1, name: "木を切る能力", description: "この能力を持つitemは木を切ることができる"},
+  { id: 2, name: "水を汲む能力", description: "この能力を持つitemは水を汲むことができる"},
+])
+
+ItemAbilityList.delete_all
+item_ability_lists = ItemAbilityList.first_or_create([
+  { id: 1, item_id: 200001, item_ability_id: 1},
+  { id: 2, item_id: 100003, item_ability_id: 2},
+])
+
+

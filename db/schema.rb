@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712133131) do
+ActiveRecord::Schema.define(version: 20150713145947) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -54,10 +54,25 @@ ActiveRecord::Schema.define(version: 20150712133131) do
   end
 
   create_table "harvests", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "description",     limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "item_ability_id", limit: 4
+  end
+
+  create_table "item_abilities", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "item_ability_lists", force: :cascade do |t|
+    t.integer  "item_id",         limit: 4
+    t.integer  "item_ability_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "items", force: :cascade do |t|
