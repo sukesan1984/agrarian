@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'areas/:id', to: 'area#show'
 
   # バトル
-  get 'battle/', to: 'battle#index'
+  get 'battle/:area_id', to: 'battle#index'
 
   #宿屋
   get 'inn/', to: 'inn#index'

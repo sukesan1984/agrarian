@@ -35,8 +35,7 @@ class AreaType::Road < AreaType::Base
 
   def get_render_object
     return {
-      id: 2,
-      contents: "fuga"
+      area_id: @area_id
     }
   end
 end

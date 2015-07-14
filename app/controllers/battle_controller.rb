@@ -1,6 +1,8 @@
 class BattleController < ApplicationController
   before_action :authenticate_user!
   def index
+    area_id = params[:area_id]
+    logger.debug(area_id)
     player_character_factory = PlayerCharacterFactory.new
     player_character = player_character_factory.build_by_user_id(current_user.id)
     unit_list_a = Array.new
