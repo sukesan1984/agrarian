@@ -146,6 +146,12 @@ enemies = Enemy.first_or_create([
   { id: 2, name: "野犬",     attack: 1, defense: 1, hp: 5 }
 ])
 
+EnemyMap.delete_all
+enemy_maps = EnemyMap.first_or_create([
+  { id: 1, area_id: 20001, enemy_id: 1, weight: 100 },
+  { id: 2, area_id: 20001, enemy_id: 2, weight: 100 }
+])
+
 Item.delete_all
 items = Item.first_or_create([
   { id: 100001, name: "木切れ", description: "木の切れ端。何の木から出たものかはよくわからない。", item_type: 1, item_type_id: 1 },
