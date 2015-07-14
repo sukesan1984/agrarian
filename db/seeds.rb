@@ -22,7 +22,8 @@ towns = Town.first_or_create([
 
 Establishment.delete_all
 establishments = Establishment.first_or_create([
-  {id: 1, town_id: 1, establishment_type: 1, establishment_id: 1}
+  {id: 1, town_id: 1, establishment_type: 1, establishment_id: 1},
+  {id: 2, town_id: 2, establishment_type: 1, establishment_id: 2}
 ])
 
 Road.delete_all
@@ -53,10 +54,11 @@ harvests = Harvest.first_or_create([
 
 Resource.delete_all
 resources = Resource.first_or_create([
-  { id: 1, name: "ただの木",             item_id: 100001, recover_count: 1, recover_interval: 60,    max_count: 100 },
-  { id: 2, name: "一般的なお店の木切れ", item_id: 100001, recover_count: 10, recover_interval: 1800, max_count: 100},
-  { id: 3, name: "川の水",               item_id: 100002, recover_count: 10, recover_interval: 60,   max_count: 1000 },
-  { id: 4, name: "一般的なお店の木の斧", item_id: 200001, recover_count: 1, recover_interval: 600, max_count: 10 }
+  { id: 1, name: "ただの木",             item_id: 100001, recover_count: 1, recover_interval: 6000,    max_count: 100 },
+  { id: 2, name: "一般的なお店の木切れ", item_id: 100001, recover_count: 10, recover_interval: 18000, max_count: 100},
+  { id: 3, name: "川の水",               item_id: 100002, recover_count: 10, recover_interval: 6000,   max_count: 1000 },
+  { id: 4, name: "一般的なお店の木の斧", item_id: 200001, recover_count: 1, recover_interval: 6000, max_count: 10 },
+  { id: 5, name: "一般的なお店のバケツ", item_id: 100003, recover_count: 1, recover_interval: 6000, max_count: 10 }
 ])
 
 ResourceAction.delete_all
@@ -68,13 +70,15 @@ resource_actions = ResourceAction.first_or_create([
 
 Shop.delete_all
 shops = Shop.first_or_create([
-  { id: 1, name: "雑貨屋「スタートアップ」", description: "店主「うちに投資せんかね」" }
+  { id: 1, name: "雑貨屋「スタートアップ」", description: "店主「うちに投資せんかね」" },
+  { id: 2, name: "なんでも屋「ドン」", description:"店主「・・・」"}
 ])
 
 Showcase.delete_all
 showcases = Showcase.first_or_create([
   { id: 1, shop_id: 1, resource_id: 2, cost: 10 },
-  { id: 2, shop_id: 1, resource_id: 4, cost: 100}
+  { id: 2, shop_id: 1, resource_id: 4, cost: 100},
+  { id: 3, shop_id: 2, resource_id: 5, cost: 100}
 ])
 
 # テレス山
