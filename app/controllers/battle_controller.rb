@@ -16,13 +16,11 @@ class BattleController < ApplicationController
     unit_list_a = Array.new
     unit_list_b = Array.new
 
-    list = enemies_lottery.lot(3)
+    list = enemies_lottery.lot(rand(1..3))
     list.each do |enemy|
       unit_list_a.push(Battle::Unit.new(EnemyCharacter.new(enemy)))
     end
 
-    #enemy1 = Enemy.find(1)
-    #enemy2 = Enemy.find(1)
     unit_list_b.push(Battle::Unit.new(player_character))
     executor = Battle::Executor.new()
     party_a = Battle::Party.new(unit_list_a, "モンスターたち" )
