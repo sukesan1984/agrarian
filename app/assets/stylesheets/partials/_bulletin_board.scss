@@ -30,3 +30,14 @@ div.bulletin-board-time{
 div.bulletin-board-write{
     clear:both;
 }
+
+input.bulletin-board-input-field{
+    width: 400px;
+    backgrond: #fff;
+    border-color: #dcdee3;
+    min-height: 32px;
+    padding-bottom:7px;
+    padding-top:7px;
+    -webkit-box-sizing: border-box;
+    display:block;
+}

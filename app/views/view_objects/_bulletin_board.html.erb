@@ -18,7 +18,7 @@
 <div class="bulletin-board-write">
 <%= form_tag('/towns/write/', method: "post") do %>
   <%= label_tag(:q, "書き込んでね") %> 
-  <%= text_field :bbs, :contents %>
+  <%= text_field :bbs, :contents, :class => "bulletin-board-input-field" %>
   <%= submit_tag("投稿") %>
 <% end %>
 </div>
