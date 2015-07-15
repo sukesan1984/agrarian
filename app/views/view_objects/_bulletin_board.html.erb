@@ -1,4 +1,24 @@
 <h2> 掲示板 </h2>
 <% records.each do |record| %>
-    <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
+    <div class="bulletin-board-record">
+        <div class="bulletin-board-content">
+            <span class="bulletin-board-name">
+                <%= record.player.name %>
+            </span>
+            <span class="bulletin-board-content"> 
+                <%= record.contents %>
+            </span>
+        </div>
+        <div class="bulletin-board-time">
+            <%= record.created_at.to_formatted_s(:without_second) %>
+        </div>
+    </div>
 <% end %>
+
+<div class="bulletin-board-write">
+<%= form_tag('/towns/write/', method: "post") do %>
+  <%= label_tag(:q, "書き込んでね") %> 
+  <%= text_field :bbs, :contents %>
+  <%= submit_tag("投稿") %>
+<% end %>
+</div>

@@ -1,0 +1,32 @@
+div.bulletin-board-record{
+    clear:both;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 400px;
+}
+
+div.bulletin-board-content{
+    width: 400px;
+    word-break:break-all;
+    color: #141823;
+    font-size: 12px;
+}
+
+span.bulletin-board-content{
+    color: #141823;
+}
+
+span.bulletin-board-name{
+    color: #3b5998;
+}
+
+div.bulletin-board-time{
+    width:200px;
+    float:right;
+    text-align:right;
+    font-size: 10px;
+}
+
+div.bulletin-board-write{
+    clear:both;
+}

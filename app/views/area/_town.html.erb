@@ -6,12 +6,5 @@
 
 <%= render "/view_objects/bulletin_board", records: object[:town_bulletin_boards] %>
 
-<%= form_tag('/towns/write/', method: "post") do %>
-  <%= label_tag(:q, "書き込んでね") %> 
-  <%= text_field :bbs, :contents %>
-  <%= submit_tag("投稿") %>
-<% end %>
-
-
 <li> <%= link_to("マップのアイデア募集中","https://whiteboardfox.com/39787-8263-9186") %>
 <li> <%= link_to("アイテムのアイデア募集中", "https://docs.google.com/spreadsheets/d/139dkqyr9fECqHWApSvVDajRffNniwwRqtZ1nrCWAp5k/edit#gid=0") %>
