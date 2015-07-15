@@ -1,0 +1,4 @@
+<h2> 掲示板 </h2>
+<% records.each do |record| %>
+    <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
+<% end %>

@@ -4,10 +4,7 @@
     <li> <%= link_to(establishment.name, "/shop/"+ object[:area_node_id].to_s + "/" +establishment.id.to_s) %> </li>
 <% end %>
 
-<h2> 掲示板 </h2>
-<% object[:town_bulletin_boards].each do |record| %>
-    <li> <%= record.player.name %>: <%= record.contents %> at <%= record.created_at %> </li>
-<% end %>
+<%= render "/view_objects/bulletin_board", records: object[:town_bulletin_boards] %>
 
 <%= form_tag('/towns/write/', method: "post") do %>
   <%= label_tag(:q, "書き込んでね") %> 
