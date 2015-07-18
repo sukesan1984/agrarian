@@ -30,6 +30,7 @@ class BattleController < ApplicationController
     @result = executor.do_battle(party_a, party_b)
 
     ActiveRecord::Base.transaction do
+      UserEncounterEnemy.delete_all(["player_id = ?", player_character.id])
       # 敵が勝利した
       if(@result.is_winner(party_a))
         @death_penalty.execute
