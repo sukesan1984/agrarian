@@ -66,4 +66,12 @@ class AreaType::Road < AreaType::Base
       )
     end
   end
+
+  def can_move_to_next
+    if(@encountered_enemy)
+      return false
+    end
+
+    return true
+  end
 end

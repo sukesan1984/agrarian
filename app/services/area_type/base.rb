@@ -23,4 +23,8 @@ class AreaType::Base
   # areaに応じた固有のアクションを実行する
   def execute
   end
+
+  def can_move_to_next
+    return true
+  end
 end

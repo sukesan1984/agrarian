@@ -29,6 +29,8 @@ class AreaController < ApplicationController
     # その位置固有のアクションの実行
     @current.execute
 
+    @can_move_to_next = @current.can_move_to_next
+
     # その位置でのターゲットを取得する。
     routes = Route.where("area_node_id = ?", @current.area_node.id)
     @target_routes = Array.new()
@@ -42,7 +44,6 @@ class AreaController < ApplicationController
         @target_routes.push(factory.build_by_area_node_id(area_node_id))
       end
     end
-
 
     user_area = UserArea.get_or_create(@player_character.id)
     user_area.area_node_id = @id
