@@ -2,11 +2,12 @@ class TownController < ApplicationController
   before_action :authenticate_user!
   def index
   end
-  def show 
+
+  def show
     @id = params[:id]
     town = Town.find_by(id: @id)
-    if(town == nil)
-      redirect_to("/towns/not_found")
+    if town.nil?
+      redirect_to '/towns/not_found'
       return
     end
     @name = town.name
@@ -17,13 +18,16 @@ class TownController < ApplicationController
     player_character_factory = PlayerCharacterFactory.new
     player_character = player_character_factory.build_by_user_id(current_user.id)
 
-    if(player_character == nil)
-      redirect_to("/player/input")
-    end
+    redirect_to '/player/input' if player_character.nil?
 
-    resource_service_action_factory = ResourceActionServiceFactory.new(player_character.player)
+    resource_service_action_factory =
+      ResourceActionServiceFactory.new(player_character.player)
     resource_service_factory = ResourceServiceFactory.new
-    factory = AreaServiceFactory.new(player_character, resource_service_factory, resource_service_action_factory)
+    factory = AreaServiceFactory.new(
+      player_character,
+      resource_service_factory,
+      resource_service_action_factory
+    )
 
     user_area = UserArea.get_or_create(player_character.id)
     town_view_model = factory.build_by_area_node_id(user_area.area_node.id)
@@ -32,9 +36,9 @@ class TownController < ApplicationController
     TownBulletinBoard.create(
       player_id: player_character.id,
       town_id: town_view_model.get_id,
-      contents: contents,
+      contents: contents
     )
-    redirect_to("/")
+    redirect_to '/'
   end
 
   # 街が見つからない
