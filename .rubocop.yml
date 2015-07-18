@@ -10,6 +10,10 @@ ClassAndModuleChildren:
 Documentation:
   Enabled: false
 
+# 行末の改行
+TrailingBlankLines:
+  EnforcedStyle: final_blank_line
+
 # has_ から始まるメソッドは許可する
 Style/PredicateName:
   NamePrefixBlacklist:

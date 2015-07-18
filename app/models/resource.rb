@@ -17,3 +17,4 @@ class Resource < ActiveRecord::Base
   has_many :showcases
   belongs_to :item
 end
+
