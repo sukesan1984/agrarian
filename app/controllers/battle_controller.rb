@@ -23,7 +23,7 @@ class BattleController < ApplicationController
     executor = Battle::Executor.new()
     party_a = Battle::Party.new(unit_list_a, "モンスターたち" )
     party_b = Battle::Party.new(unit_list_b, "俺のパーティ")
-    @turn_result_list = executor.do_battle(party_a, party_b)
+    @result = executor.do_battle(party_a, party_b)
     party_a.save
     party_b.save
   end

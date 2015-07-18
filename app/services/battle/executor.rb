@@ -12,6 +12,7 @@ class Battle::Executor
       is_battle_end = turn_result.is_battle_end
     end
 
-    return turn_result_list
+    return Battle::Result.new(turn_result_list)
   end
+
 end
