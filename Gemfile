@@ -75,6 +75,7 @@ group :test do
   gem 'rspec-sidekiq'
   gem 'rspec-collection_matchers'
   gem 'test_after_commit'
+  gem 'rubocop', require: false
 end
 
 group :doc do
