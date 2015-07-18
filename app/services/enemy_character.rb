@@ -20,6 +20,10 @@ class EnemyCharacter
     @hp.current
   end
 
+  def hp_max
+    return @hp.max
+  end
+
   def decrease_hp(value)
     @hp.decrease(value)
   end

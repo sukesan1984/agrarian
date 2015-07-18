@@ -65,7 +65,7 @@ class Battle::Party
   end
 
   # パーティ全員の状態を取得する。
-  def current_state_list()
+  def current_status_list()
     state_list = Array.new
     @unit_list.each do |unit|
       state_list.push(unit.get_current_state)

@@ -10,14 +10,29 @@
 <%= link_to("戻る", "/") %> <br>
 
 <% @result.turn_result_list.each do |turn_result|%>
+<div class="battle-one-turn">
 ======== <br>
     ターン: <%= turn_result.turn_count %> <br>
     <% turn_result.action_list.each do |action| %>
         <%= action.result %><br>
     <% end %>
 -------- <br>
-    <% turn_result.result_list.each do |result| %>
-        <%= result %><br>
+    <% if(turn_result.result_list) %>
+        <% turn_result.result_list.each do |result| %>
+            <%= result %><br>
+        <% end %>
+    -------- <br>
     <% end %>
+    <div class="battle-party-a">
+        <% turn_result.party_a_status.each do |unit_status| %>
+            <%= render "view_objects/battle/character", status:unit_status %>
+        <% end %>
+    </div>
+    <div class="battle-party-b">
+        <% turn_result.party_b_status.each do |unit_status| %>
+            <%= render "view_objects/battle/character", status:unit_status %>
+        <% end %>
+    </div>
+</div>
 <% end %>
 

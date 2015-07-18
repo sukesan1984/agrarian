@@ -39,16 +39,23 @@ class Battle::Unit
   end
 
   def get_current_state
-    state = @name + "の現在HP: " + @battlize_character.hp.to_s()
-    if(@is_dead)
-      state += " [死亡]"
-    end
-
-    return state
+    hp_rate = (@battlize_character.hp.to_f / @battlize_character.hp_max.to_f * 100).to_i
+    Rails.logger.debug(hp_rate)
+    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, @is_dead)
   end
 
   # 状態を永続化する
   def save
     @battlize_character.save
+  end
+end
+
+class Battle::Unit::UnitStatus
+  attr_reader :hp, :name, :is_dead, :hp_rate
+  def initialize(hp, hp_rate, name, is_dead)
+    @hp      = hp
+    @hp_rate = hp_rate
+    @name    = name
+    @is_dead = is_dead
   end
 end
