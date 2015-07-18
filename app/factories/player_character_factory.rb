@@ -5,16 +5,14 @@ class PlayerCharacterFactory
   end
 
   def build_by_user_id(user_id)
-    if(@player_character_dictionary.has_key?(user_id))
+    if @player_character_dictionary.has_key?(user_id)
       return @player_character_dictionary[user_id]
     end
 
     player = Player.find_by(user_id: user_id)
-    if(player.nil?)
-      return nil
-    end
+    return nil unless player
 
     @player_character_dictionary[user_id] = PlayerCharacter.new(player)
-    return @player_character_dictionary[user_id]
+    player_character_dictionary[user_id]
   end
 end

@@ -36,3 +36,7 @@ database.yml
 
 #assets
 public/assets
+
+*.imi
+*.iml
+
