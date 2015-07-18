@@ -31,12 +31,17 @@ class Battle::Party
 
   # 攻撃対象を取得する。
   def get_attackable_unit
+    attackable_units = Array.new
     @unit_list.each do |unit|
       if(!unit.is_dead)
-        return unit
+        attackable_units.push(unit)
       end
     end
-    return nil
+    if(attackable_units.count == 0)
+      return nil
+    end
+
+    return attackable_units.sample(1).first
   end
 
   # パーティを全員行動させる

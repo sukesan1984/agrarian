@@ -24,7 +24,11 @@ class BattleController < ApplicationController
     end
 
     unit_list_b.push(Battle::Unit.new(player_character))
-    unit_list_b.push(Battle::Unit.new(SoldierCharacter.new(Soldier.find_by(id: 1))))
+
+    user_soldiers = UserSoldier.where(player_id: player_character.id)
+    user_soldiers.each do |user_soldier|
+      unit_list_b.push(Battle::Unit.new(SoldierCharacter.new(user_soldier)))
+    end
     executor = Battle::Executor.new()
     party_a = Battle::Party.new(unit_list_a, "モンスターたち" )
     party_b = Battle::Party.new(unit_list_b, "俺のパーティ")

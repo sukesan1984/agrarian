@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_id: 1
+  soldier_id: 1
+  current_hp: 1
+
+two:
+  player_id: 1
+  soldier_id: 1
+  current_hp: 1

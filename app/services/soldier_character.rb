@@ -1,7 +1,8 @@
 class SoldierCharacter
-  def initialize(soldier)
-    @soldier  = soldier
-    @hp = StatusPoint.new(@soldier.hp, @soldier.hp)
+  def initialize(user_soldier)
+    @user_soldier = user_soldier
+    @soldier  = user_soldier.soldier
+    @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp)
   end
 
   def name
@@ -29,5 +30,11 @@ class SoldierCharacter
   end
   
   def save
+    @user_soldier.current_hp = @hp.current
+    if(@hp.current <= 0)
+      @user_soldier.destroy
+    else
+      @user_soldier.save
+    end
   end
 end
