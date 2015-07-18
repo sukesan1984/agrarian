@@ -32,6 +32,10 @@ class SoldierCharacter
   def recover_hp_all
     @hp.recover_all
   end
+
+  def rails
+    return 0
+  end
   
   def save
     @user_soldier.current_hp = @hp.current

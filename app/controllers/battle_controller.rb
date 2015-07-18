@@ -40,7 +40,12 @@ class BattleController < ApplicationController
       if(@result.is_winner(party_a))
         @death_penalty.execute
         @death_penalty.save!
+      else
+        @battle_end = Battle::End.new(party_a, player_character)
+        @battle_end.give_rails
+        @battle_end.save!
       end
+
       party_a.save
       party_b.save
     end

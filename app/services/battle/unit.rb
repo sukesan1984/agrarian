@@ -40,13 +40,16 @@ class Battle::Unit
 
   def get_current_state
     hp_rate = (@battlize_character.hp.to_f / @battlize_character.hp_max.to_f * 100).to_i
-    Rails.logger.debug(hp_rate)
     return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, @is_dead)
   end
 
   # 状態を永続化する
   def save
     @battlize_character.save
+  end
+
+  def rails
+    return @battlize_character.rails
   end
 end
 

@@ -5,7 +5,10 @@
     <% @death_penalty.result_list.each do |result| %> 
         <%= result %> <br>
     <% end %>
+<% else %>
+    <%= @battle_end.result %>
 <% end %>
+
 
 <%= link_to("戻る", "/") %> <br>
 

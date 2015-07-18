@@ -19,5 +19,4 @@ class Battle::Executor
 
     return Battle::Result.new(turn_result_list, winner_party)
   end
-
 end

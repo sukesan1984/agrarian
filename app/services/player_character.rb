@@ -50,6 +50,10 @@ class PlayerCharacter
     return "お金が#{after_rails}になった"
   end
 
+  def give_rails(value)
+    @player.rails += value
+  end
+
   def save
     @player.hp = @hp.current
     @player.save

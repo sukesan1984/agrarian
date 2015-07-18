@@ -79,6 +79,10 @@ class Battle::Party
     return state_list
   end
 
+  def total_rails
+    return @unit_list.inject(0){|sum, unit| sum + unit.rails}
+  end
+
   # 永続化する必要があるメンバーがいれば永続化する
   def save
     @unit_list.each do |unit|

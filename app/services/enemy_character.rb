@@ -28,6 +28,10 @@ class EnemyCharacter
     @hp.decrease(value)
   end
 
+  def rails
+    return @enemy.rails
+  end
+
   def save
     #何もしない
   end
