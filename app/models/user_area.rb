@@ -22,4 +22,10 @@ class UserArea < ActiveRecord::Base
     end
     return user_area
   end
+
+  # 初期エリアに戻す。
+  def give_death_penalty
+    self.area_node_id = INITIAL_AREA_NODE_ID
+    return "始まりの街に戻された"
+  end
 end

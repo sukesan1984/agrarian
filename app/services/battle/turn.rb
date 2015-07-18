@@ -69,4 +69,12 @@ class Battle::TurnResult
     end
     return result_list
   end
+
+  def get_winner
+    if(@party_a.is_dead)
+      return @party_b
+    end
+
+    return @party_a
+  end
 end

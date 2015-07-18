@@ -1,5 +1,12 @@
 <h1>戦闘</h1>
 
+<% if(@death_penalty.executed) %>
+    バトルに負けた！ <br>
+    <% @death_penalty.result_list.each do |result| %> 
+        <%= result %> <br>
+    <% end %>
+<% end %>
+
 <%= link_to("戻る", "/") %> <br>
 
 <% @result.turn_result_list.each do |turn_result|%>
@@ -13,3 +20,4 @@
         <%= result %><br>
     <% end %>
 <% end %>
+
