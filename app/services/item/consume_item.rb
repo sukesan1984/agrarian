@@ -1,0 +1,22 @@
+class Item::ConsumeItem
+  def initialize(user_item, count)
+    @user_item = user_item
+    @count = count
+  end
+
+  def give 
+    @user_item.count += @count
+  end
+
+  def save!
+    @user_item.save!
+  end
+
+  def name
+    return @user_item.item.name
+  end
+
+  def result
+    return "ゲットしたで"
+  end
+end

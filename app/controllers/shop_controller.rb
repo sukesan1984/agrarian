@@ -44,10 +44,8 @@ class ShopController < ApplicationController
     resource_service_factory = ResourceServiceFactory.new
     resource_service = resource_service_factory.build_by_target_id_and_resource(area_node_id, resource)
 
-    user_item = nil
-    if(resource_service.item)
-      user_item = UserItem.find_or_create(player_character.player.id, resource_service.item.id)
-    end
+    item_service_factory = ItemServiceFactory.new(player_character)
+    item_service = item_service_factory.build_by_item_id(resource_service.item.id)
 
     if(shop.nil?)
       logger.debug("shop is nil")
@@ -58,7 +56,8 @@ class ShopController < ApplicationController
 
     showcase = Showcase.find_by(shop_id: shop.id, resource_id: resource.id)
 
-    resource_purchase_service = ResourceAction::ResourcePurchaseService.new(resource_service, user_item, player_character.player, showcase)
+
+    resource_purchase_service = ResourceAction::ResourcePurchaseService.new(resource_service, item_service, player_character.player, showcase)
 
     @result = resource_purchase_service.execute()
     if(!@result[:success])

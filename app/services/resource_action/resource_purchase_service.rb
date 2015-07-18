@@ -1,7 +1,7 @@
 class ResourceAction::ResourcePurchaseService
-  def initialize(resource_service, user_item, player, showcase)
+  def initialize(resource_service, item_service, player, showcase)
     @resource_service = resource_service
-    @user_item = user_item
+    @item_service = item_service
     @player    = player
     @showcase  = showcase
   end
@@ -34,14 +34,14 @@ class ResourceAction::ResourcePurchaseService
 
       @player.rails = after_rails
 
-      @user_item.count += 1
+      @item_service.give
 
       @player.save!
-      @user_item.save!
+      @item_service.save!
       @resource_service.save!
     end
       return {
-        message: @user_item.item.name + "ゲットしたで。",
+        message: @item_service.name + @item_service.result,
         remain: @resource_service.current_count,
         success: true
       }
