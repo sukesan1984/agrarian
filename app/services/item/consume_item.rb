@@ -6,6 +6,7 @@ class Item::ConsumeItem
 
   def give 
     @user_item.count += @count
+    return true
   end
 
   def save!

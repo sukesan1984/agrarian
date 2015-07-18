@@ -34,7 +34,13 @@ class ResourceAction::ResourcePurchaseService
 
       @player.rails = after_rails
 
-      @item_service.give
+      if(!@item_service.give)
+        return {
+          message: @item_service.give_failed_message,
+          remain: @resource_service.current_count,
+          success:true
+        }
+      end
 
       @player.save!
       @item_service.save!
