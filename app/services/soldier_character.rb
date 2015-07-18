@@ -28,6 +28,10 @@ class SoldierCharacter
   def decrease_hp(value)
     @hp.decrease(value)
   end
+
+  def recover_hp_all
+    @hp.recover_all
+  end
   
   def save
     @user_soldier.current_hp = @hp.current
