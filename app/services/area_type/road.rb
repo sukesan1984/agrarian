@@ -1,9 +1,11 @@
 class AreaType::Road < AreaType::Base
   attr_reader :area_node, :area_id
-  def initialize(area_id, road, area_node)
+  def initialize(player, area_id, road, area_node)
+    @player  = player
     @area_id = area_id
     @road    = road
     @area_node = area_node
+    @encountered_enemy = false
   end
 
   def get_name
@@ -35,7 +37,33 @@ class AreaType::Road < AreaType::Base
 
   def get_render_object
     return {
-      area_id: @area_id
+      area_id: @area_id,
+      encountered_enemy: @encountered_enemy
     }
+  end
+
+  def execute
+    enemy_maps = EnemyMap.where("area_id = ?", area_id)
+    area = Area.find_by(id: area_id)
+    if(enemy_maps.count == 0 || area.nil?)
+      return
+    end
+
+    enemies_lottery = Battle::EnemiesLottery.new(enemy_maps)
+    encounter = Battle::Encounter.new(area, enemies_lottery)
+
+    list = encounter.encount
+    if(list.nil?)
+      return
+    end
+
+    @encountered_enemy = true
+    UserEncounterEnemy.delete_all(["player_id = ?", @player.id])
+    list.each do |enemy|
+      UserEncounterEnemy.create(
+        player_id: @player.id,
+        enemy_id: enemy.id
+      )
+    end
   end
 end

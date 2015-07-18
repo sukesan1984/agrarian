@@ -17,7 +17,7 @@ class AreaController < ApplicationController
 
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character.player)
     resource_service_factory = ResourceServiceFactory.new
-    factory = AreaServiceFactory.new(resource_service_factory, resource_service_action_factory)
+    factory = AreaServiceFactory.new(@player_character, resource_service_factory, resource_service_action_factory)
 
     @current = factory.build_by_area_node_id(@id)
 
@@ -25,6 +25,9 @@ class AreaController < ApplicationController
       redirect_to("/areas/not_found")
       return
     end
+
+    # その位置固有のアクションの実行
+    @current.execute
 
     # その位置でのターゲットを取得する。
     routes = Route.where("area_node_id = ?", @current.area_node.id)

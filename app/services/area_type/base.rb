@@ -19,4 +19,8 @@ class AreaType::Base
 
   def resource_action_execute
   end
+
+  # areaに応じた固有のアクションを実行する
+  def execute
+  end
 end

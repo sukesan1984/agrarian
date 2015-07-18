@@ -1,2 +1,3 @@
-<h2>スライムたちが現れた</h2>
-<%= link_to("戦う", "/battle/" + object[:area_id].to_s ) %>
+<% if(object[:encountered_enemy]) %>
+<%= render "area/enemy_appeared", area_id: object[:area_id] %>
+<% end %>

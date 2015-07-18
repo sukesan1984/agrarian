@@ -1,5 +1,6 @@
 class AreaServiceFactory
-  def initialize(resource_service_factory, resource_action_service_factory)
+  def initialize(player, resource_service_factory, resource_action_service_factory)
+    @player  = player
     @resource_service_factory = resource_service_factory
     @resource_action_service_factory = resource_action_service_factory
     @establishment_factory = EstablishmentFactory.new
@@ -18,7 +19,7 @@ class AreaServiceFactory
     when 2
       road = Road.find_by(id: area.type_id)
       if(road != nil)
-        return AreaType::Road.new(area.id, road, area_node)
+        return AreaType::Road.new(@player, area.id, road, area_node)
       end
     when 3
       nature_field = NatureField.find_by(id: area.type_id)
