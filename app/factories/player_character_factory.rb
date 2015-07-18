@@ -13,6 +13,6 @@ class PlayerCharacterFactory
     return nil unless player
 
     @player_character_dictionary[user_id] = PlayerCharacter.new(player)
-    player_character_dictionary[user_id]
+    @player_character_dictionary[user_id]
   end
 end

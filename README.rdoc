@@ -1,5 +1,10 @@
 == README
 
+1. config/database.yml.sampleをコピーしてconfig/database.ymlを作ってね。
+2. databaseはmysqlだよ。
+3. agrarian_developmentを作ってね。
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
