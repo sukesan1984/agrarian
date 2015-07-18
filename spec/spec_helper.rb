@@ -3,6 +3,7 @@ require 'factory_girl_rails'
 require 'shoulda-matchers'
 require 'capybara/rspec'
 require 'devise'
+require 'json_spec'
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
   end
