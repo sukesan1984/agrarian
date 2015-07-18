@@ -39,6 +39,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # use google analytics
 gem 'google-analytics-rails'
 
+# use uikit
+gem 'uikit-sass-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
