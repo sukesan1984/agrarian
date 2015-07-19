@@ -1,9 +1,10 @@
 div.bulletin-board-all{
-    width: 420px;
+    width: 410px;
     border: 1px solid;
     border-color:#e5e6e9 #dfe0e4 #d0d1d5;
     -webkit-border-radius: 3px;
     padding: 3px 10px 3px 10px;
+  margin-left: 10px
 }
 
 div.bulletin-board-record{
@@ -20,12 +21,21 @@ div.bulletin-board-content{
     font-size: 12px;
 }
 
+$border: 1px;
+.bulletin-board-panel {
+    background-color: #FFC;
+    border: solid black $border;
+    margin-top: $border * -1;
+}
+
 span.bulletin-board-content{
     color: #141823;
 }
 
 span.bulletin-board-name{
-    color: #3b5998;
+    color: #3b59dd;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 div.bulletin-board-time{
@@ -33,10 +43,15 @@ div.bulletin-board-time{
     float:right;
     text-align:right;
     font-size: 10px;
+    margin-top: -20px
 }
 
 div.bulletin-board-write{
     clear:both;
+}
+
+.bulletin-board-submit {
+    color: white;
 }
 
 input.bulletin-board-input-field{
