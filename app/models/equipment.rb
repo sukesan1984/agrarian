@@ -1,17 +1,15 @@
 # == Schema Information
 #
-# Table name: dungeons
+# Table name: equipment
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :string(255)
+#  item_id     :integer
+#  body_region :integer
+#  attack      :integer
+#  defense     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :dungeon do
-    
-  end
-
+class Equipment < ActiveRecord::Base
 end

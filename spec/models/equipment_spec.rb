@@ -1,20 +1,18 @@
 # == Schema Information
 #
-# Table name: soldiers
+# Table name: equipment
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :string(255)
+#  item_id     :integer
+#  body_region :integer
 #  attack      :integer
 #  defense     :integer
-#  hp          :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :soldier do
-    
-  end
+require 'rails_helper'
 
+RSpec.describe Equipment, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
