@@ -1,3 +1,8 @@
+%h1 今装備してるやつ
+- @equipped_list_service.list.each do |part|
+  .equipped
+    = part.part_name
+    = part.name
 %h1 装備可能やつ
 - @equipment_services.each do |equipment_service|
   = equipment_service.name

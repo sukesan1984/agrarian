@@ -17,6 +17,11 @@ class EquipmentController < ApplicationController
     # equipment_service
     equipment_service_factory = EquipmentServiceFactory.new
     @equipment_services = equipment_service_factory.build_list_by_player_id(@player_character.id)
+
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+
+    @equipped_list_service = equipped_list_service_factory.build_by_player_id(@player_character.id)
   end
 
   # 装備する

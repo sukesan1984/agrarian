@@ -24,4 +24,13 @@
 #
 
 class UserEquipment < ActiveRecord::Base
+  def self.get_or_create(player_id)
+    user_equipment = UserEquipment.find_by(player_id: player_id)
+    if user_equipment.nil?
+      user_equipment = UserEquipment.create(
+        player_id: player_id
+      )
+    end
+    return user_equipment
+  end
 end
