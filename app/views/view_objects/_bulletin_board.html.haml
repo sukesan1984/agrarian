@@ -1,16 +1,17 @@
 .bulletin-board-all
   %h2 掲示板
   - records.each do |record|
-    .bulletin-board-record
-      .bulletin-board-content
-        %span.bulletin-board-name
-          = record.player.name
-        %span.bulletin-board-content
-          = record.contents
-      .bulletin-board-time
-        = record.created_at.to_formatted_s(:without_second)
+    .bulletin-board-panel
+      .bulletin-board-record
+        .bulletin-board-content
+          %span.bulletin-board-name
+            = record.player.name
+          %span.bulletin-board-content
+            = record.contents
+        .bulletin-board-time
+          = record.created_at.to_formatted_s(:without_second)
   .bulletin-board-write
-    = form_tag('/towns/write/', method: "post") do
-      = label_tag(:q, "書き込んでね")
-      = text_field :bbs, :contents, :class => "bulletin-board-input-field"
-      = submit_tag("投稿")
+    = form_tag '/towns/write/', method: "post", class: 'uk-form'  do
+      = label_tag :q, "書き込んでね"
+      = text_field :bbs, :contents, class: 'bulletin-board-input-field'
+      = submit_tag '投稿', class: 'uk-button uk-button-primary bulletin-board-submit'
