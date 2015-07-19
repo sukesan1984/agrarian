@@ -9,6 +9,10 @@ class EquippedService
     return @body_part.name
   end
 
+  def part_id
+    return @body_part.id
+  end
+
   def name
     if @equipment_service.nil?
       return 'なし'
@@ -16,4 +20,13 @@ class EquippedService
 
     return @equipment_service.name
   end
+
+  def user_item_id
+    if @equipment_service.nil?
+      return nil
+    end
+
+    return @equipment_service.user_item_id
+  end
+
 end

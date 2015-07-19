@@ -21,4 +21,29 @@ class EquippedListService
       @leg,
     ]
   end
+
+  # equipped_service
+  def exchange(equipped_service)
+    case(equipped_service.part_id)
+    when BodyRegion::Type::RightHand.id
+      @right_hand = equipped_service
+      @user_equipment.right_hand = equipped_service.user_item_id
+    when BodyRegion::Type::LeftHand.id
+      @left_hand = equipped_service
+      @user_equipment.left_hand = equipped_service.user_item_id
+    when BodyRegion::Type::Body.id
+      @body = equipped_service
+      @user_equipment.body = equipped_service.user_item_id
+    when HeadRegion::Type::Head.id
+      @head = equipped_service
+      @user_equipment.head = equipped_service.user_item_id
+    when HeadRegion::Type::Leg.id
+      @leg = equipped_service
+      @user_equipment.leg = equipped_service.user_item_id
+    end
+  end
+
+  def save
+    @user_equipment.save
+  end
 end
