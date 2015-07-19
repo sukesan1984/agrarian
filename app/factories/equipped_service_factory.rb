@@ -1,14 +1,15 @@
 class EquippedServiceFactory
-  def initialize(equipment_service_factory)
+  def initialize(player, equipment_service_factory)
+    @player = player
     @equipment_service_factory = equipment_service_factory
   end
 
   def build_by_part_and_user_item_id(part, user_item_id)
-    if user_item_id.nil?
+    if user_item_id.nil? || user_item_id == 0
       return EquippedService.new(part, nil)
     end
 
-    user_item = UserItem.find_by(id: user_item_id)
+    user_item = UserItem.find_by(id: user_item_id, player_id: @player.id)
     raise 'no user item: ' + user_item_id.to_s unless user_item
 
     return EquippedService.new(part, @equipment_service_factory.build_by_user_item(user_item))
@@ -16,7 +17,8 @@ class EquippedServiceFactory
 
   # itemからパートを抽出してやる
   def build_by_user_item_id(user_item_id)
-    user_item = UserItem.find_by(id: user_item_id)
+    # 他人のやつ装備できないようにしておく
+    user_item = UserItem.find_by(id: user_item_id, player_id: @player.id)
     raise 'no user item: ' + user_item_id.to_s unless user_item
 
     equipment = Equipment.find_by(item_id: user_item.item_id)

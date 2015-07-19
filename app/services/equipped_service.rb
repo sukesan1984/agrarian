@@ -21,6 +21,10 @@ class EquippedService
     return @equipment_service.name
   end
 
+  def equipped
+    return @equipment_service != nil
+  end
+
   def user_item_id
     if @equipment_service.nil?
       return nil

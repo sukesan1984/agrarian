@@ -43,6 +43,34 @@ class EquippedListService
     end
   end
 
+  def unequip(user_item_id)
+    # TODO:あとでかえてもいいけど、まーええんちゃう
+
+    if @user_equipment.right_hand.to_i == user_item_id.to_i
+      @right_hand = EquippedService.new(BodyRegion::Type::RightHand, nil)
+      @user_equipment.right_hand = 0
+      return
+    elsif @user_equipment.left_hand.to_i == user_item_id.to_i
+      @left_hand = EquippedService.new(BodyRegion::Type::LeftHand, nil)
+      @user_equipment.left_hand = 0
+      return
+    elsif @user_equipment.head.to_i == user_item_id.to_i
+      @head = EquippedService.new(BodyRegion::Type::Head, nil)
+      @user_equipment.head = 0
+      return
+    elsif @user_equipment.body.to_i == user_item_id.to_i
+      @body = EquippedService.new(BodyRegion::Type::Body, nil)
+      @user_equipment.body = 0
+      return
+    elsif @user_equipment.leg.to_i == user_item_id.to_i
+      @leg = EquippedService.new(BodyRegion::Type::Leg, nil)
+      @user_equipment.leg = 0
+      return
+    else
+      raise 'no item equipped: ' + user_item_id.to_s
+    end
+  end
+
   def save
     @user_equipment.save
   end
