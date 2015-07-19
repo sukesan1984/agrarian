@@ -1,0 +1,36 @@
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# モジュール名::クラス名の定義を許可
+ClassAndModuleChildren:
+  Enabled: false
+
+# クラスにコメントを残さない
+Documentation:
+  Enabled: false
+
+# 行末の改行
+TrailingBlankLines:
+  EnforcedStyle: final_blank_line
+
+# has_ から始まるメソッドは許可する
+Style/PredicateName:
+  NamePrefixBlacklist:
+    - "is_"
+    - "have_"
+  NamePrefix:
+    - "is_"
+    - "have_"
+
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'test/**/*'
+    - 'vendor/bundle/**/*'
