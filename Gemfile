@@ -42,6 +42,10 @@ gem 'annotate'
 # use uikit
 gem 'uikit-sass-rails'
 
+# use haml
+gem 'haml-rails'
+gem 'erb2haml'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

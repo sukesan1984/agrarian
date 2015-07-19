@@ -1,0 +1,13 @@
+%h1= @current.get_name()
+= render "view_objects/status", status: @player_character
+/ エリアのタイプによって出し分ける。
+= render @current.get_render_path(), object: @current.get_render_object()
+- if(@can_move_to_next)
+  / 次いける部分表示する
+  %h2 出発する
+  - @target_routes.each do |target|
+    %li
+      = link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() )
+/ アイテム一覧へ
+%h2 アイテム
+= link_to("所持品をみる", "/item")

@@ -1,0 +1,7 @@
+.battle-character-status
+  / キャラ名
+  .battle-character-name
+    = status.name
+  / hp gauge
+  .battle-character-gauge-all
+    .battle-character-gauge-current{:style => "width:#{status.hp_rate}px;"}

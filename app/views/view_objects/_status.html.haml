@@ -1,0 +1,21 @@
+#body
+  #box0.status
+    #title ステータス表示
+    #rows
+      #column attack
+      #column
+        = status.attack
+    #rows
+      #column defense
+      #column
+        = status.defense
+    #rows
+      #column hit point
+      #column
+        = status.hp
+        \/ #{status.hp_max}
+    #rows
+      #column お金
+      #column
+        = status.rails
+        rails
