@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Agrarian
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = analytics_init if Rails.env.production?
+  %body
+    %header
+      %nav
+        / user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド
+        - if user_signed_in?
+          / current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド
+          /
+            *_path はUserモデルを作成したときに、
+            deviseにより自動で作成されてますので、rake routesで確認できます
+          Logged in as
+          = succeed "." do
+            %strong= current_user.email
+          = link_to 'プロフィール変更', edit_user_registration_path
+          |
+          \#{link_to "ログアウト", destroy_user_session_path, method: :delete}
+        - else
+          = link_to "サインイン", new_user_registration_path
+          |
+          \#{link_to "ログイン", new_user_session_path}
+    %p.notice= notice
+    %p.alert= alert
+    = yield

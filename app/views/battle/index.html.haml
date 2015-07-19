@@ -1,0 +1,34 @@
+%h1 戦闘
+- if(@death_penalty.executed)
+  バトルに負けた！
+  %br/
+  - @death_penalty.result_list.each do |result|
+    = result
+    %br/
+- else
+  = @battle_end.result
+= link_to("戻る", "/")
+%br/
+- @result.turn_result_list.each do |turn_result|
+  .battle-one-turn
+    \========
+    %br/
+    ターン: #{turn_result.turn_count}
+    %br/
+    - turn_result.action_list.each do |action|
+      = action.result
+      %br/
+    \--------
+    %br/
+    - if(turn_result.result_list)
+      - turn_result.result_list.each do |result|
+        = result
+        %br/
+      \--------
+      %br/
+    .battle-party-a
+      - turn_result.party_a_status.each do |unit_status|
+        = render "view_objects/battle/character", status:unit_status
+    .battle-party-b
+      - turn_result.party_b_status.each do |unit_status|
+        = render "view_objects/battle/character", status:unit_status
