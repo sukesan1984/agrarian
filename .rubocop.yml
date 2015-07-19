@@ -23,6 +23,10 @@ Style/PredicateName:
     - "is_"
     - "have_"
 
+# returnは返り値があるメソッドでは明示する。
+Style/RedundantReturn:
+    Enabled: false
+
 AllCops:
   Include:
     - '**/Rakefile'
