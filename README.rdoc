@@ -1,5 +1,7 @@
 == README
 
+{<img src="https://codeclimate.com/github/sukesan1984/agrarian/badges/gpa.svg" />}[https://codeclimate.com/github/sukesan1984/agrarian]
+
 1. config/database.yml.sampleをコピーしてconfig/database.ymlを作ってね。
 2. databaseはmysqlだよ。
 3. agrarian_developmentを作ってね。

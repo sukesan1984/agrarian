@@ -80,6 +80,7 @@ group :test do
   gem 'rspec-collection_matchers'
   gem 'test_after_commit'
   gem 'rubocop', require: false
+  gem 'codeclimate-test-reporter', require: false
 end
 
 group :doc do
