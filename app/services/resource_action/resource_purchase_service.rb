@@ -15,13 +15,6 @@ class ResourceAction::ResourcePurchaseService
 
   def execute()
     ActiveRecord::Base.transaction do
-      if(@resource_service.decrease(1).nil?)
-        return {
-          message: "在庫あらへんわ・・ごめん",
-          remain: @resource_service.current_count,
-          success:true
-        }
-      end
       cost = @showcase.cost
       after_rails = @player.rails - cost
       if(after_rails < 0)
@@ -33,6 +26,13 @@ class ResourceAction::ResourcePurchaseService
       end
 
       @player.rails = after_rails
+      if(@resource_service.decrease(1).nil?)
+        return {
+          message: "在庫あらへんわ・・ごめん",
+          remain: @resource_service.current_count,
+          success:true
+        }
+      end
 
       if(!@item_service.give)
         return {
