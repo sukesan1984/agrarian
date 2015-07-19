@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 
   # 装備やつ
   get 'equipment', to: 'equipment#index'
+  post 'equipment/equip', to: 'equipment#equip'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

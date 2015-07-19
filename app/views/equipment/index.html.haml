@@ -4,4 +4,7 @@
   attack: #{equipment_service.attack}
   defense: #{equipment_service.defense}
   %br/
+  = form_tag('/equipment/equip', method: "post") do
+    \#{hidden_field_tag(:user_item_id, equipment_service.user_item_id)}
+    \#{submit_tag("装備する")}
 = link_to("戻る", root_path)

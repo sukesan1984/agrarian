@@ -16,4 +16,8 @@ class EquipmentService
   def defense
     return @equipment.defense
   end
+
+  def user_item_id
+    return @user_item.id
+  end
 end

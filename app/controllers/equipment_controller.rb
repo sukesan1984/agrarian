@@ -1,6 +1,7 @@
 class EquipmentController < ApplicationController
   before_action :authenticate_user!
 
+  # 現在の装備
   # 装備可能アイテム一覧表示
   def index
     #なにはともあれ
@@ -16,5 +17,9 @@ class EquipmentController < ApplicationController
     # equipment_service
     equipment_service_factory = EquipmentServiceFactory.new
     @equipment_services = equipment_service_factory.build_list_by_player_id(@player_character.id)
+  end
+
+  # 装備する
+  def equip
   end
 end
