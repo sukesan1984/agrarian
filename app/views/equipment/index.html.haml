@@ -1,5 +1,7 @@
 %h1 装備可能やつ
 - @equipment_services.each do |equipment_service|
   = equipment_service.name
+  attack: #{equipment_service.attack}
+  defense: #{equipment_service.defense}
   %br/
 = link_to("戻る", root_path)

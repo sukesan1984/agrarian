@@ -15,7 +15,9 @@ class EquipmentServiceFactory
 
     equipment_services = Array.new
     user_items.each do |user_item|
-      equipment_services.push(EquipmentService.new(user_item))
+      equipment = Equipment.find_by(item_id: user_item.item_id)
+      raise "no such item" unless(equipment)
+      equipment_services.push(EquipmentService.new(user_item, equipment))
     end
 
     return equipment_services
