@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719053747) do
+ActiveRecord::Schema.define(version: 20150719064313) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -227,6 +227,16 @@ ActiveRecord::Schema.define(version: 20150719053747) do
   end
 
   add_index "user_encounter_enemies", ["player_id"], name: "index_user_encounter_enemies_on_player_id", using: :btree
+
+  create_table "user_equipments", force: :cascade do |t|
+    t.integer  "player_id",    limit: 4
+    t.integer  "body_region",  limit: 4
+    t.integer  "user_item_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "user_equipments", ["player_id", "body_region"], name: "index_user_equipments_on_player_id_and_body_region", using: :btree
 
   create_table "user_items", force: :cascade do |t|
     t.integer  "player_id",  limit: 4
