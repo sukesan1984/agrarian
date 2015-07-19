@@ -1,0 +1,21 @@
+%h1 今装備してるやつ
+- @equipped_list_service.list.each do |part|
+  .equipped
+    = part.part_name
+    = part.name
+    - if part.equipped
+      .equipment_unequip
+        = form_tag('/equipment/unequip', method: 'post') do
+          \#{hidden_field_tag(:user_item_id, part.user_item_id)}
+          \#{submit_tag("外す")}
+
+%h1 装備可能やつ
+- @equipment_services.each do |equipment_service|
+  = equipment_service.name
+  attack: #{equipment_service.attack}
+  defense: #{equipment_service.defense}
+  %br/
+  = form_tag('/equipment/equip', method: "post") do
+    \#{hidden_field_tag(:user_item_id, equipment_service.user_item_id)}
+    \#{submit_tag("装備する")}
+= link_to("戻る", root_path)

@@ -45,6 +45,11 @@ Rails.application.routes.draw do
   get 'shop/:area_node_id/:id', to: 'shop#index'
   post 'shop/buy', to: 'shop#buy'
 
+  # 装備やつ
+  get 'equipment', to: 'equipment#index'
+  post 'equipment/equip', to: 'equipment#equip'
+  post 'equipment/unequip', to: 'equipment#unequip'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

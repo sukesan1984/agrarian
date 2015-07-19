@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718133826) do
+ActiveRecord::Schema.define(version: 20150719103705) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20150718133826) do
   end
 
   add_index "enemy_maps", ["area_id"], name: "index_enemy_maps_on_area_id", using: :btree
+
+  create_table "equipment", force: :cascade do |t|
+    t.integer  "item_id",     limit: 4
+    t.integer  "body_region", limit: 4
+    t.integer  "attack",      limit: 4
+    t.integer  "defense",     limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "establishments", force: :cascade do |t|
     t.integer  "town_id",            limit: 4
@@ -218,6 +227,25 @@ ActiveRecord::Schema.define(version: 20150718133826) do
   end
 
   add_index "user_encounter_enemies", ["player_id"], name: "index_user_encounter_enemies_on_player_id", using: :btree
+
+  create_table "user_equipments", force: :cascade do |t|
+    t.integer  "player_id",  limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "right_hand", limit: 4
+    t.integer  "left_hand",  limit: 4
+    t.integer  "both_hand",  limit: 4
+    t.integer  "body",       limit: 4
+    t.integer  "head",       limit: 4
+    t.integer  "leg",        limit: 4
+    t.integer  "neck",       limit: 4
+    t.integer  "belt",       limit: 4
+    t.integer  "amulet",     limit: 4
+    t.integer  "ring_a",     limit: 4
+    t.integer  "ring_b",     limit: 4
+  end
+
+  add_index "user_equipments", ["player_id"], name: "index_user_equipments_on_player_id_and_body_region", using: :btree
 
   create_table "user_items", force: :cascade do |t|
     t.integer  "player_id",  limit: 4
