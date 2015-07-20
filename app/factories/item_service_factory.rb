@@ -6,7 +6,7 @@ class ItemServiceFactory
   def build_by_item_id(item_id)
     item = Item.find_by(id: item_id)
     case item.item_type
-    when 1..2
+    when 1, 2, 4
       user_item = UserItem.find_or_create(@player.id, item_id)
       return Item::ConsumeItem.new(user_item, 1)
     when 3

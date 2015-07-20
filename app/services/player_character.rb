@@ -64,6 +64,10 @@ class PlayerCharacter
     @player.rails += value
   end
 
+  def recover_hp(value)
+    @player.hp += value
+  end
+
   def save
     @player.hp = @hp.current
     @player.save
