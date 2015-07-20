@@ -28,10 +28,12 @@ class EquippedServiceFactory
     when 1
       return EquippedService.new(BodyRegion::Type::RightHand, @equipment_service_factory.build_by_user_item(user_item))
     when 2
-      return EquippedService.new(BodyRegion::Type::Head, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::LeftHand, @equipment_service_factory.build_by_user_item(user_item))
     when 3
-      return EquippedService.new(BodyRegion::Type::Body, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::Head, @equipment_service_factory.build_by_user_item(user_item))
     when 4
+      return EquippedService.new(BodyRegion::Type::Body, @equipment_service_factory.build_by_user_item(user_item))
+    when 5
       return EquippedService.new(BodyRegion::Type::Leg, @equipment_service_factory.build_by_user_item(user_item))
     end
   end

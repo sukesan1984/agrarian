@@ -34,10 +34,10 @@ class EquippedListService
     when BodyRegion::Type::Body.id
       @body = equipped_service
       @user_equipment.body = equipped_service.user_item_id
-    when HeadRegion::Type::Head.id
+    when BodyRegion::Type::Head.id
       @head = equipped_service
       @user_equipment.head = equipped_service.user_item_id
-    when HeadRegion::Type::Leg.id
+    when BodyRegion::Type::Leg.id
       @leg = equipped_service
       @user_equipment.leg = equipped_service.user_item_id
     end
