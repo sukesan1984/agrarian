@@ -15,7 +15,12 @@ class TownController < ApplicationController
 
   # 掲示板に書き込む
   def write
-    player_character_factory = PlayerCharacterFactory.new
+    # factory
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+
     player_character = player_character_factory.build_by_user_id(current_user.id)
 
     redirect_to '/player/input' if player_character.nil?

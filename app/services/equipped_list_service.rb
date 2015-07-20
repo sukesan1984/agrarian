@@ -71,6 +71,10 @@ class EquippedListService
     end
   end
 
+  def status
+    return list.inject(Status.new(0,0)) {|sum, equipment_service| sum + equipment_service.status}
+  end
+
   def save
     @user_equipment.save
   end
