@@ -27,4 +27,8 @@ class PlayerController < ApplicationController
   def list
     @players = Player.all
   end
+
+  def ranking_rails
+    @players = Player.order('rails DESC').limit(5)
+  end
 end
