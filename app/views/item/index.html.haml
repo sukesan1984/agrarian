@@ -8,4 +8,7 @@
 .item_consumption
   - @item_consumption_services.each do |item_consumption_service|
     = item_consumption_service.name
+    = form_tag('/item/use', method: 'post') do
+      \#{hidden_field_tag(:user_item_id, item_consumption_service.user_item_id)}
+      \#{submit_tag('使用する')}
 = link_to("トップへ", "/")

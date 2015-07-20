@@ -1,0 +1,10 @@
+.use-item-targets
+  - @targets.each do |target|
+    .use-item-target
+      = target.name
+      (
+      = target.hp
+      \/
+      = target.hp_max
+      )
+= link_to('戻る', root_path)

@@ -30,4 +30,8 @@ class ItemConsumptionService
   def user_item_id
     return @user_item.id
   end
+
+  def targets
+    return @trait.targets
+  end
 end

@@ -15,10 +15,17 @@ class ItemConsumptionServiceFactory
     user_items.each do |user_item|
       #パフォーマンスはおいおい
       consumption = Consumption.find_by(item_id: user_item.item.id)
-      trait = @trait_factory.build_by_comsumption_and_target(consumption, nil)
+      trait = @trait_factory.build_by_comsumption(consumption)
       item_consumption_services.push(ItemConsumptionService.new(user_item, trait))
     end
 
     return item_consumption_services
+  end
+
+  def build_by_player_id_and_user_item(player_id, user_item)
+    consumption = Consumption.find_by(item_id: user_item.item.id)
+    raise 'no consumption :' + user_item.item.id unless consumption
+    trait = @trait_factory.build_by_comsumption(consumption)
+    return ItemConsumptionService.new(user_item, trait)
   end
 end
