@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719103705) do
+ActiveRecord::Schema.define(version: 20150720083137) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20150719103705) do
     t.datetime "updated_at",           null: false
     t.integer  "enemy_rate", limit: 4
   end
+
+  create_table "consumptions", force: :cascade do |t|
+    t.integer  "item_id",          limit: 4
+    t.integer  "consumption_type", limit: 4
+    t.integer  "type_value",       limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "consumptions", ["item_id"], name: "index_consumptions_on_item_id", unique: true, using: :btree
 
   create_table "dungeons", force: :cascade do |t|
     t.string   "name",        limit: 255

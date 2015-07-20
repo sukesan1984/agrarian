@@ -16,4 +16,8 @@ class ItemController < ApplicationController
 
     @user_items = UserItem.where("player_id = ?", @player_character.player.id)
   end
+
+  def use
+    user_item_id = params[:user_item_id]
+  end
 end
