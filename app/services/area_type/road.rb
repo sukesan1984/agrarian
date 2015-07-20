@@ -49,6 +49,7 @@ class AreaType::Road < AreaType::Base
       return
     end
 
+    # この辺 変
     enemies_lottery = Battle::EnemiesLottery.new(enemy_maps)
     encounter = Battle::Encounter.new(area, enemies_lottery)
 
