@@ -18,7 +18,7 @@ class EquipmentController < ApplicationController
     equipment_service_factory = EquipmentServiceFactory.new
     @equipment_services = equipment_service_factory.build_list_by_player_id(@player_character.id)
 
-    equipped_service_factory = EquippedServiceFactory.new(@player_character, equipment_service_factory)
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
 
     @equipped_list_service = equipped_list_service_factory.build_by_player_id(@player_character.id)
@@ -39,7 +39,7 @@ class EquipmentController < ApplicationController
 
     # equipment_service
     equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(@player_character, equipment_service_factory)
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
 
     equipped_list_service = equipped_list_service_factory.build_by_player_id(@player_character.id)
@@ -68,13 +68,13 @@ class EquipmentController < ApplicationController
 
     # equipment_service
     equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(@player_character, equipment_service_factory)
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
 
     equipped_list_service = equipped_list_service_factory.build_by_player_id(@player_character.id)
 
     # 交換するやつ
-    exchange_equipped_service = equipped_service_factory.build_by_user_item_id(user_item_id)
+    exchange_equipped_service = equipped_service_factory.build_by_user_item_id(user_item_id, @player_character.id)
     equipped_list_service.exchange(exchange_equipped_service)
     equipped_list_service.save
 
