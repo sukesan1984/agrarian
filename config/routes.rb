@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'player/input'
   post 'player/create'
   get 'player/list', to: 'player#list'
+  get 'player/ranking_rails', to:'player#ranking_rails'
 
   root to: "home#index"
 
