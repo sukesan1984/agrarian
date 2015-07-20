@@ -24,6 +24,12 @@ class ShopController < ApplicationController
     area_node_id = params[:area_node_id]
     resource_id = params[:resource_id]
 
+    # factory
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+
     # todo: validateクラスに寄せる
     area_node = AreaNode.find_by(id: area_node_id)
     shop      = Shop.find_by(id: shop_id)
@@ -34,7 +40,6 @@ class ShopController < ApplicationController
       return
     end
 
-    player_character_factory = PlayerCharacterFactory.new
     player_character = player_character_factory.build_by_user_id(current_user.id)
 
     if(player_character == nil)

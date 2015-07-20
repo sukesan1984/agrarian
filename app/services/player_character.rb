@@ -1,10 +1,20 @@
 class PlayerCharacter
-  attr_reader :attack, :defense, :player
-  def initialize(player)
+  attr_reader :player
+  def initialize(player, equipped_list_service)
     @player = player
-    @attack = 5
-    @defense  = 3
+    @equipped_list_service = equipped_list_service
+    @status = Status.new(5, 3)
     @hp = StatusPoint.new(player.hp, player.hp_max)
+  end
+
+  def attack
+    Rails.logger.debug((@status + @equipped_list_service.status).attack)
+    return (@status + @equipped_list_service.status).attack
+  end
+
+  def defense
+    Rails.logger.debug((@status + @equipped_list_service.status).defense)
+    return (@status + @equipped_list_service.status).defense
   end
 
   def id
