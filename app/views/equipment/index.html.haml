@@ -1,4 +1,10 @@
 %h1 今装備してるやつ
+.equipment-status
+  攻撃力
+  = @equipped_list_service.status.attack
+.equipment-status
+  防御力
+  = @equipped_list_service.status.defense
 - @equipped_list_service.list.each do |part|
   .equipped
     = part.part_name

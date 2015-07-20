@@ -25,6 +25,13 @@ class EquippedService
     return @equipment_service != nil
   end
 
+  def status
+    if(@equipment_service.nil?)
+       return Status.new(0, 0)
+    end
+    return @equipment_service.status
+  end
+
   def user_item_id
     if @equipment_service.nil?
       return nil
