@@ -15,6 +15,7 @@ class EquipmentServiceFactory
 
     equipment_services = Array.new
     user_items.each do |user_item|
+      next if user_item.count == 0
       equipment_services.push(build_by_user_item(user_item))
     end
 
