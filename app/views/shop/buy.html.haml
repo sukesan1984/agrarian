@@ -1,5 +1,15 @@
-= @result[:message]
-%br/
-在庫: #{@result[:remain]}
-%br/
+%h1= @shop.name
+%h2= @shop.description
+.shop-buy-result
+  = @result[:message]
+
+- @showcases.each do |showcase|
+  = form_tag('/shop/buy', method: "post") do
+    = showcase[:name]
+    一つ: #{showcase[:cost]} rails [在庫: #{showcase[:resource_service].current_count}]
+    \#{hidden_field_tag(:shop_id, @shop.id)}
+    \#{hidden_field_tag(:resource_id, showcase[:resource_service].id)}
+    \#{hidden_field_tag(:area_node_id, showcase[:area_node_id].to_s)}
+    \#{submit_tag("購入する")}
+
 = link_to("戻る", "/")

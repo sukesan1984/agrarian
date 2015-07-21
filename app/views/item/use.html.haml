@@ -1,0 +1,17 @@
+- if (@result)
+  = @result[:message]
+.use-item-targets
+  - @targets.each do |target|
+    .use-item-target
+      = target.name
+      (
+      = target.hp
+      \/
+      = target.hp_max
+      )
+      = form_tag('/item/use_actual', method: 'post') do
+        \#{hidden_field_tag(:user_item_id, @user_item_id)}
+        \#{hidden_field_tag(:target_type, target.type)}
+        \#{hidden_field_tag(:target_id, target.id)}
+        \#{submit_tag('使用する')}
+= link_to('戻る', root_path)
