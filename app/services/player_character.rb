@@ -1,7 +1,8 @@
 class PlayerCharacter
-  attr_reader :player
+  attr_reader :player, :type
   def initialize(player, equipped_list_service)
     @player = player
+    @type   = 1
     @equipped_list_service = equipped_list_service
     @status = Status.new(5, 3)
     @hp = StatusPoint.new(player.hp, player.hp_max)
@@ -65,7 +66,7 @@ class PlayerCharacter
   end
 
   def recover_hp(value)
-    @player.hp += value
+    @hp += value
   end
 
   def save

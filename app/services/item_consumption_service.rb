@@ -6,20 +6,28 @@ class ItemConsumptionService
   end
 
   # itemを消費して効果を発揮する。
-  def use
+  def use(target_type, target_id)
     begin
-      ActiveRecord.transaction do
+      ActiveRecord::Base.transaction do
         # アイテムの消費
         if @user_item.count  <= 0
-          return false
+          return { success:false, message: '使用できるアイテムを持っていません。' }
         end
 
         @user_item.count -= 1
-        @trait.execute
-        return true
+        result = @trait.execute(target_type, target_id)
+        if !result
+          return { success: false, message: @trait.failed_message }
+        end
+
+        @user_item.save!
+        @trait.save!
+
+        return { success: true, message: @trait.success_message }
       end
     rescue => e
-      logger.debug(e)
+      Rails.logger.debug(e)
+      return { success: false, message: '失敗しました。' }
     end
   end
 
