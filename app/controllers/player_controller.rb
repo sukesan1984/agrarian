@@ -1,7 +1,7 @@
 class PlayerController < ApplicationController
   before_action :authenticate_user!
   def index
-    @name="hoge"
+    @name = 'hoge'
   end
 
   def input
@@ -30,3 +30,4 @@ class PlayerController < ApplicationController
     @players = Player.order('rails DESC').limit(5)
   end
 end
+

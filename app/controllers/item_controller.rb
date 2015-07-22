@@ -10,15 +10,13 @@ class ItemController < ApplicationController
 
     # player
     @player_character = player_character_factory.build_by_user_id(current_user.id)
-    if @player_character == nil
-      redirect_to("/player/input")
-    end
+    redirect_to('/player/input') if @player_character.nil?
 
     soldier_character_facotry = SoldierCharacterFactory.new
     trait_factory = TraitFactory.new(@player_character, soldier_character_facotry)
     item_consumption_service_factory = ItemConsumptionServiceFactory.new(trait_factory)
 
-    @user_items = UserItem.where("player_id = ?", @player_character.player.id).select{|user_item| user_item.count > 0 }
+    @user_items = UserItem.where('player_id = ?', @player_character.player.id).select{|user_item| user_item.count > 0 }
     @item_consumption_services = item_consumption_service_factory.build_list_by_player_id(@player_character.id)
   end
 
@@ -33,16 +31,14 @@ class ItemController < ApplicationController
 
     @player_character = player_character_factory.build_by_user_id(current_user.id)
 
-    if @player_character == nil
-      redirect_to("/player/input")
-    end
+    redirect_to '/player/input' if @player_character.nil?
 
     # ターゲットがあるか
     soldier_character_facotry = SoldierCharacterFactory.new
     trait_factory = TraitFactory.new(@player_character, soldier_character_facotry)
     item_consumption_service_factory = ItemConsumptionServiceFactory.new(trait_factory)
 
-    #user_itemを取得
+    # user_itemを取得
     user_item = UserItem.find_by(id: @user_item_id, player_id: @player_character.id)
     raise 'no such user item' + @user_item_id.to_s + 'for player_id: ' + @player_character.id.to_s unless user_item
 
@@ -64,15 +60,13 @@ class ItemController < ApplicationController
 
     @player_character = player_character_factory.build_by_user_id(current_user.id)
 
-    if @player_character == nil
-      redirect_to("/player/input")
-    end
+    redirect_to '/player/input' if @player_character == nil
 
     soldier_character_facotry = SoldierCharacterFactory.new
     trait_factory = TraitFactory.new(@player_character, soldier_character_facotry)
     item_consumption_service_factory = ItemConsumptionServiceFactory.new(trait_factory)
 
-    #user_itemを取得
+    # user_itemを取得
     user_item = UserItem.find_by(id: @user_item_id, player_id: @player_character.id)
     raise 'no such user item: ' + @user_item_id.to_s + ' for player_id: ' + @player_character.id.to_s unless user_item
 
@@ -82,6 +76,6 @@ class ItemController < ApplicationController
 
     @targets = item_consumption_service.targets
 
-    render template: "item/use"
+    render template: 'item/use'
   end
 end
