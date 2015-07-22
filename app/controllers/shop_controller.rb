@@ -9,10 +9,7 @@ class ShopController < ApplicationController
 
     @showcases = []
     @shop.showcases.each do |showcase|
-      @showcases.push(resource_service: resource_service_factory.build_by_target_id_and_resource(area_node_id, showcase.resource),
-                      name: showcase.resource.item.name,
-                      cost: showcase.cost,
-                      area_node_id: area_node_id)
+      @showcases.push(Shop::ShowcaseService.new(resource_service_factory.build_by_target_id_and_resource(area_node_id, showcase.resource), area_node_id, showcase))
     end
   end
 
@@ -48,8 +45,8 @@ class ShopController < ApplicationController
     item_service_factory = ItemServiceFactory.new(player_character)
     item_service = item_service_factory.build_by_item_id(resource_service.item.id)
 
-    logger.debug('shop is nil') if @shop.nil?
-    logger.debug('resource is nil') if resource.nil?
+    fail 'shop is nil' if @shop.nil?
+    fail 'resource is nil' if resource.nil?
 
     showcase = Showcase.find_by(shop_id: @shop.id, resource_id: resource.id)
 
@@ -60,10 +57,7 @@ class ShopController < ApplicationController
 
     @showcases = []
     @shop.showcases.each do |s|
-      @showcases.push(resource_service: resource_service_factory.build_by_target_id_and_resource(area_node_id, s.resource),
-                      name: s.resource.item.name,
-                      cost: s.cost,
-                      area_node_id: area_node_id)
+      @showcases.push(Shop::ShowcaseService.new(resource_service_factory.build_by_target_id_and_resource(area_node_id, s.resource), area_node_id, s))
     end
   end
 end

@@ -2,10 +2,10 @@
 %h2= @shop.description
 - @showcases.each do |showcase|
   = form_tag('/shop/buy', method: "post") do
-    = showcase[:name]
-    一つ: #{showcase[:cost]} rails [在庫: #{showcase[:resource_service].current_count}]
+    = showcase.name
+    一つ: #{showcase.cost} rails [在庫: #{showcase.resource_service.current_count}]
     \#{hidden_field_tag(:shop_id, @shop.id)}
-    \#{hidden_field_tag(:resource_id, showcase[:resource_service].id)}
-    \#{hidden_field_tag(:area_node_id, showcase[:area_node_id].to_s)}
+    \#{hidden_field_tag(:resource_id, showcase.resource_service.id)}
+    \#{hidden_field_tag(:area_node_id, showcase.area_node_id.to_s)}
     \#{submit_tag("購入する")}
 = link_to("戻る", "/")
