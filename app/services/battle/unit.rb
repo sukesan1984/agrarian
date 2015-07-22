@@ -26,17 +26,15 @@ class Battle::Unit
   # このユニットがターンで何をするか決める。
   def get_action(party)
     unit = party.get_attackable_unit
-    if(unit.nil?)
-      return
-    end
+    return if unit.nil?
     target_defense = unit.defense
     ave_damage = (@attack / 2.0 - target_defense / 4.0).ceil
-    range = -(ave_damage / 16.0).ceil..(ave_damage/16.0).ceil
+    range = -(ave_damage / 16.0).ceil..(ave_damage / 16.0).ceil
     randomize = Random.rand(range)
     damage = ave_damage + randomize + 1
-    damage = 1 if damage < 0 #最低１はダメージを与える
+    damage = 1 if damage < 0 # 最低１はダメージを与える
     unit.take_damage(damage)
-    return Battle::Action.new(self, unit, "ダメージを与えた", damage)
+    return Battle::Action.new(self, unit, 'ダメージを与えた', damage)
   end
 
   def get_current_state
@@ -63,3 +61,4 @@ class Battle::Unit::UnitStatus
     @is_dead = is_dead
   end
 end
+

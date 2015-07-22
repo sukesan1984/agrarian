@@ -6,7 +6,7 @@ class PlayerCharacterFactory
   end
 
   def build_by_user_id(user_id)
-    if @player_character_dictionary.has_key?(user_id)
+    if @player_character_dictionary.key?(user_id)
       return @player_character_dictionary[user_id]
     end
 
@@ -18,3 +18,4 @@ class PlayerCharacterFactory
     @player_character_dictionary[user_id]
   end
 end
+

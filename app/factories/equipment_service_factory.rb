@@ -1,6 +1,5 @@
 class EquipmentServiceFactory
-
-  ABILITY_ID = 100001
+  ABILITY_ID = 100_001
 
   def initialize
   end
@@ -11,9 +10,9 @@ class EquipmentServiceFactory
     # その方が多分キャッシュ効かせられる。
     item_ability_lists = ItemAbilityList.where(item_ability_id: ABILITY_ID)
 
-    user_items = UserItem.where('player_id = ? and item_id in (?)', player_id, item_ability_lists.map{|item_ability_list| item_ability_list.item_id})
+    user_items = UserItem.where('player_id = ? and item_id in (?)', player_id, item_ability_lists.map(&:item_id))
 
-    equipment_services = Array.new
+    equipment_services = []
     user_items.each do |user_item|
       next if user_item.count == 0
       equipment_services.push(build_by_user_item(user_item))
@@ -23,8 +22,9 @@ class EquipmentServiceFactory
   end
 
   def build_by_user_item(user_item)
-      equipment = Equipment.find_by(item_id: user_item.item_id)
-      raise "no such item" unless(equipment)
-      return EquipmentService.new(user_item, equipment)
+    equipment = Equipment.find_by(item_id: user_item.item_id)
+    fail 'no such item' unless equipment
+    return EquipmentService.new(user_item, equipment)
   end
 end
+

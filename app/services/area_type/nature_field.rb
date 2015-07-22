@@ -14,7 +14,7 @@ class AreaType::NatureField < AreaType::Base
   def get_name
     return @nature_field.name
   end
-  
+
   def next_to_area_node_id
   end
 
@@ -27,7 +27,7 @@ class AreaType::NatureField < AreaType::Base
   end
 
   def get_render_path
-    return "area/nature_field"
+    return 'area/nature_field'
   end
 
   def get_render_object
@@ -39,3 +39,4 @@ class AreaType::NatureField < AreaType::Base
     }
   end
 end
+

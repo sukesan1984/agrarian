@@ -4,7 +4,7 @@ class Item::ConsumeItem
     @count = count
   end
 
-  def give 
+  def give
     @user_item.count += @count
     return true
   end
@@ -18,6 +18,7 @@ class Item::ConsumeItem
   end
 
   def result
-    return "ゲットしたで"
+    return 'ゲットしたで'
   end
 end
+

@@ -5,7 +5,7 @@ class Trait::RecoverHpTrait
     @targets = targets
     @recover_values = recover_values
 
-    @modified_targets = Array.new
+    @modified_targets = []
     @failed_message = nil
   end
 
@@ -13,7 +13,7 @@ class Trait::RecoverHpTrait
     @targets.each do |target|
       if target.type.to_i == type.to_i && target.id.to_i == id.to_i
         if target.hp == target.hp_max
-          @failed_message = target.name + "は回復する必要ないよ"
+          @failed_message = target.name + 'は回復する必要ないよ'
           return false
         end
 
@@ -24,23 +24,21 @@ class Trait::RecoverHpTrait
     end
     # だれも何もされなかった。
     if @modified_targets.count == 0
-      @failed_message = "正しく選択されてないよ。"
-      raise 'no such target: ' + type.to_s + ' id: ' + id.to_s
+      @failed_message = '正しく選択されてないよ。'
+      fail 'no such target: ' + type.to_s + ' id: ' + id.to_s
     end
   end
 
   def save!
-    @modified_targets.each do |modified|
-      modified.save!
-    end
+    @modified_targets.each(&:save!)
   end
 
   def success_message
-    message_list = Array.new
+    message_list = []
     @modified_targets.each do |modified|
       message_list.push(modified.name + 'のHPを回復しました。')
     end
     return message_list
   end
-
 end
+

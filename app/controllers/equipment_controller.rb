@@ -4,7 +4,7 @@ class EquipmentController < ApplicationController
   # 現在の装備
   # 装備可能アイテム一覧表示
   def index
-    #なにはともあれ
+    # なにはともあれ
     # factory
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
@@ -82,3 +82,4 @@ class EquipmentController < ApplicationController
     redirect_to '/equipment'
   end
 end
+

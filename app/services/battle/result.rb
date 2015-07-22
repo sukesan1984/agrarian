@@ -9,3 +9,4 @@ class Battle::Result
     return party == @winner_party
   end
 end
+

@@ -11,43 +11,40 @@ class AreaServiceFactory
     case area.area_type
     when 1
       town = Town.find_by(id: area.type_id)
-      if(town != nil)
-        town_bulletin_boards = TownBulletinBoard.where("town_id = ?", town.id).order(created_at: :desc).limit(5)
+      unless town.nil?
+        town_bulletin_boards = TownBulletinBoard.where('town_id = ?', town.id).order(created_at: :desc).limit(5)
         establishment_list = @establishment_factory.build_by_town_id(town.id)
         return AreaType::Town.new(area.id, town, town_bulletin_boards, area_node, establishment_list)
       end
     when 2
       road = Road.find_by(id: area.type_id)
-      if(road != nil)
+      unless road.nil?
         return AreaType::Road.new(@player, area.id, road, area_node)
       end
     when 3
       nature_field = NatureField.find_by(id: area.type_id)
-      if(nature_field != nil)
+      unless nature_field.nil?
         resource_service = @resource_service_factory.build_by_target_id_and_resource(area_node.id, nature_field.resource)
         resource_action_service = @resource_action_service_factory.build_by_resource_service_and_action(resource_service, nature_field.resource_action)
         return AreaType::NatureField.new(area.id, nature_field, area_node, resource_action_service)
       end
     when 4
       dungeon = Dungeon.find_by(id: area.type_id)
-      if(dungeon  != nil)
+      unless dungeon.nil?
         return AreaType::Dungeon.new(area.id, dungeon, area_node)
       end
     end
 
-    return AreaType::Null.new()
+    return AreaType::Null.new
   end
 
   # area_idから生成する
   def build_by_area_node_id(area_node_id)
     area_node = AreaNode.find_by(id: area_node_id)
-    if(area_node == nil)
-      return AreaType::Null.new()
-    end
+    return AreaType::Null.new if area_node.nil?
 
-    if(area_node.area == nil)
-      return AreaType::Null.new()
-    end
-    return self.build(area_node)
+    return AreaType::Null.new if area_node.area.nil?
+    return build(area_node)
   end
 end
+

@@ -21,12 +21,12 @@ class BattleController < ApplicationController
 
     user_encounter_enemies = UserEncounterEnemy.where('player_id = ?', player_character.id)
     if user_encounter_enemies.count == 0
-      render template: "battle/no_enemy"
+      render template: 'battle/no_enemy'
       return
     end
 
-    unit_list_a = Array.new
-    unit_list_b = Array.new
+    unit_list_a = []
+    unit_list_b = []
 
     user_encounter_enemies.each do |user_encounter_enemy|
       unit_list_a.push(Battle::Unit.new(EnemyCharacter.new(user_encounter_enemy.enemy)))
@@ -41,15 +41,15 @@ class BattleController < ApplicationController
     end
 
     executor = Battle::Executor.new
-    party_a = Battle::Party.new(unit_list_a, "モンスターたち")
-    party_b = Battle::Party.new(unit_list_b, "俺のパーティ")
+    party_a = Battle::Party.new(unit_list_a, 'モンスターたち')
+    party_b = Battle::Party.new(unit_list_b, '俺のパーティ')
     @result = executor.do_battle(party_a, party_b)
 
     begin
       ActiveRecord::Base.transaction do
-        UserEncounterEnemy.delete_all(["player_id = ?", player_character.id])
+        UserEncounterEnemy.delete_all(['player_id = ?', player_character.id])
         # 敵が勝利した
-        if (@result.is_winner(party_a))
+        if @result.is_winner(party_a)
           @death_penalty.execute
           @death_penalty.save!
         else
@@ -66,3 +66,4 @@ class BattleController < ApplicationController
     end
   end
 end
+

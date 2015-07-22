@@ -46,10 +46,10 @@ class SoldierCharacter
   def recover_hp(value)
     @hp += value
   end
-  
+
   def save
     @user_soldier.current_hp = @hp.current
-    if(@hp.current <= 0)
+    if (@hp.current <= 0)
       @user_soldier.destroy
     else
       @user_soldier.save
@@ -58,10 +58,11 @@ class SoldierCharacter
 
   def save!
     @user_soldier.current_hp = @hp.current
-    if(@hp.current <= 0)
+    if (@hp.current <= 0)
       @user_soldier.destroy
     else
       @user_soldier.save!
     end
   end
 end
+

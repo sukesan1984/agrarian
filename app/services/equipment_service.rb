@@ -23,3 +23,4 @@ class EquipmentService
     return @user_item.id
   end
 end
+

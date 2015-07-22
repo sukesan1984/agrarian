@@ -3,3 +3,4 @@ class AreaType::Null < AreaType::Base
     return true
   end
 end
+
