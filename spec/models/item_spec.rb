@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  description  :string(255)
+#  item_type    :integer
+#  item_type_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do

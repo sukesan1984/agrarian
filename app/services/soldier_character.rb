@@ -1,8 +1,14 @@
 class SoldierCharacter
+  attr_reader :type
   def initialize(user_soldier)
+    @type = 2
     @user_soldier = user_soldier
     @soldier  = user_soldier.soldier
     @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp)
+  end
+
+  def id
+    return @user_soldier.id
   end
 
   def name
@@ -36,6 +42,10 @@ class SoldierCharacter
   def rails
     return 0
   end
+
+  def recover_hp(value)
+    @hp += value
+  end
   
   def save
     @user_soldier.current_hp = @hp.current
@@ -43,6 +53,15 @@ class SoldierCharacter
       @user_soldier.destroy
     else
       @user_soldier.save
+    end
+  end
+
+  def save!
+    @user_soldier.current_hp = @hp.current
+    if(@hp.current <= 0)
+      @user_soldier.destroy
+    else
+      @user_soldier.save!
     end
   end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'player/input'
   post 'player/create'
   get 'player/list', to: 'player#list'
+  get 'player/ranking_rails', to:'player#ranking_rails'
 
   root to: "home#index"
 
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
 
   #アイテム
   get 'item/', to: 'item#index'
+  post 'item/use', to: 'item#use' 
+  post 'item/use_actual', to: 'item#use_actual'
 
   #自然の奴
   get 'nature_field/', to: 'nature_field#index'
@@ -44,6 +47,11 @@ Rails.application.routes.draw do
 
   get 'shop/:area_node_id/:id', to: 'shop#index'
   post 'shop/buy', to: 'shop#buy'
+
+  # 装備やつ
+  get 'equipment', to: 'equipment#index'
+  post 'equipment/equip', to: 'equipment#equip'
+  post 'equipment/unequip', to: 'equipment#unequip'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -34,6 +34,7 @@ class Battle::Unit
     range = -(ave_damage / 16.0).ceil..(ave_damage/16.0).ceil
     randomize = Random.rand(range)
     damage = ave_damage + randomize + 1
+    damage = 1 if damage < 0 #最低１はダメージを与える
     unit.take_damage(damage)
     return Battle::Action.new(self, unit, "ダメージを与えた", damage)
   end

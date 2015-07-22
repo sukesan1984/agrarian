@@ -4,7 +4,15 @@ class BattleController < ApplicationController
   def index
     area_id = params[:area_id]
 
-    player_character_factory = PlayerCharacterFactory.new
+    # factory
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+
+    soldier_character_factory = SoldierCharacterFactory.new
+
+    # player
     player_character = player_character_factory.build_by_user_id(current_user.id)
 
     user_area = UserArea.get_or_create(player_character.id)
@@ -26,9 +34,10 @@ class BattleController < ApplicationController
 
     unit_list_b.push(Battle::Unit.new(player_character))
 
-    user_soldiers = UserSoldier.where(player_id: player_character.id)
-    user_soldiers.each do |user_soldier|
-      unit_list_b.push(Battle::Unit.new(SoldierCharacter.new(user_soldier)))
+    soldier_characters = soldier_character_factory.build_by_player_id(player_character.id)
+
+    soldier_characters.each do |soldier_character|
+      unit_list_b.push(Battle::Unit.new(soldier_character))
     end
 
     executor = Battle::Executor.new
