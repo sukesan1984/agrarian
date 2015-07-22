@@ -5,19 +5,17 @@ class PlayerController < ApplicationController
   end
 
   def input
-    @players = Player.where("user_id = ?", current_user.id)
-    if(@players.count != 0)
-      redirect_to("/")
-    end
+    @players = Player.where('user_id = ?', current_user.id)
+    redirect_to '/' if @players.count != 0
   end
 
   def create
     name = params[:player][:name]
 
-    @players = Player.where("user_id = ?", current_user.id)
+    @players = Player.where('user_id = ?', current_user.id)
 
-    #新規の時だけ作成する。
-    if(@players.count == 0)
+    # 新規の時だけ作成する。
+    if @players.count == 0
       @player = Player.create(name: name, user_id: current_user.id)
     else
       @player = @players[0]

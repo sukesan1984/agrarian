@@ -19,3 +19,4 @@ RSpec.describe ItemAbility, type: :model do
     is_expected.to have_one(:harvest)
   end
 end
+

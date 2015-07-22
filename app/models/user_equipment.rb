@@ -34,3 +34,4 @@ class UserEquipment < ActiveRecord::Base
     return user_equipment
   end
 end
+

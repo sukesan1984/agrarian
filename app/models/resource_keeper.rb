@@ -13,7 +13,8 @@
 #
 # Indexes
 #
-#  index_resource_keepers_on_target_id_and_resource_id  (target_id,resource_id) UNIQUE
+#  index_resource_keepers_on_target_id_and_resource_id
+#  (target_id,resource_id) UNIQUE
 #
 
 class ResourceKeeper < ActiveRecord::Base

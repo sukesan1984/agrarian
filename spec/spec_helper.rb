@@ -5,8 +5,8 @@ require 'capybara/rspec'
 require 'devise'
 require 'json_spec'
 RSpec.configure do |config|
-  config.expect_with :rspec do |expectations|
-  end
+  # config.expect_with :rspec do |expectations|
+  # end
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
@@ -16,9 +16,7 @@ RSpec.configure do |config|
 
   config.disable_monkey_patching!
 
-  if config.files_to_run.one?
-    config.default_formatter = 'doc'
-  end
+  config.default_formatter = 'doc' if config.files_to_run.one?
 
   config.profile_examples = 10
 
@@ -26,3 +24,4 @@ RSpec.configure do |config|
 
   Kernel.srand config.seed
 end
+

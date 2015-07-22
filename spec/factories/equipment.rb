@@ -14,9 +14,9 @@
 FactoryGirl.define do
   factory :equipment do
     item_id 1
-body_region 1
-attack 1
-defense 1
+    body_region 1
+    attack 1
+    defense 1
   end
-
 end
+

@@ -16,7 +16,7 @@ class UserArea < ActiveRecord::Base
   # 現在地を取得する。レコードがなければ生成する。
   def self.get_current_or_create(player_id)
     user_area = UserArea.get_or_create(player_id)
-    raise 'no area is saved' if user_area.area_node_id.nil?
+    fail 'no area is saved' if user_area.area_node_id.nil?
     user_area.area_node_id
   end
 

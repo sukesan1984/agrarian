@@ -13,7 +13,8 @@
 #
 # Indexes
 #
-#  index_resource_keepers_on_target_id_and_resource_id  (target_id,resource_id) UNIQUE
+#  index_resource_keepers_on_target_id_and_resource_id
+#  (target_id,resource_id) UNIQUE
 #
 
 require 'rails_helper'
@@ -21,3 +22,4 @@ require 'rails_helper'
 RSpec.describe ResourceKeeper, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
+

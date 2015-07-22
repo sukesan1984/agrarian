@@ -24,3 +24,4 @@ RSpec.describe Item, type: :model do
     is_expected.to have_many(:item_ability_lists)
   end
 end
+

@@ -17,3 +17,4 @@ RSpec.describe Establishment, type: :model do
     is_expected.to belong_to(:town)
   end
 end
+

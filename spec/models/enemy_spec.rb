@@ -20,3 +20,4 @@ RSpec.describe Enemy, type: :model do
     is_expected.to have_one(:enemy_map)
   end
 end
+
