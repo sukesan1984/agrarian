@@ -1,5 +1,5 @@
 class ItemConsumptionServiceFactory
-  ABILITY_ID = 200_001
+  ABILITY_ID = 200001
 
   def initialize(trait_factory)
     @trait_factory = trait_factory

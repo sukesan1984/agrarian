@@ -1,5 +1,5 @@
 class EquipmentServiceFactory
-  ABILITY_ID = 100_001
+  ABILITY_ID = 100001
 
   def initialize
   end

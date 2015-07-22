@@ -12,7 +12,7 @@ class UserArea < ActiveRecord::Base
   belongs_to :player
   belongs_to :area_node
 
-  INITIAL_AREA_NODE_ID = 100_011
+  INITIAL_AREA_NODE_ID = 100011
   # 現在地を取得する。レコードがなければ生成する。
   def self.get_current_or_create(player_id)
     user_area = UserArea.get_or_create(player_id)
