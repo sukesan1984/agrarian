@@ -4,7 +4,7 @@ class DeathPenalty
   def initialize(player_character, user_area)
     @player_character = player_character
     @user_area = user_area
-    @result_list = Array.new
+    @result_list = []
     @executed = false
   end
 
@@ -19,3 +19,4 @@ class DeathPenalty
     @user_area.save!
   end
 end
+

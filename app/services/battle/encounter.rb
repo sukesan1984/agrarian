@@ -6,9 +6,7 @@ class Battle::Encounter
 
   def encount
     # 遭遇しなかった
-    if(!self.lot)
-      return nil
-    end
+    return nil unless lot
 
     enemy_count = rand(1..3)
 
@@ -18,9 +16,8 @@ class Battle::Encounter
   # 出現するかどうかを返す
   def lot
     seed = rand(1..100)
-    if(seed <= @area.enemy_rate)
-      return true
-    end
+    return true if (seed <= @area.enemy_rate)
     return false
   end
 end
+

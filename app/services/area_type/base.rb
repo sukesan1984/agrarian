@@ -1,9 +1,9 @@
 class AreaType::Base
   # 名前を取得する。
-  def get_name()
+  def get_name
   end
 
-  def get_render_path()
+  def get_render_path
   end
 
   def is_nil
@@ -28,3 +28,4 @@ class AreaType::Base
     return true
   end
 end
+

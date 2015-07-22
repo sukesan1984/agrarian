@@ -26,8 +26,8 @@
 FactoryGirl.define do
   factory :user_equipment do
     player_id 1
-body_region 1
-user_item_id 1
+    body_region 1
+    user_item_id 1
   end
-
 end
+

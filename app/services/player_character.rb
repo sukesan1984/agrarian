@@ -21,7 +21,7 @@ class PlayerCharacter
   def id
     @player.id
   end
-  
+
   def name
     @player.name
   end
@@ -49,15 +49,13 @@ class PlayerCharacter
   def give_death_penalty
     rails_penalty_rate = 10
 
-    reduced_rails = (self.rails * rails_penalty_rate / 100).to_i
-    after_rails = self.rails - reduced_rails
+    reduced_rails = (rails * rails_penalty_rate / 100).to_i
+    after_rails = rails - reduced_rails
 
-    if(after_rails < 0)
-      after_rails = 0
-    end
+    after_rails = 0 if after_rails < 0
 
     @player.rails = after_rails
-    self.recover_hp_all
+    recover_hp_all
     return "お金が#{after_rails}になった"
   end
 
@@ -79,3 +77,4 @@ class PlayerCharacter
     @player.save!
   end
 end
+

@@ -10,10 +10,11 @@ class Battle::Action
     @object_character  = object_character
     @verb = verb
     @value = value
-    @result = self.to_string()
+    @result = to_string
   end
 
   def to_string
-    return @subject_character.name + "が" + @object_character.name + "に" + @value.to_s() + "の" + @verb + "。" + @object_character.name + "の現在HP: " + @object_character.hp.to_s()
+    return @subject_character.name + 'が' + @object_character.name + 'に' + @value.to_s + 'の' + @verb + '。' + @object_character.name + 'の現在HP: ' + @object_character.hp.to_s
   end
 end
+

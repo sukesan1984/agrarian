@@ -9,8 +9,8 @@ class InnController < ApplicationController
 
     # player
     player_character = player_character_factory.build_by_user_id(current_user.id)
-    if(player_character == nil)
-      redirect_to("/player/input")
+    if player_character.nil?
+      redirect_to('/player/input')
       return
     end
 
@@ -25,3 +25,4 @@ class InnController < ApplicationController
     end
   end
 end
+

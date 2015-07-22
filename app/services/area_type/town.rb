@@ -1,9 +1,9 @@
 class AreaType::Town < AreaType::Base
   attr_reader :area_node, :area_id
   def initialize(
-    area_id, 
-    town, 
-    town_bulletin_boards, 
+    area_id,
+    town,
+    town_bulletin_boards,
     area_node,
     establishment_list)
     @area_id = area_id
@@ -25,7 +25,7 @@ class AreaType::Town < AreaType::Base
   end
 
   def get_render_path
-    return "area/town"
+    return 'area/town'
   end
 
   # 部分templateに渡すやつ
@@ -37,3 +37,4 @@ class AreaType::Town < AreaType::Base
     }
   end
 end
+

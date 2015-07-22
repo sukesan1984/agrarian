@@ -17,3 +17,4 @@ RSpec.describe Harvest, type: :model do
     is_expected.to belong_to(:item_ability)
   end
 end
+

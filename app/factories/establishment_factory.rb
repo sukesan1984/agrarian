@@ -3,8 +3,8 @@ class EstablishmentFactory
   end
 
   def build_by_town_id(town_id)
-    establishments = Establishment.where("town_id = ?", town_id)
-    list = Array.new
+    establishments = Establishment.where('town_id = ?', town_id)
+    list = []
     establishments.each do |establishment|
       list.push(build_by_establishment(establishment))
     end
@@ -12,6 +12,7 @@ class EstablishmentFactory
   end
 
   private
+
   def build_by_establishment(establishment)
     case establishment.establishment_type
     # ショップ
@@ -21,3 +22,4 @@ class EstablishmentFactory
     end
   end
 end
+

@@ -33,6 +33,7 @@ class EnemyCharacter
   end
 
   def save
-    #何もしない
+    # 何もしない
   end
 end
+

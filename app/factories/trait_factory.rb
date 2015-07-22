@@ -5,10 +5,10 @@ class TraitFactory
   end
 
   def build_by_comsumption(consumption)
-    case(consumption.consumption_type)
-    when(1)
+    case (consumption.consumption_type)
+    when (1)
       # HP回復するターゲットを取得する。
-      targets = Array.new
+      targets = []
       soldier_characters = @soldier_character_factory.build_by_player_id(@player.id)
       targets.concat(soldier_characters)
       targets.push(@player)
@@ -16,3 +16,4 @@ class TraitFactory
     end
   end
 end
+

@@ -6,8 +6,9 @@ class Status
   end
 
   def +(other)
-    new_attack = self.attack  + other.attack
-    new_defense = self.defense + other.defense
+    new_attack = attack + other.attack
+    new_defense = defense + other.defense
     return Status.new(new_attack, new_defense)
   end
 end
+

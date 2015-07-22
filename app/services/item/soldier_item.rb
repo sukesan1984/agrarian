@@ -7,10 +7,8 @@ class Item::SoldierItem
 
   # すでにそのSoldierを持っていたら、あげられない
   def give
-    user_soldiers = UserSoldier.where(["player_id = ? and soldier_id = ?", @player.id, @soldier.id])
-    if(user_soldiers.count >= 1)
-      return false
-    end
+    user_soldiers = UserSoldier.where(['player_id = ? and soldier_id = ?', @player.id, @soldier.id])
+    return false if (user_soldiers.count >= 1)
 
     @gived_soldier = UserSoldier.new(
       player_id: @player.id,
@@ -22,7 +20,7 @@ class Item::SoldierItem
   end
 
   def give_failed_message
-    return "すでに仲間になってるよ"
+    return 'すでに仲間になってるよ'
   end
 
   def save!
@@ -34,6 +32,7 @@ class Item::SoldierItem
   end
 
   def result
-    return "が仲間になったで"
+    return 'が仲間になったで'
   end
 end
+

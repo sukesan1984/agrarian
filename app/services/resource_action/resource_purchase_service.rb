@@ -10,35 +10,35 @@ class ResourceAction::ResourcePurchaseService
   end
 
   def action_name
-    return "購入する"
+    return '購入する'
   end
 
-  def execute()
+  def execute
     ActiveRecord::Base.transaction do
       cost = @showcase.cost
       after_rails = @player.rails - cost
-      if(after_rails < 0)
+      if after_rails < 0
         return {
-          message: "自分お金持ってへんやん。",
+          message: '自分お金持ってへんやん。',
           remain: @resource_service.current_count,
-          success:true
+          success: true
         }
       end
 
       @player.rails = after_rails
-      if(@resource_service.decrease(1).nil?)
+      if @resource_service.decrease(1).nil?
         return {
-          message: "在庫あらへんわ・・ごめん",
+          message: '在庫あらへんわ・・ごめん',
           remain: @resource_service.current_count,
-          success:true
+          success: true
         }
       end
 
-      if(!@item_service.give)
+      unless @item_service.give
         return {
           message: @item_service.give_failed_message,
           remain: @resource_service.current_count,
-          success:true
+          success: true
         }
       end
 
@@ -46,11 +46,11 @@ class ResourceAction::ResourcePurchaseService
       @item_service.save!
       @resource_service.save!
     end
-      return {
-        message: @item_service.name + @item_service.result,
-        remain: @resource_service.current_count,
-        success: true
-      }
+    return {
+      message: @item_service.name + @item_service.result,
+      remain: @resource_service.current_count,
+      success: true
+    }
     rescue => e
       Rails.logger.debug(e)
       return {
@@ -58,3 +58,4 @@ class ResourceAction::ResourcePurchaseService
       }
   end
 end
+

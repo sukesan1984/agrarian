@@ -21,3 +21,4 @@ RSpec.describe EnemyMap, type: :model do
     is_expected.to belong_to(:enemy)
   end
 end
+

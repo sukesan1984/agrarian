@@ -17,3 +17,4 @@ RSpec.describe Area, type: :model do
     is_expected.to have_one(:area_node)
   end
 end
+

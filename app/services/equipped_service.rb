@@ -1,4 +1,4 @@
-#装備品
+# 装備品
 class EquippedService
   def initialize(body_part, equipment_service)
     @body_part = body_part
@@ -14,30 +14,24 @@ class EquippedService
   end
 
   def name
-    if @equipment_service.nil?
-      return 'なし'
-    end
+    return 'なし' if @equipment_service.nil?
 
     return @equipment_service.name
   end
 
   def equipped
-    return @equipment_service != nil
+    return !@equipment_service.nil?
   end
 
   def status
-    if(@equipment_service.nil?)
-       return Status.new(0, 0)
-    end
+    return Status.new(0, 0) if @equipment_service.nil?
     return @equipment_service.status
   end
 
   def user_item_id
-    if @equipment_service.nil?
-      return nil
-    end
+    return nil if @equipment_service.nil?
 
     return @equipment_service.user_item_id
   end
-
 end
+

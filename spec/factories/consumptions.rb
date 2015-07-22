@@ -17,8 +17,8 @@
 FactoryGirl.define do
   factory :consumption do
     item_id 1
-consumption_type 1
-type_value 1
+    consumption_type 1
+    type_value 1
   end
-
 end
+

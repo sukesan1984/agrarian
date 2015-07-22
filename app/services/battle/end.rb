@@ -12,7 +12,7 @@ class Battle::End
 
   def result
     # TODO: この辺リファクタ
-    return @added_rails.to_s + "rails を獲得した"
+    return @added_rails.to_s + 'rails を獲得した'
   end
 
   def save!

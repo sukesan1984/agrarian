@@ -15,9 +15,10 @@ class AreaType::Dungeon < AreaType::Base
   end
 
   def get_render_path
-    return "area/dungeon"
+    return 'area/dungeon'
   end
 
   def get_render_object
   end
 end
+

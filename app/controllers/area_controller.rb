@@ -39,7 +39,7 @@ class AreaController < ApplicationController
 
     # その位置でのターゲットを取得する。
     routes = Route.where('area_node_id = ?', @current.area_node.id)
-    @target_routes = Array.new()
+    @target_routes = []
     routes.each do |route|
       @target_routes.push(factory.build_by_area_node_id(route.connected_area_node_id))
     end
@@ -59,3 +59,4 @@ class AreaController < ApplicationController
   def not_found
   end
 end
+

@@ -9,11 +9,11 @@ class AreaType::Road < AreaType::Base
   end
 
   def get_name
-    return @road.name + "[" + @area_node.node_point.to_s() + "]"
+    return @road.name + '[' + @area_node.node_point.to_s + ']'
   end
 
   def get_render_path
-    return "area/road"
+    return 'area/road'
   end
 
   # 繋がっているarea_node_idを取得する。
@@ -21,14 +21,14 @@ class AreaType::Road < AreaType::Base
   def next_to_area_node_id
     max_connect_point = @road.road_length
     min_connect_point = 1
-    current = @area_node.node_point 
-    next_to = Array.new
-    #くだりがある。
-    if(current > min_connect_point)
+    current = @area_node.node_point
+    next_to = []
+    # くだりがある。
+    if current > min_connect_point
       down = @area_node.id - 1
       next_to.push(down)
     end
-    if(current < max_connect_point)
+    if current < max_connect_point
       up = @area_node.id + 1
       next_to.push(up)
     end
@@ -43,23 +43,19 @@ class AreaType::Road < AreaType::Base
   end
 
   def execute
-    enemy_maps = EnemyMap.where("area_id = ?", area_id)
+    enemy_maps = EnemyMap.where('area_id = ?', area_id)
     area = Area.find_by(id: area_id)
-    if(enemy_maps.count == 0 || area.nil?)
-      return
-    end
+    return if enemy_maps.count == 0 || area.nil?
 
     # この辺 変
     enemies_lottery = Battle::EnemiesLottery.new(enemy_maps)
     encounter = Battle::Encounter.new(area, enemies_lottery)
 
     list = encounter.encount
-    if(list.nil?)
-      return
-    end
+    return if list.nil?
 
     @encountered_enemy = true
-    UserEncounterEnemy.delete_all(["player_id = ?", @player.id])
+    UserEncounterEnemy.delete_all(['player_id = ?', @player.id])
     list.each do |enemy|
       UserEncounterEnemy.create(
         player_id: @player.id,
@@ -69,10 +65,9 @@ class AreaType::Road < AreaType::Base
   end
 
   def can_move_to_next
-    if(@encountered_enemy)
-      return false
-    end
+    return false if @encountered_enemy
 
     return true
   end
 end
+

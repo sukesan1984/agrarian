@@ -19,12 +19,12 @@ class ResourceAction::ResourceHarvestService
 
   # 実行
   # とりあえず汎用化後でするけど、一旦はharvestだけでok
-  def execute()
+  def execute
     # トランザクション開始
     ActiveRecord::Base.transaction do
-      if(@user_items_needed.count <= 0)
+      if (@user_items_needed.count <= 0)
         return {
-          message: @harvest.name + "ために必要なアイテムが無いよ!!",
+          message: @harvest.name + 'ために必要なアイテムが無いよ!!',
           remain: @resource_service.current_count,
           success: true
         }
@@ -32,9 +32,9 @@ class ResourceAction::ResourceHarvestService
       # TODO: 消費する処理
       #
       # resourceを減らしてアイテムを増やす
-      if(@resource_service.decrease(1).nil?)
+      if @resource_service.decrease(1).nil?
         return {
-          message: "無いよ！！",
+          message: '無いよ！！',
           remain: @resource_service.current_count,
           success: true
         }
@@ -44,14 +44,15 @@ class ResourceAction::ResourceHarvestService
       @user_item.count += 1
       @user_item.save!
     end
-      return {
-        message: @harvest.name,
-        remain: @resource_service.current_count,
-        success: true
-      }
+    return {
+      message: @harvest.name,
+      remain: @resource_service.current_count,
+      success: true
+    }
     rescue => e
       return {
         success: false
       }
   end
 end
+

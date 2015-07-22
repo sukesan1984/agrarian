@@ -23,3 +23,4 @@ RSpec.describe AreaNode, type: :model do
     is_expected.to have_one(:user_area)
   end
 end
+
