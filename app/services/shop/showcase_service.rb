@@ -10,6 +10,10 @@ class Shop::ShowcaseService
     return @showcase.resource.item.name
   end
 
+  def description
+    return @showcase.resource.item.description
+  end
+
   def cost
     return @showcase.cost
   end
