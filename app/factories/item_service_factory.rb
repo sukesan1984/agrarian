@@ -12,6 +12,9 @@ class ItemServiceFactory
     when 3
       soldier = Soldier.find_by(id: item.item_type_id)
       return Item::SoldierItem.new(@player, soldier)
+    when 5
+      user_quest = UserQuest.find_or_create(@player.id, item.item_type_id)
+      return Item::QuestItem.new(user_quest)
     end
   end
 end

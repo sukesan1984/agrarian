@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720083137) do
+ActiveRecord::Schema.define(version: 20150723134944) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -136,6 +136,24 @@ ActiveRecord::Schema.define(version: 20150720083137) do
   end
 
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
+
+  create_table "quest_conditions", force: :cascade do |t|
+    t.integer  "quest_id",        limit: 4
+    t.integer  "target",          limit: 4
+    t.integer  "condition_type",  limit: 4
+    t.integer  "condition_id",    limit: 4
+    t.integer  "condition_value", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "quests", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "description",    limit: 255
+    t.integer  "reward_gift_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "resource_actions", force: :cascade do |t|
     t.integer  "action_type", limit: 4
@@ -266,6 +284,16 @@ ActiveRecord::Schema.define(version: 20150720083137) do
   end
 
   add_index "user_items", ["player_id", "item_id"], name: "index_user_items_on_player_id_and_item_id", using: :btree
+
+  create_table "user_quests", force: :cascade do |t|
+    t.integer  "player_id",  limit: 4
+    t.integer  "quest_id",   limit: 4
+    t.integer  "status",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "user_quests", ["player_id", "quest_id"], name: "index_user_quests_on_player_id_and_quest_id", unique: true, using: :btree
 
   create_table "user_soldiers", force: :cascade do |t|
     t.integer  "player_id",  limit: 4
