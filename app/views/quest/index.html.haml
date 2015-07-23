@@ -1,2 +1,6 @@
 %h2 クエスト受注したクエスト
+.user-quest-list
+  - @user_quests.each do |user_quest|
+    = user_quest.name
+    = user_quest.status_name
 = link_to('戻る', root_path)

@@ -38,11 +38,34 @@ class UserQuest < ActiveRecord::Base
 
   # 新しい報酬を受け取れるかどうか
   def can_receive
-    return self.status == 0 || self.status == 3
+    return self.status == Status::NotReceived || self.status == Status::ReceivedReward
+  end
+
+  def is_not_received
+    return self.status == Status::NotReceived 
   end
 
   def set_status_to_received 
     change_status(Status::Received)
+  end
+
+  def status_name
+    case(self.status)
+    when 0
+      return '未受注'
+    when 1
+      return 'クエスト進行中'
+    when 2
+      return '報酬未受け取り'
+    when 3
+      return '報酬受け取り済'
+    end
+
+    fail 'invalid status: ' + self.status.to_s
+  end
+
+  def name
+    return self.quest.name
   end
 
   private 
