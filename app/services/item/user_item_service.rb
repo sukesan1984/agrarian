@@ -4,6 +4,18 @@ class Item::UserItemService
     @user_item = user_item
   end
 
+  def name
+    return @user_item.item.name
+  end
+
+  def count
+    return @user_item.count
+  end
+
+  def sell_price
+    return @user_item.item.sell_price
+  end
+
   # このアイテム売る
   def sell
     #先にアイテムを減らす。

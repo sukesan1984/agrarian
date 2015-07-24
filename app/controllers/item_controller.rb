@@ -91,14 +91,12 @@ class ItemController < ApplicationController
     @player_character = player_character_factory.build_by_user_id(current_user.id)
 
     user_item_service_factory = UserItemServiceFactory.new(@player_character)
-    user_item_service = user_item_service_factory.build_by_user_item_id(user_item_id)
+    @user_item_service = user_item_service_factory.build_by_user_item_id(user_item_id)
 
-    user_item_service.sell
+    @user_item_service.sell
     ActiveRecord::Base.transaction do
-      user_item_service.save!
+      @user_item_service.save!
     end
-
-    redirect_to root_path
   end
 end
 
