@@ -11,6 +11,7 @@ class ShopController < ApplicationController
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
     player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    user_item_factory = UserItemFactory.new(equipped_list_service_factory)
 
     # player
     @player_character = player_character_factory.build_by_user_id(current_user.id)
@@ -24,7 +25,7 @@ class ShopController < ApplicationController
       @showcases.push(Shop::ShowcaseService.new(resource_service_factory.build_by_target_id_and_resource(area_node_id, showcase.resource), area_node_id, showcase))
     end
 
-    @user_items = UserItem.where('player_id = ?', @player_character.player.id).select { |user_item| user_item.count > 0 }
+    @user_items = user_item_factory.build_unequipped_user_item_list_by_player_id(@player_character.id)
   end
 
   # 購入する
