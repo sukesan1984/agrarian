@@ -6,11 +6,25 @@ class ShopController < ApplicationController
     @shop = Shop.find_by(id: shop_id)
 
     resource_service_factory = ResourceServiceFactory.new
+    # factory
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+
+    # player
+    @player_character = player_character_factory.build_by_user_id(current_user.id)
+    if @player_character.nil?
+      redirect_to('/player/input')
+      return
+    end
 
     @showcases = []
     @shop.showcases.each do |showcase|
       @showcases.push(Shop::ShowcaseService.new(resource_service_factory.build_by_target_id_and_resource(area_node_id, showcase.resource), area_node_id, showcase))
     end
+
+    @user_items = UserItem.where('player_id = ?', @player_character.player.id).select { |user_item| user_item.count > 0 }
   end
 
   # 購入する
