@@ -13,7 +13,7 @@
 %br
 .shop-user-item-sell
   - @user_items.each do |user_item|
-    = form_tag('/shop/sell', method: 'post') do
+    = form_tag('/item/sell', method: 'post') do
       = user_item.item.name
       \#{hidden_field_tag(:shop_id, @shop.id)}
       \#{hidden_field_tag(:user_item_id, user_item.id)}

@@ -75,7 +75,30 @@ class ItemController < ApplicationController
 
     @targets = item_consumption_service.targets
 
-    render template: 'item/use'
+    render template: 'shop/index'
+  end
+
+  def sell
+    shop_id      = params[:shop_id]
+    user_item_id = params[:user_item_id]
+
+    # factory
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+
+    @player_character = player_character_factory.build_by_user_id(current_user.id)
+
+    user_item_service_factory = UserItemServiceFactory.new(@player_character)
+    user_item_service = user_item_service_factory.build_by_user_item_id(user_item_id)
+
+    user_item_service.sell
+    ActiveRecord::Base.transaction do
+      user_item_service.save!
+    end
+
+    redirect_to root_path
   end
 end
 
