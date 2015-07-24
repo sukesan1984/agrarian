@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723134944) do
+ActiveRecord::Schema.define(version: 20150723152206) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -108,12 +108,14 @@ ActiveRecord::Schema.define(version: 20150723134944) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "description",  limit: 255
-    t.integer  "item_type",    limit: 4
-    t.integer  "item_type_id", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "name",           limit: 255
+    t.string   "description",    limit: 255
+    t.integer  "item_type",      limit: 4
+    t.integer  "item_type_id",   limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "purchase_price", limit: 4
+    t.integer  "sell_price",     limit: 4
   end
 
   create_table "nature_fields", force: :cascade do |t|
@@ -199,6 +201,16 @@ ActiveRecord::Schema.define(version: 20150723134944) do
   end
 
   add_index "routes", ["area_node_id"], name: "index_routes_on_area_node_id", using: :btree
+
+  create_table "shop_products", force: :cascade do |t|
+    t.integer  "shop_id",    limit: 4
+    t.integer  "item_id",    limit: 4
+    t.integer  "count",      limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "shop_products", ["shop_id"], name: "index_shop_products_on_shop_id", using: :btree
 
   create_table "shops", force: :cascade do |t|
     t.string   "name",        limit: 255

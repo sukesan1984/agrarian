@@ -43,6 +43,15 @@ class EquippedListService
     end
   end
 
+  # 対象のuser_itemを装備しているか
+  def equipped(user_item_id)
+    return @user_equipment.right_hand.to_i == user_item_id.to_i ||
+      @user_equipment.left_hand.to_i == user_item_id.to_i ||
+      @user_equipment.head.to_i == user_item_id.to_i ||
+      @user_equipment.body.to_i == user_item_id.to_i ||
+      @user_equipment.leg.to_i == user_item_id.to_i
+  end
+
   def unequip(user_item_id)
     # TODO: あとでかえてもいいけど、まーええんちゃう
 

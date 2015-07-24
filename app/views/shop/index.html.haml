@@ -8,4 +8,14 @@
     \#{hidden_field_tag(:resource_id, showcase.resource_service.id)}
     \#{hidden_field_tag(:area_node_id, showcase.area_node_id.to_s)}
     \#{submit_tag("購入する")}
+%br
+#h2 <余ってたら買うよ>
+%br
+.shop-user-item-sell
+  - @user_items.each do |user_item|
+    = form_tag('/item/sell', method: 'post') do
+      = user_item.item.name
+      \#{hidden_field_tag(:shop_id, @shop.id)}
+      \#{hidden_field_tag(:user_item_id, user_item.id)}
+      \#{submit_tag('売りつける')}
 = link_to("戻る", "/")

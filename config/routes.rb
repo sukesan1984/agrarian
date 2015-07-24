@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'item/', to: 'item#index'
   post 'item/use', to: 'item#use' 
   post 'item/use_actual', to: 'item#use_actual'
+  post 'item/sell', to: 'item#sell'
 
   #自然の奴
   get 'nature_field/', to: 'nature_field#index'
