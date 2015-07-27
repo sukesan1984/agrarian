@@ -8,6 +8,11 @@
 #  count         :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  player_id     :integer
+#
+# Indexes
+#
+#  index1  (player_id,progress_type,progress_id) UNIQUE
 #
 
 require 'rails_helper'

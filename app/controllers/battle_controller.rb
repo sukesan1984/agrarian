@@ -31,7 +31,7 @@ class BattleController < ApplicationController
     unit_list_b = []
 
     user_encounter_enemies.each do |user_encounter_enemy|
-      unit_list_a.push(Battle::Unit.new(enemy_character_factory.build_by_enemy(user_encounter_enemy.enemy)))
+      unit_list_a.push(Battle::Unit.new(enemy_character_factory.build_by_enemy(player_character.id, user_encounter_enemy.enemy)))
     end
 
     unit_list_b.push(Battle::Unit.new(player_character))
