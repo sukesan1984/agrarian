@@ -3,10 +3,6 @@ class ItemServiceFactory
     @player = player
   end
 
-  def build_by_item_id(item_id)
-    return build_by_item_id(item_id, 1)
-  end
-
   def build_by_item_id(item_id, count)
     item = Item.find_by(id: item_id)
     case item.item_type
