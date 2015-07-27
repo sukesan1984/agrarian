@@ -58,7 +58,7 @@ class ShopController < ApplicationController
     resource_service = resource_service_factory.build_by_target_id_and_resource(area_node_id, resource)
 
     item_service_factory = ItemServiceFactory.new(player_character)
-    item_service = item_service_factory.build_by_item_id(resource_service.item.id)
+    item_service = item_service_factory.build_by_item_id(resource_service.item.id, 1)
 
     fail 'shop is nil' if @shop.nil?
     fail 'resource is nil' if resource.nil?
