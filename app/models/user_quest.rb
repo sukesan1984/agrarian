@@ -39,6 +39,16 @@ class UserQuest < ActiveRecord::Base
   # クリア状態にする
   def set_cleared
     change_status(Status::NotReceivedReward)
+    return true
+  end
+
+  def set_claimed
+    if !self.is_cleared
+      return false
+    end
+
+    change_status(Status::ReceivedReward)
+    return true
   end
   
   # 新しいクエストを受け取れるかどうか

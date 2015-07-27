@@ -13,6 +13,10 @@ class Quest::QuestEntity
     return @user_quest.is_received
   end
 
+  def gift_id
+    return @quest.reward_gift_id
+  end
+
   # クリア済みかいなかを返す。
   # 計算してキャッシュするために、状態更新する
   def set_cleared
@@ -33,8 +37,20 @@ class Quest::QuestEntity
     return true
   end
 
+  # 報酬受け取り状態にする。
+  def set_claimed
+    @quest_condition_entities.each do |quest_condition_entity|
+      quest_condition_entity.set_claimed
+    end
+
+    return @user_quest.set_claimed
+  end
+
   def save!
     @user_quest.save!
+    @quest_condition_entities.each do |quest_condition_entity|
+      quest_condition_entity.save!
+    end
   end
 end
 

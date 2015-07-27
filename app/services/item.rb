@@ -5,6 +5,9 @@ class Item
   def give
   end
 
+  def count
+  end
+
   def give_failed_message
   end
 

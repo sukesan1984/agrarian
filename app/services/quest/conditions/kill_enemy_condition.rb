@@ -9,4 +9,14 @@ class Quest::Conditions::KillEnemyCondition < Quest::AbstractQuestConditionEntit
     # ターゲットの数よりも進捗が大きければクリア
     return @quest_condition.condition_value <= @progress.count
   end
+
+  # 報酬を付与したときに呼ばれる。
+  # 主にリセット処理とか
+  def set_claimed
+    @progress.count = 0
+  end
+
+  def save!
+    @progress.save!
+  end
 end
