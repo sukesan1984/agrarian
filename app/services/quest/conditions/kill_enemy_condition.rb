@@ -4,6 +4,10 @@ class Quest::Conditions::KillEnemyCondition < Quest::AbstractQuestConditionEntit
     @progress = progress
   end
 
+  def progress
+    return "#{@progress.count}/#{@quest_condition.condition_value}"
+  end
+
   # 特定の数の敵を倒したかどうか
   def is_cleared
     # ターゲットの数よりも進捗が大きければクリア
