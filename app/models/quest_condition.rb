@@ -14,3 +14,7 @@
 
 class QuestCondition < ActiveRecord::Base
 end
+
+class ConditionType
+  KillEnemy = 1
+end

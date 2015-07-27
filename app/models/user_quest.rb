@@ -36,13 +36,41 @@ class UserQuest < ActiveRecord::Base
     ReceivedReward = 3
   end
 
-  # 新しい報酬を受け取れるかどうか
+  # クリア状態にする
+  def set_cleared
+    change_status(Status::NotReceivedReward)
+    return true
+  end
+
+  def set_claimed
+    if !self.is_cleared
+      return false
+    end
+
+    change_status(Status::ReceivedReward)
+    return true
+  end
+  
+  # 新しいクエストを受け取れるかどうか
   def can_receive
     return self.status == Status::NotReceived || self.status == Status::ReceivedReward
   end
 
+  def is_received
+    return self.status == Status::Received
+  end
+
   def is_not_received
     return self.status == Status::NotReceived 
+  end
+
+  def is_cleared
+    return self.status == Status::NotReceivedReward || 
+      self.status == Status::ReceivedReward
+  end
+
+  def is_not_received_reward
+    return self.status == Status::NotReceivedReward
   end
 
   def set_status_to_received 

@@ -12,6 +12,8 @@ class BattleController < ApplicationController
 
     soldier_character_factory = SoldierCharacterFactory.new
 
+    enemy_character_factory = EnemyCharacterFactory.new
+
     # player
     player_character = player_character_factory.build_by_user_id(current_user.id)
 
@@ -29,7 +31,7 @@ class BattleController < ApplicationController
     unit_list_b = []
 
     user_encounter_enemies.each do |user_encounter_enemy|
-      unit_list_a.push(Battle::Unit.new(EnemyCharacter.new(user_encounter_enemy.enemy)))
+      unit_list_a.push(Battle::Unit.new(enemy_character_factory.build_by_enemy(user_encounter_enemy.enemy)))
     end
 
     unit_list_b.push(Battle::Unit.new(player_character))

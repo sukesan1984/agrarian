@@ -1,7 +1,8 @@
 class EnemyCharacter
-  def initialize(enemy)
+  def initialize(enemy, progress)
     @enemy = enemy
     @hp = StatusPoint.new(@enemy.hp, @enemy.hp)
+    @progress = progress
   end
 
   def name
@@ -26,6 +27,9 @@ class EnemyCharacter
 
   def decrease_hp(value)
     @hp.decrease(value)
+    if @hp.current <= 0
+      @progress.count += 1
+    end
   end
 
   def rails
@@ -33,7 +37,7 @@ class EnemyCharacter
   end
 
   def save
-    # 何もしない
+    @progress.save
   end
 end
 

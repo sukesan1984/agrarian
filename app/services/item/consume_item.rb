@@ -4,6 +4,10 @@ class Item::ConsumeItem
     @count = count
   end
 
+  def count
+    return @count
+  end
+
   def give
     @user_item.count += @count
     return true
