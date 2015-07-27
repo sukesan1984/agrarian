@@ -75,7 +75,7 @@ class ItemController < ApplicationController
 
     @targets = item_consumption_service.targets
 
-    render template: 'shop/index'
+    render template: 'item/use/'
   end
 
   def sell
