@@ -18,8 +18,10 @@ class QuestController < ApplicationController
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new
     quest_entity_factory = Quest::QuestEntityFactory.new(@player_character, quest_condition_entity_factory)
     @user_quests = UserQuest.where(player_id: @player_character.id).select{|user_quest| !user_quest.is_not_received}
+    @quest_entities = []
     @user_quests.each do |user_quest|
       quest_entity = quest_entity_factory.build_by_user_quest(user_quest)
+      @quest_entities.push(quest_entity)
       Quest::QuestAchieveService.new(quest_entity).achieve
     end
   end

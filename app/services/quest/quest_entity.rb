@@ -8,6 +8,26 @@ class Quest::QuestEntity
     @quest_condition_entities = quest_condition_entities
   end
 
+  def name
+    return @quest.name
+  end
+
+  def status_name
+    return @user_quest.status_name
+  end
+
+  def user_quest_id
+    return @user_quest.id
+  end
+
+  def is_not_received_reward
+    return @user_quest.is_not_received_reward
+  end
+
+  def progresses
+    return @quest_condition_entities.map {|e| e.progress }
+  end
+
   # いまだクリアになっていない物
   def is_not_cleared
     return @user_quest.is_received
