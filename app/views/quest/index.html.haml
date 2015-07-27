@@ -3,4 +3,8 @@
   - @user_quests.each do |user_quest|
     = user_quest.name
     = user_quest.status_name
+    - if user_quest.is_not_received_reward
+      = form_tag('/quest/claim', method: 'post') do
+        \#{hidden_field_tag(:user_quest_id, user_quest.id)}
+        \#{submit_tag('報酬を受け取る')}
 = link_to('戻る', root_path)

@@ -59,6 +59,10 @@ class UserQuest < ActiveRecord::Base
       self.status == Status::ReceivedReward
   end
 
+  def is_not_received_reward
+    return self.status == Status::NotReceivedReward
+  end
+
   def set_status_to_received 
     change_status(Status::Received)
   end

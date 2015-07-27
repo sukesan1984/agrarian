@@ -24,4 +24,7 @@ class QuestController < ApplicationController
       Quest::QuestAchieveService.new(quest_entity).achieve
     end
   end
+
+  def claim
+  end
 end

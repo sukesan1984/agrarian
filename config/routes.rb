@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   # クエストの奴
   get 'quest', to: 'quest#index'
+  post 'quest/claim', to: 'quest#claim' 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
