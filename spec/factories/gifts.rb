@@ -12,7 +12,7 @@
 FactoryGirl.define do
   factory :gift do
     item_id 1
-count 1
+    count 1
   end
-
 end
+

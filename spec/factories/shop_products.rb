@@ -17,8 +17,8 @@
 FactoryGirl.define do
   factory :shop_product do
     shop_id 1
-item_id 1
-count 1
+    item_id 1
+    count 1
   end
-
 end
+

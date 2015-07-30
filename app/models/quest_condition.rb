@@ -18,3 +18,4 @@ end
 class ConditionType
   KillEnemy = 1
 end
+

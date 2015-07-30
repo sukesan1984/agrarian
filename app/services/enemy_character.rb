@@ -27,9 +27,7 @@ class EnemyCharacter
 
   def decrease_hp(value)
     @hp.decrease(value)
-    if @hp.current <= 0
-      @progress.count += 1
-    end
+    @progress.count += 1 if @hp.current <= 0
   end
 
   def rails

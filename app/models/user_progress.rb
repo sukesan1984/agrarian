@@ -33,3 +33,4 @@ end
 module ProgressType
   KillEnemy = 1
 end
+

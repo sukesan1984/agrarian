@@ -15,10 +15,10 @@
 FactoryGirl.define do
   factory :quest_condition do
     quest_id 1
-target 1
-condition_type 1
-condition_id 1
-condition_value 1
+    target 1
+    condition_type 1
+    condition_id 1
+    condition_value 1
   end
-
 end
+

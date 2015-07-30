@@ -24,6 +24,5 @@ class Item::QuestItem
   def result
     return 'のクエストを受注したよ'
   end
-
-
 end
+

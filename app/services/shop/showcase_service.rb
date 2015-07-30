@@ -6,7 +6,7 @@ class Shop::ShowcaseService
     @showcase = showcase
   end
 
-  def name 
+  def name
     return @showcase.resource.item.name
   end
 
@@ -21,5 +21,5 @@ class Shop::ShowcaseService
   def area_node_id
     return @area_node_id
   end
-
 end
+

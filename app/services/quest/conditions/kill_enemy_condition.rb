@@ -24,3 +24,4 @@ class Quest::Conditions::KillEnemyCondition < Quest::AbstractQuestConditionEntit
     @progress.save!
   end
 end
+

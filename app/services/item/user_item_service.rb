@@ -18,11 +18,9 @@ class Item::UserItemService
 
   # このアイテム売る
   def sell
-    #先にアイテムを減らす。
+    # 先にアイテムを減らす。
     after = @user_item.count - 1
-    if after < 0
-      return false
-    end
+    return false if after < 0
 
     @user_item.count = after
 
