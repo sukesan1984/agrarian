@@ -18,7 +18,12 @@ class Entity::EstablishmentEntity
   end
 
   def path
-    return "/shop/" + @area_node_id.to_s + "/" + @establishment.id.to_s
+    case(@establishment.establishment_type)
+    when 1
+      return "/shop/" + @area_node_id.to_s + "/" + @establishment.id.to_s
+    when 2
+      return "/inn"
+    end
   end
 end
 
