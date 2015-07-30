@@ -1,2 +1,11 @@
-%h1 宿屋でおやすみ
+.inn-name
+  = @inn.name
+.inn-description
+  = @inn.description
+
+= form_tag('/inn/sleep', method: 'post') do
+  一泊: #{@inn.rails} rails
+  \#{hidden_field_tag(:id, @inn.id)}
+  \#{submit_tag('泊まる')}
+
 = link_to("戻る", "/")

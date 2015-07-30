@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   get 'battle/:area_id', to: 'battle#index'
 
   #宿屋
-  get 'inn/', to: 'inn#index'
+  get 'inn/:id', to: 'inn#index'
+  post 'inn/sleep', to: 'inn#sleep'
 
   #アイテム
   get 'item/', to: 'item#index'
