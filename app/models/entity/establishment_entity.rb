@@ -16,5 +16,9 @@ class Entity::EstablishmentEntity
   def description
     return @master.description
   end
+
+  def path
+    return "/shop/" + @area_node_id.to_s + "/" + @establishment.id.to_s
+  end
 end
 

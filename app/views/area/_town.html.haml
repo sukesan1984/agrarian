@@ -3,7 +3,7 @@
 %br/
 - object[:establishment_list].each do |establishment|
   %li
-    = link_to(establishment.name, "/shop/"+ object[:area_node_id].to_s + "/" +establishment.id.to_s)
+    = link_to(establishment.name, establishment.path)
 = render "/view_objects/bulletin_board", records: object[:town_bulletin_boards]
 %li
   = link_to("公式wiki","http://wiki.agrarian.jp")
