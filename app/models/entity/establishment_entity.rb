@@ -1,11 +1,11 @@
-class Entity::EstablishmentEntity 
+class Entity::EstablishmentEntity
   def initialize(establishment, area_node_id, master)
     @area_node_id = area_node_id
     @establishment = establishment
     @master = master
   end
 
-  def id 
+  def id
     return @master.id
   end
 
@@ -18,11 +18,11 @@ class Entity::EstablishmentEntity
   end
 
   def path
-    case(@establishment.establishment_type)
+    case (@establishment.establishment_type)
     when 1
-      return "/shop/" + @area_node_id.to_s + "/" + @establishment.id.to_s
+      return '/shop/' + @area_node_id.to_s + '/' + @establishment.id.to_s
     when 2
-      return "/inn/" + @establishment.establishment_id.to_s
+      return '/inn/' + @establishment.establishment_id.to_s
     end
   end
 end

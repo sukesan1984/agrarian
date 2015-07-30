@@ -25,7 +25,7 @@ class Quest::QuestEntity
   end
 
   def progresses
-    return @quest_condition_entities.map {|e| e.progress }
+    return @quest_condition_entities.map(&:progress)
   end
 
   # いまだクリアになっていない物
@@ -41,16 +41,12 @@ class Quest::QuestEntity
   # 計算してキャッシュするために、状態更新する
   def set_cleared
     # すでにクリア済みのときは再計算しない。
-    if @user_quest.is_cleared
-      return true
-    end
+    return true if @user_quest.is_cleared
 
     # 未クリア時はチェックする
-    @quest_condition_entities.each do |quest_condition_entity| 
+    @quest_condition_entities.each do |quest_condition_entity|
       # 一つでもクリアしていない物があれば、未クリア
-      if !quest_condition_entity.is_cleared
-        return false
-      end
+      return false unless quest_condition_entity.is_cleared
     end
 
     @user_quest.set_cleared
@@ -59,18 +55,14 @@ class Quest::QuestEntity
 
   # 報酬受け取り状態にする。
   def set_claimed
-    @quest_condition_entities.each do |quest_condition_entity|
-      quest_condition_entity.set_claimed
-    end
+    @quest_condition_entities.each(&:set_claimed)
 
     return @user_quest.set_claimed
   end
 
   def save!
     @user_quest.save!
-    @quest_condition_entities.each do |quest_condition_entity|
-      quest_condition_entity.save!
-    end
+    @quest_condition_entities.each(&:save!)
   end
 end
 

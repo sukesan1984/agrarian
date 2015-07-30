@@ -65,9 +65,7 @@ class PlayerCharacter
 
   def decrease_rails(value)
     after_rails = @player.rails - value
-    if after_rails < 0
-      return false
-    end
+    return false if after_rails < 0
 
     @player.rails -= value
     return true

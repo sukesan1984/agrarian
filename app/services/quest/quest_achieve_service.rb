@@ -5,17 +5,14 @@ class Quest::QuestAchieveService
   end
 
   def achieve
-    begin
-      ActiveRecord::Base.transaction do
-        if !@quest.set_cleared
-          return false
-        end
+    ActiveRecord::Base.transaction do
+      return false unless @quest.set_cleared
 
-        @quest.save!
-        return true
-      end
-    rescue => e
-      fail e
+      @quest.save!
+      return true
     end
+  rescue => e
+    raise e
   end
 end
+

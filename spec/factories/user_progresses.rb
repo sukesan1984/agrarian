@@ -18,8 +18,8 @@
 FactoryGirl.define do
   factory :user_progress do
     progress_type 1
-progress_id 1
-count 1
+    progress_id 1
+    count 1
   end
-
 end
+

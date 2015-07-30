@@ -10,3 +10,4 @@ class UserItemServiceFactory
     return Item::UserItemService.new(@player, user_item)
   end
 end
+

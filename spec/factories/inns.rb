@@ -12,9 +12,9 @@
 
 FactoryGirl.define do
   factory :inn do
-    name "MyString"
-description ""
-rails 1
+    name 'MyString'
+    description ''
+    rails 1
   end
-
 end
+

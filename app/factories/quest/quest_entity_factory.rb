@@ -10,8 +10,9 @@ class Quest::QuestEntityFactory
     quest_conditions = QuestCondition.where(quest_id: quest_id)
     quest_condition_entities = []
     quest_conditions.each do |quest_condition|
-      quest_condition_entities.push( @quest_condition_entity_factory.build_by_quest_condition(quest_condition, @player))
+      quest_condition_entities.push(@quest_condition_entity_factory.build_by_quest_condition(quest_condition, @player))
     end
     return Quest::QuestEntity.new(quest, user_quest, quest_condition_entities)
   end
 end
+

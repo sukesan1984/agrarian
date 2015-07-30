@@ -17,8 +17,8 @@
 FactoryGirl.define do
   factory :user_quest do
     player_id 1
-quest_id 1
-status 1
+    quest_id 1
+    status 1
   end
-
 end
+

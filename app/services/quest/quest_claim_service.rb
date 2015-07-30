@@ -6,22 +6,18 @@ class Quest::QuestClaimService
   end
 
   def claim
-    begin
-      ActiveRecord::Base.transaction do
-        # questを報酬受け取り済みにする。
-        if !@quest_entity.set_claimed
-          fail 'cant claim if not cleared'
-        end
+    ActiveRecord::Base.transaction do
+      # questを報酬受け取り済みにする。
+      fail 'cant claim if not cleared' unless @quest_entity.set_claimed
 
-        # アイテムを与える。
-        @item_service.give
+      # アイテムを与える。
+      @item_service.give
 
-        @quest_entity.save!
-        @item_service.save!
-      end
-    rescue => e
-      fail e
+      @quest_entity.save!
+      @item_service.save!
     end
+  rescue => e
+    raise e
   end
 end
 

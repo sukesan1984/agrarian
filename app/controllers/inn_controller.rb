@@ -23,9 +23,7 @@ class InnController < ApplicationController
 
     # 宿屋
     @inn = Inn.find_by(id: id)
-    if @inn.nil?
-      fail 'no inn' + id.to_s
-    end
+    fail 'no inn' + id.to_s if @inn.nil?
 
     soldiers = []
     UserSoldier.where(player_id: player_character.id).each do |user_soldier|

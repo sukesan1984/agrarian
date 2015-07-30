@@ -12,9 +12,9 @@
 
 FactoryGirl.define do
   factory :quest do
-    name "MyString"
-description "MyString"
-reward_gift_id 1
+    name 'MyString'
+    description 'MyString'
+    reward_gift_id 1
   end
-
 end
+
