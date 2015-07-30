@@ -1,6 +1,13 @@
 class InnController < ApplicationController
   before_action :authenticate_user!
   def index
+    id = params[:id]
+    @inn = Inn.find_by(id: id)
+  end
+
+  def sleep
+    id = params[:id]
+
     # factory
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
@@ -14,15 +21,19 @@ class InnController < ApplicationController
       return
     end
 
-    player_character.recover_hp_all
-    player_character.save
-
-    user_soldiers = UserSoldier.where(player_id: player_character.id)
-    user_soldiers.each do |user_soldier|
-      soldier_character = SoldierCharacter.new(user_soldier)
-      soldier_character.recover_hp_all
-      soldier_character.save
+    # 宿屋
+    @inn = Inn.find_by(id: id)
+    if @inn.nil?
+      fail 'no inn' + id.to_s
     end
+
+    soldiers = []
+    UserSoldier.where(player_id: player_character.id).each do |user_soldier|
+      soldiers.push(SoldierCharacter.new(user_soldier))
+    end
+
+    inn_service = InnService.new(@inn, player_character, soldiers)
+    inn_service.sleep
   end
 end
 

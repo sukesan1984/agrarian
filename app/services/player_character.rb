@@ -63,6 +63,16 @@ class PlayerCharacter
     @player.rails += value
   end
 
+  def decrease_rails(value)
+    after_rails = @player.rails - value
+    if after_rails < 0
+      return false
+    end
+
+    @player.rails -= value
+    return true
+  end
+
   def recover_hp(value)
     @hp += value
   end
