@@ -40,7 +40,7 @@ gem 'google-analytics-rails'
 gem 'annotate'
 
 # use uikit
-gem 'uikit-sass-rails'
+gem 'uikit-sass-rails', git: 'git://github.com/8398a7/uikit-sass-rails'
 
 # use haml
 gem 'haml-rails'
