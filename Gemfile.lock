@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/8398a7/uikit-sass-rails
+  revision: cf5607b0c7081fe5a2754577dc976fd40cbb5474
+  specs:
+    uikit-sass-rails (1.4.1)
+      sass-rails (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -326,8 +333,6 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uikit-sass-rails (1.4.1)
-      sass-rails (>= 3.1)
     unicorn (4.9.0)
       kgio (~> 2.6)
       rack
@@ -386,6 +391,9 @@ DEPENDENCIES
   timecop
   turbolinks
   uglifier (>= 1.3.0)
-  uikit-sass-rails
+  uikit-sass-rails!
   unicorn
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.10.3
