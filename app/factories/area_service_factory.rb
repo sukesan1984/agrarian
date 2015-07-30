@@ -3,7 +3,7 @@ class AreaServiceFactory
     @player  = player
     @resource_service_factory = resource_service_factory
     @resource_action_service_factory = resource_action_service_factory
-    @establishment_factory = EstablishmentFactory.new
+    @establishment_entity_factory = EstablishmentEntityFactory.new
   end
 
   def build(area_node)
@@ -13,7 +13,7 @@ class AreaServiceFactory
       town = Town.find_by(id: area.type_id)
       unless town.nil?
         town_bulletin_boards = TownBulletinBoard.where('town_id = ?', town.id).order(created_at: :desc).limit(5)
-        establishment_list = @establishment_factory.build_by_town_id(town.id)
+        establishment_list = @establishment_entity_factory.build_by_town_id(town.id)
         return AreaType::Town.new(area.id, town, town_bulletin_boards, area_node, establishment_list)
       end
     when 2
