@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/sukesan1984/agrarian.png?label=ready&title=Ready)](https://waffle.io/sukesan1984/agrarian)
 # Agrarian
 
 [![Code Climate](https://codeclimate.com/github/sukesan1984/agrarian/badges/gpa.svg)](https://codeclimate.com/github/sukesan1984/agrarian)
