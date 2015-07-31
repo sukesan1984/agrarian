@@ -9,11 +9,8 @@ class AreaController < ApplicationController
   def show
     @id = params[:id]
 
-    resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
-    resource_service_factory = ResourceServiceFactory.new
-    factory = AreaServiceFactory.new(@player_character, resource_service_factory, resource_service_action_factory)
-
-    @current = factory.build_by_area_node_id(@id)
+    @area_service_factory = AreaServiceFactory.new(@player_character, @resource_service_factory, @resource_service_action_factory)
+    @current = @area_service_factory.build_by_area_node_id(@id)
 
     if @current.is_nil
       redirect_to '/areas/not_found'
@@ -29,13 +26,13 @@ class AreaController < ApplicationController
     routes = Route.where('area_node_id = ?', @current.area_node.id)
     @target_routes = []
     routes.each do |route|
-      @target_routes.push(factory.build_by_area_node_id(route.connected_area_node_id))
+      @target_routes.push(@area_service_factory.build_by_area_node_id(route.connected_area_node_id))
     end
 
     # nilじゃなかったら、each
     if @current.next_to_area_node_id
       @current.next_to_area_node_id.each do |area_node_id|
-        @target_routes.push(factory.build_by_area_node_id(area_node_id))
+        @target_routes.push(@area_service_factory.build_by_area_node_id(area_node_id))
       end
     end
 
@@ -53,6 +50,8 @@ class AreaController < ApplicationController
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    @resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
+    @resource_service_factory = ResourceServiceFactory.new
   end
 
   def set_player_character
