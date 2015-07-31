@@ -1,11 +1,11 @@
 class ItemController < ApplicationController
   before_action :authenticate_user!
   before_action :set_factories
+  before_action :set_player_character
+
   def index
 
     # player
-    @player_character = @player_character_factory.build_by_user_id(current_user.id)
-    redirect_to('/player/input') if @player_character.nil?
 
     @user_items = UserItem.where('player_id = ?', @player_character.player.id).select { |user_item| user_item.count > 0 }
     @item_consumption_services = @item_consumption_service_factory.build_list_by_player_id(@player_character.id)
@@ -13,9 +13,6 @@ class ItemController < ApplicationController
 
   def use
     @user_item_id = params[:user_item_id]
-
-    @player_character = @player_character_factory.build_by_user_id(current_user.id)
-    redirect_to '/player/input' if @player_character.nil?
 
     # user_itemを取得
     user_item = UserItem.find_by(id: @user_item_id, player_id: @player_character.id)
@@ -29,9 +26,6 @@ class ItemController < ApplicationController
     @user_item_id = params[:user_item_id]
     target_type  = params[:target_type]
     target_id    = params[:target_id]
-
-    @player_character = @player_character_factory.build_by_user_id(current_user.id)
-    redirect_to '/player/input' if @player_character.nil?
 
     # user_itemを取得
     user_item = UserItem.find_by(id: @user_item_id, player_id: @player_character.id)
@@ -50,8 +44,6 @@ class ItemController < ApplicationController
     #TODO: 将来的にはどの店に売ったかを記録してそれを販売するようにする。
     #shop_id      = params[:shop_id]
     user_item_id = params[:user_item_id]
-
-    @player_character = @player_character_factory.build_by_user_id(current_user.id)
 
     user_item_service_factory = UserItemServiceFactory.new(@player_character)
     @user_item_service = user_item_service_factory.build_by_user_item_id(user_item_id)
@@ -74,6 +66,11 @@ class ItemController < ApplicationController
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
     @trait_factory = TraitFactory.new(@player_character_factory, @soldier_character_facotry)
     @item_consumption_service_factory = ItemConsumptionServiceFactory.new(@trait_factory)
+  end
+
+  def set_player_character
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
+    redirect_to('/player/input') if @player_character.nil?
   end
 end
 
