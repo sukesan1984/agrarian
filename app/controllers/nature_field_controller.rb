@@ -1,5 +1,7 @@
 class NatureFieldController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_factories
+  before_action :set_player_character
 
   def index
   end
@@ -8,29 +10,7 @@ class NatureFieldController < ApplicationController
   def action
     @area_node_id = params[:id]
 
-    # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-
-    # player
-    @player_character =
-      player_character_factory.build_by_user_id(current_user.id)
-
-    redirect_to '/player/input' if @player_character.nil?
-
-    resource_service_action_factory =
-      ResourceActionServiceFactory.new(player_character_factory)
-    resource_service_fatory = ResourceServiceFactory.new
-    area_service_factory =
-      AreaServiceFactory.new(
-        player_character_factory,
-        resource_service_fatory,
-        resource_service_action_factory
-      )
-
-    area = area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, @player_character.id)
+    area = @area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, @player_character.id)
     redirect_to '/' if area.is_nil
 
     if area.has_resource_action
@@ -40,6 +20,28 @@ class NatureFieldController < ApplicationController
     else
       redirect_to '/'
     end
+  end
+
+  def set_factories
+    # factory
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    resource_service_action_factory =
+      ResourceActionServiceFactory.new(@player_character_factory)
+    resource_service_fatory = ResourceServiceFactory.new
+    @area_service_factory =
+      AreaServiceFactory.new(
+        @player_character_factory,
+        resource_service_fatory,
+        resource_service_action_factory
+      )
+  end
+
+  def set_player_character
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
+    redirect_to('/player/input') if @player_character.nil?
   end
 end
 
