@@ -25,7 +25,7 @@ class AreaServiceFactory
       nature_field = NatureField.find_by(id: area.type_id)
       unless nature_field.nil?
         resource_service = @resource_service_factory.build_by_target_id_and_resource(area_node.id, nature_field.resource)
-        resource_action_service = @resource_action_service_factory.build_by_resource_service_and_action(resource_service, nature_field.resource_action)
+        resource_action_service = @resource_action_service_factory.build_by_resource_service_and_action_and_player_id(resource_service, nature_field.resource_action, @player.id)
         return AreaType::NatureField.new(area.id, nature_field, area_node, resource_action_service)
       end
     when 4

@@ -21,7 +21,7 @@ class NatureFieldController < ApplicationController
     redirect_to '/player/input' if @player_character.nil?
 
     resource_service_action_factory =
-      ResourceActionServiceFactory.new(@player_character.player)
+      ResourceActionServiceFactory.new(player_character_factory)
     resource_service_fatory = ResourceServiceFactory.new
     area_service_factory =
       AreaServiceFactory.new(
