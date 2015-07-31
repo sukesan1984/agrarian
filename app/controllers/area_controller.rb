@@ -1,20 +1,14 @@
 class AreaController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_factories
 
   def index
   end
 
   def show
     @id = params[:id]
-
-    # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-
     # player
-    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-    @player_character = player_character_factory.build_by_user_id(current_user.id)
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
 
     unless @player_character
       redirect_to '/player/input'
@@ -57,6 +51,14 @@ class AreaController < ApplicationController
   end
 
   def not_found
+  end
+
+  private
+  def set_factories
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
   end
 end
 
