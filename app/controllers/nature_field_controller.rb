@@ -25,12 +25,12 @@ class NatureFieldController < ApplicationController
     resource_service_fatory = ResourceServiceFactory.new
     area_service_factory =
       AreaServiceFactory.new(
-        @player_character,
+        player_character_factory,
         resource_service_fatory,
         resource_service_action_factory
       )
 
-    area = area_service_factory.build_by_area_node_id(@area_node_id)
+    area = area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, @player_character.id)
     redirect_to '/' if area.is_nil
 
     if area.has_resource_action
