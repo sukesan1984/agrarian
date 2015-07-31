@@ -98,5 +98,8 @@ class ItemController < ApplicationController
       @user_item_service.save!
     end
   end
+
+  def throw
+  end
 end
 
