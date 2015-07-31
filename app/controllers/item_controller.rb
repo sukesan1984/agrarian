@@ -40,13 +40,10 @@ class ItemController < ApplicationController
     #shop_id      = params[:shop_id]
     user_item_id = params[:user_item_id]
 
-    user_item_service_factory = UserItemServiceFactory.new(@player_character)
-    @user_item_service = user_item_service_factory.build_by_user_item_id(user_item_id)
+    item_sale_service_factory = ItemSaleServiceFactory.new(@player_character)
+    @item_sale_service = item_sale_service_factory.build_by_user_item_id(user_item_id)
 
-    @user_item_service.sell
-    ActiveRecord::Base.transaction do
-      @user_item_service.save!
-    end
+    @item_sale_service.sell
   end
 
   def throw
