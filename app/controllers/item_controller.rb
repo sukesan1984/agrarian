@@ -4,9 +4,6 @@ class ItemController < ApplicationController
   before_action :set_player_character
 
   def index
-
-    # player
-
     @user_items = UserItem.where('player_id = ?', @player_character.player.id).select { |user_item| user_item.count > 0 }
     @item_consumption_services = @item_consumption_service_factory.build_list_by_player_id(@player_character.id)
   end
@@ -32,9 +29,7 @@ class ItemController < ApplicationController
     fail 'no such user item: ' + @user_item_id.to_s + ' for player_id: ' + @player_character.id.to_s unless user_item
 
     item_consumption_service = @item_consumption_service_factory.build_by_player_id_and_user_item(@player_character.id, user_item)
-
     @result = item_consumption_service.use(target_type, target_id)
-
     @targets = item_consumption_service.targets
 
     render template: 'item/use/'
