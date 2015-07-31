@@ -1,18 +1,12 @@
 class ItemController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_factories
   def index
-    # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-
     # player
-    @player_character = player_character_factory.build_by_user_id(current_user.id)
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
     redirect_to('/player/input') if @player_character.nil?
 
-    soldier_character_facotry = SoldierCharacterFactory.new
-    trait_factory = TraitFactory.new(@player_character, soldier_character_facotry)
+    trait_factory = TraitFactory.new(@player_character, @soldier_character_facotry)
     item_consumption_service_factory = ItemConsumptionServiceFactory.new(trait_factory)
 
     @user_items = UserItem.where('player_id = ?', @player_character.player.id).select { |user_item| user_item.count > 0 }
@@ -22,19 +16,12 @@ class ItemController < ApplicationController
   def use
     @user_item_id = params[:user_item_id]
 
-    # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-
-    @player_character = player_character_factory.build_by_user_id(current_user.id)
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
 
     redirect_to '/player/input' if @player_character.nil?
 
     # ターゲットがあるか
-    soldier_character_facotry = SoldierCharacterFactory.new
-    trait_factory = TraitFactory.new(@player_character, soldier_character_facotry)
+    trait_factory = TraitFactory.new(@player_character, @soldier_character_facotry)
     item_consumption_service_factory = ItemConsumptionServiceFactory.new(trait_factory)
 
     # user_itemを取得
@@ -51,18 +38,11 @@ class ItemController < ApplicationController
     target_type  = params[:target_type]
     target_id    = params[:target_id]
 
-    # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-
-    @player_character = player_character_factory.build_by_user_id(current_user.id)
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
 
     redirect_to '/player/input' if @player_character.nil?
 
-    soldier_character_facotry = SoldierCharacterFactory.new
-    trait_factory = TraitFactory.new(@player_character, soldier_character_facotry)
+    trait_factory = TraitFactory.new(@player_character, @soldier_character_facotry)
     item_consumption_service_factory = ItemConsumptionServiceFactory.new(trait_factory)
 
     # user_itemを取得
@@ -82,13 +62,7 @@ class ItemController < ApplicationController
     shop_id      = params[:shop_id]
     user_item_id = params[:user_item_id]
 
-    # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-
-    @player_character = player_character_factory.build_by_user_id(current_user.id)
+    @player_character = @player_character_factory.build_by_user_id(current_user.id)
 
     user_item_service_factory = UserItemServiceFactory.new(@player_character)
     @user_item_service = user_item_service_factory.build_by_user_item_id(user_item_id)
@@ -100,6 +74,15 @@ class ItemController < ApplicationController
   end
 
   def throw
+  end
+
+  private
+  def set_factories
+    equipment_service_factory = EquipmentServiceFactory.new
+    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    @soldier_character_facotry = SoldierCharacterFactory.new
+    @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
   end
 end
 
