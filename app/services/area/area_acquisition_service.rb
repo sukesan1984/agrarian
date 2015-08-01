@@ -8,5 +8,11 @@ class Area::AreaAcquisitionService
     fail 'no such area_node_id: ' + current_area_node_id.to_s unless area_node
     return area_node
   end
+
+  def get_by_area_node_id(area_node_id)
+    area_node = AreaNode.find_by(id: area_node_id)
+    fail 'no such area_node_id' + area_node_id.to_s unless area_node
+    return area_node
+  end
 end
 

@@ -9,6 +9,7 @@
 #  thrown_at    :datetime         default(NULL), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  lock_version :integer          default(0), not null
 #
 # Indexes
 #
@@ -21,8 +22,19 @@ class ThrownItem < ActiveRecord::Base
   THROWN_VALID_SECONDS = 24 * 60 * 60
 
   def is_valid
+    return false if count == 0
     # 捨てられてからの経過時間が有効期限以下であれば有効
     return (Time.now - thrown_at) <= THROWN_VALID_SECONDS
+  end
+
+  def decrease(value)
+    after_count = self.count - value
+    if after_count < 0
+      return false
+    end
+
+    self.count = after_count
+    return true
   end
 
   def self.get_or_new_by_area_node_id_and_item_id(area_node_id, item_id)

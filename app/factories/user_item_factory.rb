@@ -11,5 +11,13 @@ class UserItemFactory
                  .select { |user_item| !equipped_list_service.equipped(user_item.id) }
     return user_items
   end
+
+  # item_idが有効かどうかのvalidationとかもやる
+  def build_by_player_id_and_item_id(player_id, item_id)
+    item = Item.find_by(id: item_id)
+    fail 'invalid item_id: ' + item_id.to_s unless item
+
+    return UserItem.find_or_create(player_id, item.id)
+  end
 end
 

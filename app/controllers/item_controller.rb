@@ -57,6 +57,16 @@ class ItemController < ApplicationController
   end
 
   def pickup
+    area_node_id = params[:area_node_id]
+    item_id = params[:item_id]
+
+    user_item_factory = UserItemFactory.new(@equipped_list_service_factory)
+    user_item = user_item_factory.build_by_player_id_and_item_id(@player_character.id, item_id)
+
+    area_node = Area::AreaAcquisitionService.new.get_by_area_node_id(area_node_id)
+
+    item_pickup_service = ItemPickupServiceFactory.new.build_by_user_item_and_area_node(user_item, area_node)
+    item_pickup_service.pickup
   end
 
   private
