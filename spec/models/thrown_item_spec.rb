@@ -10,6 +10,10 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
+# Indexes
+#
+#  index_thrown_items_on_area_node_id_and_item_id  (area_node_id,item_id) UNIQUE
+#
 
 require 'rails_helper'
 
