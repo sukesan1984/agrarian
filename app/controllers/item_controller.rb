@@ -56,6 +56,9 @@ class ItemController < ApplicationController
     @result = item_throw_service.throw
   end
 
+  def pickup
+  end
+
   private
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
