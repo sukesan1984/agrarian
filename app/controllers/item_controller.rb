@@ -66,7 +66,7 @@ class ItemController < ApplicationController
     area_node = Area::AreaAcquisitionService.new.get_by_area_node_id(area_node_id)
 
     item_pickup_service = ItemPickupServiceFactory.new.build_by_user_item_and_area_node(user_item, area_node)
-    item_pickup_service.pickup
+    @result = item_pickup_service.pickup
   end
 
   private

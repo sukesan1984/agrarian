@@ -10,7 +10,7 @@ class Item::ItemPickupService
     ActiveRecord::Base.transaction do
       # thrown_itemから減らす
       if !@thrown_item.is_valid
-        return {success: false, message: 'アイテム落ちてないよ'}
+        return { success: false, message: 'アイテム落ちてないよ' }
       end
 
       @thrown_item.decrease(1)
@@ -19,9 +19,10 @@ class Item::ItemPickupService
       # user_itemに追加する。
       @user_item.increase(1)
       @user_item.save!
+      return { success: true, message: @user_item.item.name + 'を拾った。今:' + @user_item.count.to_s + '個持ってる' }
     end
-  rescue => e
-    raise e
+    rescue => e
+      raise e
   end
 end
 

@@ -10,7 +10,7 @@ class Item::ItemThrowService
   # 実際に捨てる
   def throw
     if @equipped_list_service.equipped(@user_item.id)
-      return {success: false, message: '装備してるやつは捨てられへんで'}
+      return { success: false, message: '装備してるやつは捨てられへんで' }
     end
     ActiveRecord::Base.transaction do
       # アイテムの削除
@@ -33,7 +33,7 @@ class Item::ItemThrowService
       
       @thrown_item.thrown_at = Time.now
       @thrown_item.save!
-      return {success: true, message: '捨てた'}
+      return { success: true, message: @user_item.item.name + 'を捨てた。今:' + @user_item.count.to_s + '個持ってる' }
     end
     rescue => e 
       raise e
