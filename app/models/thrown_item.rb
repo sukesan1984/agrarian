@@ -6,7 +6,7 @@
 #  area_node_id :integer
 #  item_id      :integer
 #  count        :integer
-#  thrown_at    :time
+#  thrown_at    :datetime         default(NULL), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
