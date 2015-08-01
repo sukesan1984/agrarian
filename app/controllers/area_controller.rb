@@ -10,7 +10,6 @@ class AreaController < ApplicationController
     @id = params[:id]
 
     @current = @area_service_factory.build_by_area_node_id_and_player_id(@id, @player_character.id)
-
     if @current.is_nil
       redirect_to '/areas/not_found'
       return
@@ -38,6 +37,10 @@ class AreaController < ApplicationController
     user_area = UserArea.get_or_create(@player_character.id)
     user_area.area_node_id = @id
     user_area.save
+
+    # そのエリアに落ちてるアイテム
+    @thrown_items = ThrownItem.where(area_node_id: @id)
+                    .select{ |thrown_item| thrown_item.is_valid }
   end
 
   def not_found

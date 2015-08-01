@@ -8,6 +8,19 @@
   - @target_routes.each do |target|
     %li
       = link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() )
+
+/ 落ちてるアイテム
+%h2 ここに落ちてるアイテム
+- @thrown_items.each do |thrown_item|
+  .area-thrown-item
+    = thrown_item.item.name
+    = thrown_item.count
+    個
+    = form_tag('/item/pickup', method: 'post') do
+      \#{hidden_field_tag(:area_node_id, @id)}
+      \#{hidden_field_tag(:item_id, thrown_item.item.id)}
+      \#{submit_tag('拾う')}
+
 / アイテム一覧へ
 %h2 アイテム
 = link_to("所持品をみる", "/item")
