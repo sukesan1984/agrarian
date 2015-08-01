@@ -41,6 +41,7 @@ class AreaController < ApplicationController
     # そのエリアに落ちてるアイテム
     @thrown_items = ThrownItem.where(area_node_id: @id)
                     .select{ |thrown_item| thrown_item.is_valid }
+    @soldier_characters = @soldier_character_factory.build_by_player_id(@player_character.id)
   end
 
   def not_found
@@ -51,6 +52,7 @@ class AreaController < ApplicationController
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    @soldier_character_factory = SoldierCharacterFactory.new
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
     @resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     @resource_service_factory = ResourceServiceFactory.new
