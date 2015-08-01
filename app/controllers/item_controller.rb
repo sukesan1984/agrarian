@@ -12,8 +12,7 @@ class ItemController < ApplicationController
     @user_item_id = params[:user_item_id]
 
     # user_itemを取得
-    user_item = UserItem.find_by(id: @user_item_id, player_id: @player_character.id)
-    fail 'no such user item' + @user_item_id.to_s + 'for player_id: ' + @player_character.id.to_s unless user_item
+    user_item = get_valid_user_item(@player_character.id, @user_item_id)
 
     item_consumption_service = @item_consumption_service_factory.build_by_player_id_and_user_item(@player_character.id, user_item)
     @targets = item_consumption_service.targets
@@ -25,8 +24,7 @@ class ItemController < ApplicationController
     target_id    = params[:target_id]
 
     # user_itemを取得
-    user_item = UserItem.find_by(id: @user_item_id, player_id: @player_character.id)
-    fail 'no such user item: ' + @user_item_id.to_s + ' for player_id: ' + @player_character.id.to_s unless user_item
+    user_item = get_valid_user_item(@player_character.id, @user_item_id)
 
     item_consumption_service = @item_consumption_service_factory.build_by_player_id_and_user_item(@player_character.id, user_item)
     @result = item_consumption_service.use(target_type, target_id)
@@ -47,15 +45,24 @@ class ItemController < ApplicationController
   end
 
   def throw
+    user_item_id = params[:user_item_id]
+    user_item = get_valid_user_item(@player_character.id, user_item_id)
+
+    area_acquisition_service = Area::AreaAcquisitionService.new
+    area_node = area_acquisition_service.get_current_area_node_by_player_id(@player_character.id)
+
+    item_throw_service = ItemThrowServiceFactory.new(@equipped_list_service_factory).build_by_user_item_and_area_node_and_player_id(user_item, area_node, @player_character.id)
+
+    @result = item_throw_service.throw
   end
 
   private
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    @equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
     @soldier_character_facotry = SoldierCharacterFactory.new
-    @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    @player_character_factory = PlayerCharacterFactory.new(@equipped_list_service_factory)
     @trait_factory = TraitFactory.new(@player_character_factory, @soldier_character_facotry)
     @item_consumption_service_factory = ItemConsumptionServiceFactory.new(@trait_factory)
   end
@@ -63,6 +70,12 @@ class ItemController < ApplicationController
   def set_player_character
     @player_character = @player_character_factory.build_by_user_id(current_user.id)
     redirect_to('/player/input') if @player_character.nil?
+  end
+
+  def get_valid_user_item(player_id, user_item_id)
+    user_item = UserItem.find_by(id: user_item_id, player_id: player_id)
+    fail 'no such user item' + user_item_id.to_s + 'for player_id: ' + player_id.to_s unless user_item
+    return user_item
   end
 end
 

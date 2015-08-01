@@ -394,6 +394,3 @@ DEPENDENCIES
   uikit-sass-rails!
   unicorn
   web-console (~> 2.0)
-
-BUNDLED WITH
-   1.10.3
