@@ -16,6 +16,7 @@
 #
 
 class ThrownItem < ActiveRecord::Base
+  belongs_to :item
   # 捨てられてから有効な時間
   THROWN_VALID_SECONDS = 24 * 60 * 60
 

@@ -9,6 +9,13 @@
     %li
       = link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() )
 / アイテム一覧へ
+%h2 ここに落ちてるアイテム
+- @thrown_items.each do |thrown_item|
+  .area-thrown-item
+    = thrown_item.item.name
+    = thrown_item.count
+    個
+
 %h2 アイテム
 = link_to("所持品をみる", "/item")
 
