@@ -6,6 +6,9 @@ class EquipmentController < ApplicationController
   # 現在の装備
   # 装備可能アイテム一覧表示
   def index
+    character_type = params[:character_type]
+    character_id   = params[:character_id]
+
     @equipment_services = @equipment_service_factory.build_list_by_player_id(@player_character.id)
 
     @equipped_list_service = @equipped_list_service_factory.build_by_player_id(@player_character.id)
