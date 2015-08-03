@@ -24,20 +24,26 @@ class EquippedListService
 
   # equipped_service
   def exchange(equipped_service)
+    equipped_service.set_equipped(true)
     case (equipped_service.part_id)
     when BodyRegion::Type::RightHand.id
+      @right_hand.set_equipped(false)
       @right_hand = equipped_service
       @equipment_model.right_hand = equipped_service.user_item_id
     when BodyRegion::Type::LeftHand.id
+      @left_hand.set_equipped(false)
       @left_hand = equipped_service
       @equipment_model.left_hand = equipped_service.user_item_id
     when BodyRegion::Type::Body.id
+      @body.set_equipped(false)
       @body = equipped_service
       @equipment_model.body = equipped_service.user_item_id
     when BodyRegion::Type::Head.id
+      @head.set_equipped(false)
       @head = equipped_service
       @equipment_model.head = equipped_service.user_item_id
     when BodyRegion::Type::Leg.id
+      @leg.set_equipped(false)
       @leg = equipped_service
       @equipment_model.leg = equipped_service.user_item_id
     end
@@ -84,8 +90,11 @@ class EquippedListService
     return list.inject(Status.new(0, 0)) { |sum, equipment_service| sum + equipment_service.status }
   end
 
-  def save
-    @equipment_model.save
+  def save!
+    @equipment_model.save!
+    self.list.each do |part|
+      part.save!
+    end
   end
 end
 

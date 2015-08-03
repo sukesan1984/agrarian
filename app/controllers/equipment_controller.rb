@@ -28,7 +28,7 @@ class EquipmentController < ApplicationController
 
     # 装備外すやつ
     @equipped_list_service.unequip(user_item_id)
-    @equipped_list_service.save
+    @equipped_list_service.save!
 
     redirect_to '/equipment/' + character_type.to_s + '/' + character_id.to_s
   end
@@ -45,7 +45,7 @@ class EquipmentController < ApplicationController
     # 交換するやつ
     exchange_equipped_service = @equipped_service_factory.build_by_user_item_id(user_item_id, @player_character.id)
     @equipped_list_service.exchange(exchange_equipped_service)
-    @equipped_list_service.save
+    @equipped_list_service.save!
 
     redirect_to '/equipment/' + character_type.to_s + '/' + character_id.to_s
   end

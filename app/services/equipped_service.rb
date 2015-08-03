@@ -23,6 +23,18 @@ class EquippedService
     return !@equipment_service.nil?
   end
 
+  def set_equipped(value)
+    if @equipment_service.nil?
+      if value 
+        fail 'cant equip nil equipment'
+      end
+
+      return
+    end
+
+    @equipment_service.set_equipped(value)
+  end
+
   def status
     return Status.new(0, 0) if @equipment_service.nil?
     return @equipment_service.status
@@ -32,6 +44,12 @@ class EquippedService
     return nil if @equipment_service.nil?
 
     return @equipment_service.user_item_id
+  end
+
+  def save!
+    if @equipment_service
+      @equipment_service.save!
+    end
   end
 end
 
