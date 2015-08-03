@@ -10,8 +10,9 @@ class EquipmentController < ApplicationController
     character_id   = params[:character_id]
 
     @equipment_services = @equipment_service_factory.build_list_by_player_id(@player_character.id)
+    @equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
 
-    @equipped_list_service = @equipped_list_service_factory.build_by_player_id(@player_character.id)
+    @character_service = @character_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
   end
 
   # 装備を外す
@@ -32,7 +33,6 @@ class EquipmentController < ApplicationController
   # 装備する
   def equip
     user_item_id = params[:user_item_id]
-    logger.debug(user_item_id)
 
     # equipment_service
     equipped_list_service = @equipped_list_service_factory.build_by_player_id(@player_character.id)
@@ -50,6 +50,8 @@ class EquipmentController < ApplicationController
     @equipped_service_factory = EquippedServiceFactory.new(@equipment_service_factory)
     @equipped_list_service_factory = EquippedListServiceFactory.new(@equipped_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_service_factory)
+    @soldier_character_factory = SoldierCharacterFactory.new
+    @character_service_factory = CharacterServiceFactory.new(@player_character_factory, @soldier_character_factory)
   end
 
   def set_player_character
