@@ -62,22 +62,32 @@ class EquippedListService
     # TODO: あとでかえてもいいけど、まーええんちゃう
 
     if @equipment_model.right_hand.to_i == user_item_id.to_i
+      @right_hand.set_equipped(false)
+      @modified = @right_hand
       @right_hand = EquippedService.new(BodyRegion::Type::RightHand, nil)
       @equipment_model.right_hand = 0
       return
     elsif @equipment_model.left_hand.to_i == user_item_id.to_i
+      @left_hand.set_equipped(false)
+      @modified = @left_hand
       @left_hand = EquippedService.new(BodyRegion::Type::LeftHand, nil)
       @equipment_model.left_hand = 0
       return
     elsif @equipment_model.head.to_i == user_item_id.to_i
+      @head.set_equipped(false)
+      @modified = @head
       @head = EquippedService.new(BodyRegion::Type::Head, nil)
       @equipment_model.head = 0
       return
     elsif @equipment_model.body.to_i == user_item_id.to_i
+      @body.set_equipped(false)
+      @modified = @body
       @body = EquippedService.new(BodyRegion::Type::Body, nil)
       @equipment_model.body = 0
       return
     elsif @equipment_model.leg.to_i == user_item_id.to_i
+      @leg.set_equipped(false)
+      @modified = @leg
       @leg = EquippedService.new(BodyRegion::Type::Leg, nil)
       @equipment_model.leg = 0
       return
@@ -94,6 +104,9 @@ class EquippedListService
     @equipment_model.save!
     self.list.each do |part|
       part.save!
+    end
+    if @modified
+      @modified.save!
     end
   end
 end
