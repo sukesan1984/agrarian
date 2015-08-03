@@ -52,7 +52,7 @@ class AreaController < ApplicationController
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    @soldier_character_factory = SoldierCharacterFactory.new
+    @soldier_character_factory = SoldierCharacterFactory.new(equipped_list_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
     @resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     @resource_service_factory = ResourceServiceFactory.new

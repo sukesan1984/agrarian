@@ -55,7 +55,7 @@ class EquipmentController < ApplicationController
     @equipped_service_factory = EquippedServiceFactory.new(@equipment_service_factory)
     @equipped_list_service_factory = EquippedListServiceFactory.new(@equipped_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_service_factory)
-    @soldier_character_factory = SoldierCharacterFactory.new
+    @soldier_character_factory = SoldierCharacterFactory.new(@equipped_list_service_factory)
     @character_service_factory = CharacterServiceFactory.new(@player_character_factory, @soldier_character_factory)
   end
 
