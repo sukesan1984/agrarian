@@ -10,6 +10,7 @@ class EquippedListService
     @head = head
     @body = body
     @leg = leg
+    @modified = {}
   end
 
   def list
@@ -24,7 +25,6 @@ class EquippedListService
 
   # equipped_service
   def exchange(equipped_service)
-
     equip_target_body_part(equipped_service)
   end
 
@@ -38,14 +38,23 @@ class EquippedListService
   end
 
   def unequip(user_item_id)
-    BodyRegion.get_list.each do |body_part|
-      body_part_name = body_part.variable_name
+    BodyRegion.get_list.each do |part|
+      body_part_name = part.variable_name
       if @equipment_model.send(body_part_name).to_i == user_item_id.to_i
         unequip_target_body_part(send(body_part_name))
         return
       end
     end
     fail 'no item equipped: ' + user_item_id.to_s
+  end
+
+  # 全ての装備を外す
+  def unequip_all
+    BodyRegion.get_list.each do |part|
+      body_part_name = part.variable_name
+      unequip_target_body_part(send(body_part_name))
+      return
+    end
   end
 
   def status
@@ -57,8 +66,12 @@ class EquippedListService
     self.list.each do |part|
       part.save!
     end
-    if @modified
-      @modified.save!
+    @modified.each do |part_id, body_part|
+      if body_part
+        body_part.save!
+        # saveしたら、modifiedはnilにする。
+        @modified[part_id] = nil
+      end
     end
   end
 
@@ -73,7 +86,7 @@ class EquippedListService
 
   def unequip_target_body_part(body_part)
     body_part.set_equipped(false)
-    @modified = body_part
+    @modified[body_part.part_id] = body_part
     body_part = EquippedService.new(BodyRegion.get_by_variable_name(body_part.part_variable_name), nil)
     @equipment_model.send("#{body_part.part_variable_name}=", 0)
   end
