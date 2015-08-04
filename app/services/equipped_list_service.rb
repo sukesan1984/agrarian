@@ -61,39 +61,24 @@ class EquippedListService
   def unequip(user_item_id)
     # TODO: あとでかえてもいいけど、まーええんちゃう
 
-    if @equipment_model.right_hand.to_i == user_item_id.to_i
-      @right_hand.set_equipped(false)
-      @modified = @right_hand
-      @right_hand = EquippedService.new(BodyRegion::Type::RightHand, nil)
-      @equipment_model.right_hand = 0
+    case(user_item_id.to_i)
+    when @equipment_model.right_hand.to_i
+      unequip_target_body_part(@right_hand, 'right_hand')
       return
-    elsif @equipment_model.left_hand.to_i == user_item_id.to_i
-      @left_hand.set_equipped(false)
-      @modified = @left_hand
-      @left_hand = EquippedService.new(BodyRegion::Type::LeftHand, nil)
-      @equipment_model.left_hand = 0
+    when @equipment_model.left_hand.to_i
+      unequip_target_body_part(@right_hand, 'left_hand')
       return
-    elsif @equipment_model.head.to_i == user_item_id.to_i
-      @head.set_equipped(false)
-      @modified = @head
-      @head = EquippedService.new(BodyRegion::Type::Head, nil)
-      @equipment_model.head = 0
+    when @equipment_model.head.to_i
+      unequip_target_body_part(@head, 'head')
       return
-    elsif @equipment_model.body.to_i == user_item_id.to_i
-      @body.set_equipped(false)
-      @modified = @body
-      @body = EquippedService.new(BodyRegion::Type::Body, nil)
-      @equipment_model.body = 0
+    when @equipment_model.body.to_i
+      unequip_target_body_part(@body, 'body')
       return
-    elsif @equipment_model.leg.to_i == user_item_id.to_i
-      @leg.set_equipped(false)
-      @modified = @leg
-      @leg = EquippedService.new(BodyRegion::Type::Leg, nil)
-      @equipment_model.leg = 0
+    when @equipment_model.leg.to_i
+      unequip_target_leg_part(@leg, 'leg')
       return
-    else
-      fail 'no item equipped: ' + user_item_id.to_s
     end
+    fail 'no item equipped: ' + user_item_id.to_s
   end
 
   def status
@@ -108,6 +93,14 @@ class EquippedListService
     if @modified
       @modified.save!
     end
+  end
+
+  private
+  def unequip_target_body_part(body_part, part_name)
+    body_part.set_equipped(false)
+    @modified = body_part
+    body_part = EquippedService.new(BodyRegion::Type::Leg, nil)
+    @equipment_model.send("#{part_name}=", 0)
   end
 end
 
