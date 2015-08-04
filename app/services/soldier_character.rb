@@ -49,18 +49,11 @@ class SoldierCharacter
     @hp += value
   end
 
-  def save
-    @user_soldier.current_hp = @hp.current
-    if (@hp.current <= 0)
-      @user_soldier.destroy
-    else
-      @user_soldier.save
-    end
-  end
-
   def save!
     @user_soldier.current_hp = @hp.current
     if (@hp.current <= 0)
+      @equipped_list_service.unequip_all
+      @equipped_list_service.save!
       @user_soldier.destroy
     else
       @user_soldier.save!

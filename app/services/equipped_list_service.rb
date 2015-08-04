@@ -1,6 +1,6 @@
 # ある人の装備全体
 class EquippedListService
-  attr_reader :right_hand, :left_hand, :both_hand, :head, :body, :leg
+  attr_accessor :right_hand, :left_hand, :both_hand, :head, :body, :leg
   def initialize(equipment_model:, right_hand:, left_hand:, both_hand:, head:, body:, leg:)
     Rails.logger.debug(right_hand)
     @equipment_model = equipment_model
@@ -53,7 +53,6 @@ class EquippedListService
     BodyRegion.get_list.each do |part|
       body_part_name = part.variable_name
       unequip_target_body_part(send(body_part_name))
-      return
     end
   end
 
@@ -66,13 +65,14 @@ class EquippedListService
     self.list.each do |part|
       part.save!
     end
-    @modified.each do |part_id, body_part|
+    @modified.each{|part_id, body_part|
+      Rails.logger.debug("#{part_id} : #{body_part}")
       if body_part
         body_part.save!
         # saveしたら、modifiedはnilにする。
         @modified[part_id] = nil
       end
-    end
+    }
   end
 
   private
@@ -87,7 +87,7 @@ class EquippedListService
   def unequip_target_body_part(body_part)
     body_part.set_equipped(false)
     @modified[body_part.part_id] = body_part
-    body_part = EquippedService.new(BodyRegion.get_by_variable_name(body_part.part_variable_name), nil)
+    send("#{body_part.part_variable_name}=", EquippedService.new(BodyRegion.get_by_variable_name(body_part.part_variable_name), nil))
     @equipment_model.send("#{body_part.part_variable_name}=", 0)
   end
 end

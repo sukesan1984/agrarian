@@ -60,8 +60,8 @@ class BattleController < ApplicationController
           @battle_end.save!
         end
 
-        party_a.save
-        party_b.save
+        party_a.save!
+        party_b.save!
       end
     rescue => e
       logger.debug(e)

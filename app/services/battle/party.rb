@@ -74,8 +74,8 @@ class Battle::Party
   end
 
   # 永続化する必要があるメンバーがいれば永続化する
-  def save
-    @unit_list.each(&:save)
+  def save!
+    @unit_list.each(&:save!)
   end
 end
 

@@ -73,11 +73,6 @@ class PlayerCharacter
     @hp += value
   end
 
-  def save
-    @player.hp = @hp.current
-    @player.save
-  end
-
   def save!
     @player.hp = @hp.current
     @player.save!
