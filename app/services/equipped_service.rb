@@ -9,6 +9,10 @@ class EquippedService
     return @body_part.name
   end
 
+  def part_variable_name
+    return @body_part.variable_name
+  end
+
   def part_id
     return @body_part.id
   end
