@@ -1,20 +1,18 @@
 class ItemServiceFactory
-  def initialize(player)
+  def initialize(player, user_item_factory)
     @player = player
+    @user_item_factory = user_item_factory
   end
 
   def build_by_item_id(item_id, count)
-    item = Item.find_by(id: item_id)
-    case item.item_type
+    user_item = @user_item_factory.build_by_player_id_and_item_id(@player.id, item_id)
+    case user_item.item.item_type
     when 1, 2, 4
-      user_item = UserItem.find_or_create(@player.id, item_id)
       return Item::ConsumeItem.new(user_item, count)
     when 3
-      soldier = Soldier.find_by(id: item.item_type_id)
-      return Item::SoldierItem.new(@player, soldier)
+      return Item::SoldierItem.new(@player, user_item)
     when 5
-      user_quest = UserQuest.find_or_create(@player.id, item.item_type_id)
-      return Item::QuestItem.new(user_quest)
+      return Item::QuestItem.new(user_item)
     end
   end
 

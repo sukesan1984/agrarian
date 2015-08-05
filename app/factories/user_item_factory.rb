@@ -17,7 +17,23 @@ class UserItemFactory
     item = Item.find_by(id: item_id)
     fail 'invalid item_id: ' + item_id.to_s unless item
 
-    return UserItem.find_or_create(player_id, item.id)
+    case item.item_type
+    when 1, 4
+      user_item = UserItem.find_or_create(player_id, item_id)
+      return user_item
+    when 2
+      user_item = UserItem.create(
+        player_id: player_id,
+        item_id: item_id,
+        count: 0)
+      return user_item
+    when 3
+      soldier = Soldier.find_by(id: item.item_type_id)
+      return soldier
+    when 5
+      user_quest = UserQuest.find_or_create(player_id, item.item_type_id)
+      return user_quest
+    end
   end
 end
 
