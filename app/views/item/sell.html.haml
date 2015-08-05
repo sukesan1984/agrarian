@@ -1,18 +1,6 @@
 %h2結果
 
-= @item_sale_service.name
-が
-= @item_sale_service.sell_price
-railsで売れて
-= @player_character.rails
-お金railsに増えたで。
-
-%br
-
-今:
-= @item_sale_service.count
-個持ってるわ
-
-%br
+.item-sell-result
+  = @result[:message]
 
 = link_to('戻る', root_path)

@@ -18,7 +18,7 @@ class QuestController < ApplicationController
     user_quest_id = params[:user_quest_id]
 
     # 報酬付与のためのitem_serviceのfactory
-    item_service_factory = ItemServiceFactory.new(@player_character)
+    item_service_factory = ItemServiceFactory.new(@player_character, UserItemeFactory.new(@player_character))
 
     user_quest = UserQuest.find_by(id: user_quest_id, player_id: @player_character.id)
     fail 'user_quest is not found: ' + id.to_s if user_quest.nil?
