@@ -41,7 +41,7 @@ class ItemController < ApplicationController
     item_sale_service_factory = ItemSaleServiceFactory.new(@player_character)
     @item_sale_service = item_sale_service_factory.build_by_user_item_id(user_item_id)
 
-    @item_sale_service.sell
+    @result = @item_sale_service.sell
   end
 
   def throw
@@ -74,7 +74,7 @@ class ItemController < ApplicationController
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     @equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    @soldier_character_facotry = SoldierCharacterFactory.new
+    @soldier_character_facotry = SoldierCharacterFactory.new(@equipped_list_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_service_factory)
     @trait_factory = TraitFactory.new(@player_character_factory, @soldier_character_facotry)
     @item_consumption_service_factory = ItemConsumptionServiceFactory.new(@trait_factory)

@@ -1,3 +1,5 @@
+%h1
+  = @character_service.name
 %h1 今装備してるやつ
 .equipment-status
   攻撃力
@@ -13,6 +15,8 @@
       .equipment_unequip
         = form_tag('/equipment/unequip', method: 'post') do
           \#{hidden_field_tag(:user_item_id, part.user_item_id)}
+          \#{hidden_field_tag(:character_type, @character_service.type)}
+          \#{hidden_field_tag(:character_id, @character_service.id)}
           \#{submit_tag("外す")}
 
 %h1 装備可能やつ
@@ -22,6 +26,8 @@
   defense: #{equipment_service.defense}
   %br/
   = form_tag('/equipment/equip', method: "post") do
+    \#{hidden_field_tag(:character_type, @character_service.type)}
+    \#{hidden_field_tag(:character_id, @character_service.id)}
     \#{hidden_field_tag(:user_item_id, equipment_service.user_item_id)}
     \#{submit_tag("装備する")}
 = link_to("戻る", root_path)

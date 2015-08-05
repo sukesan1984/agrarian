@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150801061845) do
+ActiveRecord::Schema.define(version: 20150803142444) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -318,8 +318,9 @@ ActiveRecord::Schema.define(version: 20150801061845) do
     t.integer  "player_id",  limit: 4
     t.integer  "item_id",    limit: 4
     t.integer  "count",      limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "equipped",   limit: 4, default: 0
   end
 
   add_index "user_items", ["player_id", "item_id"], name: "index_user_items_on_player_id_and_item_id", using: :btree
@@ -349,8 +350,19 @@ ActiveRecord::Schema.define(version: 20150801061845) do
     t.integer  "player_id",  limit: 4
     t.integer  "soldier_id", limit: 4
     t.integer  "current_hp", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "right_hand", limit: 4, default: 0
+    t.integer  "left_hand",  limit: 4, default: 0
+    t.integer  "both_hand",  limit: 4, default: 0
+    t.integer  "body",       limit: 4, default: 0
+    t.integer  "head",       limit: 4, default: 0
+    t.integer  "leg",        limit: 4, default: 0
+    t.integer  "neck",       limit: 4, default: 0
+    t.integer  "belt",       limit: 4, default: 0
+    t.integer  "amulet",     limit: 4, default: 0
+    t.integer  "ring_a",     limit: 4, default: 0
+    t.integer  "ring_b",     limit: 4, default: 0
   end
 
   add_index "user_soldiers", ["player_id"], name: "index_user_soldiers_on_player_id", using: :btree

@@ -1,10 +1,12 @@
 class SoldierCharacter
   attr_reader :type
-  def initialize(user_soldier)
+  def initialize(user_soldier, equipped_list_service)
     @type = 2
     @user_soldier = user_soldier
     @soldier  = user_soldier.soldier
+    @equipped_list_service = equipped_list_service
     @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp)
+    @status = Status.new(@soldier.attack, @soldier.defense)
   end
 
   def id
@@ -16,11 +18,11 @@ class SoldierCharacter
   end
 
   def attack
-    return @soldier.attack
+    return (@status + @equipped_list_service.status).attack
   end
 
   def defense
-    return @soldier.defense
+    return (@status + @equipped_list_service.status).defense
   end
 
   def hp
@@ -47,18 +49,11 @@ class SoldierCharacter
     @hp += value
   end
 
-  def save
-    @user_soldier.current_hp = @hp.current
-    if (@hp.current <= 0)
-      @user_soldier.destroy
-    else
-      @user_soldier.save
-    end
-  end
-
   def save!
     @user_soldier.current_hp = @hp.current
     if (@hp.current <= 0)
+      @equipped_list_service.unequip_all
+      @equipped_list_service.save!
       @user_soldier.destroy
     else
       @user_soldier.save!

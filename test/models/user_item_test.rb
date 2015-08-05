@@ -8,6 +8,7 @@
 #  count      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  equipped   :integer          default(0)
 #
 # Indexes
 #

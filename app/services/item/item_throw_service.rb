@@ -9,7 +9,7 @@ class Item::ItemThrowService
 
   # 実際に捨てる
   def throw
-    if @equipped_list_service.equipped(@user_item.id)
+    if @user_item.equipped == 1
       return { success: false, message: '装備してるやつは捨てられへんで' }
     end
     ActiveRecord::Base.transaction do

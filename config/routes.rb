@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   post 'shop/buy', to: 'shop#buy'
 
   # 装備やつ
-  get 'equipment', to: 'equipment#index'
+  get 'equipment/:character_type/:character_id', to: 'equipment#index'
   post 'equipment/equip', to: 'equipment#equip'
   post 'equipment/unequip', to: 'equipment#unequip'
 

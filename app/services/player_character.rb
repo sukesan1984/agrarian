@@ -9,12 +9,10 @@ class PlayerCharacter
   end
 
   def attack
-    Rails.logger.debug((@status + @equipped_list_service.status).attack)
     return (@status + @equipped_list_service.status).attack
   end
 
   def defense
-    Rails.logger.debug((@status + @equipped_list_service.status).defense)
     return (@status + @equipped_list_service.status).defense
   end
 
@@ -73,11 +71,6 @@ class PlayerCharacter
 
   def recover_hp(value)
     @hp += value
-  end
-
-  def save
-    @player.hp = @hp.current
-    @player.save
   end
 
   def save!
