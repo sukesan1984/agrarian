@@ -17,7 +17,7 @@ class UserItemFactory
     item = Item.find_by(id: item_id)
     fail 'invalid item_id: ' + item_id.to_s unless item
 
-    return build_by_player_id_and_item(item)
+    return build_by_player_id_and_item(player_id, item)
   end
 
   def build_by_player_id_and_item(player_id, item)
