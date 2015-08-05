@@ -5,8 +5,12 @@ class ItemServiceFactory
   end
 
   def build_by_item_id(item_id, count)
-    user_item = @user_item_factory.build_by_player_id_and_item_id(@player.id, item_id)
-    case user_item.item.item_type
+    item = Item.find_by(id: item_id)
+    fail 'invalid item_id: ' + item_id.to_s unless item
+
+    user_item = @user_item_factory.build_by_player_id_and_item(@player.id, item)
+
+    case item.item_type
     when 1, 2, 4
       return Item::ConsumeItem.new(user_item, count)
     when 3

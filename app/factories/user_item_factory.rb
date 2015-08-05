@@ -17,14 +17,18 @@ class UserItemFactory
     item = Item.find_by(id: item_id)
     fail 'invalid item_id: ' + item_id.to_s unless item
 
+    return build_by_player_id_and_item(item)
+  end
+
+  def build_by_player_id_and_item(player_id, item)
     case item.item_type
     when 1, 4
-      user_item = UserItem.find_or_create(player_id, item_id)
+      user_item = UserItem.find_or_create(player_id, item.id)
       return user_item
     when 2
       user_item = UserItem.create(
         player_id: player_id,
-        item_id: item_id,
+        item_id: item.id,
         count: 0)
       return user_item
     when 3

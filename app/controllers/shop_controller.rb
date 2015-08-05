@@ -15,7 +15,7 @@ class ShopController < ApplicationController
       @showcases.push(Shop::ShowcaseService.new(@resource_service_factory.build_by_target_id_and_resource(@area_node.id, showcase.resource), @area_node.id, showcase))
     end
 
-    @user_items = user_item_factory.build_unequipped_user_item_list_by_player_id(@player_character.id)
+    @user_items = user_item_factory.build_unequipped_user_item_list_by_player_id(@player_character.id).select{ |user_item| user_item.equipped == 0 }
   end
 
   def buy
