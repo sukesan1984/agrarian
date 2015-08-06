@@ -17,6 +17,8 @@ class ItemServiceFactory
       return Item::SoldierItem.new(@player, user_item)
     when 5
       return Item::QuestItem.new(user_item)
+    when 6
+      return Item::MoneyItem.new(@player, count)
     end
   end
 
