@@ -42,6 +42,14 @@ class UserQuest < ActiveRecord::Base
     return true
   end
 
+  def set_uncleared
+    if is_received 
+      change_status(Status::Received)
+      return true
+    end
+    return false
+  end
+
   def set_claimed
     return false unless is_cleared
 

@@ -20,7 +20,7 @@ class Entity::EstablishmentEntity
   def path
     case (@establishment.establishment_type)
     when 1
-      return '/shop/' + @area_node_id.to_s + '/' + @establishment.id.to_s
+      return '/shop/' + @area_node_id.to_s + '/' + @establishment.establishment_id.to_s
     when 2
       return '/inn/' + @establishment.establishment_id.to_s
     end

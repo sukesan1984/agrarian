@@ -41,12 +41,16 @@ class Quest::QuestEntity
   # 計算してキャッシュするために、状態更新する
   def set_cleared
     # すでにクリア済みのときは再計算しない。
-    return true if @user_quest.is_cleared
+    # 途中でクエストのクリアチェックが落ちる時があるので、毎回計算する。
+    #return true if @user_quest.is_cleared
 
     # 未クリア時はチェックする
     @quest_condition_entities.each do |quest_condition_entity|
       # 一つでもクリアしていない物があれば、未クリア
-      return false unless quest_condition_entity.is_cleared
+      if !quest_condition_entity.is_cleared
+        @user_quest.set_uncleared
+        return false
+      end
     end
 
     @user_quest.set_cleared
