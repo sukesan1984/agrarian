@@ -5,8 +5,8 @@ class SoldierCharacter
     @user_soldier = user_soldier
     @soldier  = user_soldier.soldier
     @equipped_list_service = equipped_list_service
-    @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp)
-    @status = Status.new(@soldier.attack, @soldier.defense)
+    @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
+    @status = Status.new(@soldier.attack_min, @soldier.defense_min)
   end
 
   def id
