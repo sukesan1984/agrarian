@@ -15,4 +15,9 @@
 #
 
 class Level < ActiveRecord::Base
+  def self.get_level_from(exp)
+    level = Level.where("exp_min <= ? and exp_max >= ?", exp, exp)
+    fail 'no level for this exp' unless level[0]
+    return level[0].level
+  end
 end

@@ -8,6 +8,10 @@ class PlayerCharacter
     @hp = StatusPoint.new(player.hp, player.hp_max)
   end
 
+  def level
+    return 1
+  end
+
   def attack
     return (@status + @equipped_list_service.status).attack
   end

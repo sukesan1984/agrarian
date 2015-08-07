@@ -1,5 +1,5 @@
 class SoldierCharacter
-  attr_reader :type
+  attr_reader :type, :level
   def initialize(user_soldier, equipped_list_service)
     @type = 2
     @user_soldier = user_soldier
@@ -7,6 +7,7 @@ class SoldierCharacter
     @equipped_list_service = equipped_list_service
     @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
     @status = Status.new(@soldier.attack_min, @soldier.defense_min)
+    @level = Level.get_level_from(user_soldier.exp)
   end
 
   def id
