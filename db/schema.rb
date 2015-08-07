@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806152133) do
+ActiveRecord::Schema.define(version: 20150807141033) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -376,6 +376,7 @@ ActiveRecord::Schema.define(version: 20150806152133) do
     t.integer  "amulet",     limit: 4, default: 0
     t.integer  "ring_a",     limit: 4, default: 0
     t.integer  "ring_b",     limit: 4, default: 0
+    t.integer  "exp",        limit: 4, default: 0
   end
 
   add_index "user_soldiers", ["player_id"], name: "index_user_soldiers_on_player_id", using: :btree
