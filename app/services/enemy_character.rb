@@ -34,6 +34,10 @@ class EnemyCharacter
     return @enemy.rails
   end
 
+  def exp
+    return @enemy.exp
+  end
+
   def save!
     @progress.save!
   end

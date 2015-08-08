@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803142444) do
+ActiveRecord::Schema.define(version: 20150808124000) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150803142444) do
     t.datetime "updated_at",              null: false
     t.string   "description", limit: 255
     t.integer  "rails",       limit: 4
+    t.integer  "exp",         limit: 4
   end
 
   create_table "enemy_maps", force: :cascade do |t|
@@ -132,6 +133,16 @@ ActiveRecord::Schema.define(version: 20150803142444) do
     t.integer  "purchase_price", limit: 4
     t.integer  "sell_price",     limit: 4
   end
+
+  create_table "levels", force: :cascade do |t|
+    t.integer  "exp_min",    limit: 4
+    t.integer  "exp_max",    limit: 4
+    t.integer  "level",      limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "levels", ["level"], name: "index_levels_on_level", using: :btree
 
   create_table "nature_fields", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -245,11 +256,15 @@ ActiveRecord::Schema.define(version: 20150803142444) do
   create_table "soldiers", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
-    t.integer  "attack",      limit: 4
-    t.integer  "defense",     limit: 4
-    t.integer  "hp",          limit: 4
+    t.integer  "attack_min",  limit: 4
+    t.integer  "defense_min", limit: 4
+    t.integer  "hp_min",      limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "attack_max",  limit: 4
+    t.integer  "defense_max", limit: 4
+    t.integer  "hp_max",      limit: 4
+    t.integer  "level_max",   limit: 4
   end
 
   create_table "thrown_items", force: :cascade do |t|
@@ -363,6 +378,7 @@ ActiveRecord::Schema.define(version: 20150803142444) do
     t.integer  "amulet",     limit: 4, default: 0
     t.integer  "ring_a",     limit: 4, default: 0
     t.integer  "ring_b",     limit: 4, default: 0
+    t.integer  "exp",        limit: 4, default: 0
   end
 
   add_index "user_soldiers", ["player_id"], name: "index_user_soldiers_on_player_id", using: :btree

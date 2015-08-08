@@ -19,6 +19,7 @@
 #  amulet     :integer          default(0)
 #  ring_a     :integer          default(0)
 #  ring_b     :integer          default(0)
+#  exp        :integer          default(0)
 #
 # Indexes
 #

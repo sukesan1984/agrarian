@@ -5,11 +5,15 @@
 #  id          :integer          not null, primary key
 #  name        :string(255)
 #  description :string(255)
-#  attack      :integer
-#  defense     :integer
-#  hp          :integer
+#  attack_min  :integer
+#  defense_min :integer
+#  hp_min      :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  attack_max  :integer
+#  defense_max :integer
+#  hp_max      :integer
+#  level_max   :integer
 #
 
 class Soldier < ActiveRecord::Base

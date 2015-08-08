@@ -13,7 +13,7 @@ class Item::SoldierItem
     @gived_soldier = UserSoldier.new(
       player_id: @player.id,
       soldier_id: @soldier.id,
-      current_hp: @soldier.hp
+      current_hp: @soldier.hp_min
     )
 
     return true

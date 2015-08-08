@@ -50,6 +50,14 @@ class Battle::Unit
   def rails
     return @battlize_character.rails
   end
+
+  def exp
+    return @battlize_character.exp
+  end
+
+  def give_exp(exp)
+    return @battlize_character.give_exp(exp)
+  end
 end
 
 class Battle::Unit::UnitStatus
