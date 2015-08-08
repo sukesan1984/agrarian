@@ -20,4 +20,15 @@ class Level < ActiveRecord::Base
     fail 'no level for this exp' unless level[0]
     return level[0]
   end
+
+  def self.exp_for_next_level_from_exp(exp)
+    current_level = get_level_from(exp)
+    return current_level.exp_max - exp
+  end
+
+  def exp_for_next_level(exp)
+    exp_for_next_level = self.exp_max - exp
+    fail 'level row is different' if exp_for_next_level < 0
+    return exp_for_next_level
+  end
 end

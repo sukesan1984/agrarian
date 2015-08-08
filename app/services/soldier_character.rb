@@ -5,8 +5,10 @@ class SoldierCharacter
     @user_soldier = user_soldier
     @soldier  = user_soldier.soldier
     @equipped_list_service = equipped_list_service
+
     @level = Level.get_level_from(user_soldier.exp)
     @level_max = Level.find_by(level:  @soldier.level_max)
+
     if @level.level > @soldier.level_max
       @level = @level_max
     end
@@ -62,11 +64,23 @@ class SoldierCharacter
   end
 
   def give_exp(exp)
+    exp_for_next_level = @level.exp_for_next_level(@user_soldier.exp)
+
+    level_up =  exp_for_next_level <= exp
     after_exp = @user_soldier.exp + exp
     if after_exp > @level_max.exp_max
       after_exp = @level_max.exp_max
     end
     @user_soldier.exp = after_exp
+    @level = level_up ? Level.get_level_from(@user_soldier.exp) : @level
+    is_max_level = @level.level == @soldier.level_max
+
+    return {
+      name: self.name,
+      level_up: level_up,
+      level: @level.level,
+      exp_for_next_level: is_max_level ? 0 : @level.exp_for_next_level(@user_soldier.exp)
+    }
   end
 
   def recover_hp(value)
