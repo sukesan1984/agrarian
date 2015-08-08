@@ -5,9 +5,11 @@ class SoldierCharacter
     @user_soldier = user_soldier
     @soldier  = user_soldier.soldier
     @equipped_list_service = equipped_list_service
-    @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
-    @status = Status.new(@soldier.attack_min, @soldier.defense_min)
     @level = Level.get_level_from(user_soldier.exp)
+    @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
+    attack = StatusCalculationUtility.calculate(@soldier.attack_min, @soldier.attack_max, @soldier.level_max, @level)
+    defense = StatusCalculationUtility.calculate(@soldier.defense_min, @soldier.defense_max, @soldier.level_max, @level)
+    @status = Status.new(attack, defense)
   end
 
   def id
