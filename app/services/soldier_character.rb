@@ -64,20 +64,20 @@ class SoldierCharacter
   end
 
   def give_exp(exp)
-    exp_for_next_level = @level.exp_for_next_level(@user_soldier.exp)
-
-    level_up =  exp_for_next_level <= exp
     after_exp = @user_soldier.exp + exp
     if after_exp > @level_max.exp_max
       after_exp = @level_max.exp_max
     end
+
     @user_soldier.exp = after_exp
-    @level = level_up ? Level.get_level_from(@user_soldier.exp) : @level
-    is_max_level = @level.level == @soldier.level_max
+    @after_level = Level.get_level_from(@user_soldier.exp)
+    is_max_level = @after_level.level == @soldier.level_max
+    is_level_up = @after_level.level > @level.level
+    @level = is_level_up ? @after_level : @level
 
     return {
       name: self.name,
-      level_up: level_up,
+      level_up: is_level_up,
       level: @level.level,
       exp_for_next_level: is_max_level ? 0 : @level.exp_for_next_level(@user_soldier.exp)
     }
