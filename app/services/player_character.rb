@@ -44,6 +44,10 @@ class PlayerCharacter
     return @player.rails
   end
 
+  def exp
+    return 0
+  end
+
   def recover_hp_all
     @hp.recover_all
   end
@@ -63,6 +67,10 @@ class PlayerCharacter
 
   def give_rails(value)
     @player.rails += value
+  end
+
+  def give_exp(exp)
+    return 0
   end
 
   def decrease_rails(value)

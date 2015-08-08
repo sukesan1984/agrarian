@@ -55,8 +55,9 @@ class BattleController < ApplicationController
           @death_penalty.execute
           @death_penalty.save!
         else
-          @battle_end = Battle::End.new(party_a, player_character)
+          @battle_end = Battle::End.new(party_b, party_a, player_character)
           @battle_end.give_rails
+          @battle_end.give_exp
           @battle_end.save!
         end
 

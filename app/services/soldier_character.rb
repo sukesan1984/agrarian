@@ -48,6 +48,14 @@ class SoldierCharacter
     return 0
   end
 
+  def exp
+    return @user_soldier.exp
+  end
+
+  def give_exp(exp)
+    @user_soldier.exp += exp
+  end
+
   def recover_hp(value)
     @hp += value
   end
