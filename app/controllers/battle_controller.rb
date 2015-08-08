@@ -65,7 +65,7 @@ class BattleController < ApplicationController
         party_b.save!
       end
     rescue => e
-      logger.debug(e)
+      raise e
     end
   end
 end
