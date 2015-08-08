@@ -1,9 +1,11 @@
 # バトル終了処理
 class Battle::End
+  attr_reader :given_exp_result
   def initialize(winner_party, defeated_party, player_character)
     @winner_party = winner_party
     @defeated_party   = defeated_party
     @player_character = player_character
+    @given_exp_result = []
   end
 
   def give_rails
@@ -13,7 +15,7 @@ class Battle::End
 
   def give_exp
     @get_exp = @defeated_party.total_exp
-    @winner_party.give_exp(@defeated_party.total_exp)
+    @given_exp_result = @winner_party.give_exp(@defeated_party.total_exp)
   end
 
   def result

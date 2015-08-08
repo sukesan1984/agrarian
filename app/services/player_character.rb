@@ -70,7 +70,12 @@ class PlayerCharacter
   end
 
   def give_exp(exp)
-    return 0
+    return {
+      name: self.name,
+      level_up: false,
+      level: 1,
+      exp_for_next_level: 0
+    }
   end
 
   def decrease_rails(value)

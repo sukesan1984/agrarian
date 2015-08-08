@@ -79,9 +79,11 @@ class Battle::Party
 
   def give_exp(exp)
     given_exp = (exp / @unit_list.count).ceil
+    result = []
     @unit_list.each do |unit|
-      unit.give_exp(given_exp)
+      result.push(unit.give_exp(given_exp))
     end
+    return result
   end
 
   # 永続化する必要があるメンバーがいれば永続化する
