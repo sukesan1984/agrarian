@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807141033) do
+ActiveRecord::Schema.define(version: 20150808113529) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 20150807141033) do
     t.integer  "attack_max",  limit: 4
     t.integer  "defense_max", limit: 4
     t.integer  "hp_max",      limit: 4
+    t.integer  "level_max",   limit: 4
   end
 
   create_table "thrown_items", force: :cascade do |t|

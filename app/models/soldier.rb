@@ -13,6 +13,7 @@
 #  attack_max  :integer
 #  defense_max :integer
 #  hp_max      :integer
+#  level_max   :integer
 #
 
 class Soldier < ActiveRecord::Base
