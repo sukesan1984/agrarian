@@ -1,4 +1,4 @@
-class ItemServiceFactory
+class ItemEntityFactory
   def initialize(player, user_item_factory)
     @player = player
     @user_item_factory = user_item_factory
