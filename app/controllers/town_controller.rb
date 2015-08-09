@@ -46,7 +46,8 @@ class TownController < ApplicationController
     @area_service_factory = AreaServiceFactory.new(
       @player_character_factory,
       resource_service_factory,
-      resource_service_action_factory
+      resource_service_action_factory,
+      Battle::BattleEncounterFactory.new(@player_character_factory)
     )
   end
 

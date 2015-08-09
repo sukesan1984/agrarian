@@ -1,9 +1,10 @@
 class AreaServiceFactory
-  def initialize(player_character_factory, resource_service_factory, resource_action_service_factory)
+  def initialize(player_character_factory, resource_service_factory, resource_action_service_factory, battle_encounter_factory)
     @player_character_factory  = player_character_factory
     @resource_service_factory = resource_service_factory
     @resource_action_service_factory = resource_action_service_factory
     @establishment_entity_factory = EstablishmentEntityFactory.new
+    @battle_encounter_factory = battle_encounter_factory
   end
 
   def build_by_area_node_and_player_id(area_node, player_id)
@@ -20,7 +21,8 @@ class AreaServiceFactory
     when 2
       road = Road.find_by(id: area.type_id)
       unless road.nil?
-        return AreaType::Road.new(player, area.id, road, area_node)
+        battle_encounter = @battle_encounter_factory.build_by_area_id_and_player_id(area.id, player.id)
+        return AreaType::Road.new(player, area.id, road, area_node, battle_encounter)
       end
     when 3
       nature_field = NatureField.find_by(id: area.type_id)
