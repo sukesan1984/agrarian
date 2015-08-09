@@ -1,4 +1,15 @@
 %h2 Log in
+プレイするためには、登録が必要になっています。 
+%br/
+emailアドレスは、なんでもいいです。（パスワードを忘れた時に入力しておけば再発行できます）
+%br/
+ちょっとだけ試してみたいという方はこちらをお使いください。
+%br/
+email:test@test.com
+%br/
+password: testtest
+%br/
+
 = form_for(resource, as: resource_name, url: session_path(resource_name), class: 'uk-form uk-form-stacked') do |f|
   .uk-form-row
     = f.label :email
