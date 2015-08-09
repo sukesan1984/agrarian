@@ -1,6 +1,6 @@
-class Item::MoneyItem
-  def initialize(player, count)
-    @player = player
+class Entity::Item::ConsumeItemEntity 
+  def initialize(user_item, count)
+    @user_item = user_item
     @count = count
   end
 
@@ -9,19 +9,20 @@ class Item::MoneyItem
   end
 
   def give
-    @player.give_rails(@count)
+    @user_item.count += @count
     return true
   end
 
   def save!
-    @player.save!
+    @user_item.save!
   end
 
   def name
-    return 'rails'
+    return @user_item.item.name
   end
 
   def result
     return 'ゲットしたで'
   end
 end
+

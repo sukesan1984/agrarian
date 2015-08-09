@@ -1,4 +1,4 @@
-class Item::QuestItem
+class Entity::Item::QuestItemEntity
   def initialize(user_quest)
     @user_quest = user_quest
   end
