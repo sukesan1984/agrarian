@@ -1,4 +1,4 @@
-class PlayerCharacter
+class Entity::PlayerCharacterEntity
   attr_reader :player, :type
   def initialize(player, equipped_list_service)
     @player = player
