@@ -22,6 +22,9 @@ class Quest::Conditions::CollectItemCondition <Quest::AbstractQuestConditionEnti
     @progress.count -= @quest_condition.condition_value
   end
 
+  def set_received
+  end
+
   def save!
     @progress.save!
   end

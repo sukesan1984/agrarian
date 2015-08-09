@@ -1,20 +1,18 @@
 class Entity::Item::QuestItemEntity
-  def initialize(user_quest)
-    @user_quest = user_quest
+  def initialize(quest_entity)
+    @quest_entity = quest_entity
   end
 
   def give
-    return false unless @user_quest.can_receive
-
-    @user_quest.set_received
+    return @quest_entity.set_received
   end
 
   def save!
-    @user_quest.save!
+    @quest_entity.save!
   end
 
   def name
-    return @user_quest.quest.name
+    return @quest_entity.name
   end
 
   def give_failed_message

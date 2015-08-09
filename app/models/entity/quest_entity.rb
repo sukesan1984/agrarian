@@ -48,6 +48,18 @@ class Entity::QuestEntity
     return true
   end
 
+  # 受注状態にする。
+  def set_received
+    @quest_condition_entities.each do |quest_condition_entity|
+      # 一つでもクリアしていない物があれば、未クリア
+      unless quest_condition_entity.set_received
+        fail 'cant set_received'
+      end
+    end
+
+    return @user_quest.set_received
+  end
+
   # clear状態にする。
   def set_cleared
     if self.is_cleared

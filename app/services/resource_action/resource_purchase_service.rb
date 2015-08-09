@@ -52,10 +52,7 @@ class ResourceAction::ResourcePurchaseService
       success: true
     }
     rescue => e
-      Rails.logger.debug(e)
-      return {
-        success: false
-      }
+      raise e
   end
 end
 
