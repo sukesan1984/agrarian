@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809084253) do
+ActiveRecord::Schema.define(version: 20150809084607) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -382,6 +382,7 @@ ActiveRecord::Schema.define(version: 20150809084253) do
     t.integer  "is_in_party", limit: 4
   end
 
+  add_index "user_soldiers", ["player_id", "is_in_party"], name: "index_user_soldiers_on_player_id_and_is_in_party", using: :btree
   add_index "user_soldiers", ["player_id"], name: "index_user_soldiers_on_player_id", using: :btree
 
   create_table "users", force: :cascade do |t|

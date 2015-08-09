@@ -24,7 +24,8 @@
 #
 # Indexes
 #
-#  index_user_soldiers_on_player_id  (player_id)
+#  index_user_soldiers_on_player_id                  (player_id)
+#  index_user_soldiers_on_player_id_and_is_in_party  (player_id,is_in_party)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
