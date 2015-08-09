@@ -56,7 +56,7 @@ class AreaController < ApplicationController
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
     @resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     @resource_service_factory = ResourceServiceFactory.new
-    @area_service_factory = AreaServiceFactory.new(@player_character_factory, @resource_service_factory, @resource_service_action_factory)
+    @area_service_factory = AreaServiceFactory.new(@player_character_factory, @resource_service_factory, @resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory))
   end
 
   def set_player_character
