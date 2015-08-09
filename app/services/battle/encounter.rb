@@ -8,11 +8,15 @@ class Battle::Encounter
 
   def encount
     ActiveRecord::Base.transaction do
+      user_encounter_enemies = UserEncounterEnemy.where(player_id: @player.id)
+      # すでに遭遇してる。
+      return true if user_encounter_enemies.count > 0
+
       # 敵がいない
-      return if @enemy_maps.count == 0
+      return false if @enemy_maps.count == 0
 
       # 遭遇しなかった
-      return unless lot
+      return false unless lot
 
       enemy_count = rand(1..3)
       list = @enemies_lottery.lot(enemy_count)
