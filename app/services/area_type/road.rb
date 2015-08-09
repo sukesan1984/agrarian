@@ -38,7 +38,7 @@ class AreaType::Road < AreaType::Base
 
   def get_render_object
     return {
-      area_id: @area_id,
+      area_node_id: @area_node.id,
       encountered_enemy: @encountered_enemy
     }
   end

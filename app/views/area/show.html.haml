@@ -2,12 +2,7 @@
   .area-left-layout
     %h1= @current.get_name()
     - if(@can_move_to_next)
-      / 次いける部分表示する
-      %h2 移動する(下から移動先を選んでね)
-      - @target_routes.each do |target|
-        %li
-          = link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() )
-
+      = render 'view_objects/target_routes', target_routes: @target_routes 
     / エリアのタイプによって出し分ける。
     = render @current.get_render_path(), object: @current.get_render_object()
 

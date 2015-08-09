@@ -20,19 +20,7 @@ class AreaController < ApplicationController
 
     @can_move_to_next = @current.can_move_to_next
 
-    # その位置でのターゲットを取得する。
-    routes = Route.where('area_node_id = ?', @current.area_node.id)
-    @target_routes = []
-    routes.each do |route|
-      @target_routes.push(@area_service_factory.build_by_area_node_id_and_player_id(route.connected_area_node_id, @player_character.id))
-    end
-
-    # nilじゃなかったら、each
-    if @current.next_to_area_node_id
-      @current.next_to_area_node_id.each do |area_node_id|
-        @target_routes.push(@area_service_factory.build_by_area_node_id_and_player_id(area_node_id, @player_character.id))
-      end
-    end
+    @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(@current.area_node.id, @player_character.id)
 
     user_area = UserArea.get_or_create(@player_character.id)
     user_area.area_node_id = @id
