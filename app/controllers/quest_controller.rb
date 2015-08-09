@@ -9,7 +9,9 @@ class QuestController < ApplicationController
     @quest_entities = []
     @user_quests.each do |user_quest|
       quest_entity = @quest_entity_factory.build_by_user_quest_and_player_id(user_quest, @player_character.id)
-      @quest_entities.push(quest_entity)
+      if quest_entity.is_received || quest_entity.is_not_received_reward
+        @quest_entities.push(quest_entity)
+      end
       Quest::QuestAchieveService.new(quest_entity).achieve
     end
   end

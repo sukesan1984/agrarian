@@ -17,6 +17,40 @@
 require 'rails_helper'
 
 RSpec.describe UserQuest, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'status change' do
+    user_quest = UserQuest.new(
+      player_id: 1,
+      quest_id: 1,
+      status: 0
+    )
+
+    # クエスト未受け取り状態から
+    expect(user_quest.set_cleared).to eq false
+    expect(user_quest.is_not_received).to eq true
+    expect(user_quest.set_claimed).to eq false
+    expect(user_quest.is_not_received).to eq true
+
+    expect(user_quest.set_received).to eq true
+    expect(user_quest.is_received).to eq true
+
+    # クエスト受け取り状態から
+    expect(user_quest.set_claimed).to eq false
+    expect(user_quest.is_received).to eq true
+    expect(user_quest.set_uncleared).to eq false
+    expect(user_quest.is_received).to eq true
+
+    expect(user_quest.set_cleared).to eq true
+    expect(user_quest.is_not_received_reward).to eq true
+
+    # クエストクリア状態から
+    expect(user_quest.set_uncleared).to eq false
+    expect(user_quest.is_not_received_reward).to eq true
+    expect(user_quest.set_received).to eq false
+    expect(user_quest.is_not_received_reward).to eq true
+
+    expect(user_quest.set_claimed).to eq true
+    expect(user_quest.is_received_reward).to eq true
+
+  end
 end
 

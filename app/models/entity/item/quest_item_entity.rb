@@ -6,7 +6,7 @@ class Entity::Item::QuestItemEntity
   def give
     return false unless @user_quest.can_receive
 
-    @user_quest.set_status_to_received
+    @user_quest.set_received
   end
 
   def save!
