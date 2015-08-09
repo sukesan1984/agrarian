@@ -21,7 +21,7 @@
           次のレベルまで#{exp_result[:exp_for_next_level]}
 
 
-= link_to("戻る", "/")
+= render 'view_objects/target_routes', target_routes: @target_routes
 %br/
 - @result.turn_result_list.each do |turn_result|
   .battle-one-turn

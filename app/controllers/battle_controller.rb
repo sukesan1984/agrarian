@@ -2,7 +2,7 @@ class BattleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    area_id = params[:area_id]
+    area_node_id = params[:area_node_id]
 
     # factory
     equipment_service_factory = EquipmentServiceFactory.new
@@ -14,6 +14,10 @@ class BattleController < ApplicationController
 
     enemy_character_factory = EnemyCharacterFactory.new
 
+    resource_service_action_factory = ResourceActionServiceFactory.new(player_character_factory)
+    resource_service_factory = ResourceServiceFactory.new
+    area_service_factory = AreaServiceFactory.new(player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(player_character_factory))
+
     # player
     player_character = player_character_factory.build_by_user_id(current_user.id)
 
@@ -22,6 +26,8 @@ class BattleController < ApplicationController
     @death_penalty = DeathPenalty.new(player_character, user_area)
 
     user_encounter_enemies = UserEncounterEnemy.where('player_id = ?', player_character.id)
+    @target_routes = area_service_factory.build_target_routes_by_area_node_id_and_player_id(area_node_id, player_character.id)
+
     if user_encounter_enemies.count == 0
       render template: 'battle/no_enemy'
       return

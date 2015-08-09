@@ -1,5 +1,5 @@
 class Area::AreaAcquisitionService
-  def initialize()
+  def initialize(area_service_factory)
   end
 
   def get_current_area_node_by_player_id(player_id)
