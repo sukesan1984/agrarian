@@ -5,6 +5,7 @@
   - @death_penalty.result_list.each do |result|
     = result
     %br/
+  = link_to('戻る', root_path)
 - else
   .battle-end-result
     = @battle_end.result
@@ -19,9 +20,7 @@
           次のレベルまで#{exp_result[:exp_for_next_level]}
         - else
           次のレベルまで#{exp_result[:exp_for_next_level]}
-
-
-= render 'view_objects/target_routes', target_routes: @target_routes
+  = render 'view_objects/target_routes', target_routes: @target_routes
 %br/
 - @result.turn_result_list.each do |turn_result|
   .battle-one-turn
