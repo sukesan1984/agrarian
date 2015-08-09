@@ -20,6 +20,10 @@ class Quest::Conditions::KillEnemyCondition < Quest::AbstractQuestConditionEntit
     @progress.count = 0
   end
 
+  def set_received
+    @progress.count = 0
+  end
+
   def save!
     @progress.save!
   end

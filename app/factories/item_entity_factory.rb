@@ -1,7 +1,8 @@
 class ItemEntityFactory
-  def initialize(player, user_item_factory)
+  def initialize(player, user_item_factory, quest_entity_factory)
     @player = player
     @user_item_factory = user_item_factory
+    @quest_entity_factory = quest_entity_factory
   end
 
   def build_by_item_id(item_id, count)
@@ -16,7 +17,8 @@ class ItemEntityFactory
     when 3
       return Entity::Item::SoldierItemEntity.new(@player, user_item)
     when 5
-      return Entity::Item::QuestItemEntity.new(user_item)
+      quest_entity = @quest_entity_factory.build_by_user_quest_and_player_id(user_item, @player.id)
+      return Entity::Item::QuestItemEntity.new(quest_entity)
     when 6
       return Entity::Item::MoneyItemEntity.new(@player, count)
     end

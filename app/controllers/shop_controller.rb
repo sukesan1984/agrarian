@@ -28,7 +28,7 @@ class ShopController < ApplicationController
 
     resource_service = @resource_service_factory.build_by_target_id_and_resource(@area_node.id, @resource)
 
-    item_entity_factory = ItemEntityFactory.new(@player_character, UserItemFactory.new(@player_character))
+    item_entity_factory = ItemEntityFactory.new(@player_character, UserItemFactory.new(@player_character), @quest_entity_factory)
     item_service = item_entity_factory.build_by_item_id(resource_service.item.id, 1)
 
     resource_purchase_service = ResourceAction::ResourcePurchaseService.new(resource_service, item_service, @player_character.player, showcase)
@@ -50,6 +50,9 @@ class ShopController < ApplicationController
     equipped_service_factory       = EquippedServiceFactory.new(equipment_service_factory)
     @equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
     @player_character_factory      = PlayerCharacterFactory.new(@equipped_list_service_factory)
+    user_item_factory = UserItemFactory.new(@equipped_list_service_factory)
+    @quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
+    @quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, @quest_condition_entity_factory)
   end
 
   def set_player_character

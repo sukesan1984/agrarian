@@ -9,7 +9,9 @@ class QuestController < ApplicationController
     @quest_entities = []
     @user_quests.each do |user_quest|
       quest_entity = @quest_entity_factory.build_by_user_quest_and_player_id(user_quest, @player_character.id)
-      @quest_entities.push(quest_entity)
+      if quest_entity.is_received || quest_entity.is_not_received_reward
+        @quest_entities.push(quest_entity)
+      end
       Quest::QuestAchieveService.new(quest_entity).achieve
     end
   end
@@ -18,7 +20,7 @@ class QuestController < ApplicationController
     user_quest_id = params[:user_quest_id]
 
     # 報酬付与のためのitem_serviceのfactory
-    item_entity_factory = ItemEntityFactory.new(@player_character, UserItemFactory.new(@player_character))
+    item_entity_factory = ItemEntityFactory.new(@player_character, UserItemFactory.new(@player_character), @quest_entity_factory)
 
     user_quest = UserQuest.find_by(id: user_quest_id, player_id: @player_character.id)
     fail 'user_quest is not found: ' + id.to_s if user_quest.nil?

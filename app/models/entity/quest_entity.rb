@@ -28,8 +28,8 @@ class Entity::QuestEntity
     return @quest_condition_entities.map(&:progress)
   end
 
-  # いまだクリアになっていない物
-  def is_not_cleared
+  # クエストを受けているやつ
+  def is_received
     return @user_quest.is_received
   end
 
@@ -37,30 +37,41 @@ class Entity::QuestEntity
     return @quest.reward_gift_id
   end
 
-  # クリア済みかいなかを返す。
-  # 計算してキャッシュするために、状態更新する
-  def set_cleared
-    # すでにクリア済みのときは再計算しない。
-    # 途中でクエストのクリアチェックが落ちる時があるので、毎回計算する。
-    #return true if @user_quest.is_cleared
-
-    # 未クリア時はチェックする
+  def is_cleared
     @quest_condition_entities.each do |quest_condition_entity|
       # 一つでもクリアしていない物があれば、未クリア
       if !quest_condition_entity.is_cleared
-        @user_quest.set_uncleared
         return false
       end
     end
 
-    @user_quest.set_cleared
     return true
+  end
+
+  # 受注状態にする。
+  def set_received
+    @quest_condition_entities.each do |quest_condition_entity|
+      # 一つでもクリアしていない物があれば、未クリア
+      unless quest_condition_entity.set_received
+        fail 'cant set_received'
+      end
+    end
+
+    return @user_quest.set_received
+  end
+
+  # clear状態にする。
+  def set_cleared
+    if self.is_cleared
+      @user_quest.set_cleared
+      return true
+    end
+    return false
   end
 
   # 報酬受け取り状態にする。
   def set_claimed
     @quest_condition_entities.each(&:set_claimed)
-
     return @user_quest.set_claimed
   end
 
