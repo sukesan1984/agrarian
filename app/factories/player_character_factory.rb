@@ -31,7 +31,7 @@ class PlayerCharacterFactory
   private 
   def build_by_player(player)
     equipped_list_service = @equipped_list_service_factory.build_by_player_id(player.id)
-    player_character = PlayerCharacter.new(player, equipped_list_service)
+    player_character = Entity::PlayerCharacterEntity.new(player, equipped_list_service)
     @player_character_dictionary[player.user_id] = player_character
     @player_character_dictionary_for_player_id[player.id] = player_character
     return player_character

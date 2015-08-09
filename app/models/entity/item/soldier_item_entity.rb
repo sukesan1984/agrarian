@@ -1,4 +1,4 @@
-class Item::SoldierItem
+class Entity::Item::SoldierItemEntity
   def initialize(player, soldier)
     @player  = player
     @soldier = soldier

@@ -1,7 +1,7 @@
 # クエストのEntityモデル
 # 基本的にはUserQuestに紐づく。
 # aggregate
-class Quest::QuestEntity
+class Entity::QuestEntity
   def initialize(quest, user_quest, quest_condition_entities)
     @quest = quest
     @user_quest = user_quest

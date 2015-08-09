@@ -1,4 +1,4 @@
-class Item
+class Entity::ItemEntity
   def initialize
   end
 

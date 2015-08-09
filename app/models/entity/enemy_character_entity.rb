@@ -1,4 +1,4 @@
-class EnemyCharacter
+class Entity::EnemyCharacterEntity
   def initialize(enemy, progress)
     @enemy = enemy
     @hp = StatusPoint.new(@enemy.hp, @enemy.hp)

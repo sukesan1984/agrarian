@@ -1,4 +1,4 @@
-class ItemServiceFactory
+class ItemEntityFactory
   def initialize(player, user_item_factory)
     @player = player
     @user_item_factory = user_item_factory
@@ -12,13 +12,13 @@ class ItemServiceFactory
 
     case item.item_type
     when 1, 2, 4
-      return Item::ConsumeItem.new(user_item, count)
+      return Entity::Item::ConsumeItemEntity.new(user_item, count)
     when 3
-      return Item::SoldierItem.new(@player, user_item)
+      return Entity::Item::SoldierItemEntity.new(@player, user_item)
     when 5
-      return Item::QuestItem.new(user_item)
+      return Entity::Item::QuestItemEntity.new(user_item)
     when 6
-      return Item::MoneyItem.new(@player, count)
+      return Entity::Item::MoneyItemEntity.new(@player, count)
     end
   end
 

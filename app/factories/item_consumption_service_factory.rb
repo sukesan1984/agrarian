@@ -16,7 +16,7 @@ class ItemConsumptionServiceFactory
       # パフォーマンスはおいおい
       consumption = Consumption.find_by(item_id: user_item.item.id)
       trait = @trait_factory.build_by_comsumption_and_player_id(consumption, player_id)
-      item_consumption_services.push(ItemConsumptionService.new(user_item, trait))
+      item_consumption_services.push(Item::ItemConsumptionService.new(user_item, trait))
     end
 
     return item_consumption_services
@@ -26,7 +26,7 @@ class ItemConsumptionServiceFactory
     consumption = Consumption.find_by(item_id: user_item.item.id)
     fail 'no consumption :' + user_item.item.id unless consumption
     trait = @trait_factory.build_by_comsumption_and_player_id(consumption, player_id)
-    return ItemConsumptionService.new(user_item, trait)
+    return Item::ItemConsumptionService.new(user_item, trait)
   end
 end
 
