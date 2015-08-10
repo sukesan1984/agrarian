@@ -39,12 +39,15 @@ class AreaType::Road < AreaType::Base
   def get_render_object
     return {
       area_node_id: @area_node.id,
-      encountered_enemy: @encountered_enemy
+      encountered_enemy: @encountered_enemy,
+      enemies: @user_encounter_enemies
     }
   end
 
   def execute
-    @encountered_enemy = @battle_encounter.encount
+    result = @battle_encounter.encount
+    @encountered_enemy = result[:is_encount]
+    @user_encounter_enemies = result[:enemies]
   end
 
   def can_move_to_next
