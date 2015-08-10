@@ -10,25 +10,34 @@ class Battle::Encounter
     ActiveRecord::Base.transaction do
       user_encounter_enemies = UserEncounterEnemy.where(player_id: @player.id)
       # すでに遭遇してる。
-      return true if user_encounter_enemies.count > 0
+      if user_encounter_enemies.count > 0
+        return {is_encount: true, enemies: user_encounter_enemies} 
+      end
 
       # 敵がいない
-      return false if @enemy_maps.count == 0
+      if @enemy_maps.count == 0
+        return {is_encount: false, enemies: nil}
+      end
+
 
       # 遭遇しなかった
-      return false unless lot
+      unless lot
+        return {is_encount: false, enemies: nil}
+      end
+
 
       enemy_count = rand(1..3)
       list = @enemies_lottery.lot(enemy_count)
 
       UserEncounterEnemy.delete_all(['player_id = ?', @player.id])
+      user_encounter_enemies = []
       list.each do |enemy|
-        UserEncounterEnemy.create(
+        user_encounter_enemies.push(UserEncounterEnemy.create(
           player_id: @player.id,
           enemy_id: enemy.id
-        )
+        ))
       end
-      return true
+      return{ is_encount: true, enemies: user_encounter_enemies}
     end
     rescue => e
       raise e

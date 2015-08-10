@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   # バトル
   get 'battle/:area_node_id', to: 'battle#index'
+  get 'battle/escape/:area_node_id', to: 'battle#escape'
 
   #宿屋
   get 'inn/:id', to: 'inn#index'

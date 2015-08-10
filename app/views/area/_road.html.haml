@@ -1,2 +1,8 @@
 - if(object[:encountered_enemy])
+  - object[:enemies].each do |enemy|
+    = enemy.name
+    %br/
+  が現れた
   = render "area/enemy_appeared", area_node_id: object[:area_node_id]
+  %br/
+  = link_to('逃げる(失敗すると戦闘突入)', "/battle/escape/#{object[:area_node_id]}")
