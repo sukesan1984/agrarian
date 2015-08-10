@@ -62,6 +62,20 @@ class BattleController < ApplicationController
     end
   end
 
+  def escape
+    area_node_id = params[:area_node_id]
+    battle_escape_service = Battle::Escape.new
+    player_character = @player_character_factory.build_by_user_id(current_user.id)
+    is_success_to_escape = battle_escape_service.execute(player_character.id)
+
+    if !is_success_to_escape
+      redirect_to('/battle/' + area_node_id.to_s)
+      return
+    end
+
+    @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(area_node_id, player_character.id)
+  end
+
   def set_factories
     # factory
     equipment_service_factory = EquipmentServiceFactory.new
@@ -76,7 +90,6 @@ class BattleController < ApplicationController
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     resource_service_factory = ResourceServiceFactory.new
     @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory))
-
   end
 end
 
