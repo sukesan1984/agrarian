@@ -23,6 +23,7 @@ class Quest::Conditions::CollectItemCondition <Quest::AbstractQuestConditionEnti
   end
 
   def set_received
+    return true
   end
 
   def save!
