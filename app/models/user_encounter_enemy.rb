@@ -15,5 +15,9 @@
 
 class UserEncounterEnemy < ActiveRecord::Base
   belongs_to :enemy
+
+  def name
+    return self.enemy.name
+  end
 end
 
