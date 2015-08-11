@@ -1,2 +1,7 @@
 %h2 仲間一覧
+- @soldiers.each do |soldier|
+  = soldier.name
+  = form_tag('/soldier/remove', method: "post") do
+    \#{hidden_field_tag(:user_soldier_id, soldier.id)}
+    \#{submit_tag("外す")}
 = link_to('戻る', root_path)
