@@ -1,0 +1,2 @@
+class SoldierController < ApplicationController
+end
