@@ -379,7 +379,7 @@ ActiveRecord::Schema.define(version: 20150809084607) do
     t.integer  "ring_a",      limit: 4, default: 0
     t.integer  "ring_b",      limit: 4, default: 0
     t.integer  "exp",         limit: 4, default: 0
-    t.integer  "is_in_party", limit: 4
+    t.integer  "is_in_party", limit: 4, default: 0
   end
 
   add_index "user_soldiers", ["player_id", "is_in_party"], name: "index_user_soldiers_on_player_id_and_is_in_party", using: :btree

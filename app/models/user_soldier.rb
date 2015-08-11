@@ -20,7 +20,7 @@
 #  ring_a      :integer          default(0)
 #  ring_b      :integer          default(0)
 #  exp         :integer          default(0)
-#  is_in_party :integer
+#  is_in_party :integer          default(0)
 #
 # Indexes
 #

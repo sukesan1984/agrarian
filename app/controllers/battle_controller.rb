@@ -29,7 +29,7 @@ class BattleController < ApplicationController
 
     unit_list_b.push(Battle::Unit.new(player_character))
 
-    soldier_characters = @soldier_character_factory.build_by_player_id(player_character.id)
+    soldier_characters = @soldier_character_factory.build_party_by_player_id(player_character.id)
 
     soldier_characters.each do |soldier_character|
       unit_list_b.push(Battle::Unit.new(soldier_character))
