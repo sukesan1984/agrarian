@@ -1,2 +1,6 @@
-%h2 パーティに加えた
+- if @is_success
+  %h2 パーティに加えた
+- else
+  %h2 失敗
+
 = link_to('戻る', root_path)
