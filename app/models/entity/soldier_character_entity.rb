@@ -63,6 +63,10 @@ class Entity::SoldierCharacterEntity
     return @user_soldier.exp
   end
 
+  def is_in_party
+    return @user_soldier.is_in_party == 1
+  end
+
   def give_exp(exp)
     after_exp = @user_soldier.exp + exp
     if after_exp > @level_max.exp_max

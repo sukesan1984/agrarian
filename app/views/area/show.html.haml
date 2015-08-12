@@ -31,4 +31,5 @@
     = render "view_objects/status", status: @player_character
     - @soldier_characters.each do |soldier_character|
       = render 'view_objects/status', status: soldier_character
+    = link_to('傭兵編成', '/soldier')
 

@@ -29,7 +29,7 @@ class AreaController < ApplicationController
     # そのエリアに落ちてるアイテム
     @thrown_items = ThrownItem.where(area_node_id: @id)
                     .select{ |thrown_item| thrown_item.is_valid }
-    @soldier_characters = @soldier_character_factory.build_by_player_id(@player_character.id)
+    @soldier_characters = @soldier_character_factory.build_party_by_player_id(@player_character.id)
   end
 
   def not_found
