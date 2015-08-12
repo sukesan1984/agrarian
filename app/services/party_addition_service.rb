@@ -1,7 +1,7 @@
 # パーティに加えるサービス
 #
 class PartyAdditionService
-  MAX_PARTY_NUM = 3
+  MAX_PARTY_NUM = 2
   def initialize()
   end
 
