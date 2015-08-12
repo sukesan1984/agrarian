@@ -8,6 +8,11 @@ class SoldierCharacterFactory
     return build_by_user_soldiers(user_soldiers, player_id)
   end
 
+  def build_sub_party_by_player_id(player_id)
+    user_soldiers = UserSoldier.where(player_id: player_id, is_in_party: 0)
+    return build_by_user_soldiers(user_soldiers, player_id)
+  end
+
   def build_by_player_id(player_id)
     user_soldiers = UserSoldier.where(player_id: player_id)
     return build_by_user_soldiers(user_soldiers, player_id)

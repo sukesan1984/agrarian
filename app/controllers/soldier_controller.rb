@@ -10,7 +10,11 @@ class SoldierController < ApplicationController
   # パーティから外す
   def remove
     user_soldier_id = params[:user_soldier_id]
+  end
 
+  # パーティに加える
+  def add
+    user_soldier_id = params[:user_soldier_id]
   end
 
   private 
