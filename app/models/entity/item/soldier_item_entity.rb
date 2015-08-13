@@ -16,6 +16,10 @@ class Entity::Item::SoldierItemEntity
       current_hp: @soldier.hp_min
     )
 
+    if UserSoldier.where(player_id: @player.id, is_in_party: 1).count < PartyAdditionService::MAX_PARTY_NUM
+      @gived_soldier.is_in_party = 1
+    end
+
     return true
   end
 

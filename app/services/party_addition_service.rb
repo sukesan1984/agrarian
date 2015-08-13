@@ -7,7 +7,7 @@ class PartyAdditionService
 
   def add(player_id, user_soldier_id)
     # 今仲間になっている数
-    if UserSoldier.where(player_id: player_id, is_in_party: 1).count == MAX_PARTY_NUM
+    if UserSoldier.where(player_id: player_id, is_in_party: 1).count >= MAX_PARTY_NUM
       return false
     end
 
