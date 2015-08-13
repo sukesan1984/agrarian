@@ -50,6 +50,12 @@ class AreaServiceFactory
     return build_by_area_node_and_player_id(area_node, player_id)
   end
 
+  # playerの現在地からtarget_routesを取得する
+  def build_target_routes_by_player_id(player_id)
+    user_area = UserArea.get_or_create(player_id)
+    return build_target_routes_by_area_node_id_and_player_id(user_area.area_node_id, player_id)
+  end
+
   def build_target_routes_by_area_node_id_and_player_id(area_node_id, player_id)
     routes = Route.where(area_node_id: area_node_id)
     target_routes = []
