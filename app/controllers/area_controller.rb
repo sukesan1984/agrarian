@@ -7,9 +7,9 @@ class AreaController < ApplicationController
   end
 
   def show
-    @id = params[:id]
+    @area_node_id = params[:id]
 
-    @current = @area_service_factory.build_by_area_node_id_and_player_id(@id, @player_character.id)
+    @current = @area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, @player_character.id)
     if @current.is_nil
       redirect_to '/areas/not_found'
       return
@@ -23,11 +23,11 @@ class AreaController < ApplicationController
     @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(@current.area_node.id, @player_character.id)
 
     user_area = UserArea.get_or_create(@player_character.id)
-    user_area.area_node_id = @id
+    user_area.area_node_id = @area_node_id
     user_area.save
 
     # そのエリアに落ちてるアイテム
-    @thrown_items = ThrownItem.where(area_node_id: @id)
+    @thrown_items = ThrownItem.where(area_node_id: @area_node_id)
                     .select{ |thrown_item| thrown_item.is_valid }
     @soldier_characters = @soldier_character_factory.build_party_by_player_id(@player_character.id)
   end
