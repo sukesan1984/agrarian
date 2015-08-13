@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # 場所のとこ
   get 'areas/', to: 'area#index'
   get 'areas/not_found', to: 'area#not_found'
+  get 'areas/cant_move', to: 'area#cant_move'
   get 'areas/:id', to: 'area#show'
 
   # バトル
