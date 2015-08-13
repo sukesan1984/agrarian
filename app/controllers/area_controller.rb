@@ -7,9 +7,8 @@ class AreaController < ApplicationController
   end
 
   def show
-    @area_node_id = params[:id]
+    @area_node_id = params[:id].to_i
 
-    Rails.logger.debug(@area_node_id)
     @current = @area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, @player_character.id)
     if @current.is_nil
       redirect_to '/areas/not_found'
@@ -21,9 +20,9 @@ class AreaController < ApplicationController
 
     user_area = UserArea.get_or_create(@player_character.id)
     # 今いる位置からの移動できる場所 or 今いる位置
-    can_move_list = @current_target_routes.map{ |target| target.area_node.id.to_i }
-    can_move_list.push user_area.area_node_id.to_i
-    unless can_move_list.include?(@area_node_id.to_i)
+    can_move_list = @current_target_routes.map{ |target| target.area_node.id }
+    can_move_list.push user_area.area_node_id
+    unless can_move_list.include?(@area_node_id)
       redirect_to '/areas/cant_move'
       return
     end
