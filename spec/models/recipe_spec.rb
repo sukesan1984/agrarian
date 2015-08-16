@@ -27,7 +27,7 @@ RSpec.describe Recipe, type: :model do
     expect(recipe_item.item_id).to eq 1
     expect(recipe_item.count).to eq 1
   end
-  it 'required_item' do
+  it 'required_item and product_item' do
     recipe = Recipe.new(
       required_item_id1: 100001,
       required_item_count1: 2,
@@ -51,5 +51,7 @@ RSpec.describe Recipe, type: :model do
     expect(recipe.required_items[3].count).to eq 1
     expect(recipe.required_items[4].item_id).to eq 100005
     expect(recipe.required_items[4].count).to eq 2
+    expect(recipe.product_item.item_id).to eq 100006
+    expect(recipe.product_item.count).to eq 1
   end
 end

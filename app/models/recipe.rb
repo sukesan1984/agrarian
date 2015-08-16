@@ -47,4 +47,13 @@ class Recipe < ActiveRecord::Base
 
     return @required_items
   end
+
+  def product_item
+    if @product_item
+      return @product_item
+    end
+
+    @product_item = Recipe::Item.new(self.product_item_id, self.product_item_count)
+    return @product_item
+  end
 end
