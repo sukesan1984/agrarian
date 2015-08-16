@@ -14,7 +14,7 @@
         = thrown_item.count
         個
         = form_tag('/item/pickup', method: 'post') do
-          \#{hidden_field_tag(:area_node_id, @id)}
+          \#{hidden_field_tag(:area_node_id, @area_node_id)}
           \#{hidden_field_tag(:item_id, thrown_item.item.id)}
           \#{submit_tag('拾う')}
 
