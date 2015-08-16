@@ -20,4 +20,31 @@
 #
 
 class Recipe < ActiveRecord::Base
+  # レシピのマックス素材数(db定義に依存)
+  RECIPE_COUNT = 5
+  # inner class
+  class Recipe::Item
+    attr_reader :item_id, :count
+    def initialize(item_id, count)
+      @item_id = item_id
+      @count = count
+    end
+  end
+
+  def required_items
+    if @required_items
+      return @required_items
+    end
+
+    @required_items = []
+
+    (1..RECIPE_COUNT).each do |recipe_number|
+      variable_item_id = "required_item_id#{recipe_number}"
+      variable_item_num = "required_item_num#{recipe_number}"
+      @required_items.push(
+        Recipe::Item.new(send(variable_item_id), send(variable_item_num)))
+    end
+
+    return @required_items
+  end
 end
