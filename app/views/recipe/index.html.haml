@@ -1,2 +1,11 @@
 %h2 レシピ一覧
+- @recipe_list.each do |recipe|
+  完成品: #{recipe[:product].name}#{recipe[:product].count}
+  %br/
+  素材:
+  %br/
+  - recipe[:required_items].each do |required_item|
+    #{required_item.name} 必要数: #{required_item.count}
+  %br/
+
 = link_to('戻る', root_path)

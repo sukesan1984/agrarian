@@ -41,8 +41,12 @@ class Recipe < ActiveRecord::Base
     (1..RECIPE_COUNT).each do |recipe_number|
       variable_item_id = "required_item_id#{recipe_number}"
       variable_item_count = "required_item_count#{recipe_number}"
-      @required_items.push(
-        Recipe::Item.new(send(variable_item_id), send(variable_item_count)))
+      item_id = send(variable_item_id)
+      count = send(variable_item_count)
+      # item_idが0の時は飛ばす
+      if item_id != 0
+        @required_items.push(Recipe::Item.new(item_id, count))
+      end
     end
 
     return @required_items
