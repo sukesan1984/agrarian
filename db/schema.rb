@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815133220) do
+ActiveRecord::Schema.define(version: 20150816025644) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -184,20 +184,20 @@ ActiveRecord::Schema.define(version: 20150815133220) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.integer  "required_item_id1",  limit: 4
-    t.integer  "required_item_num1", limit: 4
-    t.integer  "required_item_id2",  limit: 4
-    t.integer  "required_item_num2", limit: 4
-    t.integer  "required_item_id3",  limit: 4
-    t.integer  "required_item_num3", limit: 4
-    t.integer  "required_item_id4",  limit: 4
-    t.integer  "required_item_num4", limit: 4
-    t.integer  "required_item_id5",  limit: 4
-    t.integer  "required_item_num5", limit: 4
-    t.integer  "product_item_id",    limit: 4
-    t.integer  "product_item_num",   limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "required_item_id1",    limit: 4
+    t.integer  "required_item_count1", limit: 4
+    t.integer  "required_item_id2",    limit: 4
+    t.integer  "required_item_count2", limit: 4
+    t.integer  "required_item_id3",    limit: 4
+    t.integer  "required_item_count3", limit: 4
+    t.integer  "required_item_id4",    limit: 4
+    t.integer  "required_item_count4", limit: 4
+    t.integer  "required_item_id5",    limit: 4
+    t.integer  "required_item_count5", limit: 4
+    t.integer  "product_item_id",      limit: 4
+    t.integer  "product_item_count",   limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "resource_actions", force: :cascade do |t|

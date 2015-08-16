@@ -2,21 +2,21 @@
 #
 # Table name: recipes
 #
-#  id                 :integer          not null, primary key
-#  required_item_id1  :integer
-#  required_item_num1 :integer
-#  required_item_id2  :integer
-#  required_item_num2 :integer
-#  required_item_id3  :integer
-#  required_item_num3 :integer
-#  required_item_id4  :integer
-#  required_item_num4 :integer
-#  required_item_id5  :integer
-#  required_item_num5 :integer
-#  product_item_id    :integer
-#  product_item_num   :integer
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                   :integer          not null, primary key
+#  required_item_id1    :integer
+#  required_item_count1 :integer
+#  required_item_id2    :integer
+#  required_item_count2 :integer
+#  required_item_id3    :integer
+#  required_item_count3 :integer
+#  required_item_id4    :integer
+#  required_item_count4 :integer
+#  required_item_id5    :integer
+#  required_item_count5 :integer
+#  product_item_id      :integer
+#  product_item_count   :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
 #
 
 require 'rails_helper'
@@ -30,17 +30,17 @@ RSpec.describe Recipe, type: :model do
   it 'required_item' do
     recipe = Recipe.new(
       required_item_id1: 100001,
-      required_item_num1: 2,
+      required_item_count1: 2,
       required_item_id2: 100002,
-      required_item_num2: 3,
+      required_item_count2: 3,
       required_item_id3: 100003,
-      required_item_num3: 2,
+      required_item_count3: 2,
       required_item_id4: 100004,
-      required_item_num4: 1,
+      required_item_count4: 1,
       required_item_id5: 100005,
-      required_item_num5: 2,
+      required_item_count5: 2,
       product_item_id: 100006,
-      product_item_num: 1)
+      product_item_count: 1)
     expect(recipe.required_items[0].item_id).to eq 100001
     expect(recipe.required_items[0].count).to eq 2
     expect(recipe.required_items[1].item_id).to eq 100002
