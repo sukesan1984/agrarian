@@ -19,7 +19,10 @@ class RecipeController < ApplicationController
   end
 
   def make
-    @recipe_id = params[:recipe]
+    @recipe_id = params[:recipe_id]
+
+    recipe_making_service = RecipeMakingServiceFactory.new.build_by_recipe_id_and_player_id(@recipe_id, @player_character.id)
+    @result = recipe_making_service.execute
   end
 
   def set_factories
