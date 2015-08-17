@@ -7,5 +7,9 @@
   - recipe[:required_items].each do |required_item|
     #{required_item.name} 必要数: #{required_item.count}
   %br/
+  = form_tag('/recipe/make', method: 'post') do
+    \#{hidden_field_tag(:recipe_id, recipe[:id])}
+    \#{submit_tag('作る')}
+
 
 = link_to('戻る', root_path)

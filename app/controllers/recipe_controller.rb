@@ -4,7 +4,6 @@ class RecipeController < ApplicationController
   before_action :set_player_character
 
   def index
-
     item_entity_factory = ItemEntityFactory.new(@player_character, @user_item_factory, @quest_entity_factory)
 
     recipes = Recipe.all
@@ -15,8 +14,12 @@ class RecipeController < ApplicationController
         required_items.push(item_entity_factory.build_by_item_id(required_item.item_id, required_item.count))
       end
       product = item_entity_factory.build_by_item_id(recipe.product_item.item_id, recipe.product_item.count)
-      @recipe_list.push({required_items: required_items, product: product})
+      @recipe_list.push({id: recipe.id, required_items: required_items, product: product})
     end
+  end
+
+  def make
+    @recipe_id = params[:recipe]
   end
 
   def set_factories
@@ -28,7 +31,6 @@ class RecipeController < ApplicationController
     @quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
 
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
-
   end
 
   def set_player_character
