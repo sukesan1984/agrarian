@@ -1,2 +1,2 @@
-id,required_item_id1,required_item_count1,required_item_id2,required_item_count2,required_item_id3,required_item_count3,required_item_id4,required_item_count4,required_item_id5,required_item_count5,product_item_id,product_item_count
-1,100001,4,0,0,0,0,0,0,0,0,100005,1
+id,required_item_id1,required_item_count1,required_item_id2,required_item_count2,required_item_id3,required_item_count3,required_item_id4,required_item_count4,required_item_id5,required_item_count5,product_item_id,product_item_count,skill_id,difficulty
+1,100001,4,0,0,0,0,0,0,0,0,100005,1,1,0
