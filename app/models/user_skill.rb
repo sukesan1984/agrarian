@@ -11,4 +11,20 @@
 #
 
 class UserSkill < ActiveRecord::Base
+  belongs_to :skill
+
+  def self.find_or_create(player_id, skill_ids)
+    user_skills = UserSkill.where('player_id = ? and skill_id in (?)', player_id, skill_ids)
+    skill_ids.each do |skill_id|
+      unless user_skills.map(&:skill_id).include?(skill_id)
+        user_skill = UserSkill.create(
+          player_id: player_id,
+          skill_id: skill_id,
+          skill_point: 0
+        )
+        user_skills.push(user_skill)
+      end
+    end
+    return user_skills
+  end
 end
