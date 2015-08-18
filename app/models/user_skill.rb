@@ -14,8 +14,12 @@ class UserSkill < ActiveRecord::Base
   belongs_to :skill
 
   def self.find_or_create(player_id, skill_ids)
+    # 一回有効性チェックしておく
+    skills = Skill.where('id in (?)', skill_ids)
+    valid_skill_ids = skills.map(&:id)
+
     user_skills = UserSkill.where('player_id = ? and skill_id in (?)', player_id, skill_ids)
-    skill_ids.each do |skill_id|
+    valid_skill_ids.each do |skill_id|
       unless user_skills.map(&:skill_id).include?(skill_id)
         user_skill = UserSkill.create(
           player_id: player_id,
