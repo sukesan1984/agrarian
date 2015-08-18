@@ -17,6 +17,8 @@
 #  product_item_count   :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  skill_id             :integer
+#  difficulty           :integer
 #
 
 require 'rails_helper'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150816025644) do
+ActiveRecord::Schema.define(version: 20150818135958) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -198,6 +198,8 @@ ActiveRecord::Schema.define(version: 20150816025644) do
     t.integer  "product_item_count",   limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "skill_id",             limit: 4
+    t.integer  "difficulty",           limit: 4
   end
 
   create_table "resource_actions", force: :cascade do |t|
@@ -268,6 +270,13 @@ ActiveRecord::Schema.define(version: 20150816025644) do
     t.integer  "cost",        limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "soldiers", force: :cascade do |t|
@@ -377,6 +386,14 @@ ActiveRecord::Schema.define(version: 20150816025644) do
   end
 
   add_index "user_quests", ["player_id", "quest_id"], name: "index_user_quests_on_player_id_and_quest_id", unique: true, using: :btree
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "player_id",   limit: 4
+    t.integer  "skill_id",    limit: 4
+    t.integer  "skill_point", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "user_soldiers", force: :cascade do |t|
     t.integer  "player_id",   limit: 4

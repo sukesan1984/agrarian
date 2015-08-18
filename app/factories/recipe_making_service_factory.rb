@@ -14,6 +14,7 @@ class RecipeMakingServiceFactory
     end
 
     product_user_item = UserItem.find_or_create(player_id, recipe.product_item.item_id)
-    return RecipeMakingService.new(recipe, user_item_dictionary, product_user_item)
+    user_skill = UserSkill.find_or_create(player_id, [recipe.skill_id])[0]
+    return RecipeMakingService.new(recipe, user_item_dictionary, product_user_item, user_skill)
   end
 end

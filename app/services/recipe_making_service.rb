@@ -1,8 +1,9 @@
 class RecipeMakingService
-  def initialize(recipe, required_user_items, product_user_item)
+  def initialize(recipe, required_user_items, product_user_item, user_skill)
     @recipe = recipe
     @required_user_items = required_user_items
     @product_user_item = product_user_item
+    @user_skill = user_skill
   end
 
   # レシピに従って、製品を作る
@@ -19,6 +20,11 @@ class RecipeMakingService
         user_item.save!
       end
 
+      # 成功率の計算
+      unless self.is_success(@user_skill.skill_point, @recipe.difficulty)
+        return {success:false, message: '失敗しました。素材がなくなりました'}
+      end
+
       if @recipe.product_item.item_id != @product_user_item.item.id
         fail 'user_item is invalid: ' + @product_user_item.item.id
       end
@@ -29,5 +35,21 @@ class RecipeMakingService
     end
     rescue => e
       raise e
+  end
+
+  def is_success(skill_point, difficulty)
+    rate = RecipeMakingService.calculate_successable_rate(skill_point, difficulty)
+    seed = rand(0.0...100.0)
+
+    Rails.logger.debug("rate: #{rate}, seed: #{seed}")
+    return rate > seed
+  end
+
+  def self.calculate_successable_rate(skill_point, difficulty)
+    if skill_point / 10 > difficulty
+      return 100
+    end
+
+    return 100 * 2 ** ((skill_point / 10 - difficulty) / 10)
   end
 end
