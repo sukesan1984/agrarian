@@ -26,7 +26,7 @@ class UserItemFactory
       user_item = UserItem.find_or_create(player_id, item.id)
       return user_item
     when 2
-      user_item = UserItem.create(
+      user_item = UserItem.new(
         player_id: player_id,
         item_id: item.id,
         count: 0)
