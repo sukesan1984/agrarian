@@ -7,6 +7,10 @@ class Entity::Item::QuestItemEntity
     return @quest_entity.set_received
   end
 
+  def current_count
+    return 1
+  end
+
   def save!
     @quest_entity.save!
   end

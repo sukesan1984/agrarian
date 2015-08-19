@@ -8,6 +8,10 @@ class Entity::Item::MoneyItemEntity
     return @count
   end
 
+  def current_count
+    return @player.rails
+  end
+
   def give
     @player.give_rails(@count)
     return true

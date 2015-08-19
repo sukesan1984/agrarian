@@ -7,6 +7,10 @@ class Entity::Item::ConsumeItemEntity
   def count
     return @count
   end
+  
+  def current_count
+    return @user_item.count
+  end
 
   def give
     @user_item.count += @count
