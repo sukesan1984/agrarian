@@ -40,5 +40,9 @@ class UserItem < ActiveRecord::Base
     logger.debug(user_item)
     user_item
   end
+
+  def equipped?
+    return self.equipped != 0
+  end
 end
 
