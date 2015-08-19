@@ -21,7 +21,7 @@ class RecipeMakingService
       end
 
       # 成功率の計算
-      unless self.is_success(@user_skill.skill_point, @recipe.difficulty)
+      unless self.is_success(@user_skill.real_skill_point, @recipe.difficulty)
         return {success:false, message: '失敗しました。素材がなくなりました'}
       end
 
@@ -29,27 +29,34 @@ class RecipeMakingService
         fail 'user_item is invalid: ' + @product_user_item.item.id
       end
 
+      # 成功したら
+      skill_increase = @user_skill.try_increase(@recipe.difficulty)
       @product_user_item.count += @recipe.product_item.count
       @product_user_item.save!
-      return {success:true, message: "#{@product_user_item.item.name}を#{@recipe.product_item.count}を手に入れた"}
+      message ="#{@product_user_item.item.name}を#{@recipe.product_item.count}を手に入れた。"
+      if skill_increase > 0
+        message += "#{@user_skill.skill.name}のスキル値が#{skill_increase}上昇した。今は#{@user_skill.real_skill_point}。"
+        @user_skill.save!
+      end
+      return {success:true, message: message} 
     end
     rescue => e
       raise e
   end
 
-  def is_success(skill_point, difficulty)
-    rate = RecipeMakingService.calculate_successable_rate(skill_point, difficulty)
+  def is_success(real_skill_point, difficulty)
+    rate = RecipeMakingService.calculate_successable_rate(real_skill_point, difficulty)
     seed = rand(0.0...100.0)
 
     Rails.logger.debug("rate: #{rate}, seed: #{seed}")
     return rate > seed
   end
 
-  def self.calculate_successable_rate(skill_point, difficulty)
-    if skill_point / 10 > difficulty
+  def self.calculate_successable_rate(real_skill_point, difficulty)
+    if real_skill_point > difficulty
       return 100
     end
 
-    return 100 * 2 ** ((skill_point / 10 - difficulty) / 10)
+    return 100 * 2 ** ((real_skill_point - difficulty) / 10)
   end
 end
