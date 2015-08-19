@@ -1,6 +1,8 @@
 %h2 アイテム一覧
 - @user_items.each do |user_item|
   = user_item.item.name
+  - if user_item.equipped == 1
+    (装備中)
   \: #{user_item.count}
   = form_tag('/item/throw', method: 'post') do
     \#{hidden_field_tag(:user_item_id, user_item.id)}
