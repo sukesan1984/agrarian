@@ -8,6 +8,9 @@ class Entity::ItemEntity
   def count
   end
 
+  def current_count
+  end
+
   def give_failed_message
   end
 
