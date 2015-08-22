@@ -12,13 +12,13 @@
 ニコニコ生放送のコミュニティで不定期に生放送をしながら作っているソーシャルゲームです！
 
 ゲームサイト
-[http://agrarian.jp](http://agrarian.jp)
+* [http://agrarian.jp](http://agrarian.jp)
 
 公式wiki
-[http://wiki.agrarian.jp/](http://wiki.agrarian.jp/)
+* [http://wiki.agrarian.jp/](http://wiki.agrarian.jp/)
 
 slackチームは以下のフォームから招待を受けてください
-[http://agrarian.herokuapp.com](http://agrarian.herokuapp.com)
+* [http://agrarian.herokuapp.com](http://agrarian.herokuapp.com)
 
 <a target="_blank" href="http://com.nicovideo.jp/community/co2141769">【ニコニコミュニティ】【プログラミング放送】みんなの力でソシャゲを作る【Ruby on Rails】</a>
 
