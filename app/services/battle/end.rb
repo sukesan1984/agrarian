@@ -28,9 +28,6 @@ class Battle::End
   end
 
   def item_list
-    @item_list.each do |item|
-      Rails.logger.debug(item.name)
-    end
     return @item_list
   end
 
