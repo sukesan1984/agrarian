@@ -17,3 +17,8 @@
  *= require_self
  */
 @import "partials/*";
+
+
+.uk-panel-box-danger.alert {
+  background-color: rgb(255, 205, 237);
+}

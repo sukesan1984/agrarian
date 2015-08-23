@@ -23,8 +23,10 @@
                 = link_with_icon 'サインアップ', new_user_registration_path, icon: 'play fw'
               %li
                 = link_with_icon 'ログイン', new_user_session_path, icon: 'sign-in fw'
-    %p.notice= notice
-    %p.alert= alert
     .uk-container.uk-container-center
+      - if notice
+        .uk-panel.uk-panel-box.uk-panel-box-primary.notice= notice
+      - if alert
+        .uk-panel.uk-panel-box.uk-panel-box-danger.alert= alert
       = yield
   = render 'layouts/footer'
