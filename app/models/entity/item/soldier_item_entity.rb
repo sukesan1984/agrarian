@@ -27,7 +27,7 @@ class Entity::Item::SoldierItemEntity
 
   def current_count
     return 1
-  end 
+  end
 
   def give_failed_message
     return 'すでに仲間になってるよ'

@@ -15,3 +15,4 @@ class Battle::BattleEncounterFactory
     return Battle::Encounter.new(player, area, enemy_maps, enemies_lottery)
   end
 end
+

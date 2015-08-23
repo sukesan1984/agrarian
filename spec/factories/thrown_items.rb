@@ -19,9 +19,9 @@
 FactoryGirl.define do
   factory :thrown_item do
     area_node_id 1
-item_id 1
-count 1
-thrown_at "2015-08-01 13:10:55"
+    item_id 1
+    count 1
+    thrown_at '2015-08-01 13:10:55'
   end
-
 end
+

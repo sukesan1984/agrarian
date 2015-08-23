@@ -13,7 +13,7 @@ class BodyRegion
   end
 
   def self.get_by_variable_name(variable_name)
-    case(variable_name)
+    case (variable_name)
     when 'right_hand'
       return Type::RightHand
     when 'left_hand'

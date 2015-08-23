@@ -68,7 +68,7 @@ class BattleController < ApplicationController
     player_character = @player_character_factory.build_by_user_id(current_user.id)
     is_success_to_escape = battle_escape_service.execute(player_character.id)
 
-    if !is_success_to_escape
+    unless is_success_to_escape
       redirect_to('/battle/' + area_node_id.to_s)
       return
     end

@@ -19,7 +19,8 @@ class SoldierController < ApplicationController
     @is_success = PartyAdditionService.new.add(@player_character.id, user_soldier_id)
   end
 
-  private 
+  private
+
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
@@ -33,3 +34,4 @@ class SoldierController < ApplicationController
     redirect_to('/player/input') if @player_character.nil?
   end
 end
+

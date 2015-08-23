@@ -1,6 +1,5 @@
 module Agrarian::V1
   class Players < Grape::API
-
     get '/players' do
       Player.all
     end
@@ -10,7 +9,7 @@ module Agrarian::V1
     end
 
     get '/players/ranking/rails' do
-      players = Player.all.sort_by { |e| e.rails }
+      players = Player.all.sort_by(&:rails)
       ranking = []
       players.each.with_index(1) do |player, k|
         link = "http://agrarian/players/#{player[:id]}"
@@ -20,3 +19,4 @@ module Agrarian::V1
     end
   end
 end
+

@@ -34,8 +34,8 @@ class ItemController < ApplicationController
   end
 
   def sell
-    #TODO: 将来的にはどの店に売ったかを記録してそれを販売するようにする。
-    #shop_id      = params[:shop_id]
+    # TODO: 将来的にはどの店に売ったかを記録してそれを販売するようにする。
+    # shop_id      = params[:shop_id]
     user_item_id = params[:user_item_id]
 
     item_sale_service_factory = ItemSaleServiceFactory.new(@player_character)
@@ -70,6 +70,7 @@ class ItemController < ApplicationController
   end
 
   private
+
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)

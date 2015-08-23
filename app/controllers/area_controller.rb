@@ -20,7 +20,7 @@ class AreaController < ApplicationController
 
     user_area = UserArea.get_or_create(@player_character.id)
     # 今いる位置からの移動できる場所 or 今いる位置
-    can_move_list = @current_target_routes.map{ |target| target.area_node.id }
+    can_move_list = @current_target_routes.map { |target| target.area_node.id }
     can_move_list.push user_area.area_node_id
     unless can_move_list.include?(@area_node_id)
       redirect_to '/areas/cant_move'
@@ -39,7 +39,7 @@ class AreaController < ApplicationController
 
     # そのエリアに落ちてるアイテム
     @thrown_items = ThrownItem.where(area_node_id: @area_node_id)
-                    .select{ |thrown_item| thrown_item.is_valid }
+                    .select(&:is_valid)
     @soldier_characters = @soldier_character_factory.build_party_by_player_id(@player_character.id)
   end
 
@@ -50,6 +50,7 @@ class AreaController < ApplicationController
   end
 
   private
+
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)

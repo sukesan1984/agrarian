@@ -45,21 +45,22 @@ class UserSkill < ActiveRecord::Base
   # 上昇を試みる
   # 失敗するかも
   def try_increase(difficulty)
-    rate = UserSkill.calculate_increase_rate(self.real_skill_point, difficulty)
+    rate = UserSkill.calculate_increase_rate(real_skill_point, difficulty)
     seed = rand(0.0...100.0)
     Rails.logger.debug("スキル上昇率#{rate}:#{seed}")
     if rate > seed
-      self.increase(1)
-      return (1/FOR_DISPLAY_RATE).to_f
+      increase(1)
+      return (1 / FOR_DISPLAY_RATE).to_f
     end
     return 0
   end
 
   # difficultyとskill_pointの関係からスキルの上がる確率を計算する.
   def self.calculate_increase_rate(real_skill_point, difficulty)
-    Rails.logger.debug("スキル:#{real_skill_point} 難易度:#{difficulty}");
-    rate = 100 * 2 ** (-(real_skill_point - difficulty + 20) / 10) * (300 - real_skill_point) / 300
+    Rails.logger.debug("スキル:#{real_skill_point} 難易度:#{difficulty}")
+    rate = 100 * 2**(-(real_skill_point - difficulty + 20) / 10) * (300 - real_skill_point) / 300
     return 100 if rate > 100
     return rate
   end
 end
+

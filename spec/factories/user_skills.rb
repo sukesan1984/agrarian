@@ -13,8 +13,8 @@
 FactoryGirl.define do
   factory :user_skill do
     player_id 1
-skill_id 1
-skill_point 1
+    skill_id 1
+    skill_point 1
   end
-
 end
+

@@ -14,15 +14,15 @@ class RecipeMakingService
         user_item = @required_user_items.get(required_item.item_id)
         # 数が足りなければ、false
         if user_item.count < required_item.count
-          return {success:false, message: '数が足りません '}
+          return { success: false, message: '数が足りません ' }
         end
         user_item.count -= required_item.count
         user_item.save!
       end
 
       # 成功率の計算
-      unless self.is_success(@user_skill.real_skill_point, @recipe.difficulty)
-        return {success:false, message: '失敗しました。素材がなくなりました'}
+      unless is_success(@user_skill.real_skill_point, @recipe.difficulty)
+        return { success: false, message: '失敗しました。素材がなくなりました' }
       end
 
       if @recipe.product_item.item_id != @product_item_entity.item_id
@@ -33,12 +33,12 @@ class RecipeMakingService
       skill_increase = @user_skill.try_increase(@recipe.difficulty)
       @product_item_entity.give
       @product_item_entity.save!
-      message ="#{@product_item_entity.name}を#{@recipe.product_item.count}を手に入れた。"
+      message = "#{@product_item_entity.name}を#{@recipe.product_item.count}を手に入れた。"
       if skill_increase > 0
         message += "#{@user_skill.skill.name}のスキル値が#{skill_increase}上昇した。今は#{@user_skill.real_skill_point}。"
         @user_skill.save!
       end
-      return {success:true, message: message} 
+      return { success: true, message: message }
     end
     rescue => e
       raise e
@@ -53,10 +53,9 @@ class RecipeMakingService
   end
 
   def self.calculate_successable_rate(real_skill_point, difficulty)
-    if real_skill_point > difficulty
-      return 100
-    end
+    return 100 if real_skill_point > difficulty
 
-    return 100 * 2 ** ((real_skill_point - difficulty) / 10)
+    return 100 * 2**((real_skill_point - difficulty) / 10)
   end
 end
+

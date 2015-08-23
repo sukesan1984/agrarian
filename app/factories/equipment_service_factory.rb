@@ -11,8 +11,7 @@ class EquipmentServiceFactory
     item_ability_lists = ItemAbilityList.where(item_ability_id: ABILITY_ID)
 
     user_items = UserItem.where('player_id = ? and item_id in (?)', player_id, item_ability_lists.map(&:item_id))
-                 .select{|user_item| user_item.equipped == 0}
-                 
+                 .select { |user_item| user_item.equipped == 0 }
 
     equipment_services = []
     user_items.each do |user_item|

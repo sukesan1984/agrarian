@@ -50,7 +50,6 @@ RSpec.describe UserQuest, type: :model do
 
     expect(user_quest.set_claimed).to eq true
     expect(user_quest.is_received_reward).to eq true
-
   end
 end
 
