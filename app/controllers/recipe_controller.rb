@@ -21,7 +21,8 @@ class RecipeController < ApplicationController
   def make
     @recipe_id = params[:recipe_id]
 
-    recipe_making_service = RecipeMakingServiceFactory.new.build_by_recipe_id_and_player_id(@recipe_id, @player_character.id)
+    @item_entity_factory = ItemEntityFactory.new(@player_character, @user_item_factory, @quest_entity_factory)
+    recipe_making_service = RecipeMakingServiceFactory.new(@item_entity_factory).build_by_recipe_id_and_player_id(@recipe_id, @player_character.id)
     @result = recipe_making_service.execute
   end
 
