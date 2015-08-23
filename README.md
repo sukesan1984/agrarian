@@ -106,7 +106,7 @@ mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
     "rank": 1,
     "id": 1,
     "name": "poge",
-    "rails":74
+    "rails":74,
     "player": PLAYER_URL
   }
 ]
