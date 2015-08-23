@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
+  mount Agrarian::API => '/api'
+
   get 'home/index'
 
   get 'home/show'
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
 
   #アイテム
   get 'item/', to: 'item#index'
-  post 'item/use', to: 'item#use' 
+  post 'item/use', to: 'item#use'
   post 'item/use_actual', to: 'item#use_actual'
   post 'item/sell', to: 'item#sell'
   post 'item/throw', to: 'item#throw'
@@ -61,7 +64,7 @@ Rails.application.routes.draw do
 
   # クエストの奴
   get 'quest', to: 'quest#index'
-  post 'quest/claim', to: 'quest#claim' 
+  post 'quest/claim', to: 'quest#claim'
 
   # soldier
   get 'soldier', to: 'soldier#index'

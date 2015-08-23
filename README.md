@@ -44,5 +44,73 @@ mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
 4. pushする (git push origin my-new-feature)
 5. pull request を 発行する
 
+## API一覧
+
+- player一覧 : `/api/v1/players`
+
+```json
+[
+  {
+    "id":1,
+    "user_id":1,
+    "name":"hoge",
+    "created_at":"2015-07-31T01:44:12.000+09:00",
+    "updated_at":"2015-07-31T04:32:10.000+09:00",
+    "hp":50,
+    "hp_max":50,
+    "rails":74
+  },
+  {
+    "id":2,
+    "user_id":2,
+    "name":"poge",
+    "created_at":"2015-08-31T00:44:12.000+09:00",
+    "updated_at":"2015-08-31T08:32:10.000+09:00",
+    "hp":50,
+    "hp_max":50,
+    "rails":371
+  }
+]
+
+```
+
+- player : `/api/v1/player/:id`
+
+```json
+[
+  {
+    "id":1,
+    "user_id":1,
+    "name":"hoge",
+    "created_at":"2015-07-31T01:44:12.000+09:00",
+    "updated_at":"2015-07-31T04:32:10.000+09:00",
+    "hp":50,
+    "hp_max":50,
+    "rails":74
+  }
+]
+```
+
+- rails ranking : `/api/v1/players/ranking/rails`
+
+```json
+[
+  {
+    "rank": 1,
+    "id": 2,
+    "name": "poge",
+    "rails":371,
+    "player": PLAYER_URL
+  },
+  {
+    "rank": 1,
+    "id": 1,
+    "name": "poge",
+    "rails":74
+    "player": PLAYER_URL
+  }
+]
+```
+
 ## LISENCE
 

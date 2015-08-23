@@ -46,6 +46,8 @@ gem 'uikit-sass-rails', git: 'git://github.com/8398a7/uikit-sass-rails'
 gem 'haml-rails'
 gem 'erb2haml'
 
+gem 'grape', git: 'https://github.com/intridea/grape.git'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -86,6 +88,4 @@ end
 group :doc do
   gem 'sdoc'
 end
-
-
 
