@@ -4,6 +4,7 @@ module Agrarian::V1
     format :json
 
     mount Players
+    mount Enemies
   end
 end
 
