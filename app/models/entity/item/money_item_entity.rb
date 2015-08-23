@@ -1,7 +1,9 @@
 class Entity::Item::MoneyItemEntity
-  def initialize(player, count)
+  attr_reader :item_id
+  def initialize(player, count, item_id)
     @player = player
     @count = count
+    @item_id = item_id
   end
 
   def count

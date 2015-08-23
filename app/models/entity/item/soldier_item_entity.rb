@@ -1,8 +1,10 @@
 class Entity::Item::SoldierItemEntity
-  def initialize(player, soldier)
+  attr_reader :item_id
+  def initialize(player, soldier, item_id)
     @player  = player
     @soldier = soldier
     @gived_soldier = nil
+    @item_id = item_id
   end
 
   # すでにそのSoldierを持っていたら、あげられない
