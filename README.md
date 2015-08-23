@@ -46,19 +46,6 @@ mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
 
 ## API一覧
 
-- user一覧   : `/api/v1/users`
-
-```json
-[
-  {
-    "id":1,
-    "email":"hoge@poge.com",
-    "created_at":"2015-07-31T01:44:02.000+09:00",
-    "updated_at":"2015-07-31T01:44:02.000+09:00"
-  }
-]
-```
-
 - player一覧 : `/api/v1/players`
 
 ```json
@@ -110,8 +97,17 @@ mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
 [
   {
     "rank": 1,
-    "name": "hoge",
+    "id": 2,
+    "name": "poge",
+    "rails":371,
+    "player": PLAYER_URL
+  },
+  {
+    "rank": 1,
+    "id": 1,
+    "name": "poge",
     "rails":74
+    "player": PLAYER_URL
   }
 ]
 ```
