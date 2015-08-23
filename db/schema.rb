@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818135958) do
+ActiveRecord::Schema.define(version: 20150823133143) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -48,15 +48,17 @@ ActiveRecord::Schema.define(version: 20150818135958) do
   end
 
   create_table "enemies", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.integer  "attack",      limit: 4
-    t.integer  "defense",     limit: 4
-    t.integer  "hp",          limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "description", limit: 255
-    t.integer  "rails",       limit: 4
-    t.integer  "exp",         limit: 4
+    t.string   "name",                  limit: 255
+    t.integer  "attack",                limit: 4
+    t.integer  "defense",               limit: 4
+    t.integer  "hp",                    limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "description",           limit: 255
+    t.integer  "rails",                 limit: 4
+    t.integer  "exp",                   limit: 4
+    t.integer  "item_lottery_group_id", limit: 4,   default: 0, null: false
+    t.integer  "drop_item_rate",        limit: 4,   default: 0, null: false
   end
 
   create_table "enemy_maps", force: :cascade do |t|
@@ -121,6 +123,16 @@ ActiveRecord::Schema.define(version: 20150818135958) do
     t.integer  "item_ability_id", limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "item_lotteries", force: :cascade do |t|
+    t.integer  "group_id",           limit: 4
+    t.integer  "item_id",            limit: 4
+    t.integer  "count",              limit: 4
+    t.integer  "weight",             limit: 4
+    t.integer  "composite_group_id", limit: 4, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "items", force: :cascade do |t|

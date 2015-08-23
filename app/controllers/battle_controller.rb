@@ -51,6 +51,7 @@ class BattleController < ApplicationController
           @battle_end = Battle::End.new(party_b, party_a, player_character)
           @battle_end.give_rails
           @battle_end.give_exp
+          @battle_end.give_items
           @battle_end.save!
         end
 
@@ -85,7 +86,13 @@ class BattleController < ApplicationController
 
     @soldier_character_factory = SoldierCharacterFactory.new(equipped_list_service_factory)
 
-    @enemy_character_factory = EnemyCharacterFactory.new
+    item_lottery_component_factory = ItemLotteryComponentFactory.new
+    user_item_factory = UserItemFactory.new(equipped_list_service_factory)
+
+    quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
+    quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
+    item_entity_factory = ItemEntityFactory.new(@player_character_factory.build_by_user_id(current_user.id), user_item_factory, quest_entity_factory)
+    @enemy_character_factory = EnemyCharacterFactory.new(item_lottery_component_factory, item_entity_factory)
 
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     resource_service_factory = ResourceServiceFactory.new

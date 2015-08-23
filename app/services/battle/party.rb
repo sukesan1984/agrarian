@@ -77,6 +77,16 @@ class Battle::Party
     return @unit_list.inject(0) { |sum, unit| sum + unit.exp }
   end
 
+  def drop_item_list
+    item_list = []
+    @unit_list.each do |unit|
+      if unit.drop_item
+        item_list.push(unit.drop_item)
+      end
+    end
+    return item_list
+  end
+
   def give_exp(exp)
     given_exp = (exp / @unit_list.count).ceil
     result = []
