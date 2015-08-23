@@ -12,10 +12,13 @@
 ニコニコ生放送のコミュニティで不定期に生放送をしながら作っているソーシャルゲームです！
 
 ゲームサイト
-[http://agrarian.jp](http://agrarian.jp)
+* [http://agrarian.jp](http://agrarian.jp)
 
 公式wiki
-[http://wiki.agrarian.jp/](http://wiki.agrarian.jp/)
+* [http://wiki.agrarian.jp/](http://wiki.agrarian.jp/)
+
+slackチームは以下のフォームから招待を受けてください
+* [http://agrarian.herokuapp.com](http://agrarian.herokuapp.com)
 
 <a target="_blank" href="http://com.nicovideo.jp/community/co2141769">【ニコニコミュニティ】【プログラミング放送】みんなの力でソシャゲを作る【Ruby on Rails】</a>
 
@@ -40,6 +43,74 @@ mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
 3. commitする (git commit -am 'Add some feature')
 4. pushする (git push origin my-new-feature)
 5. pull request を 発行する
+
+## API一覧
+
+- player一覧 : `/api/v1/players`
+
+```json
+[
+  {
+    "id":1,
+    "user_id":1,
+    "name":"hoge",
+    "created_at":"2015-07-31T01:44:12.000+09:00",
+    "updated_at":"2015-07-31T04:32:10.000+09:00",
+    "hp":50,
+    "hp_max":50,
+    "rails":74
+  },
+  {
+    "id":2,
+    "user_id":2,
+    "name":"poge",
+    "created_at":"2015-08-31T00:44:12.000+09:00",
+    "updated_at":"2015-08-31T08:32:10.000+09:00",
+    "hp":50,
+    "hp_max":50,
+    "rails":371
+  }
+]
+
+```
+
+- player : `/api/v1/player/:id`
+
+```json
+[
+  {
+    "id":1,
+    "user_id":1,
+    "name":"hoge",
+    "created_at":"2015-07-31T01:44:12.000+09:00",
+    "updated_at":"2015-07-31T04:32:10.000+09:00",
+    "hp":50,
+    "hp_max":50,
+    "rails":74
+  }
+]
+```
+
+- rails ranking : `/api/v1/players/ranking/rails`
+
+```json
+[
+  {
+    "rank": 1,
+    "id": 2,
+    "name": "poge",
+    "rails":371,
+    "player": PLAYER_URL
+  },
+  {
+    "rank": 1,
+    "id": 1,
+    "name": "poge",
+    "rails":74
+    "player": PLAYER_URL
+  }
+]
+```
 
 ## LISENCE
 

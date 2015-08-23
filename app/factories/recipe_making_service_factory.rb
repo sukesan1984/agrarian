@@ -1,5 +1,6 @@
 class RecipeMakingServiceFactory
-  def initialize
+  def initialize(item_entity_factory)
+    @item_entity_factory = item_entity_factory
   end
 
   def build_by_recipe_id_and_player_id(recipe_id, player_id)
@@ -13,8 +14,9 @@ class RecipeMakingServiceFactory
       user_item_dictionary.add(required_item.item_id, user_item)
     end
 
-    product_user_item = UserItem.find_or_create(player_id, recipe.product_item.item_id)
+    product_item_entity = @item_entity_factory.build_by_item_id(recipe.product_item.item_id, recipe.product_item.count)
+
     user_skill = UserSkill.find_or_create(player_id, [recipe.skill_id])[0]
-    return RecipeMakingService.new(recipe, user_item_dictionary, product_user_item, user_skill)
+    return RecipeMakingService.new(recipe, user_item_dictionary, product_item_entity, user_skill)
   end
 end

@@ -1,6 +1,8 @@
 class Entity::Item::QuestItemEntity
-  def initialize(quest_entity)
+  attr_reader :item_id
+  def initialize(quest_entity, item_id)
     @quest_entity = quest_entity
+    @item_id = item_id
   end
 
   def give

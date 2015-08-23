@@ -1,8 +1,8 @@
 class RecipeMakingService
-  def initialize(recipe, required_user_items, product_user_item, user_skill)
+  def initialize(recipe, required_user_items, product_item_entity, user_skill)
     @recipe = recipe
     @required_user_items = required_user_items
-    @product_user_item = product_user_item
+    @product_item_entity = product_item_entity
     @user_skill = user_skill
   end
 
@@ -25,15 +25,15 @@ class RecipeMakingService
         return {success:false, message: '失敗しました。素材がなくなりました'}
       end
 
-      if @recipe.product_item.item_id != @product_user_item.item.id
-        fail 'user_item is invalid: ' + @product_user_item.item.id
+      if @recipe.product_item.item_id != @product_item_entity.item_id
+        fail 'user_item is invalid: ' + @product_item_entity.item_id
       end
 
       # 成功したら
       skill_increase = @user_skill.try_increase(@recipe.difficulty)
-      @product_user_item.count += @recipe.product_item.count
-      @product_user_item.save!
-      message ="#{@product_user_item.item.name}を#{@recipe.product_item.count}を手に入れた。"
+      @product_item_entity.give
+      @product_item_entity.save!
+      message ="#{@product_item_entity.name}を#{@recipe.product_item.count}を手に入れた。"
       if skill_increase > 0
         message += "#{@user_skill.skill.name}のスキル値が#{skill_increase}上昇した。今は#{@user_skill.real_skill_point}。"
         @user_skill.save!

@@ -1,7 +1,13 @@
 class Entity::Item::ConsumeItemEntity 
-  def initialize(user_item, count)
+  attr_reader :item_id
+  def initialize(user_item, count, item_id)
     @user_item = user_item
     @count = count
+    @item_id = item_id
+  end
+
+  def item_id
+    return @user_item.item.id
   end
 
   def count
