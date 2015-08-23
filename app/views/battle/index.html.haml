@@ -20,6 +20,10 @@
           次のレベルまで#{exp_result[:exp_for_next_level]}
         - else
           次のレベルまで#{exp_result[:exp_for_next_level]}
+  .battle-end-item-list
+    獲得アイテム
+    - @battle_end.item_list.each do |drop_item|
+      %li #{drop_item.name} x #{drop_item.count}
   = render 'view_objects/target_routes', target_routes: @target_routes
 %br/
 - @result.turn_result_list.each do |turn_result|

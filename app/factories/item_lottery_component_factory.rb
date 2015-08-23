@@ -4,6 +4,9 @@ class ItemLotteryComponentFactory
 
   def build_by_group_id(group_id, root_item_lottery)
     item_lotteries = ItemLottery.where(group_id: group_id)
+    if item_lotteries.count == 0
+      return nil
+    end
     components = []
     item_lotteries.each do |item_lottery|
       if item_lottery.has_composite_group_id

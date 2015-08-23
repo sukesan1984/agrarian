@@ -90,6 +90,10 @@ class Entity::PlayerCharacterEntity
     @hp += value
   end
 
+  def drop_item
+    return nil
+  end
+
   def save!
     @player.hp = @hp.current
     @player.save!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823060405) do
+ActiveRecord::Schema.define(version: 20150823075644) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -48,15 +48,16 @@ ActiveRecord::Schema.define(version: 20150823060405) do
   end
 
   create_table "enemies", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.integer  "attack",      limit: 4
-    t.integer  "defense",     limit: 4
-    t.integer  "hp",          limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "description", limit: 255
-    t.integer  "rails",       limit: 4
-    t.integer  "exp",         limit: 4
+    t.string   "name",                  limit: 255
+    t.integer  "attack",                limit: 4
+    t.integer  "defense",               limit: 4
+    t.integer  "hp",                    limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "description",           limit: 255
+    t.integer  "rails",                 limit: 4
+    t.integer  "exp",                   limit: 4
+    t.integer  "item_lottery_group_id", limit: 4,   default: 0, null: false
   end
 
   create_table "enemy_maps", force: :cascade do |t|

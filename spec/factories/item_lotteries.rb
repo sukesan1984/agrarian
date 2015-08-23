@@ -7,7 +7,7 @@
 #  item_id            :integer
 #  count              :integer
 #  weight             :integer
-#  composite_group_id :integer
+#  composite_group_id :integer          not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

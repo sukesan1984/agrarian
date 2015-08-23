@@ -58,6 +58,10 @@ class Battle::Unit
   def give_exp(exp)
     return @battlize_character.give_exp(exp)
   end
+
+  def drop_item
+    return @battlize_character.drop_item
+  end
 end
 
 class Battle::Unit::UnitStatus

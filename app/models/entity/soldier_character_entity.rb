@@ -91,6 +91,10 @@ class Entity::SoldierCharacterEntity
     @hp += value
   end
 
+  def drop_item
+    return nil
+  end
+
   def save!
     @user_soldier.current_hp = @hp.current
     if (@hp.current <= 0)

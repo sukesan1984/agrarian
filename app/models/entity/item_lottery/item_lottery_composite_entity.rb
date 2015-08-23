@@ -21,6 +21,7 @@ class Entity::ItemLottery::ItemLotteryCompositeEntity
   end
 
   def weight_sum
+    Rails.logger.debug(@list)
     return @list.map(&:weight).inject(:+)
   end
 end

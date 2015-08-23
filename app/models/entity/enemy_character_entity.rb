@@ -1,8 +1,9 @@
 class Entity::EnemyCharacterEntity
-  def initialize(enemy, progress)
+  def initialize(enemy, progress, drop_item_entity) 
     @enemy = enemy
     @hp = StatusPoint.new(@enemy.hp, @enemy.hp)
     @progress = progress
+    @drop_item_entity = drop_item_entity
   end
 
   def name
@@ -36,6 +37,10 @@ class Entity::EnemyCharacterEntity
 
   def exp
     return @enemy.exp
+  end
+
+  def drop_item
+    return @drop_item_entity
   end
 
   def save!
