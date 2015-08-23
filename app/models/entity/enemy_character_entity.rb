@@ -11,6 +11,10 @@ class Entity::EnemyCharacterEntity
     return @enemy.name
   end
 
+  def image
+    return 'enemies/' + @enemy.id.to_s + '.png'
+  end
+
   def attack
     return @enemy.attack
   end

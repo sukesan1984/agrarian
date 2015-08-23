@@ -21,6 +21,10 @@ class Entity::SoldierCharacterEntity
     return @user_soldier.id
   end
 
+  def image
+    return nil
+  end
+
   def name
     return @soldier.name
   end
