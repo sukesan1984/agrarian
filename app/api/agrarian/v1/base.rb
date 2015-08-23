@@ -3,7 +3,6 @@ module Agrarian::V1
     version 'v1', using: :path
     format :json
 
-    mount Users
     mount Players
   end
 end
