@@ -48,6 +48,8 @@ gem 'erb2haml'
 
 gem 'grape', git: 'https://github.com/intridea/grape.git'
 
+gem 'font-awesome-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

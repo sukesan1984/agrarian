@@ -9,25 +9,22 @@
     = analytics_init if Rails.env.production?
     - favicon_link_tag '/assets/favicon.ico'
   %body
-    %header
-      %nav
-        / user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド
-        - if user_signed_in?
-          / current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド
-          /
-            *_path はUserモデルを作成したときに、
-            deviseにより自動で作成されてますので、rake routesで確認できます
-          Logged in as
-          = succeed "." do
-            %strong= current_user.email
-          = link_to 'プロフィール変更', edit_user_registration_path
-          |
-          \#{link_to "ログアウト", destroy_user_session_path, method: :delete}
-        - else
-          = link_to "サインイン", new_user_registration_path
-          |
-          \#{link_to "ログイン", new_user_session_path}
+    %nav.uk-navbar.uk-navbar-attached
+      .uk-container.uk-container-center
+        %ul.uk-navbar-nav
+          %li
+            - if user_signed_in?
+              %li
+                = link_with_icon 'プレイヤー情報', edit_user_registration_path, icon: 'pencil fw'
+              %li
+                = link_to 'ログアウト', destroy_user_session_path, method: :delete
+            - else
+              %li
+                = link_with_icon 'サインアップ', new_user_registration_path, icon: 'play fw'
+              %li
+                = link_with_icon 'ログイン', new_user_session_path, icon: 'sign-in fw'
     %p.notice= notice
     %p.alert= alert
-    = yield
+    .uk-container.uk-container-center
+      = yield
   = render 'layouts/footer'
