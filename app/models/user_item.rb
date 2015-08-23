@@ -19,10 +19,8 @@ class UserItem < ActiveRecord::Base
   belongs_to :item
 
   def increase(value)
-    after_count = self.count + value
-    if after_count < 0
-      return false
-    end
+    after_count = count + value
+    return false if after_count < 0
 
     self.count = after_count
     return true
@@ -42,7 +40,7 @@ class UserItem < ActiveRecord::Base
   end
 
   def equipped?
-    return self.equipped != 0
+    return equipped != 0
   end
 end
 

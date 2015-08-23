@@ -4,7 +4,7 @@ class EquippedListServiceFactory
   end
 
   def build_by_character_type_and_character_id_and_player_id(character_type, character_id, player_id)
-    case(character_type.to_i)
+    case (character_type.to_i)
 
     # player
     when 1
@@ -16,8 +16,8 @@ class EquippedListServiceFactory
   end
 
   def build_by_soldier_id_and_player_id(soldier_id, player_id)
-      user_soldier = UserSoldier.find_by(id: soldier_id, player_id: player_id)
-      return build_by_equipment_and_player_id(user_soldier, player_id)
+    user_soldier = UserSoldier.find_by(id: soldier_id, player_id: player_id)
+    return build_by_equipment_and_player_id(user_soldier, player_id)
   end
 
   def build_by_player_id(player_id)
@@ -25,7 +25,8 @@ class EquippedListServiceFactory
     return build_by_equipment_and_player_id(user_equipment, player_id)
   end
 
-  private 
+  private
+
   def build_by_equipment_and_player_id(equipment_model, player_id)
     return EquippedListService.new(
       equipment_model: equipment_model,

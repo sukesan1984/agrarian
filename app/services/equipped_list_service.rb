@@ -62,20 +62,19 @@ class EquippedListService
 
   def save!
     @equipment_model.save!
-    self.list.each do |part|
-      part.save!
-    end
-    @modified.each{|part_id, body_part|
+    list.each(&:save!)
+    @modified.each do|part_id, body_part|
       Rails.logger.debug("#{part_id} : #{body_part}")
       if body_part
         body_part.save!
         # saveしたら、modifiedはnilにする。
         @modified[part_id] = nil
       end
-    }
+    end
   end
 
   private
+
   def equip_target_body_part(equipped_service)
     equipped_service.set_equipped(true)
     body_part = send(equipped_service.part_variable_name)

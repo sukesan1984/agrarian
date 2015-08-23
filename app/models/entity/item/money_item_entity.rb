@@ -31,3 +31,4 @@ class Entity::Item::MoneyItemEntity
     return 'ゲットしたで'
   end
 end
+

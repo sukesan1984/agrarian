@@ -60,15 +60,15 @@ class AreaServiceFactory
     routes = Route.where(area_node_id: area_node_id)
     target_routes = []
     routes.each do |route|
-      target_routes.push(self.build_by_area_node_id_and_player_id(route.connected_area_node_id, player_id))
+      target_routes.push(build_by_area_node_id_and_player_id(route.connected_area_node_id, player_id))
     end
 
-    current = self.build_by_area_node_id_and_player_id(area_node_id, player_id)
+    current = build_by_area_node_id_and_player_id(area_node_id, player_id)
 
     # nilじゃなかったら、each
     if current.next_to_area_node_id
       current.next_to_area_node_id.each do |next_area_node_id|
-        target_routes.push(self.build_by_area_node_id_and_player_id(next_area_node_id, player_id))
+        target_routes.push(build_by_area_node_id_and_player_id(next_area_node_id, player_id))
       end
     end
 

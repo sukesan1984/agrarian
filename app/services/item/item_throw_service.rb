@@ -15,7 +15,7 @@ class Item::ItemThrowService
     ActiveRecord::Base.transaction do
       # アイテムの削除
       after_count = @user_item.count - 1
-      if(after_count <= 0)
+      if (after_count <= 0)
         @user_item.destroy!
       else
         @user_item.count = after_count
@@ -30,12 +30,12 @@ class Item::ItemThrowService
       else
         @thrown_item.count = 1
       end
-      
+
       @thrown_item.thrown_at = Time.now
       @thrown_item.save!
       return { success: true, message: @user_item.item.name + 'を捨てた。今:' + @user_item.count.to_s + '個持ってる' }
     end
-    rescue => e 
+    rescue => e
       raise e
   end
 end

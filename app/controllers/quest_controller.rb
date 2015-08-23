@@ -32,6 +32,7 @@ class QuestController < ApplicationController
   end
 
   private
+
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)

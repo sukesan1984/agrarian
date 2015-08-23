@@ -21,3 +21,4 @@ class SkillController < ApplicationController
     redirect_to('/player/input') if @player_character.nil?
   end
 end
+

@@ -17,8 +17,8 @@
 FactoryGirl.define do
   factory :level do
     exp_min 1
-exp_max 1
-level 1
+    exp_max 1
+    level 1
   end
-
 end
+

@@ -20,3 +20,4 @@ class RecipeMakingServiceFactory
     return RecipeMakingService.new(recipe, user_item_dictionary, product_item_entity, user_skill)
   end
 end
+

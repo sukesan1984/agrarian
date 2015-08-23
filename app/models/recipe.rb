@@ -34,9 +34,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def required_items
-    if @required_items
-      return @required_items
-    end
+    return @required_items if @required_items
 
     @required_items = []
 
@@ -46,20 +44,17 @@ class Recipe < ActiveRecord::Base
       item_id = send(variable_item_id)
       count = send(variable_item_count)
       # item_idが0の時は飛ばす
-      if item_id != 0
-        @required_items.push(Recipe::Item.new(item_id, count))
-      end
+      @required_items.push(Recipe::Item.new(item_id, count)) if item_id != 0
     end
 
     return @required_items
   end
 
   def product_item
-    if @product_item
-      return @product_item
-    end
+    return @product_item if @product_item
 
-    @product_item = Recipe::Item.new(self.product_item_id, self.product_item_count)
+    @product_item = Recipe::Item.new(product_item_id, product_item_count)
     return @product_item
   end
 end
+

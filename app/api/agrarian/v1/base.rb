@@ -6,3 +6,4 @@ module Agrarian::V1
     mount Players
   end
 end
+

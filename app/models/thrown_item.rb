@@ -28,18 +28,16 @@ class ThrownItem < ActiveRecord::Base
   end
 
   def decrease(value)
-    after_count = self.count - value
-    if after_count < 0
-      return false
-    end
+    after_count = count - value
+    return false if after_count < 0
 
     self.count = after_count
     return true
   end
 
   def self.get_or_new_by_area_node_id_and_item_id(area_node_id, item_id)
-    thrown_item = self.find_by(area_node_id: area_node_id, item_id: item_id)
-    
+    thrown_item = find_by(area_node_id: area_node_id, item_id: item_id)
+
     if thrown_item.nil?
       thrown_item = ThrownItem.new(
         area_node_id: area_node_id,
@@ -52,3 +50,4 @@ class ThrownItem < ActiveRecord::Base
     return thrown_item
   end
 end
+

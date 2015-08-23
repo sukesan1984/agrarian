@@ -9,9 +9,7 @@ class Item::ItemPickupService
   def pickup
     ActiveRecord::Base.transaction do
       # thrown_itemから減らす
-      if !@thrown_item.is_valid
-        return { success: false, message: 'アイテム落ちてないよ' }
-      end
+      return { success: false, message: 'アイテム落ちてないよ' } unless @thrown_item.is_valid
 
       @thrown_item.decrease(1)
       @thrown_item.save!

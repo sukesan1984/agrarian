@@ -1,4 +1,4 @@
-class Quest::Conditions::CollectItemCondition <Quest::AbstractQuestConditionEntity
+class Quest::Conditions::CollectItemCondition < Quest::AbstractQuestConditionEntity
   def initialize(quest_condition, progress)
     @quest_condition = quest_condition
     @progress = progress
@@ -15,9 +15,7 @@ class Quest::Conditions::CollectItemCondition <Quest::AbstractQuestConditionEnti
   end
 
   def set_claimed
-    if @quest_condition.condition_value > @progress.count
-      fail 'cant claim'
-    end
+    fail 'cant claim' if @quest_condition.condition_value > @progress.count
 
     @progress.count -= @quest_condition.condition_value
   end
@@ -30,3 +28,4 @@ class Quest::Conditions::CollectItemCondition <Quest::AbstractQuestConditionEnti
     @progress.save!
   end
 end
+

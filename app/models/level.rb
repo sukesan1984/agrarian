@@ -16,7 +16,7 @@
 
 class Level < ActiveRecord::Base
   def self.get_level_from(exp)
-    level = Level.where("exp_min <= ? and exp_max >= ?", exp, exp)
+    level = Level.where('exp_min <= ? and exp_max >= ?', exp, exp)
     fail 'no level for this exp' unless level[0]
     return level[0]
   end
@@ -27,8 +27,9 @@ class Level < ActiveRecord::Base
   end
 
   def exp_for_next_level(exp)
-    exp_for_next_level = self.exp_max - exp
+    exp_for_next_level = exp_max - exp
     fail 'level row is different' if exp_for_next_level < 0
     return exp_for_next_level
   end
 end
+

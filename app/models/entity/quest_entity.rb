@@ -40,9 +40,7 @@ class Entity::QuestEntity
   def is_cleared
     @quest_condition_entities.each do |quest_condition_entity|
       # 一つでもクリアしていない物があれば、未クリア
-      if !quest_condition_entity.is_cleared
-        return false
-      end
+      return false unless quest_condition_entity.is_cleared
     end
 
     return true
@@ -52,9 +50,7 @@ class Entity::QuestEntity
   def set_received
     @quest_condition_entities.each do |quest_condition_entity|
       # 一つでもクリアしていない物があれば、未クリア
-      unless quest_condition_entity.set_received
-        fail 'cant set_received'
-      end
+      fail 'cant set_received' unless quest_condition_entity.set_received
     end
 
     return @user_quest.set_received
@@ -62,7 +58,7 @@ class Entity::QuestEntity
 
   # clear状態にする。
   def set_cleared
-    if self.is_cleared
+    if is_cleared
       @user_quest.set_cleared
       return true
     end

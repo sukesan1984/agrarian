@@ -79,3 +79,4 @@ RSpec.describe Recipe, type: :model do
     expect(recipe.required_items[2].count).to eq 2
   end
 end
+
