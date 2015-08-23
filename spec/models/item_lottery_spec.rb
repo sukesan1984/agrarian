@@ -15,5 +15,17 @@
 require 'rails_helper'
 
 RSpec.describe ItemLottery, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has_composite_group_id' do
+    item_lottery = ItemLottery.new(
+      composite_group_id: 1
+    )
+
+    expect(item_lottery.has_composite_group_id).to eq true
+
+    item_lottery2 = ItemLottery.new(
+      composite_group_id: 0
+    )
+
+    expect(item_lottery2.has_composite_group_id).to eq false
+  end
 end
