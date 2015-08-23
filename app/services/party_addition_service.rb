@@ -2,7 +2,7 @@
 #
 class PartyAdditionService
   MAX_PARTY_NUM = 2
-  def initialize()
+  def initialize
   end
 
   def add(player_id, user_soldier_id)
@@ -13,16 +13,15 @@ class PartyAdditionService
 
     target = UserSoldier.find_by(id: user_soldier_id, player_id: player_id, is_in_party: 0)
 
-    if target.nil?
-      return false
-    end
+    return false if target.nil?
 
     ActiveRecord::Base.transaction do
       target.is_in_party = 1
       target.save!
       return true
-    end 
+    end
     rescue => e
       raise e
   end
 end
+

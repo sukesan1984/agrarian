@@ -11,20 +11,14 @@ class Battle::Encounter
       user_encounter_enemies = UserEncounterEnemy.where(player_id: @player.id)
       # すでに遭遇してる。
       if user_encounter_enemies.count > 0
-        return {is_encount: true, enemies: user_encounter_enemies} 
+        return { is_encount: true, enemies: user_encounter_enemies }
       end
 
       # 敵がいない
-      if @enemy_maps.count == 0
-        return {is_encount: false, enemies: nil}
-      end
-
+      return { is_encount: false, enemies: nil } if @enemy_maps.count == 0
 
       # 遭遇しなかった
-      unless lot
-        return {is_encount: false, enemies: nil}
-      end
-
+      return { is_encount: false, enemies: nil } unless lot
 
       enemy_count = rand(1..3)
       list = @enemies_lottery.lot(enemy_count)
@@ -33,11 +27,11 @@ class Battle::Encounter
       user_encounter_enemies = []
       list.each do |enemy|
         user_encounter_enemies.push(UserEncounterEnemy.create(
-          player_id: @player.id,
-          enemy_id: enemy.id
+                                      player_id: @player.id,
+                                      enemy_id: enemy.id
         ))
       end
-      return{ is_encount: true, enemies: user_encounter_enemies}
+      return{ is_encount: true, enemies: user_encounter_enemies }
     end
     rescue => e
       raise e

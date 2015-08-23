@@ -29,9 +29,7 @@ class EquippedService
 
   def set_equipped(value)
     if @equipment_service.nil?
-      if value 
-        fail 'cant equip nil equipment'
-      end
+      fail 'cant equip nil equipment' if value
 
       return
     end
@@ -51,9 +49,7 @@ class EquippedService
   end
 
   def save!
-    if @equipment_service
-      @equipment_service.save!
-    end
+    @equipment_service.save! if @equipment_service
   end
 end
 

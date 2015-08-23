@@ -1,4 +1,4 @@
-class Entity::Item::ConsumeItemEntity 
+class Entity::Item::ConsumeItemEntity
   attr_reader :item_id
   def initialize(user_item, count, item_id)
     @user_item = user_item
@@ -13,7 +13,7 @@ class Entity::Item::ConsumeItemEntity
   def count
     return @count
   end
-  
+
   def current_count
     return @user_item.count
   end

@@ -112,5 +112,9 @@ mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
 ]
 ```
 
+- enemies : `/api/v1/enemies`
+
+- enemy : `/api/v1/enemies/:id`
+
 ## LISENCE
 

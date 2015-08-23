@@ -69,9 +69,9 @@ class Entity::PlayerCharacterEntity
     @player.rails += value
   end
 
-  def give_exp(exp)
+  def give_exp(_exp)
     return {
-      name: self.name,
+      name: name,
       level_up: false,
       level: 1,
       exp_for_next_level: 0

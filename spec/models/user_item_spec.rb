@@ -29,13 +29,13 @@ RSpec.describe UserItem, type: :model do
       player_id: 1,
       item_id: 2,
       equipped: 1)
-    expect(user_item2.equipped?).to eq true 
+    expect(user_item2.equipped?).to eq true
 
     user_item3 = UserItem.new(
       player_id: 1,
       item_id: 2,
       equipped: 10)
-    expect(user_item3.equipped?).to eq true 
+    expect(user_item3.equipped?).to eq true
   end
 end
 

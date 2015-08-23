@@ -23,7 +23,7 @@ class EquipmentController < ApplicationController
 
     # equipment_service
 
-    #equipped_list_service = @equipped_list_service_factory.build_by_player_id(@player_character.id)
+    # equipped_list_service = @equipped_list_service_factory.build_by_player_id(@player_character.id)
     @equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
 
     # 装備外すやつ

@@ -9,9 +9,7 @@ class Entity::SoldierCharacterEntity
     @level = Level.get_level_from(user_soldier.exp)
     @level_max = Level.find_by(level:  @soldier.level_max)
 
-    if @level.level > @soldier.level_max
-      @level = @level_max
-    end
+    @level = @level_max if @level.level > @soldier.level_max
 
     @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
     attack = StatusCalculationUtility.calculate(@soldier.attack_min, @soldier.attack_max, @soldier.level_max, @level.level)
@@ -69,9 +67,7 @@ class Entity::SoldierCharacterEntity
 
   def give_exp(exp)
     after_exp = @user_soldier.exp + exp
-    if after_exp > @level_max.exp_max
-      after_exp = @level_max.exp_max
-    end
+    after_exp = @level_max.exp_max if after_exp > @level_max.exp_max
 
     @user_soldier.exp = after_exp
     @after_level = Level.get_level_from(@user_soldier.exp)
@@ -80,7 +76,7 @@ class Entity::SoldierCharacterEntity
     @level = is_level_up ? @after_level : @level
 
     return {
-      name: self.name,
+      name: name,
       level_up: is_level_up,
       level: @level.level,
       exp_for_next_level: is_max_level ? 0 : @level.exp_for_next_level(@user_soldier.exp)

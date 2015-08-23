@@ -24,8 +24,9 @@ class SoldierCharacterFactory
   end
 
   private
+
   def build_by_user_soldier(user_soldier, player_id)
-    equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(2, user_soldier.id, player_id) 
+    equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(2, user_soldier.id, player_id)
     return Entity::SoldierCharacterEntity.new(user_soldier, equipped_list_service)
   end
 

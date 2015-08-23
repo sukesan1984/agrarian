@@ -4,3 +4,4 @@ module Agrarian
     mount V1::Base
   end
 end
+

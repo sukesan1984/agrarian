@@ -9,18 +9,15 @@ class Entity::Item::UserItemDictionary
   end
 
   def add(key, user_item)
-    if @dictionary.has_key?(key)
-      fail key + ' is already registered' 
-    end
+    fail key + ' is already registered' if @dictionary.key?(key)
 
     @dictionary[key] = user_item
   end
 
   def remove(key)
-    unless @dictionary.has_key?(key)
-      fail 'dictionary has not ' + key
-    end
+    fail 'dictionary has not ' + key unless @dictionary.key?(key)
 
     @dictionary.delete(key)
   end
 end
+

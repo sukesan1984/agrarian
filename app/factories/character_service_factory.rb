@@ -5,7 +5,7 @@ class CharacterServiceFactory
   end
 
   def build_by_character_type_and_character_id_and_player_id(character_type, character_id, player_id)
-    case(character_type.to_i)
+    case (character_type.to_i)
     when 1
       return @player_character_factory.build_by_player_id(player_id)
     when 2
@@ -13,3 +13,4 @@ class CharacterServiceFactory
     end
   end
 end
+

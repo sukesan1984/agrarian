@@ -10,3 +10,4 @@ RSpec.describe Entity::Item::UserItemDictionary do
     expect(user_item_dictionary.get('hoge')).to eq nil
   end
 end
+

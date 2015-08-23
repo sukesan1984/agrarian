@@ -32,6 +32,9 @@ LineLength:
 MethodLength:
   Enabled: false
 
+NumericLiterals:
+  MinDigits: 10
+
 ParameterLists:
   Max: 12
 

@@ -5,3 +5,4 @@ class StatusCalculationUtility
     return status_min + delta * (level_current - 1)
   end
 end
+

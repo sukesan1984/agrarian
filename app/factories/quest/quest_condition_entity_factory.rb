@@ -10,10 +10,11 @@ class Quest::QuestConditionEntityFactory
       return build_kill_enemy_condition_entity(quest_condition, player)
     when ConditionType::CollectItem
       return build_collect_item_condition_entity(quest_condition, player)
-    end 
+    end
   end
 
   private
+
   def build_kill_enemy_condition_entity(quest_condition, player)
     # 敵の討伐の進捗を取得
     user_progress = UserProgress.get_or_create(player.id, ProgressType::KillEnemy, quest_condition.condition_id)
