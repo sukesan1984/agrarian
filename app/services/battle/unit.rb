@@ -39,7 +39,7 @@ class Battle::Unit
 
   def get_current_state
     hp_rate = (@battlize_character.hp.to_f / @battlize_character.hp_max.to_f * 100).to_i
-    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, @is_dead)
+    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, @is_dead, @battlize_character.image)
   end
 
   # 状態を永続化する
@@ -65,12 +65,13 @@ class Battle::Unit
 end
 
 class Battle::Unit::UnitStatus
-  attr_reader :hp, :name, :is_dead, :hp_rate
-  def initialize(hp, hp_rate, name, is_dead)
+  attr_reader :hp, :name, :is_dead, :hp_rate, :image
+  def initialize(hp, hp_rate, name, is_dead, image)
     @hp      = hp
     @hp_rate = hp_rate
     @name    = name
     @is_dead = is_dead
+    @image = image
   end
 end
 

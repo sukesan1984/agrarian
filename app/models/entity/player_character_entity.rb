@@ -12,6 +12,10 @@ class Entity::PlayerCharacterEntity
     return 1
   end
 
+  def image
+    return nil
+  end
+
   def attack
     return (@status + @equipped_list_service.status).attack
   end
