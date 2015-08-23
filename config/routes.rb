@@ -4,132 +4,105 @@ Rails.application.routes.draw do
 
   mount Agrarian::API => '/api'
 
-  get 'home/index'
+  resource 'home' do
+    get 'index'
+    get 'show'
+  end
 
-  get 'home/show'
+  root to: 'home#index'
 
   # player 登録周り
-  get 'player/index'
-  get 'player/input'
+  get  'player/index'
+  get  'player/input'
   post 'player/create'
-  get 'player/list', to: 'player#list'
-  get 'player/ranking_rails', to:'player#ranking_rails'
-
-  root to: "home#index"
+  get  'player/list', to: 'player#list'
+  get  'player/ranking_rails', to:'player#ranking_rails'
 
   # 街のとこ
-  get 'towns/', to: 'towns#index'
-  get 'towns/not_found', to: 'town#not_found'
-  get 'towns/:id', to: 'town#show'
-  post 'towns/write', to: 'town#write'
+  resource :towns do
+    get  '',          to: 'towns#index'
+    get  'not_found', to: 'town#not_found'
+    get  ':id',       to: 'town#show'
+    post 'write',     to: 'town#write'
+  end
 
   # 街道
-  get 'roads/', to: 'road#index'
-  get 'roads/not_found', to: 'road#not_found'
-  get 'roads/:id', to: 'road#show'
+  resource :roads do
+    get '',          to: 'road#index'
+    get 'not_found', to: 'road#not_found'
+    get ':id',       to: 'road#show'
+  end
 
-  # 場所のとこ
-  get 'areas/', to: 'area#index'
-  get 'areas/not_found', to: 'area#not_found'
-  get 'areas/cant_move', to: 'area#cant_move'
-  get 'areas/:id', to: 'area#show'
+  # エリア
+  resource :areas do
+    get '',          to: 'area#index'
+    get 'not_found', to: 'area#not_found'
+    get 'cant_move', to: 'area#cant_move'
+    get ':id',       to: 'area#show'
+  end
 
   # バトル
-  get 'battle/:area_node_id', to: 'battle#index'
-  get 'battle/escape/:area_node_id', to: 'battle#escape'
+  resource :battle do
+    get ':area_node_id',        to: 'battle#index'
+    get 'escape/:area_node_id', to: 'battle#escape'
+  end
 
-  #宿屋
-  get 'inn/:id', to: 'inn#index'
-  post 'inn/sleep', to: 'inn#sleep'
+  # 宿屋
+  resource :inn do
+    get  ':id',   to: 'inn#index'
+    post 'sleep', to: 'inn#sleep'
+  end
 
-  #アイテム
-  get 'item/', to: 'item#index'
-  post 'item/use', to: 'item#use'
-  post 'item/use_actual', to: 'item#use_actual'
-  post 'item/sell', to: 'item#sell'
-  post 'item/throw', to: 'item#throw'
-  post 'item/pickup', to: 'item#pickup'
+  # アイテム
+  resource :item do
+    get  '',           to: 'item#index'
+    post 'use',        to: 'item#use'
+    post 'use_actual', to: 'item#use_actual'
+    post 'sell',       to: 'item#sell'
+    post 'throw',      to: 'item#throw'
+    post 'pickup',     to: 'item#pickup'
+  end
 
-  #自然の奴
-  get 'nature_field/', to: 'nature_field#index'
-  post 'nature_field/action', to: 'nature_field#action'
+  # 自然資源
+  resource :nature_field do
+    get  '',       to: 'nature_field#index'
+    post 'action', to: 'nature_field#action'
+  end
 
-  get 'shop/:area_node_id/:id', to: 'shop#index'
-  post 'shop/buy', to: 'shop#buy'
+  # ショップ
+  resource :shop do
+    get  ':area_node_id/:id', to: 'shop#index'
+    post 'buy',               to: 'shop#buy'
+  end
 
-  # 装備やつ
-  get 'equipment/:character_type/:character_id', to: 'equipment#index'
-  post 'equipment/equip', to: 'equipment#equip'
-  post 'equipment/unequip', to: 'equipment#unequip'
+  # 装備
+  resource :equipment do
+    get  ':character_type/:character_id', to: 'equipment#index'
+    post 'equip',   to: 'equipment#equip'
+    post 'unequip', to: 'equipment#unequip'
+  end
 
   # クエストの奴
-  get 'quest', to: 'quest#index'
-  post 'quest/claim', to: 'quest#claim'
+  resource :quest do
+    get  '',      to: 'quest#index'
+    post 'claim', to: 'quest#claim'
+  end
 
   # soldier
-  get 'soldier', to: 'soldier#index'
-  post 'soldier/remove', to: 'soldier#remove'
-  post 'soldier/add', to: 'soldier#add'
+  resource :soldier do
+    get  '',       to: 'soldier#index'
+    post 'remove', to: 'soldier#remove'
+    post 'add',    to: 'soldier#add'
+  end
 
   # recipe
-  get 'recipe', to: 'recipe#index'
-  post 'recipe/make', to: 'recipe#make'
+  resource :recipe do
+    get  '',     to: 'recipe#index'
+    post 'make', to: 'recipe#make'
+  end
 
   # skill
-  get 'skill', to: 'skill#index'
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  resource :skill do
+    get '', to: 'skill#index'
+  end
 end
