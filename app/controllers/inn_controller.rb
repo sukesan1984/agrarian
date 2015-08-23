@@ -13,6 +13,7 @@ class InnController < ApplicationController
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
     equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
     player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    soldier_character_factory = SoldierCharacterFactory.new(equipped_list_service_factory)
 
     # player
     player_character = player_character_factory.build_by_user_id(current_user.id)
@@ -25,10 +26,7 @@ class InnController < ApplicationController
     @inn = Inn.find_by(id: id)
     fail 'no inn' + id.to_s if @inn.nil?
 
-    soldiers = []
-    UserSoldier.where(player_id: player_character.id).each do |user_soldier|
-      soldiers.push(SoldierCharacter.new(user_soldier))
-    end
+    soldiers = soldier_character_factory.build_by_player_id(player_character.id)
 
     inn_service = InnService.new(@inn, player_character, soldiers)
     inn_service.sleep

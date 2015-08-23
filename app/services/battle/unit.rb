@@ -43,12 +43,20 @@ class Battle::Unit
   end
 
   # 状態を永続化する
-  def save
-    @battlize_character.save
+  def save!
+    @battlize_character.save!
   end
 
   def rails
     return @battlize_character.rails
+  end
+
+  def exp
+    return @battlize_character.exp
+  end
+
+  def give_exp(exp)
+    return @battlize_character.give_exp(exp)
   end
 end
 

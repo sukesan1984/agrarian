@@ -8,6 +8,7 @@
 #  count      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  equipped   :integer          default(0)
 #
 # Indexes
 #
@@ -16,6 +17,16 @@
 
 class UserItem < ActiveRecord::Base
   belongs_to :item
+
+  def increase(value)
+    after_count = self.count + value
+    if after_count < 0
+      return false
+    end
+
+    self.count = after_count
+    return true
+  end
 
   def self.find_or_create(player_id, item_id)
     user_item = UserItem.find_by(player_id: player_id, item_id: item_id)
@@ -28,6 +39,10 @@ class UserItem < ActiveRecord::Base
     end
     logger.debug(user_item)
     user_item
+  end
+
+  def equipped?
+    return self.equipped != 0
   end
 end
 

@@ -1,11 +1,12 @@
 #box0{
-      top:100px;
-      left:383px;
-      width:200px;
-      height:100px;
-      position:absolute;
+      width:320px;
+      height:160px;
       border-style:solid;
       solid-width: 1px;
+      float:left;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 8px
 }
 #title{
     text-align: center;

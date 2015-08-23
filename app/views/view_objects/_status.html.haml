@@ -2,6 +2,14 @@
   #box0.status
     #title ステータス表示
     #rows
+      #column 名前
+      #column
+        = status.name
+    #rows
+      #column level
+      #column
+        = status.level
+    #rows
       #column attack
       #column
         = status.attack
@@ -19,3 +27,6 @@
       #column
         = status.rails
         rails
+    #rows
+      = link_to('装備整える', '/equipment/' + status.type.to_s + '/' + status.id.to_s)
+

@@ -8,6 +8,7 @@
 #  count      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  equipped   :integer          default(0)
 #
 # Indexes
 #
@@ -17,6 +18,24 @@
 require 'rails_helper'
 
 RSpec.describe UserItem, type: :model do
-  it { is_expected.to belong_to(:item) }
+  it 'equipped?' do
+    user_item = UserItem.new(
+      player_id: 1,
+      item_id: 1,
+      equipped: 0)
+
+    expect(user_item.equipped?).to eq false
+    user_item2 = UserItem.new(
+      player_id: 1,
+      item_id: 2,
+      equipped: 1)
+    expect(user_item2.equipped?).to eq true 
+
+    user_item3 = UserItem.new(
+      player_id: 1,
+      item_id: 2,
+      equipped: 10)
+    expect(user_item3.equipped?).to eq true 
+  end
 end
 

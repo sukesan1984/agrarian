@@ -17,5 +17,6 @@ end
 
 class ConditionType
   KillEnemy = 1
+  CollectItem = 2
 end
 

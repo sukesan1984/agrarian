@@ -22,5 +22,17 @@ class EquipmentService
   def user_item_id
     return @user_item.id
   end
+
+  def set_equipped(value)
+    if value
+      @user_item.equipped = 1
+    else
+      @user_item.equipped = 0
+    end
+  end
+
+  def save!
+    @user_item.save!
+  end
 end
 

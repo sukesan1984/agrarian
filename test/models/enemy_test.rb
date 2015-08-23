@@ -11,6 +11,7 @@
 #  updated_at  :datetime         not null
 #  description :string(255)
 #  rails       :integer
+#  exp         :integer
 #
 
 require 'test_helper'

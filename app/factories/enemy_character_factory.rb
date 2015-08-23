@@ -13,7 +13,7 @@ class EnemyCharacterFactory
       @progress_cache[enemy.id] = user_progress
     end
 
-    return EnemyCharacter.new(enemy, user_progress)
+    return Entity::EnemyCharacterEntity.new(enemy, user_progress)
   end
 end
 

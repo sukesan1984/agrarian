@@ -1,0 +1,4 @@
+id,required_item_id1,required_item_count1,required_item_id2,required_item_count2,required_item_id3,required_item_count3,required_item_id4,required_item_count4,required_item_id5,required_item_count5,product_item_id,product_item_count,skill_id,difficulty
+1,100001,4,0,0,0,0,0,0,0,0,100005,1,1,0
+2,100005,3,0,0,0,0,0,0,0,0,200001,1,1,10
+3,100006,3,100005,2,0,0,0,0,0,0,200011,1,2,10

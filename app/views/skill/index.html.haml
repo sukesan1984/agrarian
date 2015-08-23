@@ -1,0 +1,5 @@
+%h2 スキル一覧
+- @user_skills.each do |user_skill|
+  #{user_skill.skill.name} [スキルの値] #{user_skill.real_skill_point}
+%br/
+= link_to('戻る', root_path)

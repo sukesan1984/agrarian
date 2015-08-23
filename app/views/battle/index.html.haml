@@ -5,9 +5,22 @@
   - @death_penalty.result_list.each do |result|
     = result
     %br/
+  = link_to('戻る', root_path)
 - else
-  = @battle_end.result
-= link_to("戻る", "/")
+  .battle-end-result
+    = @battle_end.result
+  .battle-end-exp-result
+    - @battle_end.given_exp_result.each do |exp_result|
+      .battle-end-exp-result-row
+        = exp_result[:name]
+        %br/
+        - if exp_result[:level_up]
+          #{exp_result[:name]}はレベルが上がった。
+          %br/
+          次のレベルまで#{exp_result[:exp_for_next_level]}
+        - else
+          次のレベルまで#{exp_result[:exp_for_next_level]}
+  = render 'view_objects/target_routes', target_routes: @target_routes
 %br/
 - @result.turn_result_list.each do |turn_result|
   .battle-one-turn

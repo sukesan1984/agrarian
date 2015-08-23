@@ -28,10 +28,12 @@ Rails.application.routes.draw do
   # 場所のとこ
   get 'areas/', to: 'area#index'
   get 'areas/not_found', to: 'area#not_found'
+  get 'areas/cant_move', to: 'area#cant_move'
   get 'areas/:id', to: 'area#show'
 
   # バトル
-  get 'battle/:area_id', to: 'battle#index'
+  get 'battle/:area_node_id', to: 'battle#index'
+  get 'battle/escape/:area_node_id', to: 'battle#escape'
 
   #宿屋
   get 'inn/:id', to: 'inn#index'
@@ -42,6 +44,8 @@ Rails.application.routes.draw do
   post 'item/use', to: 'item#use' 
   post 'item/use_actual', to: 'item#use_actual'
   post 'item/sell', to: 'item#sell'
+  post 'item/throw', to: 'item#throw'
+  post 'item/pickup', to: 'item#pickup'
 
   #自然の奴
   get 'nature_field/', to: 'nature_field#index'
@@ -51,13 +55,25 @@ Rails.application.routes.draw do
   post 'shop/buy', to: 'shop#buy'
 
   # 装備やつ
-  get 'equipment', to: 'equipment#index'
+  get 'equipment/:character_type/:character_id', to: 'equipment#index'
   post 'equipment/equip', to: 'equipment#equip'
   post 'equipment/unequip', to: 'equipment#unequip'
 
   # クエストの奴
   get 'quest', to: 'quest#index'
   post 'quest/claim', to: 'quest#claim' 
+
+  # soldier
+  get 'soldier', to: 'soldier#index'
+  post 'soldier/remove', to: 'soldier#remove'
+  post 'soldier/add', to: 'soldier#add'
+
+  # recipe
+  get 'recipe', to: 'recipe#index'
+  post 'recipe/make', to: 'recipe#make'
+
+  # skill
+  get 'skill', to: 'skill#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

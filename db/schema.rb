@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728151226) do
+ActiveRecord::Schema.define(version: 20150818135958) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150728151226) do
     t.datetime "updated_at",              null: false
     t.string   "description", limit: 255
     t.integer  "rails",       limit: 4
+    t.integer  "exp",         limit: 4
   end
 
   create_table "enemy_maps", force: :cascade do |t|
@@ -133,6 +134,16 @@ ActiveRecord::Schema.define(version: 20150728151226) do
     t.integer  "sell_price",     limit: 4
   end
 
+  create_table "levels", force: :cascade do |t|
+    t.integer  "exp_min",    limit: 4
+    t.integer  "exp_max",    limit: 4
+    t.integer  "level",      limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "levels", ["level"], name: "index_levels_on_level", using: :btree
+
   create_table "nature_fields", force: :cascade do |t|
     t.string   "name",               limit: 255
     t.string   "description",        limit: 255
@@ -170,6 +181,25 @@ ActiveRecord::Schema.define(version: 20150728151226) do
     t.integer  "reward_gift_id", limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.integer  "required_item_id1",    limit: 4
+    t.integer  "required_item_count1", limit: 4
+    t.integer  "required_item_id2",    limit: 4
+    t.integer  "required_item_count2", limit: 4
+    t.integer  "required_item_id3",    limit: 4
+    t.integer  "required_item_count3", limit: 4
+    t.integer  "required_item_id4",    limit: 4
+    t.integer  "required_item_count4", limit: 4
+    t.integer  "required_item_id5",    limit: 4
+    t.integer  "required_item_count5", limit: 4
+    t.integer  "product_item_id",      limit: 4
+    t.integer  "product_item_count",   limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "skill_id",             limit: 4
+    t.integer  "difficulty",           limit: 4
   end
 
   create_table "resource_actions", force: :cascade do |t|
@@ -242,15 +272,38 @@ ActiveRecord::Schema.define(version: 20150728151226) do
     t.datetime "updated_at",            null: false
   end
 
-  create_table "soldiers", force: :cascade do |t|
+  create_table "skills", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
-    t.integer  "attack",      limit: 4
-    t.integer  "defense",     limit: 4
-    t.integer  "hp",          limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "soldiers", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.integer  "attack_min",  limit: 4
+    t.integer  "defense_min", limit: 4
+    t.integer  "hp_min",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "attack_max",  limit: 4
+    t.integer  "defense_max", limit: 4
+    t.integer  "hp_max",      limit: 4
+    t.integer  "level_max",   limit: 4
+  end
+
+  create_table "thrown_items", force: :cascade do |t|
+    t.integer  "area_node_id", limit: 4
+    t.integer  "item_id",      limit: 4
+    t.integer  "count",        limit: 4
+    t.datetime "thrown_at",                          null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "lock_version", limit: 4, default: 0, null: false
+  end
+
+  add_index "thrown_items", ["area_node_id", "item_id"], name: "index_thrown_items_on_area_node_id_and_item_id", unique: true, using: :btree
 
   create_table "town_bulletin_boards", force: :cascade do |t|
     t.integer  "town_id",    limit: 4
@@ -306,8 +359,9 @@ ActiveRecord::Schema.define(version: 20150728151226) do
     t.integer  "player_id",  limit: 4
     t.integer  "item_id",    limit: 4
     t.integer  "count",      limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "equipped",   limit: 4, default: 0
   end
 
   add_index "user_items", ["player_id", "item_id"], name: "index_user_items_on_player_id_and_item_id", using: :btree
@@ -333,14 +387,36 @@ ActiveRecord::Schema.define(version: 20150728151226) do
 
   add_index "user_quests", ["player_id", "quest_id"], name: "index_user_quests_on_player_id_and_quest_id", unique: true, using: :btree
 
-  create_table "user_soldiers", force: :cascade do |t|
-    t.integer  "player_id",  limit: 4
-    t.integer  "soldier_id", limit: 4
-    t.integer  "current_hp", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "player_id",   limit: 4
+    t.integer  "skill_id",    limit: 4
+    t.integer  "skill_point", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
+  create_table "user_soldiers", force: :cascade do |t|
+    t.integer  "player_id",   limit: 4
+    t.integer  "soldier_id",  limit: 4
+    t.integer  "current_hp",  limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "right_hand",  limit: 4, default: 0
+    t.integer  "left_hand",   limit: 4, default: 0
+    t.integer  "both_hand",   limit: 4, default: 0
+    t.integer  "body",        limit: 4, default: 0
+    t.integer  "head",        limit: 4, default: 0
+    t.integer  "leg",         limit: 4, default: 0
+    t.integer  "neck",        limit: 4, default: 0
+    t.integer  "belt",        limit: 4, default: 0
+    t.integer  "amulet",      limit: 4, default: 0
+    t.integer  "ring_a",      limit: 4, default: 0
+    t.integer  "ring_b",      limit: 4, default: 0
+    t.integer  "exp",         limit: 4, default: 0
+    t.integer  "is_in_party", limit: 4, default: 0
+  end
+
+  add_index "user_soldiers", ["player_id", "is_in_party"], name: "index_user_soldiers_on_player_id_and_is_in_party", using: :btree
   add_index "user_soldiers", ["player_id"], name: "index_user_soldiers_on_player_id", using: :btree
 
   create_table "users", force: :cascade do |t|

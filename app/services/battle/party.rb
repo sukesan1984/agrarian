@@ -73,9 +73,22 @@ class Battle::Party
     return @unit_list.inject(0) { |sum, unit| sum + unit.rails }
   end
 
+  def total_exp
+    return @unit_list.inject(0) { |sum, unit| sum + unit.exp }
+  end
+
+  def give_exp(exp)
+    given_exp = (exp / @unit_list.count).ceil
+    result = []
+    @unit_list.each do |unit|
+      result.push(unit.give_exp(given_exp))
+    end
+    return result
+  end
+
   # 永続化する必要があるメンバーがいれば永続化する
-  def save
-    @unit_list.each(&:save)
+  def save!
+    @unit_list.each(&:save!)
   end
 end
 

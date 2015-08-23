@@ -1,11 +1,12 @@
 class AreaType::Road < AreaType::Base
   attr_reader :area_node, :area_id
-  def initialize(player, area_id, road, area_node)
+  def initialize(player, area_id, road, area_node, battle_encounter)
     @player  = player
     @area_id = area_id
     @road    = road
     @area_node = area_node
     @encountered_enemy = false
+    @battle_encounter = battle_encounter
   end
 
   def get_name
@@ -37,31 +38,16 @@ class AreaType::Road < AreaType::Base
 
   def get_render_object
     return {
-      area_id: @area_id,
-      encountered_enemy: @encountered_enemy
+      area_node_id: @area_node.id,
+      encountered_enemy: @encountered_enemy,
+      enemies: @user_encounter_enemies
     }
   end
 
   def execute
-    enemy_maps = EnemyMap.where('area_id = ?', area_id)
-    area = Area.find_by(id: area_id)
-    return if enemy_maps.count == 0 || area.nil?
-
-    # この辺 変
-    enemies_lottery = Battle::EnemiesLottery.new(enemy_maps)
-    encounter = Battle::Encounter.new(area, enemies_lottery)
-
-    list = encounter.encount
-    return if list.nil?
-
-    @encountered_enemy = true
-    UserEncounterEnemy.delete_all(['player_id = ?', @player.id])
-    list.each do |enemy|
-      UserEncounterEnemy.create(
-        player_id: @player.id,
-        enemy_id: enemy.id
-      )
-    end
+    result = @battle_encounter.encount
+    @encountered_enemy = result[:is_encount]
+    @user_encounter_enemies = result[:enemies]
   end
 
   def can_move_to_next
