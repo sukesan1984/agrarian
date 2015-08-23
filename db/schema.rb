@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822140238) do
+ActiveRecord::Schema.define(version: 20150823060405) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20150822140238) do
     t.integer  "item_id",            limit: 4
     t.integer  "count",              limit: 4
     t.integer  "weight",             limit: 4
-    t.integer  "composite_group_id", limit: 4
+    t.integer  "composite_group_id", limit: 4, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
