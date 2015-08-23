@@ -13,6 +13,7 @@
 #  rails                 :integer
 #  exp                   :integer
 #  item_lottery_group_id :integer          default(0), not null
+#  drop_item_rate        :integer          default(0), not null
 #
 
 FactoryGirl.define do
