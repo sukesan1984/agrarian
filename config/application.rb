@@ -34,6 +34,9 @@ module Agrarian
       g.fixture_replacement :factory_girl
     end
 
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
     config.autoload_paths += Dir["#{config.root}/lib"]
     config.autoload_paths += Dir["#{config.root}/lib/**"]
   end
