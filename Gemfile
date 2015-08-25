@@ -50,6 +50,8 @@ gem 'grape', git: 'https://github.com/intridea/grape.git'
 
 gem 'font-awesome-rails'
 
+gem 'gviz'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
