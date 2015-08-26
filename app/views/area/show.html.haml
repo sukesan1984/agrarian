@@ -29,8 +29,12 @@
     = link_to("所持金ランキング", '/player/ranking_rails')
     %h2 レシピ(β)
     = link_to('レシピ一覧', '/recipe')
-  .area-status
-    = render "view_objects/status", status: @player_character
-    - @soldier_characters.each do |soldier_character|
-      = render 'view_objects/status', status: soldier_character
-    = link_to('傭兵編成', '/soldier')
+  .area-right-layout
+    .area-status
+      = render "view_objects/status", status: @player_character
+      - @soldier_characters.each do |soldier_character|
+        = render 'view_objects/status', status: soldier_character
+      = link_to('傭兵編成', '/soldier')
+    .area-map
+      = image_tag('area/map.png')
+      
