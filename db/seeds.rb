@@ -6,6 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+test_email = 'test@test.com'
+unless User.find_by(email: test_email)
+  user = User.create(email: test_email, password: 'testtest')
+  puts 'created test user'
+
+  Player.create(name: 'テスト用', user_id: user.id)
+  puts 'created test player'
+end
+
 csv_files = Dir.entries("./master").select{|f| f=~ /\.csv$/ }
 csv_files.each do |csv_file|
   p "#{csv_file} import..."
