@@ -22,18 +22,21 @@ slackチームは以下のフォームから招待を受けてください
 
 <a target="_blank" href="http://com.nicovideo.jp/community/co2141769">【ニコニコミュニティ】【プログラミング放送】みんなの力でソシャゲを作る【Ruby on Rails】</a>
 
-## migrateするには
+
+## 開発環境構築
+
+### データベース
 
 1. config/database.yml.sampleをコピーしてconfig/database.ymlを作ってね。
 2. databaseはmysqlだよ。
 3. agrarian_developmentを作ってね。
 
 ```sh
-$ mv config/database.yml.sample config/database.yml
+$ cp config/database.yml.sample config/database.yml
+$ # 自分の環境に合わせてhost, username, passwordを設定
 $ vi config/database.yml
-$ mysql -u [user_name]
-mysql-> CREATE TABLE `agrarian_development` CHARACTER SET UTF-8;
-mysql-> grant all on `agrarian_development` .* to [user_name]@localhost;
+$ # データベースとテーブルの作成と初期データの投入
+$ rake db:setup
 ```
 
 ## contributeするには
