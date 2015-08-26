@@ -38,7 +38,7 @@ class Tasks::CreateMap
       }
     end
     
-    gv.save :map, :png
+    gv.save :map, :svg
   end
 
   def self.get_by_area_id(area_id)
