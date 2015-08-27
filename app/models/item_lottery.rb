@@ -14,6 +14,7 @@
 
 class ItemLottery < ActiveRecord::Base
   def has_composite_group_id
-    return self.composite_group_id > 0
+    return composite_group_id > 0
   end
 end
+

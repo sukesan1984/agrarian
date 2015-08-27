@@ -22,7 +22,7 @@ class Quest::QuestConditionEntityFactory
   end
 
   def build_collect_item_condition_entity(quest_condition, player)
-    user_item  = @user_item_factory.build_by_player_id_and_item_id(player.id, quest_condition.condition_id)
+    user_item = @user_item_factory.build_by_player_id_and_item_id(player.id, quest_condition.condition_id)
     return Quest::Conditions::CollectItemCondition.new(quest_condition, user_item)
   end
 end

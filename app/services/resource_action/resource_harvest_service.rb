@@ -49,10 +49,10 @@ class ResourceAction::ResourceHarvestService
       remain: @resource_service.current_count,
       success: true
     }
-    rescue => e
-      return {
-        success: false
-      }
+  rescue => e
+    return {
+      success: false
+    }
   end
 end
 

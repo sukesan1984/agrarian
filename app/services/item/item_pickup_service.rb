@@ -19,8 +19,8 @@ class Item::ItemPickupService
       @user_item.save!
       return { success: true, message: @user_item.item.name + 'を拾った。今:' + @user_item.count.to_s + '個持ってる' }
     end
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 end
 

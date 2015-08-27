@@ -3,11 +3,11 @@ class Entity::SoldierCharacterEntity
   def initialize(user_soldier, equipped_list_service)
     @type = 2
     @user_soldier = user_soldier
-    @soldier  = user_soldier.soldier
+    @soldier = user_soldier.soldier
     @equipped_list_service = equipped_list_service
 
     @level = Level.get_level_from(user_soldier.exp)
-    @level_max = Level.find_by(level:  @soldier.level_max)
+    @level_max = Level.find_by(level: @soldier.level_max)
 
     @level = @level_max if @level.level > @soldier.level_max
 

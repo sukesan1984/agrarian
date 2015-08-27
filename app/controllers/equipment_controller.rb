@@ -56,8 +56,8 @@ class EquipmentController < ApplicationController
       @equipped_list_service.save!
     end
     redirect_to '/equipment/' + character_type.to_s + '/' + character_id.to_s
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 
   def set_factories

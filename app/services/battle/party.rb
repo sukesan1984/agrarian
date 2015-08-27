@@ -80,9 +80,7 @@ class Battle::Party
   def drop_item_list
     item_list = []
     @unit_list.each do |unit|
-      if unit.drop_item
-        item_list.push(unit.drop_item)
-      end
+      item_list.push(unit.drop_item) if unit.drop_item
     end
     return item_list
   end

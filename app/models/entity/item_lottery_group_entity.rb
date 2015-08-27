@@ -8,3 +8,4 @@ class Entity::ItemLotteryGroupEntity
   def lot
   end
 end
+

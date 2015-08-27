@@ -29,3 +29,4 @@ RSpec.describe ItemLottery, type: :model do
     expect(item_lottery2.has_composite_group_id).to eq false
   end
 end
+

@@ -20,8 +20,8 @@ class PartyAdditionService
       target.save!
       return true
     end
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 end
 

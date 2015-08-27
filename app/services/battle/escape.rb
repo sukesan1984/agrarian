@@ -17,7 +17,7 @@ class Battle::Escape
   def is_success_to_escape
     escape_success_rate = 20
     seed = rand(1..100)
-    return  escape_success_rate >= seed
+    return escape_success_rate >= seed
   end
 end
 

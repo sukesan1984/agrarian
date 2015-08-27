@@ -6,7 +6,7 @@ class Battle::End
     @defeated_party   = defeated_party
     @player_character = player_character
     @given_exp_result = []
-    #@item_list = []
+    # @item_list = []
   end
 
   def give_rails
@@ -21,9 +21,7 @@ class Battle::End
 
   def give_items
     @item_list = @defeated_party.drop_item_list
-    @item_list.each do |item_entity|
-      item_entity.give
-    end
+    @item_list.each(&:give)
     return @item_list
   end
 
@@ -39,9 +37,7 @@ class Battle::End
   def save!
     @player_character.save!
     @winner_party.save!
-    @item_list.each do |item_entity|
-      item_entity.save!
-    end
+    @item_list.each(&:save!)
   end
 end
 
