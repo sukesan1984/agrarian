@@ -24,7 +24,8 @@ class Trait::MoveTrait
   # moveでは、target_typeは使わない
   def execute(target_type, target_id)
     # TODO: エンモルドは未実装
-    if target_id == 3
+    cant_move_areas = [3,5,6,7]
+    if cant_move_areas.include?(target_id.to_i)
       @failed_message = 'ごめん。まだいかれへんねん'
       return false
     end
