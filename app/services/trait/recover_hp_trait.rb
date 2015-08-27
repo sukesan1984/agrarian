@@ -65,6 +65,10 @@ class Trait::RecoverHpTrait
     def get_view
       return "#{@target.name} ( #{@target.hp} / #{@target.hp_max} )"
     end
+
+    def get_use_message
+      return '使用する'
+    end
   end
 end
 

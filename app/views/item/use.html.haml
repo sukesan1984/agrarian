@@ -8,5 +8,5 @@
         - target.parameters.each do |parameter|
           \#{hidden_field_tag(:user_item_id, @user_item_id)}
           \#{hidden_field_tag(parameter[:name].to_sym, parameter[:value])}
-        \#{submit_tag('使用する')}
+        \#{submit_tag(target.get_use_message)}
 = link_to('戻る', root_path)
