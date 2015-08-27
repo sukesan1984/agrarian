@@ -17,7 +17,7 @@ class TraitFactory
     when (2)
       # 移動先のターゲットを取得する。
       # TODO: エンモルドがマップに登場したら、変更する。
-      targets = Town.where('id != ?',  3)
+      targets = Town.where('id not in (?)', [3,5,6,7])
       user_area = UserArea.get_or_create(player.id)
       fail 'no user area' unless user_area
 
