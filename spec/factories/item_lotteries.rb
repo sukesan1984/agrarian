@@ -15,10 +15,10 @@
 FactoryGirl.define do
   factory :item_lottery do
     group_id 1
-item_id 1
-count 1
-weight 1
-composite_group_id 1
+    item_id 1
+    count 1
+    weight 1
+    composite_group_id 1
   end
-
 end
+

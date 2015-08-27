@@ -1,6 +1,6 @@
 class AreaServiceFactory
   def initialize(player_character_factory, resource_service_factory, resource_action_service_factory, battle_encounter_factory)
-    @player_character_factory  = player_character_factory
+    @player_character_factory = player_character_factory
     @resource_service_factory = resource_service_factory
     @resource_action_service_factory = resource_action_service_factory
     @establishment_entity_factory = EstablishmentEntityFactory.new

@@ -5,3 +5,4 @@ class ValueObjects::Item
     @count = count
   end
 end
+

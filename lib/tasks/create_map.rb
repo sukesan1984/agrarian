@@ -6,12 +6,12 @@ class Tasks::CreateMap
     @routes = Route.all
     @routes.each do |route|
       area_node = AreaNode.find_by(id: route.area_node_id)
-      area = self.get_by_area_id(area_node.area_id)
-      concrete = self.build_by_area(area)
+      area = get_by_area_id(area_node.area_id)
+      concrete = build_by_area(area)
 
       connected_area_node = AreaNode.find_by(id: route.connected_area_node_id)
-      connected_area = self.get_by_area_id(connected_area_node.area_id)
-      concrete_area = self.build_by_area(connected_area)
+      connected_area = get_by_area_id(connected_area_node.area_id)
+      concrete_area = build_by_area(connected_area)
 
       gv.add route.area_node_id.to_s.to_sym => route.connected_area_node_id
 
@@ -22,22 +22,19 @@ class Tasks::CreateMap
     # roadをつなぐ
     areas = Area.where(area_type: 2)
     areas.each do |area|
-      concrete = self.build_by_area(area)
+      concrete = build_by_area(area)
       area_nodes = AreaNode.where(area_id: area.id)
-      area_nodes.each_with_index {|area_node, index|
-        if index == area_nodes.length - 1
-          next
-        end
+      area_nodes.each_with_index do|area_node, index|
+        next if index == area_nodes.length - 1
 
-        gv.add area_node.id.to_s.to_sym => area_nodes[index+1].id.to_s.to_sym
-        gv.add area_nodes[index+1].id.to_s.to_sym => area_node.id.to_s.to_sym
+        gv.add area_node.id.to_s.to_sym => area_nodes[index + 1].id.to_s.to_sym
+        gv.add area_nodes[index + 1].id.to_s.to_sym => area_node.id.to_s.to_sym
 
         gv.node area_node.id.to_s.to_sym, label: "#{concrete.name}[#{area_node.node_point}]", font_size: 1
-        gv.node area_nodes[index+1].id.to_s.to_sym, label: "#{concrete.name}[#{area_nodes[index+1].node_point}]", font_size: 1
-
-      }
+        gv.node area_nodes[index + 1].id.to_s.to_sym, label: "#{concrete.name}[#{area_nodes[index + 1].node_point}]", font_size: 1
+      end
     end
-    
+
     gv.save :map, :svg
   end
 
@@ -68,3 +65,4 @@ class Tasks::CreateMap
     end
   end
 end
+

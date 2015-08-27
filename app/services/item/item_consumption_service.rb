@@ -1,7 +1,7 @@
 class Item::ItemConsumptionService
   # 性質を持ってる
   def initialize(user_item, trait)
-    @user_item   = user_item
+    @user_item = user_item
     @trait = trait
   end
 

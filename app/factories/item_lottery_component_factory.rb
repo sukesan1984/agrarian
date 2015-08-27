@@ -4,13 +4,11 @@ class ItemLotteryComponentFactory
 
   def build_by_group_id(group_id, root_item_lottery)
     item_lotteries = ItemLottery.where(group_id: group_id)
-    if item_lotteries.count == 0
-      return nil
-    end
+    return nil if item_lotteries.count == 0
     components = []
     item_lotteries.each do |item_lottery|
       if item_lottery.has_composite_group_id
-        components.push(self.build_by_group_id(item_lottery.composite_group_id, item_lottery))
+        components.push(build_by_group_id(item_lottery.composite_group_id, item_lottery))
       else
         components.push(Entity::ItemLottery::ItemLotteryLeafEntity.new(item_lottery))
       end
@@ -18,3 +16,4 @@ class ItemLotteryComponentFactory
     return Entity::ItemLottery::ItemLotteryCompositeEntity.new(components, root_item_lottery)
   end
 end
+

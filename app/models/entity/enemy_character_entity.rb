@@ -1,5 +1,5 @@
 class Entity::EnemyCharacterEntity
-  def initialize(enemy, progress, drop_item_entity) 
+  def initialize(enemy, progress, drop_item_entity)
     @enemy = enemy
     @hp = StatusPoint.new(@enemy.hp, @enemy.hp)
     @progress = progress
@@ -45,9 +45,7 @@ class Entity::EnemyCharacterEntity
   end
 
   def drop_item
-    if @enemy.drop_item_rate <= @dropped_item_seed
-      return nil
-    end
+    return nil if @enemy.drop_item_rate <= @dropped_item_seed
 
     return @drop_item_entity
   end

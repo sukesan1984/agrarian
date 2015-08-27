@@ -40,8 +40,8 @@ class RecipeMakingService
       end
       return { success: true, message: message }
     end
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 
   def is_success(real_skill_point, difficulty)

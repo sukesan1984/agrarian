@@ -33,8 +33,8 @@ class Battle::Encounter
       end
       return{ is_encount: true, enemies: user_encounter_enemies }
     end
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 
   # 出現するかどうかを返す

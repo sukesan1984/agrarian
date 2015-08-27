@@ -51,8 +51,8 @@ class ResourceAction::ResourcePurchaseService
       remain: @resource_service.current_count,
       success: true
     }
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 end
 

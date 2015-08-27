@@ -33,8 +33,8 @@ class Item::ItemSaleService
       @user_item.save!
       return { success: false, message: "#{name}が#{sell_price}railsで売れて#{@player.rails}railsになった。今#{@user_item.count}個持ってるわ" }
     end
-    rescue => e
-      raise e
+  rescue => e
+    raise e
   end
 end
 

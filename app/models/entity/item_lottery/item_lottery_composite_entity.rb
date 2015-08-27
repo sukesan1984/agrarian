@@ -9,14 +9,12 @@ class Entity::ItemLottery::ItemLotteryCompositeEntity
     seed = rand(0...weight_sum)
     current = 0
     @list.each do |entity|
-      if seed < entity.weight + current
-        return entity.lot
-      end
+      return entity.lot if seed < entity.weight + current
       current += entity.weight
     end
   end
 
-  def weight 
+  def weight
     return @item_lottery.weight
   end
 
