@@ -4,18 +4,8 @@ class RecipeController < ApplicationController
   before_action :set_player_character
 
   def index
-    item_entity_factory = ItemEntityFactory.new(@player_character, @user_item_factory, @quest_entity_factory)
-
-    recipes = Recipe.all
-    @recipe_list = []
-    recipes.each do |recipe|
-      required_items = []
-      recipe.required_items.each do |required_item|
-        required_items.push(item_entity_factory.build_by_item_id(required_item.item_id, required_item.count))
-      end
-      product = item_entity_factory.build_by_item_id(recipe.product_item.item_id, recipe.product_item.count)
-      @recipe_list.push(id: recipe.id, required_items: required_items, product: product)
-    end
+    @item_entity_factory = ItemEntityFactory.new(@player_character, @user_item_factory, @quest_entity_factory)
+    @recipe_list = self.create_recipe_list
   end
 
   def make
@@ -24,8 +14,23 @@ class RecipeController < ApplicationController
     @item_entity_factory = ItemEntityFactory.new(@player_character, @user_item_factory, @quest_entity_factory)
     recipe_making_service = RecipeMakingServiceFactory.new(@item_entity_factory).build_by_recipe_id_and_player_id(@recipe_id, @player_character.id)
     @result = recipe_making_service.execute
+    @recipe_list = self.create_recipe_list
   end
 
+  def create_recipe_list
+    recipes = Recipe.all
+    recipe_list = []
+    recipes.each do |recipe|
+      required_items = []
+      recipe.required_items.each do |required_item|
+        required_items.push(@item_entity_factory.build_by_item_id(required_item.item_id, required_item.count))
+      end
+      product = @item_entity_factory.build_by_item_id(recipe.product_item.item_id, recipe.product_item.count)
+      recipe_list.push(id: recipe.id, required_items: required_items, product: product)
+    end
+    return recipe_list
+  end
+  
   def set_factories
     equipment_service_factory = EquipmentServiceFactory.new
     equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)

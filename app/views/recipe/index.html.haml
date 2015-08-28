@@ -1,14 +1,2 @@
-%h2 レシピ一覧
-- @recipe_list.each do |recipe|
-  完成品: #{recipe[:product].name}#{recipe[:product].count}
-  %br/
-  素材:
-  %br/
-  - recipe[:required_items].each do |required_item|
-    #{required_item.name} 必要数: #{required_item.count} (持ってる数:#{required_item.current_count})
-  %br/
-  = form_tag('/recipe/make', method: 'post') do
-    \#{hidden_field_tag(:recipe_id, recipe[:id])}
-    \#{submit_tag('作る')}
-
+= render 'view_objects/recipe/list', recipe_list: @recipe_list
 = link_to('戻る', root_path)
