@@ -21,7 +21,7 @@ class EnemyCharacterFactory
       drop_item_entity = nil
     else
       drop_item = item_lottery_component.lot
-      drop_item_entity = @item_entity_factory.build_by_item_id(drop_item.item_id, drop_item.count)
+      drop_item_entity = @item_entity_factory.build_by_player_id_and_item_id_and_count(player_id, drop_item.item_id, drop_item.count)
     end
 
     return Entity::EnemyCharacterEntity.new(enemy, user_progress, drop_item_entity)

@@ -47,16 +47,18 @@ class BattleController < ApplicationController
         if @result.is_winner(party_a)
           @death_penalty.execute
           @death_penalty.save!
+          # この辺refactor
+          party_a.save!
+          party_b.save!
         else
           @battle_end = Battle::End.new(party_b, party_a, player_character)
           @battle_end.give_rails
           @battle_end.give_exp
           @battle_end.give_items
           @battle_end.save!
+          # この辺refactor
+          party_a.save!
         end
-
-        party_a.save!
-        party_b.save!
       end
     rescue => e
       raise e
@@ -91,7 +93,7 @@ class BattleController < ApplicationController
 
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
-    item_entity_factory = ItemEntityFactory.new(@player_character_factory.build_by_user_id(current_user.id), user_item_factory, quest_entity_factory)
+    item_entity_factory = ItemEntityFactory.new(@player_character_factory, user_item_factory, quest_entity_factory)
     @enemy_character_factory = EnemyCharacterFactory.new(item_lottery_component_factory, item_entity_factory)
 
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
