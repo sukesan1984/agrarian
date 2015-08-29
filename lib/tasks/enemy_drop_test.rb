@@ -15,7 +15,7 @@ class Tasks::EnemyDropTest
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     quest_entity_factory = Quest::QuestEntityFactory.new(player_character_factory, quest_condition_entity_factory)
 
-    item_entity_factory = ItemEntityFactory.new(player, user_item_factory, quest_entity_factory)
+    item_entity_factory = ItemEntityFactory.new(player_character_factory, user_item_factory, quest_entity_factory)
 
     enemy_character_factory = EnemyCharacterFactory.new(item_lottery_component_factory, item_entity_factory)
     enemy = Enemy.find_by(id: 13)

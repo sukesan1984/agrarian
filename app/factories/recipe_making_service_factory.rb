@@ -14,7 +14,7 @@ class RecipeMakingServiceFactory
       user_item_dictionary.add(required_item.item_id, user_item)
     end
 
-    product_item_entity = @item_entity_factory.build_by_item_id(recipe.product_item.item_id, recipe.product_item.count)
+    product_item_entity = @item_entity_factory.build_by_player_id_and_item_id_and_count(player_id, recipe.product_item.item_id, recipe.product_item.count)
 
     user_skill = UserSkill.find_or_create(player_id, [recipe.skill_id])[0]
     return RecipeMakingService.new(recipe, user_item_dictionary, product_item_entity, user_skill)

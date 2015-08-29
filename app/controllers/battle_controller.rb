@@ -91,7 +91,7 @@ class BattleController < ApplicationController
 
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
-    item_entity_factory = ItemEntityFactory.new(@player_character_factory.build_by_user_id(current_user.id), user_item_factory, quest_entity_factory)
+    item_entity_factory = ItemEntityFactory.new(@player_character_factory, user_item_factory, quest_entity_factory)
     @enemy_character_factory = EnemyCharacterFactory.new(item_lottery_component_factory, item_entity_factory)
 
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
