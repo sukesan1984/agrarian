@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830095206) do
+ActiveRecord::Schema.define(version: 20150830112419) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -76,12 +76,16 @@ ActiveRecord::Schema.define(version: 20150830095206) do
   add_index "enemy_maps", ["area_id"], name: "index_enemy_maps_on_area_id", using: :btree
 
   create_table "equipment", force: :cascade do |t|
-    t.integer  "item_id",     limit: 4
-    t.integer  "body_region", limit: 4
-    t.integer  "attack",      limit: 4
-    t.integer  "defense",     limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "item_id",             limit: 4
+    t.integer  "body_region",         limit: 4
+    t.integer  "attack",              limit: 4
+    t.integer  "defense",             limit: 4
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "critical_hit_chance", limit: 4, default: 0, null: false
+    t.integer  "critical_hit_damage", limit: 4, default: 0, null: false
+    t.integer  "dodge_chance",        limit: 4, default: 0, null: false
+    t.integer  "damage_reduction",    limit: 4, default: 0, null: false
   end
 
   create_table "establishments", force: :cascade do |t|
