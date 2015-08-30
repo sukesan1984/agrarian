@@ -35,10 +35,22 @@
 }
 
 .alert {
+  position: absolute;
+  top: 5%;
+  left: 30%;
   margin: 20px;
+  z-index: 100;
 }
 
+.guest-login-button {
+  float: right;
+  margin-top: -5px;
+}
 .notice {
+  position: absolute;
+  top: 5%;
+  left: 30%;
   margin: 20px;
+  z-index: 100;
 }
 
