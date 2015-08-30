@@ -27,10 +27,10 @@ class ItemEntityFactory
     end
   end
 
-  def build_by_gift_id(gift_id)
+  def build_by_player_id_and_gift_id(player_id, gift_id)
     gift = Gift.find_by(id: gift_id)
     fail 'gift is not found for' + gift_id.to_s unless gift
-    return build_by_item_id(gift.item_id, gift.count)
+    return build_by_player_id_and_item_id_and_count(player_id, gift.item_id, gift.count)
   end
 end
 
