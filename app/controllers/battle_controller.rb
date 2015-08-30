@@ -10,6 +10,8 @@ class BattleController < ApplicationController
 
     user_area = UserArea.get_or_create(player_character.id)
 
+    @current = @area_service_factory.build_by_area_node_id_and_player_id(area_node_id, player_character.id)
+
     @death_penalty = DeathPenalty.new(player_character, user_area)
 
     user_encounter_enemies = UserEncounterEnemy.where('player_id = ?', player_character.id)

@@ -54,6 +54,8 @@ class AreaServiceFactory
       end
     end
 
+    target_routes.push(current)
+
     return target_routes
   end
 

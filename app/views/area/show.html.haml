@@ -2,7 +2,7 @@
   .area-left-layout
     %h1= @current.get_name()
     - if(@can_move_to_next)
-      = render 'view_objects/target_routes', target_routes: @target_routes 
+      = render 'view_objects/target_routes', target_routes: @target_routes, current: @current
     / エリアのタイプによって出し分ける。
     = render @current.get_render_path(), object: @current.get_render_object()
 

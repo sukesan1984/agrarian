@@ -28,7 +28,7 @@
         %li #{drop_item.name} x #{drop_item.count}
     - else
       なし
-  = render 'view_objects/target_routes', target_routes: @target_routes
+  = render 'view_objects/target_routes', target_routes: @target_routes, current: @current
 %br/
 - @result.turn_result_list.each do |turn_result|
   .battle-one-turn
