@@ -56,6 +56,10 @@ class Entity::SoldierCharacterEntity
     return (@status + @equipped_list_service.status).critical_hit_damage
   end
 
+  def dodge_chance
+    return (@status + @equipped_list_service.status).dodge_chance
+  end
+
   def hp
     return @hp.current
   end

@@ -27,6 +27,9 @@ class Battle::Unit
   def get_action(party)
     unit = party.get_attackable_unit
     return if unit.nil?
+
+    # 対象が避けるかどうか
+    
     target_defense = unit.defense
     ave_damage = (@attack / 2.0 - target_defense / 4.0).ceil
     range = -(ave_damage / 16.0).ceil..(ave_damage / 16.0).ceil
