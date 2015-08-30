@@ -105,4 +105,11 @@ Rails.application.routes.draw do
   resource :skill do
     get '', to: 'skill#index'
   end
+
+  # bank
+  resource :bank do
+    get '', to: 'bank#index'
+    post 'deposit', to: 'bank#deposit'
+    post 'draw', to: 'bank#draw'
+  end
 end

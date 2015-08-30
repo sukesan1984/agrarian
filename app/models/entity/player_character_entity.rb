@@ -85,6 +85,11 @@ class Entity::PlayerCharacterEntity
     return "お金が#{after_rails}になった"
   end
 
+  def has_enough_rails?(value)
+    return false unless value.is_a?(Integer)
+    return @player.rails >= value
+  end
+
   def give_rails(value)
     @player.rails += value
   end
