@@ -11,6 +11,8 @@ namespace :players do
       player_id = Integer(ARGV[1]) rescue nil
       item_id   = Integer(ARGV[2]) rescue nil
       item_num  = Integer(ARGV[3]) rescue nil
+      Player.find(player_id)
+      Item.find(item_id)
       user_item = UserItem.find_by(player_id: player_id, item_id: item_id)
       if user_item.nil?
         UserItem.create!(player_id: player_id, item_id: item_id, count: item_num)
