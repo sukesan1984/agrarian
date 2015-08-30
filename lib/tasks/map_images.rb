@@ -1,6 +1,6 @@
 require 'gviz'
 
-class Tasks::CreateMap
+class MapImage
   def self.execute
     gv = Gviz.new
     @routes = Route.all
