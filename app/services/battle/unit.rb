@@ -53,7 +53,7 @@ class Battle::Unit
   end
 
   def has_critical_damage
-    randomize = Random.rand(0...100)
+    randomize = Random.rand(0...10000)
     # クリティカル発動せず。
     Rails.logger.debug("randomize: #{randomize} / #{@battlize_character.critical_hit_chance}")
     if randomize > @battlize_character.critical_hit_chance
@@ -63,7 +63,7 @@ class Battle::Unit
   end
 
   def is_dodged(target)
-    randomize = Random.rand(0...100)
+    randomize = Random.rand(0...10000)
 
     Rails.logger.debug("dodge : #{randomize} / #{@battlize_character.dodge_chance}")
     if randomize > target.dodge_chance
