@@ -10,7 +10,7 @@ module Agrarian::V1
       end
 
       get 'ranking/rails' do
-        players = Player.all.sort_by(&:rails).reverse
+        players = RankingAquisitionService.new.get_player_rails_all
         ranking = []
         players.each.with_index(1) do |player, k|
           link = "http://agrarian.jp/api/v1/players/#{player[:id]}"

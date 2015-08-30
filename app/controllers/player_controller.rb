@@ -27,7 +27,8 @@ class PlayerController < ApplicationController
   end
 
   def ranking_rails
-    @players = Player.order('rails DESC').limit(5)
+    @players = RankingAquisitionService.new.get_player_rails(5)
+    @banks = RankingAquisitionService.new.get_user_bank_rails(5)
   end
 end
 

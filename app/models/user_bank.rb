@@ -14,6 +14,7 @@
 #
 
 class UserBank < ActiveRecord::Base
+  belongs_to :player
   def self.get_or_new(player_id)
     user_bank = UserBank.find_by(player_id: player_id)
     if user_bank.nil?
