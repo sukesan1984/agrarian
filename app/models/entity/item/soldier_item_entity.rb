@@ -25,6 +25,10 @@ class Entity::Item::SoldierItemEntity
     return true
   end
 
+  def count
+    return 1
+  end
+
   def current_count
     return 1
   end
