@@ -2,15 +2,17 @@ namespace :players do
   namespace :item do
     task add: :environment do
       ARGV.slice(1,ARGV.size).each{|v| task v.to_sym do; end}
-      unless ARGV.length == 4
+      unless ARGV.length == 4 || ARGV.length == 1
         puts '
           usage:
           $ bundle exec rake players:item:add [players_id] [item_id] [item_num]'
         exit 1
       end
-      player_id = Integer(ARGV[1]) rescue nil
-      item_id   = Integer(ARGV[2]) rescue nil
-      item_num  = Integer(ARGV[3]) rescue nil
+
+      data = get_item_and_player_id
+      player_id = data[:player_id]
+      item_id   = data[:item_id]
+      item_num  = data[:item_num]
 
       item_entity_factory = create_item_entity_factory
       item_entity = item_entity_factory.build_by_player_id_and_item_id_and_count(player_id, item_id, item_num)
@@ -24,11 +26,27 @@ namespace :players do
       puts("付与成功!")
     end
 
+    def get_item_and_player_id
+      if ARGV.length == 1
+        print 'プレイヤーID : '
+        player_id = STDIN.gets.chomp.to_i
+        print 'アイテムID   : '
+        item_id   = STDIN.gets.chomp.to_i
+        print '個数         : '
+        item_num  = STDIN.gets.chomp.to_i
+      else
+        player_id = Integer(ARGV[1]) rescue nil
+        item_id   = Integer(ARGV[2]) rescue nil
+        item_num  = Integer(ARGV[3]) rescue nil
+      end
+      return {player_id: player_id, item_id: item_id, item_num: item_num}
+    end
+
     def create_item_entity_factory
-      equipment_service_factory = EquipmentServiceFactory.new
-      equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
+      equipment_service_factory     = EquipmentServiceFactory.new
+      equipped_service_factory      = EquippedServiceFactory.new(equipment_service_factory)
       equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-      player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+      player_character_factory      = PlayerCharacterFactory.new(equipped_list_service_factory)
 
       user_item_factory = UserItemFactory.new(equipped_list_service_factory)
 
