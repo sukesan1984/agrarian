@@ -41,6 +41,14 @@ class Entity::SoldierCharacterEntity
     return (@status + @equipped_list_service.status).defense
   end
 
+  def critical_hit_chance
+    return 0
+  end 
+
+  def critical_hit_damage
+    return 0
+  end
+
   def hp
     return @hp.current
   end

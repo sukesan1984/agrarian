@@ -4,7 +4,7 @@ class Entity::PlayerCharacterEntity
     @player = player
     @type   = 1
     @equipped_list_service = equipped_list_service
-    @status = Status.new(5, 3, 0, 50, 0, 0)
+    @status = Status.new(5, 3, 5, 50, 0, 0)
     @hp = StatusPoint.new(player.hp, player.hp_max)
   end
 
@@ -22,6 +22,14 @@ class Entity::PlayerCharacterEntity
 
   def defense
     return (@status + @equipped_list_service.status).defense
+  end
+
+  def critical_hit_chance
+    return (@status + @equipped_list_service.status).critical_hit_chance
+  end
+
+  def critical_hit_damage
+    return (@status + @equipped_list_service.status).critical_hit_damage
   end
 
   def id

@@ -23,6 +23,14 @@ class Entity::EnemyCharacterEntity
     return @enemy.defense
   end
 
+  def critical_hit_chance
+    return 0
+  end
+
+  def critical_hit_damage
+    return 0
+  end
+
   def hp
     @hp.current
   end
