@@ -38,7 +38,7 @@ class EquippedService
   end
 
   def status
-    return Status.new(0, 0) if @equipment_service.nil?
+    return Status.new(0, 0, 0, 0, 0, 0) if @equipment_service.nil?
     return @equipment_service.status
   end
 

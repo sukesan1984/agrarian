@@ -14,7 +14,7 @@ class Entity::SoldierCharacterEntity
     @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
     attack = StatusCalculationUtility.calculate(@soldier.attack_min, @soldier.attack_max, @soldier.level_max, @level.level)
     defense = StatusCalculationUtility.calculate(@soldier.defense_min, @soldier.defense_max, @soldier.level_max, @level.level)
-    @status = Status.new(attack, defense)
+    @status = Status.new(attack, defense, 0, 50, 0, 0)
   end
 
   def id
