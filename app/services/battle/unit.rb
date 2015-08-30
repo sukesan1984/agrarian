@@ -38,7 +38,7 @@ class Battle::Unit
   end
 
   def get_current_state
-    hp_rate = (@battlize_character.hp.to_f / @battlize_character.hp_max.to_f * 100).to_i
+    hp_rate = @battlize_character.hp_rate 
     return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, @is_dead, @battlize_character.image)
   end
 
