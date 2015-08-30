@@ -4,10 +4,11 @@
       = fa_icon 'sign-in'
       ログイン
       .guest-login-button
-        = hidden_field_tag 'user[email]', 'test@test.com'
-        = hidden_field_tag 'user[password]', 'testtest'
-        %button{:class => 'uk-button uk-button-success', :type => "submit"}
-          ゲストログイン
+        = form_tag '/users/sign_in', method: 'post' do
+          = hidden_field_tag 'user[email]', 'test@test.com'
+          = hidden_field_tag 'user[password]', 'testtest'
+          %button{:class => 'uk-button uk-button-success', :type => "submit"}
+            ゲストログイン
     .uk-nav-side
       .uk-nav-divider
 
