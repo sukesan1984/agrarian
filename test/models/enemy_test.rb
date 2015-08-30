@@ -14,6 +14,10 @@
 #  exp                   :integer
 #  item_lottery_group_id :integer          default(0), not null
 #  drop_item_rate        :integer          default(0), not null
+#  critical_hit_chance   :integer          default(0), not null
+#  critical_hit_damage   :integer          default(0), not null
+#  dodge_chance          :integer          default(0), not null
+#  damage_reduction      :integer          default(0), not null
 #
 
 require 'test_helper'

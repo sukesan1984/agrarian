@@ -14,7 +14,14 @@ class Entity::SoldierCharacterEntity
     @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
     attack = StatusCalculationUtility.calculate(@soldier.attack_min, @soldier.attack_max, @soldier.level_max, @level.level)
     defense = StatusCalculationUtility.calculate(@soldier.defense_min, @soldier.defense_max, @soldier.level_max, @level.level)
-    @status = Status.new(attack, defense)
+
+    critical_hit_chance = StatusCalculationUtility.calculate(@soldier.critical_hit_chance_min, @soldier.critical_hit_chance_max, @soldier.level_max, @level.level)
+
+    critical_hit_damage = StatusCalculationUtility.calculate(@soldier.critical_hit_damage_min, @soldier.critical_hit_damage_max, @soldier.level_max, @level.level)
+
+    dodge_chance = StatusCalculationUtility.calculate(@soldier.dodge_chance_min, @soldier.dodge_chance_max, @soldier.level_max, @level.level)
+
+    @status = Status.new(attack, defense, critical_hit_chance, critical_hit_damage, dodge_chance, 0)
   end
 
   def id
@@ -39,6 +46,18 @@ class Entity::SoldierCharacterEntity
 
   def defense
     return (@status + @equipped_list_service.status).defense
+  end
+
+  def critical_hit_chance
+    return (@status + @equipped_list_service.status).critical_hit_chance
+  end 
+
+  def critical_hit_damage
+    return (@status + @equipped_list_service.status).critical_hit_damage
+  end
+
+  def dodge_chance
+    return (@status + @equipped_list_service.status).dodge_chance
   end
 
   def hp

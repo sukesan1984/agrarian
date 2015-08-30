@@ -57,7 +57,7 @@ class EquippedListService
   end
 
   def status
-    return list.inject(Status.new(0, 0)) { |sum, equipment_service| sum + equipment_service.status }
+    return list.inject(Status.new(0, 0, 0, 0, 0, 0)) { |sum, equipment_service| sum + equipment_service.status }
   end
 
   def save!
