@@ -1,0 +1,14 @@
+今持ってるお金: #{player_character.rails} rails
+%br/
+銀行に預けているお金:#{user_bank.rails} rails
+%br/
+
+= form_tag('/bank/deposit', method: 'post') do
+  = label_tag(:q, '預ける金額を入力してください')
+  \#{text_field(:bank, :rails)}
+  \#{submit_tag('預ける')}
+
+= form_tag('/bank/draw', method: 'post') do
+  = label_tag(:q, '引き出す金額を入力してください')
+  \#{text_field(:bank, :rails)}
+  \#{submit_tag('引き出す')}

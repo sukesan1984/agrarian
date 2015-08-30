@@ -2,6 +2,8 @@
 - object[:establishment_list].each do |establishment|
   %li
     = link_to(establishment.name, establishment.path)
+%li 
+  = link_to('銀行', '/bank')
 = render "/view_objects/bulletin_board", records: object[:town_bulletin_boards]
 %li
   = link_to("公式wiki","http://wiki.agrarian.jp")
