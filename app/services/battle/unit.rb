@@ -1,6 +1,6 @@
 class Battle::Unit
   attr_accessor :done_action
-  attr_reader :name, :is_dead, :defense, :attack
+  attr_reader :name, :is_dead, :defense, :attack, :dodge_chance
   # battlize_character.name
   # battlize_character.attack
   # battlize_character.defense
@@ -10,6 +10,7 @@ class Battle::Unit
     @name     = battlize_character.name
     @attack   = battlize_character.attack
     @defense  = battlize_character.defense
+    @dodge_chance = battlize_character.dodge_chance
     @is_dead = false
     @done_action = false
   end
@@ -29,7 +30,10 @@ class Battle::Unit
     return if unit.nil?
 
     # 対象が避けるかどうか
-    
+    if is_dodged(unit)
+      return Battle::Action.new(self, unit, 'ダメージ(避けた！)', 0)
+    end
+
     target_defense = unit.defense
     ave_damage = (@attack / 2.0 - target_defense / 4.0).ceil
     range = -(ave_damage / 16.0).ceil..(ave_damage / 16.0).ceil
@@ -53,6 +57,16 @@ class Battle::Unit
     # クリティカル発動せず。
     Rails.logger.debug("randomize: #{randomize} / #{@battlize_character.critical_hit_chance}")
     if randomize > @battlize_character.critical_hit_chance
+      return false
+    end
+    return true
+  end
+
+  def is_dodged(target)
+    randomize = Random.rand(0...100)
+
+    Rails.logger.debug("dodge : #{randomize} / #{@battlize_character.dodge_chance}")
+    if randomize > target.dodge_chance
       return false
     end
     return true
