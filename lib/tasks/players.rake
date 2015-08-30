@@ -17,23 +17,30 @@ namespace :players do
       item_entity_factory = create_item_entity_factory
       item_entity = item_entity_factory.build_by_player_id_and_item_id_and_count(player_id, item_id, item_num)
 
-      puts("アイテム:#{item_entity.name}")
-      puts("個数#{item_entity.count}")
+      puts('プレイヤー   : ' << Player.find(player_id).name)
+      puts('アイテム     : ' << item_entity.name)
+      puts('個数         : ' << item_entity.count.to_s)
 
       fail item_entity.give_failed_message unless item_entity.give
-      item_entity.save!
 
-      puts("付与成功!")
+      print '付与しますか？ y/n : '
+      if STDIN.gets.chomp.gsub(' ', '') == 'y'
+        item_entity.save!
+        puts('付与成功!')
+      else
+        puts('キャンセルしました')
+        exit 1
+      end
     end
 
     def get_item_and_player_id
       if ARGV.length == 1
         print 'プレイヤーID : '
-        player_id = STDIN.gets.chomp.to_i
+        player_id = STDIN.gets.chomp.gsub(' ', '').to_i
         print 'アイテムID   : '
-        item_id   = STDIN.gets.chomp.to_i
+        item_id   = STDIN.gets.chomp.gsub(' ', '').to_i
         print '個数         : '
-        item_num  = STDIN.gets.chomp.to_i
+        item_num  = STDIN.gets.chomp.gsub(' ', '').to_i
       else
         player_id = Integer(ARGV[1]) rescue nil
         item_id   = Integer(ARGV[2]) rescue nil
