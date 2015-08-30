@@ -22,6 +22,8 @@
       #column
         = status.hp
         \/ #{status.hp_max}
+        .battle-character-gauge-all
+          .battle-character-gauge-current{:style => "width:#{status.hp_rate}px;"}
     #rows
       #column お金
       #column

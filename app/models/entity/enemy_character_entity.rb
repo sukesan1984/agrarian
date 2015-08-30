@@ -31,6 +31,11 @@ class Entity::EnemyCharacterEntity
     return @hp.max
   end
 
+  def hp_rate
+    return (self.hp.to_f / self.hp_max.to_f * 100).to_i
+  end
+
+
   def decrease_hp(value)
     @hp.decrease(value)
     @progress.count += 1 if @hp.current <= 0
