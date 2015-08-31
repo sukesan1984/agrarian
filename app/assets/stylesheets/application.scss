@@ -22,3 +22,35 @@
 .uk-panel-box-danger.alert {
   background-color: rgb(255, 205, 237);
 }
+
+.main {
+  margin-top: 20px;
+}
+
+.uk-panel-box {
+  width: 400px;
+  input {
+    width: 380px;
+  }
+}
+
+.alert {
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  margin: 20px;
+  z-index: 100;
+}
+
+.guest-login-button {
+  float: right;
+  margin-top: -5px;
+}
+.notice {
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  margin: 20px;
+  z-index: 100;
+}
+

@@ -1,28 +1,30 @@
-%h2 Log in
-プレイするためには、登録が必要になっています。 
-%br/
-emailアドレスは、なんでもいいです。（パスワードを忘れた時に入力しておけば再発行できます）
-%br/
-ちょっとだけ試してみたいという方はゲストログインを押してください。
+.uk-width-medium-1-2.uk-container-center
+  .uk-panel.uk-panel-box
+    .uk-panel-title.bold
+      = fa_icon 'sign-in'
+      ログイン
+      .guest-login-button
+        = form_tag '/users/sign_in', method: 'post' do
+          = hidden_field_tag 'user[email]', 'test@test.com'
+          = hidden_field_tag 'user[password]', 'testtest'
+          %button{:class => 'uk-button uk-button-success', :type => "submit"}
+            ゲストログイン
+    .uk-nav-side
+      .uk-nav-divider
 
-= form_tag('/users/sign_in', method: 'post') do
-  \#{hidden_field_tag('user[email]', 'test@test.com')}
-  \#{hidden_field_tag('user[password]', 'testtest')}
-  \#{submit_tag('ゲストログイン')}
-= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'uk-form uk-form-stacked') do |f|
-  .uk-form-row
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  .uk-form-row
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .uk-form-row
-      %label
-        = f.check_box :remember_me
+    = form_for resource, as: resource_name, html: { class: 'uk-form uk-form-stacked' }, url: session_path(resource_name) do |f|
+      .uk-form-row
+        .uk-form-icon
+          %i.uk-icon-user
+          = f.text_field :email, autofocus: true, placeholder: 'メールアドレス'
+      .uk-form-row
+        .uk-form-icon
+          %i.uk-icon-key
+          = f.password_field :password, autocomplete: 'off', placeholder: 'パスワード'
+      .uk-form-row
         = f.label :remember_me
-  .actions.uk-form-row
-    = f.submit "Log in", class: 'uk-button uk-button-primary'
-= render "devise/shared/links"
+        = f.check_box :remember_me
+      .uk-form-row
+        .uk-button-group
+          %button{:class => 'uk-button uk-button-primary', :type => "submit"}
+            = fa_icon 'sign-in'

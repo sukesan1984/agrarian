@@ -15,7 +15,7 @@
           %li
             - if user_signed_in?
               %li
-                = link_with_icon 'プレイヤー情報', edit_user_registration_path, icon: 'pencil fw'
+                = link_with_icon 'ユーザー情報変更', edit_user_registration_path, icon: 'pencil fw'
               %li
                 = link_to 'ログアウト', destroy_user_session_path, method: :delete
             - else
@@ -23,10 +23,13 @@
                 = link_with_icon 'サインアップ', new_user_registration_path, icon: 'play fw'
               %li
                 = link_with_icon 'ログイン', new_user_session_path, icon: 'sign-in fw'
-    .uk-container.uk-container-center
+    .uk-container.uk-container-center.main
       - if notice
         .uk-panel.uk-panel-box.uk-panel-box-primary.notice= notice
       - if alert
         .uk-panel.uk-panel-box.uk-panel-box-danger.alert= alert
       = yield
   = render 'layouts/footer'
+%script
+  $('.notice').fadeOut(3000);
+  $('.alert').fadeOut(3000);
