@@ -1,3 +1,4 @@
 id,item_id,consumption_type,type_value
 1,400001,1,20
 2,400002,2,0
+3,400003,1,100
