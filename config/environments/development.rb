@@ -26,7 +26,6 @@ Rails.application.configure do
     password: ENV['SMTP_PASSWORD_DEV'],
     authentication: :plain,
     enable_starttls_auto: true
-
   }
 
   # Print deprecation notices to the Rails logger.

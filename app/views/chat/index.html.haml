@@ -4,7 +4,7 @@
 %input#comment{:type => "text"}/
 %input#send{:type => "button", :value => "send"}/
 :javascript
-  var ws_rails = new WebSocketRails("localhost:3000/websocket");
+  var ws_rails = new WebSocketRails("#{@host}/websocket")
   
   
   var websocket_chat_channel = ws_rails.subscribe("websocket_chat_channel");
