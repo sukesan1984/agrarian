@@ -1,0 +1,32 @@
+/ チャット表示部分
+%ul#chat_area
+/ コメントフォーム
+%input#comment{:type => "text"}/
+%input#send{:type => "button", :value => "send"}/
+:javascript
+  var ws_rails = new WebSocketRails("localhost:3000/websocket");
+  
+  
+  var websocket_chat_channel = ws_rails.subscribe("websocket_chat_channel");
+  
+    // メッセージ受信時の処理
+  
+    // ws_rails.bind("websocket_chat", function(message){
+    websocket_chat_channel.bind("websocket_chat", function(message){
+  
+      var message_li = document.createElement("li");
+  
+      message_li.textContent = message;
+  
+      document.getElementById("chat_area").appendChild(message_li);
+    })
+  
+  
+  
+    // メッセージ送信時の処理
+    document.getElementById("send").onclick =  function(){
+  
+  　　var comment = document.getElementById("comment").value;
+  　　//ws_rails.trigger("websocket_chat", comment);
+      websocket_chat_channel.trigger("websocket_chat", comment);
+  　　}

@@ -52,6 +52,8 @@ gem 'font-awesome-rails'
 
 gem 'gviz'
 
+gem 'websocket-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

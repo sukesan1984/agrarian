@@ -112,4 +112,6 @@ Rails.application.routes.draw do
     post 'deposit', to: 'bank#deposit'
     post 'draw', to: 'bank#draw'
   end
+
+  get  'chat', to: 'chat#index'
 end
