@@ -10,6 +10,7 @@ class RecipeMakingService
   def execute
     ActiveRecord::Base.transaction do
       # 数を減らす
+      saved_array = []
       @recipe.required_items.each do |required_item|
         user_item = @required_user_items.get(required_item.item_id)
         # 数が足りなければ、false
@@ -17,7 +18,7 @@ class RecipeMakingService
           return { success: false, message: '数が足りません ' }
         end
         user_item.count -= required_item.count
-        user_item.save!
+        saved_array.push(user_item)
       end
 
       # 成功率の計算
@@ -32,12 +33,17 @@ class RecipeMakingService
       # 成功したら
       skill_increase = @user_skill.try_increase(@recipe.difficulty)
       @product_item_entity.give
-      @product_item_entity.save!
+      saved_array.push(@product_item_entity)
       message = "#{@product_item_entity.name}を#{@recipe.product_item.count}を手に入れた。"
       if skill_increase > 0
         message += "#{@user_skill.skill.name}のスキル値が#{skill_increase}上昇した。今は#{@user_skill.real_skill_point}。"
-        @user_skill.save!
+        saved_array.push(@user_skill)
       end
+
+      saved_array.each do |saved_object|
+        saved_object.save!
+      end
+
       return { success: true, message: message }
     end
   rescue => e
