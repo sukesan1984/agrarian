@@ -26,7 +26,6 @@ Rails.application.configure do
     password: ENV['SMTP_PASSWORD_DEV'],
     authentication: :plain,
     enable_starttls_auto: true
-
   }
 
   # Print deprecation notices to the Rails logger.
@@ -51,4 +50,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # rails websocket
+  config.middleware.delete Rack::Lock
 end

@@ -15,3 +15,5 @@
 //= require turbolinks
 //= requrie uikit
 //= require_tree .
+//= require websocket_rails/main
+
