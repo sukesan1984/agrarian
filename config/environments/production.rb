@@ -1,6 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   ENV["REDIS"]=ENV["REDIS_ENDPOINT"]
+  config.session_store :redis_store, servers: "redis://" + ENV["REDIS"] + "/0", expire_in: 1.day
 
   # Code is not reloaded between requests.
   config.cache_classes = true
