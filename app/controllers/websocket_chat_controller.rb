@@ -9,11 +9,13 @@ class WebsocketChatController < WebsocketRails::BaseController
   def connect
     Rails.logger.debug('connected')
     broadcast_message(:websocket_chat, "#{@name}さんが入室しました。")
+    broadcast_message(:websocket_member_in, @name)
   end
 
   def disconnect
     Rails.logger.debug('disconnected')
     broadcast_message(:websocket_chat, "#{@name}さんが退室しました。")
+    broadcast_message(:websocket_member_out, @name)
   end
 
   def set_factories
