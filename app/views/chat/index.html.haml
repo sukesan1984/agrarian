@@ -25,6 +25,6 @@
     document.getElementById("send").onclick =  function(){
       var failure = function(response){console.log('fail' + response.message);};
   　　var comment = document.getElementById("comment").value;
-  　　ws_rails.trigger("websocket_chat2", comment, function(){console.log('success');}, failure);
+  　　ws_rails.trigger("websocket_chat", comment, function(){console.log('success');}, failure);
       //ws_rails.trigger("websocket_chat", comment);
   　　}

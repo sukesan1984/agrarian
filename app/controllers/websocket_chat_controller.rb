@@ -1,14 +1,5 @@
 class WebsocketChatController < WebsocketRails::BaseController 
-  def message_receive 
-　　# クライアントからのメッセージを取得
-　　# websocket_chatイベントで接続しているクライアントにブロードキャスト
-
-　　receive_message = message()
-
-　　broadcast_message(:websocket_chat, receive_message)
-  end
-
-  def message_receive2
+  def message_receive
     broadcast_message(:websocket_chat, message())
   end
 
