@@ -11,5 +11,6 @@ WebsocketRails::EventMap.describe do
   #     subscribe :new, :to => ProductController, :with_method => :new_product
   #   end
   # The above will handle an event triggered on the client like `product.new`.
-  subscribe :websocket_chat, to: WebsocketChatController, with_method: :message_receive
+  subscribe :websocket_chat, :to => WebsocketChatController, :with_method => :message_receive
+  subscribe :client_connected, :to => WebsocketChatController, :with_method => :connect
 end
