@@ -6,13 +6,12 @@
 :javascript
   var ws_rails = new WebSocketRails("#{@host}/websocket")
   
-  
-  var websocket_chat_channel = ws_rails.subscribe("websocket_chat_channel");
+  //var websocket_chat_channel = ws_rails.subscribe("websocket_with_channel");
   
     // メッセージ受信時の処理
   
-    // ws_rails.bind("websocket_chat", function(message){
-    websocket_chat_channel.bind("websocket_chat", function(message){
+    ws_rails.bind("websocket_chat", function(message){
+    //websocket_chat_channel.bind("websocket_chat", function(message){
   
       var message_li = document.createElement("li");
   
@@ -22,11 +21,10 @@
     })
   
   
-  
     // メッセージ送信時の処理
     document.getElementById("send").onclick =  function(){
-  
+      var failure = function(response){console.log('fail' + response.message);};
   　　var comment = document.getElementById("comment").value;
-  　　//ws_rails.trigger("websocket_chat", comment);
-      websocket_chat_channel.trigger("websocket_chat", comment);
+  　　ws_rails.trigger("websocket_chat2", comment, function(){console.log('success');}, failure);
+      //ws_rails.trigger("websocket_chat", comment);
   　　}
