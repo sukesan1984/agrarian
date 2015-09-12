@@ -7,7 +7,9 @@ class ChatController < ApplicationController
     length = Redis.current.llen('websocket-member')
     @member_list = Redis.current.lrange('websocket-member', 0, length - 1)
     return if @member_list.count == 0
-    @member_list.delete_at(@member_list.index(@name))
+    index = @member_list.index(@name)
+    return unless index
+    @member_list.delete_at(index)
     Rails.logger.debug(@member_list)
   end
 
