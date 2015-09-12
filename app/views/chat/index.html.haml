@@ -1,30 +1,46 @@
 / チャット表示部分
-%ul#chat_area
+.uk-grid
+  .uk-width-1-2
+    .uk-list-line#chat_area
+  .uk-width-1-2
+    今いる人
+    .uk-list-striped#member_area
+
 / コメントフォーム
 %input#comment{:type => "text"}/
 %input#send{:type => "button", :value => "send"}/
 :javascript
   var ws_rails = new WebSocketRails("#{@host}/websocket")
   
-  //var websocket_chat_channel = ws_rails.subscribe("websocket_with_channel");
-  
     // メッセージ受信時の処理
-  
     ws_rails.bind("websocket_chat", function(message){
-    //websocket_chat_channel.bind("websocket_chat", function(message){
-  
       var message_li = document.createElement("li");
   
       message_li.textContent = message;
   
       document.getElementById("chat_area").appendChild(message_li);
     })
-  
-  
+
     // メッセージ送信時の処理
     document.getElementById("send").onclick =  function(){
       var failure = function(response){console.log('fail' + response.message);};
   　　var comment = document.getElementById("comment").value;
   　　ws_rails.trigger("websocket_chat", comment, function(){console.log('success');}, failure);
-      //ws_rails.trigger("websocket_chat", comment);
   　　}
+
+    // メンバーが入室した時の処理
+    ws_rails.bind("websocket_member_in", function(name){
+        var member_li = document.createElement("li");
+
+        member_li.textContent = name
+        member_li.id = name
+        document.getElementById("member_area").appendChild(member_li);
+    })
+
+    // メンバーが退室した時の処理
+    // TODO:  もっと厳密にやる必要ある。
+    ws_rails.bind("websocket_member_out", function(name){
+        var elem = document.getElementById(name);
+        elem.parentNode.removeChild(elem);
+    })
+

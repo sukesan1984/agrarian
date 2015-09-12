@@ -1,16 +1,21 @@
 class WebsocketChatController < WebsocketRails::BaseController 
-  #before_action :set_factories
-  #before_action :set_player_character
+  before_filter :set_factories
+  before_filter :set_player_character
 
   def message_receive
-    set_factories
-    set_player_character
-    name = @player_character ? @player_character.name : '名無しさん'
-    broadcast_message(:websocket_chat,"[#{name}] #{ message()}")
+    broadcast_message(:websocket_chat, "[#{@name}] #{ message()}")
   end
 
   def connect
     Rails.logger.debug('connected')
+    broadcast_message(:websocket_chat, "#{@name}さんが入室しました。")
+    broadcast_message(:websocket_member_in, @name)
+  end
+
+  def disconnect
+    Rails.logger.debug('disconnected')
+    broadcast_message(:websocket_chat, "#{@name}さんが退室しました。")
+    broadcast_message(:websocket_member_out, @name)
   end
 
   def set_factories
@@ -23,8 +28,10 @@ class WebsocketChatController < WebsocketRails::BaseController
   def set_player_character
     if current_user.nil?
       @player_character = nil
+      @name = '名無し'
       return
     end
     @player_character = @player_character_factory.build_by_user_id(current_user.id)
+    @name = @player_character ? @player_character.name : '名無し'
   end
 end
