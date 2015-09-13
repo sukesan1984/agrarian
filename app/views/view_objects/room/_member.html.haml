@@ -1,7 +1,7 @@
 今ここにいる人たち
 .uk-list-striped#member_area
   - members.each do |member| 
-    %li #{member}
+    %li(id=member) #{member}
 :javascript
   var ws_rails = new WebSocketRails("#{host}/websocket")
   
