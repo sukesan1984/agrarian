@@ -52,7 +52,8 @@ gem 'font-awesome-rails'
 
 gem 'gviz'
 
-gem 'websocket-rails'
+#gem 'websocket-rails'
+gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'sync_fixes'
 
 # for redis
 gem 'redis-objects'
