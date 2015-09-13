@@ -25,7 +25,78 @@ slackチームは以下のフォームから招待を受けてください
 
 ## 開発環境構築
 
-### データベース
+### Rubyなどもろもろインストール
+
+mac以外のOSでの設定をした場合は追記してね
+
+#### macの場合
+
+rbenvをruby-buildで入れる
+```
+$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+$ mkdir -p ~/.rbenv/plugins
+$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+```
+
+~/.bash_profileに追記して再読み込み
+```
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+source ~/.bash_profile
+```
+
+rubyは2.1.0 (2015.09.13現在)
+```
+$ rbenv install 2.1.0
+$ rbenv global 2.1.0
+$ rbenv rehash
+$ ruby -v
+ruby 2.1.0p0 (2013-12-25 revision 44422) [x86_64-darwin14.0]
+```
+
+railsは4.2.0 (2015.09.13現在), めっちゃ遅いので気長に...
+```
+$ gem install rails -v 4.2.0
+
+# もしXcode Command Line Toolsがないと言われたら以下を実行してからやる
+$ xcode-select --instal
+```
+
+```
+# リポジトリのディレクトリ配下でbundle install
+$ cd agrarian
+$ bundle install
+```
+
+### MySQLのインストール
+
+mac以外のOSでの設定をした場合は追記してね
+
+#### macの場合
+
+Homebrewとかでmysqlをインストール
+```
+$ brew install mysql
+```
+
+mysql起動
+```
+$ mysql.server start
+```
+
+初期設定でrootのパスワードとか設定. 質問はだいたいYでOK
+```
+$ mysql_secure_installation
+```
+
+rootでログインしてゲーム用にユーザを作る. ローカルのDBだから権限の設定は適当ですすいません
+```
+$ mysql -uroot -p
+mysql> CREATE USER '[任意のユーザ名]'@'localhost' IDENTIFIED BY '[任意のパスワード]';
+mysql> GRANT ALL ON *.* TO '[任意のユーザ名]'@'localhost';
+```
+
+### データベースのセットアップ
 
 1. config/database.yml.sampleをコピーしてconfig/database.ymlを作ってね。
 2. databaseはmysqlだよ。
@@ -36,7 +107,38 @@ $ cp config/database.yml.sample config/database.yml
 $ # 自分の環境に合わせてhost, username, passwordを設定
 $ vi config/database.yml
 $ # データベースとテーブルの作成と初期データの投入
-$ rake db:setup
+$ bundle exec rake db:setup
+```
+
+### Redisのインストール
+
+#### macの場合
+
+Homebrewとかでインスコ
+```
+$ brew install redis
+```
+
+redisを起動
+```
+$ redis-server /usr/local/etc/redis.conf
+```
+
+### webサーバ起動
+
+```
+$ rails s
+```
+
+表示確認
+[http://http://localhost:3000](http://http://localhost:3000)
+
+とりあえずゲストログインできればOK!
+
+### DBのスキーマ変更が起こったら
+
+```
+$ bundle exec rake db:migrate
 ```
 
 ## contributeするには
