@@ -28,7 +28,7 @@
         document.getElementById("member_area").appendChild(member_li);
     }
 
-    var channel = ws_rails.subscribe(#{area_node_id});
+    var channel = ws_rails.subscribe("#{area_node_id}");
 
     // メンバーが入室した時の処理
     //ws_rails.bind("websocket_member_in", function(name){
