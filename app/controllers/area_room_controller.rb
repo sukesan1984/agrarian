@@ -9,7 +9,15 @@ class AreaRoomController < WebsocketRails::BaseController
 
   def disconnect
     Rails.logger.debug("disconnected AreaRoome Controller")
-    RoomeEntranceService.exit(@user_area.area_node_id, @player_character.name)
+    RoomEntranceService.exit(@user_area.area_node_id, @player_character.name)
+  end
+
+  def enter
+    Rails.logger.debug("enter")
+  end
+
+  def exit
+    Rails.logger.debug("exit")
   end
 
   def set_factories
