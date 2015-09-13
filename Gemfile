@@ -54,6 +54,9 @@ gem 'gviz'
 
 gem 'websocket-rails'
 
+# for redis
+gem 'redis-objects'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

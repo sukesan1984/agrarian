@@ -441,6 +441,7 @@ DEPENDENCIES
   parallel
   pry-rails
   rails (= 4.2.0)
+  redis-objects
   rspec-collection_matchers
   rspec-rails
   rspec-sidekiq
