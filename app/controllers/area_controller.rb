@@ -21,12 +21,14 @@ class AreaController < ApplicationController
 
     user_area = UserArea.get_or_create(@player_character.id)
 
-    # 今いる場所のroomから抜ける
-    #WebsocketRails[user_area.area_node_id.to_sym].trigger(:area_room_member_out, @player_character.name)
-    RoomEntranceService.exit(user_area.area_node_id, @player_character.name)
-    # 新しいroomに入る
-    #WebsocketRails[@area_node_id.to_sym].trigger(:area_room_member_in, @player_character.name)
-    RoomEntranceService.enter(@area_node_id, @player_character.name)
+    #移動するときだけ
+    if user_area.area_node_id != @area_node_id
+      logger.debug('room exit and enter')
+      # 今いる場所のroomから抜ける
+      RoomEntranceService.exit(user_area.area_node_id, @player_character.name)
+      # 新しいroomに入る
+      RoomEntranceService.enter(@area_node_id, @player_character.name)
+    end
 
     # 今いる位置からの移動できる場所 or 今いる位置
     can_move_list = @current_target_routes.map { |target| target.area_node.id }

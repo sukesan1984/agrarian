@@ -35,6 +35,7 @@
     //    add_member(name);
     //})
     channel.bind('area_room_member_in', function(name){
+        console.log("in:" + name);
         add_member(name);
     })
 
@@ -45,6 +46,9 @@
     //    elem.parentNode.removeChild(elem);
     //})
     channel.bind("area_room_member_out", function(name){
+        console.log("out:" + name);
         var elem = document.getElementById(name);
-        elem.parentNode.removeChild(elem);
+        if(elem){
+          elem.parentNode.removeChild(elem);
+        }
     })
