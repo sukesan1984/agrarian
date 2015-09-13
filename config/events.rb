@@ -14,4 +14,7 @@ WebsocketRails::EventMap.describe do
   subscribe :websocket_chat, :to => WebsocketChatController, :with_method => :message_receive
   subscribe :client_connected, :to => WebsocketChatController, :with_method => :connect
   subscribe :client_disconnected, :to => WebsocketChatController, :with_method => :disconnect
+
+  subscribe :client_connected, :to => AreaRoomController, :with_method => :connect
+  subscribe :client_disconnected, :to => AreaRoomController, :with_method => :disconnect
 end

@@ -1,0 +1,50 @@
+今ここにいる人たち
+.uk-list-striped#member_area
+  - members.each do |member| 
+    %li #{member}
+:javascript
+  var ws_rails = new WebSocketRails("#{host}/websocket")
+  
+    // メッセージ受信時の処理
+    //ws_rails.bind("websocket_chat", function(message){
+    //  var message_li = document.createElement("li");
+  
+    //  message_li.textContent = message;
+  
+    //  document.getElementById("chat_area").appendChild(message_li);
+    //})
+
+    // メッセージ送信時の処理
+    // document.getElementById("send").onclick =  function(){
+    //   var failure = function(response){console.log('fail' + response.message);};
+  　// 　var comment = document.getElementById("comment").value;
+  　// 　ws_rails.trigger("websocket_chat", comment, function(){console.log('success');}, failure);
+  　// 　}
+
+    var add_member = function(member) {
+        var member_li = document.createElement("li");
+        member_li.textContent = member
+        member_li.id = member
+        document.getElementById("member_area").appendChild(member_li);
+    }
+
+    var channel = ws_rails.subscribe(#{area_node_id});
+
+    // メンバーが入室した時の処理
+    //ws_rails.bind("websocket_member_in", function(name){
+    //    add_member(name);
+    //})
+    channel.bind('area_room_member_in', function(name){
+        add_member(name);
+    })
+
+    // メンバーが退室した時の処理
+    // TODO:  もっと厳密にやる必要ある。
+    //ws_rails.bind("websocket_member_out", function(name){
+    //    var elem = document.getElementById(name);
+    //    elem.parentNode.removeChild(elem);
+    //})
+    channel.bind("area_room_member_out", function(name){
+        var elem = document.getElementById(name);
+        elem.parentNode.removeChild(elem);
+    })

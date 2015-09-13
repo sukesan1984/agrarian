@@ -2,6 +2,7 @@ class AreaController < ApplicationController
   before_action :authenticate_user!
   before_action :set_factories
   before_action :set_player_character
+  before_action :set_host
 
   def index
   end
@@ -19,6 +20,14 @@ class AreaController < ApplicationController
     @current_target_routes = @area_service_factory.build_target_routes_by_player_id(@player_character.id)
 
     user_area = UserArea.get_or_create(@player_character.id)
+
+    # 今いる場所のroomから抜ける
+    #WebsocketRails[user_area.area_node_id.to_sym].trigger(:area_room_member_out, @player_character.name)
+    RoomEntranceService.exit(user_area.area_node_id, @player_character.name)
+    # 新しいroomに入る
+    #WebsocketRails[@area_node_id.to_sym].trigger(:area_room_member_in, @player_character.name)
+    RoomEntranceService.enter(@area_node_id, @player_character.name)
+
     # 今いる位置からの移動できる場所 or 今いる位置
     can_move_list = @current_target_routes.map { |target| target.area_node.id }
     can_move_list.push user_area.area_node_id
@@ -26,6 +35,9 @@ class AreaController < ApplicationController
       redirect_to '/areas/cant_move'
       return
     end
+
+    chat_room = ChatRoom.create_or_find(@area_node_id)
+    @members = chat_room.user_ids
 
     # その位置固有のアクションの実行
     @current.execute
@@ -65,6 +77,14 @@ class AreaController < ApplicationController
   def set_player_character
     @player_character = @player_character_factory.build_by_user_id(current_user.id)
     redirect_to('/player/input') if @player_character.nil?
+  end
+
+  def set_host
+    if Rails.env == 'production'
+      @host = 'agrarian.jp:3001'
+    else
+      @host = 'localhost:3000'
+    end
   end
 end
 
