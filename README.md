@@ -162,6 +162,15 @@ $ bundle exec rake db:migrate
 4. pushする (git push origin my-new-feature)
 5. pull request を 発行する
 
+## 便利スクリプト系
+### アイテム付与
+```
+# 対話式に付与する
+$ bundle exec rake players:item:add 
+# 個数等を決めて付与する。 
+bundle exec rake players:item:add [player_id] [item_id] [item_num]
+```
+
 ## API一覧
 
 - player一覧 : `/api/v1/players`
