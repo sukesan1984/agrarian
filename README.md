@@ -54,18 +54,31 @@ $ ruby -v
 ruby 2.1.0p0 (2013-12-25 revision 44422) [x86_64-darwin14.0]
 ```
 
-railsは4.2.0 (2015.09.13現在), めっちゃ遅いので気長に...
+bundlerいれる
 ```
-$ gem install rails -v 4.2.0
-
-# もしXcode Command Line Toolsがないと言われたら以下を実行してからやる
-$ xcode-select --instal
+$ rbenv exec gem install bundler
+$ rbenv rehash
 ```
 
+SSL通信しようとしたときにエラーがでるので、証明書をダンロードする
+```
+# 証明書のパスを確認し、
+$ ruby -ropenssl -e "p OpenSSL::X509::DEFAULT_CERT_FILE"
+# 返ってきたパスに対して、証明書をダウンロード
+$ sudo curl "http://curl.haxx.se/ca/cacert.pem" -o /usr/local/etc/openssl/cert.pem
+```
+
+bundle installを実行, railsとか諸々必要なものをインストール
 ```
 # リポジトリのディレクトリ配下でbundle install
 $ cd agrarian
-$ bundle install
+$ bundle install --path vendor/bundle
+
+# もしXcode Command Line Toolsがないと言われたら以下を実行してからやる
+$ xcode-select --instal
+
+# もしnokogiri-1.6.6.2がどーのこーののエラーがでた場合
+$ bundle config build.nokogiri --use-system-libraries
 ```
 
 ### MySQLのインストール
@@ -131,7 +144,7 @@ $ rails s
 ```
 
 表示確認
-[http://http://localhost:3000](http://http://localhost:3000)
+[http://localhost:3000](http://localhost:3000)
 
 とりあえずゲストログインできればOK!
 
