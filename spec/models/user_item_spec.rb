@@ -18,6 +18,8 @@
 require 'rails_helper'
 
 RSpec.describe UserItem, type: :model do
+  let(:user_item) { create(:user_item) }
+  let(:user_equipment_affixes) {create_pair(:user_equipment_affix, user_item: user_item) }
   it 'equipped?' do
     user_item = UserItem.new(
       player_id: 1,
@@ -36,6 +38,12 @@ RSpec.describe UserItem, type: :model do
       item_id: 2,
       equipped: 10)
     expect(user_item3.equipped?).to eq true
+  end
+
+  describe "Relation" do
+    it 'has many user_equipment_affixes' do
+      expect(user_item.user_equipment_affixes).to match_array user_equipment_affixes
+    end
   end
 end
 
