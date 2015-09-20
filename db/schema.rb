@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920030043) do
+ActiveRecord::Schema.define(version: 20150920080612) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -401,13 +401,13 @@ ActiveRecord::Schema.define(version: 20150920030043) do
   create_table "user_equipment_affixes", force: :cascade do |t|
     t.integer  "user_item_id",       limit: 4
     t.integer  "equipment_affix_id", limit: 4
-    t.integer  "damage_perc",        limit: 4
-    t.integer  "attack_rating_perc", limit: 4
-    t.integer  "defense_perc",       limit: 4
-    t.integer  "hp",                 limit: 4
-    t.integer  "hp_steal_perc",      limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "damage_perc",        limit: 4, default: 0
+    t.integer  "attack_rating_perc", limit: 4, default: 0
+    t.integer  "defense_perc",       limit: 4, default: 0
+    t.integer  "hp",                 limit: 4, default: 0
+    t.integer  "hp_steal_perc",      limit: 4, default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "user_equipment_affixes", ["user_item_id"], name: "index_user_equipment_affixes_on_user_item_id", using: :btree

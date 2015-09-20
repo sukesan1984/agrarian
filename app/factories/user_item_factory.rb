@@ -20,6 +20,10 @@ class UserItemFactory
     return build_by_player_id_and_item(player_id, item)
   end
 
+  def build_by_player_id_and_user_item_id(player_id, user_item_id)
+    return UserItem.find_by('id = ? and player_id = ? ', user_item_id, player_id)
+  end
+
   def build_by_player_id_and_item(player_id, item)
     case item.item_type
     when 1, 4

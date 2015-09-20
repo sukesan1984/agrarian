@@ -13,6 +13,10 @@ class Entity::EquipmentEntity
     return @user_equipment_affix_list.name + @user_item.item.name
   end
 
+  def descriptions
+    return @status.descriptions
+  end
+
   def attack
     return @equipment.attack
   end

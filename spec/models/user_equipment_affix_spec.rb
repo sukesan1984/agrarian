@@ -5,11 +5,11 @@
 #  id                 :integer          not null, primary key
 #  user_item_id       :integer
 #  equipment_affix_id :integer
-#  damage_perc        :integer
-#  attack_rating_perc :integer
-#  defense_perc       :integer
-#  hp                 :integer
-#  hp_steal_perc      :integer
+#  damage_perc        :integer          default(0)
+#  attack_rating_perc :integer          default(0)
+#  defense_perc       :integer          default(0)
+#  hp                 :integer          default(0)
+#  hp_steal_perc      :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

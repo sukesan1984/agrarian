@@ -77,6 +77,7 @@ Rails.application.routes.draw do
 
   # 装備
   resource :equipment do
+    get 'show_detail/:user_item_id', to: 'equipment#show_detail'
     get  ':character_type/:character_id', to: 'equipment#index'
     post 'equip',   to: 'equipment#equip'
     post 'unequip', to: 'equipment#unequip'

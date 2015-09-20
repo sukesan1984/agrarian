@@ -3,6 +3,13 @@ class EquipmentController < ApplicationController
   before_action :set_factories
   before_action :set_player_character
 
+  def show_detail
+    user_item_id = params[:user_item_id]
+    user_item = @user_item_factory.build_by_player_id_and_user_item_id(@player_character.id, user_item_id)
+
+    @equipment_entity = @equipment_entity_factory.build_by_user_item(user_item)
+  end
+
   # 現在の装備
   # 装備可能アイテム一覧表示
   def index
@@ -67,6 +74,7 @@ class EquipmentController < ApplicationController
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_entity_factory)
     @soldier_character_factory = SoldierCharacterFactory.new(@equipped_list_entity_factory)
     @character_service_factory = CharacterServiceFactory.new(@player_character_factory, @soldier_character_factory)
+    @user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
   end
 
   def set_player_character

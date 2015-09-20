@@ -21,7 +21,7 @@
 
 %h1 装備可能やつ
 - @equipment_entitys.each do |equipment_entity|
-  = equipment_entity.name
+  = link_to(equipment_entity.name, "/equipment/show_detail/#{equipment_entity.user_item_id}")
   attack: #{equipment_entity.attack}
   defense: #{equipment_entity.defense}
   %br/

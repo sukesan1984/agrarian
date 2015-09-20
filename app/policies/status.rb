@@ -32,7 +32,7 @@ class Status
   end
 
   # 説明文をリストで返す
-  def description
+  def descriptions
     description_list = []
     if @attack != 0
       description_list.push("攻撃力: " + @attack.to_s)
@@ -77,6 +77,8 @@ class Status
     if @hp_steal_perc != 0
       description_list.push("HP Steal: +" + @hp_steal_perc.to_s + "%")
     end
+
+    return description_list
   end
 
   def +(other)
