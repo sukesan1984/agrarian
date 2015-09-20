@@ -50,9 +50,9 @@ class EquipmentController < ApplicationController
 
     # 交換するやつ
     ActiveRecord::Base.transaction do
-      exchange_equipped_service = @equipped_service_factory.build_by_user_item_id(user_item_id, @player_character.id)
-      @equipped_list_service.exchange(exchange_equipped_service)
-      exchange_equipped_service.save!
+      exchange_equipped_entity = @equipped_entity_factory.build_by_user_item_id(user_item_id, @player_character.id)
+      @equipped_list_service.exchange(exchange_equipped_entity)
+      exchange_equipped_entity.save!
       @equipped_list_service.save!
     end
     redirect_to '/equipment/' + character_type.to_s + '/' + character_id.to_s
@@ -62,8 +62,8 @@ class EquipmentController < ApplicationController
 
   def set_factories
     @equipment_entity_factory = EquipmentEntityFactory.new
-    @equipped_service_factory = EquippedServiceFactory.new(@equipment_entity_factory)
-    @equipped_list_service_factory = EquippedListServiceFactory.new(@equipped_service_factory)
+    @equipped_entity_factory = EquippedEntityFactory.new(@equipment_entity_factory)
+    @equipped_list_service_factory = EquippedListServiceFactory.new(@equipped_entity_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_service_factory)
     @soldier_character_factory = SoldierCharacterFactory.new(@equipped_list_service_factory)
     @character_service_factory = CharacterServiceFactory.new(@player_character_factory, @soldier_character_factory)

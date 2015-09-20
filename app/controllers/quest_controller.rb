@@ -35,8 +35,8 @@ class QuestController < ApplicationController
 
   def set_factories
     equipment_entity_factory = EquipmentEntityFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_entity_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
+    equipped_entity_factory = EquippedEntityFactory.new(equipment_entity_factory)
+    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_entity_factory)
     user_item_factory = UserItemFactory.new(equipped_list_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
     @quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)

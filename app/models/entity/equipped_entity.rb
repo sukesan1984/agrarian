@@ -1,5 +1,5 @@
 # 装備品
-class EquippedService
+class Entity::EquippedEntity
   def initialize(body_part, equipment_entity)
     @body_part = body_part
     @equipment_entity = equipment_entity
