@@ -31,6 +31,54 @@ class Status
     @hp_steal_perc = hp_steal_perc
   end
 
+  # 説明文をリストで返す
+  def description
+    description_list = []
+    if @attack != 0
+      description_list.push("攻撃力: " + @attack.to_s)
+    end
+
+    if @defense != 0
+      description_list.push("防御力: " + @defense.to_s)
+    end
+
+    if @critical_hit_chance != 0
+      description_list.push("クリティカル発動率: " + @critical_hit_chance.to_s + "%")
+    end
+
+    if @critical_hit_damage != 0
+      description_list.push("クリティカルダメージ: " + @critical_hit_damage.to_s)
+    end
+
+    if @dodge_chance != 0
+      description_list.push("回避率: " + @dodge_chance.to_s + "%")
+    end
+
+    if @damage_reduction != 0
+      description_list.push("被ダメージ減少率: " + @damage_reduction.to_s + "%")
+    end
+
+    if @damage_perc != 0
+      description_list.push("ダメージ上昇率: +" + @damage_perc.to_s + "%")
+    end
+
+    if @attack_rating_perc != 0
+      description_list.push("命中率: +" + @attack_rating_perc.to_s + "%")
+    end
+
+    if @defense_perc != 0
+      description_list.push("防御力アップ率: +" + @defense_perc.to_s + "%")
+    end
+
+    if @hp != 0
+      description_list.push("HP: +" + @hp.to_s)
+    end
+
+    if @hp_steal_perc != 0
+      description_list.push("HP Steal: +" + @hp_steal_perc.to_s + "%")
+    end
+  end
+
   def +(other)
     new_attack = @attack + other.attack
     new_defense = @defense + other.defense

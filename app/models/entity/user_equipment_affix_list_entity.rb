@@ -16,8 +16,10 @@ class Entity::UserEquipmentAffixListEntity
       end
     end
 
-    name = prefix.inject(:+)
-    name += suffix.inject(:+)
+    name = ''
+
+    name = prefix.inject('') {|sum, i| sum + i}
+    name += suffix.inject('') {|sum, i| sum + i}
 
     return name
   end
