@@ -1,6 +1,6 @@
 class EquippedServiceFactory
-  def initialize(equipment_service_factory)
-    @equipment_service_factory = equipment_service_factory
+  def initialize(equipment_entity_factory)
+    @equipment_entity_factory = equipment_entity_factory
   end
 
   def build_by_part_and_user_item_id(part, user_item_id, player_id)
@@ -11,7 +11,7 @@ class EquippedServiceFactory
     user_item = UserItem.find_by(id: user_item_id, player_id: player_id)
     fail 'no user item: ' + user_item_id.to_s unless user_item
 
-    return EquippedService.new(part, @equipment_service_factory.build_by_user_item(user_item))
+    return EquippedService.new(part, @equipment_entity_factory.build_by_user_item(user_item))
   end
 
   # itemからパートを抽出してやる
@@ -26,15 +26,15 @@ class EquippedServiceFactory
     # TODO: refactor
     case (equipment.body_region)
     when 1
-      return EquippedService.new(BodyRegion::Type::RightHand, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::RightHand, @equipment_entity_factory.build_by_user_item(user_item))
     when 2
-      return EquippedService.new(BodyRegion::Type::LeftHand, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::LeftHand, @equipment_entity_factory.build_by_user_item(user_item))
     when 3
-      return EquippedService.new(BodyRegion::Type::Head, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::Head, @equipment_entity_factory.build_by_user_item(user_item))
     when 4
-      return EquippedService.new(BodyRegion::Type::Body, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::Body, @equipment_entity_factory.build_by_user_item(user_item))
     when 5
-      return EquippedService.new(BodyRegion::Type::Leg, @equipment_service_factory.build_by_user_item(user_item))
+      return EquippedService.new(BodyRegion::Type::Leg, @equipment_entity_factory.build_by_user_item(user_item))
     end
   end
 end

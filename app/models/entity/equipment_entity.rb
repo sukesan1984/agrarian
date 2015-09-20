@@ -1,5 +1,5 @@
 # 装備奴
-class EquipmentService
+class Entity::EquipmentEntity
   attr_reader :status
   def initialize(user_item, equipment)
     @user_item = user_item

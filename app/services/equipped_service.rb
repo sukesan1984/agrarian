@@ -1,8 +1,8 @@
 # 装備品
 class EquippedService
-  def initialize(body_part, equipment_service)
+  def initialize(body_part, equipment_entity)
     @body_part = body_part
-    @equipment_service = equipment_service
+    @equipment_entity = equipment_entity
   end
 
   def part_name
@@ -18,38 +18,38 @@ class EquippedService
   end
 
   def name
-    return 'なし' if @equipment_service.nil?
+    return 'なし' if @equipment_entity.nil?
 
-    return @equipment_service.name
+    return @equipment_entity.name
   end
 
   def equipped
-    return !@equipment_service.nil?
+    return !@equipment_entity.nil?
   end
 
   def set_equipped(value)
-    if @equipment_service.nil?
+    if @equipment_entity.nil?
       fail 'cant equip nil equipment' if value
 
       return
     end
 
-    @equipment_service.set_equipped(value)
+    @equipment_entity.set_equipped(value)
   end
 
   def status
-    return Status.new(0, 0, 0, 0, 0, 0) if @equipment_service.nil?
-    return @equipment_service.status
+    return Status.new(0, 0, 0, 0, 0, 0) if @equipment_entity.nil?
+    return @equipment_entity.status
   end
 
   def user_item_id
-    return nil if @equipment_service.nil?
+    return nil if @equipment_entity.nil?
 
-    return @equipment_service.user_item_id
+    return @equipment_entity.user_item_id
   end
 
   def save!
-    @equipment_service.save! if @equipment_service
+    @equipment_entity.save! if @equipment_entity
   end
 end
 

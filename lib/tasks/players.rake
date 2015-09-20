@@ -50,8 +50,8 @@ namespace :players do
     end
 
     def create_item_entity_factory
-      equipment_service_factory     = EquipmentServiceFactory.new
-      equipped_service_factory      = EquippedServiceFactory.new(equipment_service_factory)
+      equipment_entity_factory     = EquipmentEntityFactory.new
+      equipped_service_factory      = EquippedServiceFactory.new(equipment_entity_factory)
       equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
       player_character_factory      = PlayerCharacterFactory.new(equipped_list_service_factory)
 

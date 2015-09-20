@@ -9,7 +9,7 @@ class EquipmentController < ApplicationController
     character_type = params[:character_type]
     character_id   = params[:character_id]
 
-    @equipment_services = @equipment_service_factory.build_list_by_player_id(@player_character.id)
+    @equipment_entitys = @equipment_entity_factory.build_list_by_player_id(@player_character.id)
     @equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
 
     @character_service = @character_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
@@ -21,7 +21,7 @@ class EquipmentController < ApplicationController
     character_id = params[:character_id]
     user_item_id = params[:user_item_id]
 
-    # equipment_service
+    # equipment_entity
 
     # equipped_list_service = @equipped_list_service_factory.build_by_player_id(@player_character.id)
     @equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
@@ -45,7 +45,7 @@ class EquipmentController < ApplicationController
       return
     end
 
-    # equipment_service
+    # equipment_entity
     @equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
 
     # 交換するやつ
@@ -61,8 +61,8 @@ class EquipmentController < ApplicationController
   end
 
   def set_factories
-    @equipment_service_factory = EquipmentServiceFactory.new
-    @equipped_service_factory = EquippedServiceFactory.new(@equipment_service_factory)
+    @equipment_entity_factory = EquipmentEntityFactory.new
+    @equipped_service_factory = EquippedServiceFactory.new(@equipment_entity_factory)
     @equipped_list_service_factory = EquippedListServiceFactory.new(@equipped_service_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_service_factory)
     @soldier_character_factory = SoldierCharacterFactory.new(@equipped_list_service_factory)

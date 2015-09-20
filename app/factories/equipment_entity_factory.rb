@@ -1,4 +1,4 @@
-class EquipmentServiceFactory
+class EquipmentEntityFactory
   ABILITY_ID = 100001
 
   def initialize
@@ -13,19 +13,19 @@ class EquipmentServiceFactory
     user_items = UserItem.where('player_id = ? and item_id in (?)', player_id, item_ability_lists.map(&:item_id))
                  .select { |user_item| user_item.equipped == 0 }
 
-    equipment_services = []
+    equipment_entitys = []
     user_items.each do |user_item|
       next if user_item.count == 0
-      equipment_services.push(build_by_user_item(user_item))
+      equipment_entitys.push(build_by_user_item(user_item))
     end
 
-    return equipment_services
+    return equipment_entitys
   end
 
   def build_by_user_item(user_item)
     equipment = Equipment.find_by(item_id: user_item.item_id)
     fail 'no such item' unless equipment
-    return EquipmentService.new(user_item, equipment)
+    return Entity::EquipmentEntity.new(user_item, equipment)
   end
 end
 

@@ -20,14 +20,14 @@
           \#{submit_tag("外す")}
 
 %h1 装備可能やつ
-- @equipment_services.each do |equipment_service|
-  = equipment_service.name
-  attack: #{equipment_service.attack}
-  defense: #{equipment_service.defense}
+- @equipment_entitys.each do |equipment_entity|
+  = equipment_entity.name
+  attack: #{equipment_entity.attack}
+  defense: #{equipment_entity.defense}
   %br/
   = form_tag('/equipment/equip', method: "post") do
     \#{hidden_field_tag(:character_type, @character_service.type)}
     \#{hidden_field_tag(:character_id, @character_service.id)}
-    \#{hidden_field_tag(:user_item_id, equipment_service.user_item_id)}
+    \#{hidden_field_tag(:user_item_id, equipment_entity.user_item_id)}
     \#{submit_tag("装備する")}
 = link_to("戻る", root_path)
