@@ -7,6 +7,7 @@ class BankActivityService
   # valueだけ入金する
   def deposit(value)
     return false unless value.is_a?(Integer)
+    return false if value < 0
     ActiveRecord::Base.transaction do
       return false unless @player.has_enough_rails?(value)
       Rails.logger.debug("hogehoge")
@@ -23,6 +24,7 @@ class BankActivityService
   # valueだけ出金する
   def draw(value)
     return false unless value.is_a?(Integer)
+    return false if value < 0
     ActiveRecord::Base.transaction do
       return false unless @user_bank.has_enough_rails?(value)
 
