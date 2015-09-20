@@ -38,7 +38,7 @@ class RecipeController < ApplicationController
     @quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
 
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_entity_factory)
-    @item_entity_factory = ItemEntityFactory.new(@player_character_factory, @user_item_factory, @quest_entity_factory)
+    @item_entity_factory = ItemEntityFactory.new(@player_character_factory, @user_item_factory, @quest_entity_factory, equipment_entity_factory)
   end
 
   def set_player_character

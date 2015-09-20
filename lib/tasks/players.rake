@@ -60,7 +60,7 @@ namespace :players do
       quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
       quest_entity_factory = Quest::QuestEntityFactory.new(player_character_factory, quest_condition_entity_factory)
 
-      item_entity_factory = ItemEntityFactory.new(player_character_factory, user_item_factory, quest_entity_factory)
+      item_entity_factory = ItemEntityFactory.new(player_character_factory, user_item_factory, quest_entity_factory, equipment_entity_factory)
 
       return item_entity_factory
     end

@@ -1,8 +1,9 @@
 class ItemEntityFactory
-  def initialize(player_character_factory, user_item_factory, quest_entity_factory)
+  def initialize(player_character_factory, user_item_factory, quest_entity_factory, equipment_entity_factory)
     @player_character_factory = player_character_factory
     @user_item_factory = user_item_factory
     @quest_entity_factory = quest_entity_factory
+    @equipment_entity_factory = equipment_entity_factory
   end
 
   def build_by_player_id_and_item_id_and_count(player_id, item_id, count)
@@ -15,8 +16,10 @@ class ItemEntityFactory
     user_item = @user_item_factory.build_by_player_id_and_item(player.id, item)
 
     case item.item_type
-    when 1, 2, 4
+    when 1, 4
       return Entity::Item::ConsumeItemEntity.new(user_item, count, item_id)
+    when 2
+      return @equipment_entity_factory.build_by_user_item(user_item)
     when 3
       return Entity::Item::SoldierItemEntity.new(player, user_item, item_id)
     when 5

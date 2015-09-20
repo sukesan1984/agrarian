@@ -9,6 +9,23 @@ class Entity::EquipmentEntity
     self.update_affix_status
   end
 
+  def item_id
+    return @user_item.item.id
+  end
+
+  def count
+    return 1
+  end
+
+  def current_count
+    return @user_item.count
+  end
+
+  def give
+    @user_item.count = 1
+    return true
+  end
+
   def has_affixes
     return @user_equipment_affix_list.has_affixes
   end
@@ -51,6 +68,10 @@ class Entity::EquipmentEntity
   def save!
     @user_item.save!
     @user_equipment_affix_list.save!
+  end
+
+  def result
+    return 'ゲットしたで'
   end
 
   def update_affix_status
