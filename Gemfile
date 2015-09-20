@@ -58,6 +58,9 @@ gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'sync_fixes'
 # for redis
 gem 'redis-objects'
 
+# random bell
+gem 'random_bell', github: 's-osa/random_bell'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

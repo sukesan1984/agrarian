@@ -3,11 +3,11 @@
 %h1 今装備してるやつ
 .equipment-status
   攻撃力
-  = @equipped_list_service.status.attack
+  = @equipped_list_entity.status.attack
 .equipment-status
   防御力
-  = @equipped_list_service.status.defense
-- @equipped_list_service.list.each do |part|
+  = @equipped_list_entity.status.defense
+- @equipped_list_entity.list.each do |part|
   .equipped
     = part.part_name
     = part.name
@@ -20,14 +20,14 @@
           \#{submit_tag("外す")}
 
 %h1 装備可能やつ
-- @equipment_services.each do |equipment_service|
-  = equipment_service.name
-  attack: #{equipment_service.attack}
-  defense: #{equipment_service.defense}
+- @equipment_entitys.each do |equipment_entity|
+  = link_to(equipment_entity.name, "/equipment/show_detail/#{equipment_entity.user_item_id}")
+  attack: #{equipment_entity.attack}
+  defense: #{equipment_entity.defense}
   %br/
   = form_tag('/equipment/equip', method: "post") do
     \#{hidden_field_tag(:character_type, @character_service.type)}
     \#{hidden_field_tag(:character_id, @character_service.id)}
-    \#{hidden_field_tag(:user_item_id, equipment_service.user_item_id)}
+    \#{hidden_field_tag(:user_item_id, equipment_entity.user_item_id)}
     \#{submit_tag("装備する")}
 = link_to("戻る", root_path)

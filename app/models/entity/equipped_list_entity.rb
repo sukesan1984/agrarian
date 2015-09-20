@@ -1,5 +1,5 @@
 # ある人の装備全体
-class EquippedListService
+class Entity::EquippedListEntity
   attr_accessor :right_hand, :left_hand, :both_hand, :head, :body, :leg
   def initialize(equipment_model:, right_hand:, left_hand:, both_hand:, head:, body:, leg:)
     Rails.logger.debug(right_hand)
@@ -23,9 +23,9 @@ class EquippedListService
     ]
   end
 
-  # equipped_service
-  def exchange(equipped_service)
-    equip_target_body_part(equipped_service)
+  # equipped_entity
+  def exchange(equipped_entity)
+    equip_target_body_part(equipped_entity)
   end
 
   # 対象のuser_itemを装備しているか
@@ -57,7 +57,7 @@ class EquippedListService
   end
 
   def status
-    return list.inject(Status.new(0, 0, 0, 0, 0, 0)) { |sum, equipment_service| sum + equipment_service.status }
+    return list.inject(Status.new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)) { |sum, equipment_entity| sum + equipment_entity.status }
   end
 
   def save!
@@ -75,18 +75,18 @@ class EquippedListService
 
   private
 
-  def equip_target_body_part(equipped_service)
-    equipped_service.set_equipped(true)
-    body_part = send(equipped_service.part_variable_name)
+  def equip_target_body_part(equipped_entity)
+    equipped_entity.set_equipped(true)
+    body_part = send(equipped_entity.part_variable_name)
     body_part.set_equipped(false)
-    body_part = equipped_service
-    @equipment_model.send("#{equipped_service.part_variable_name}=", equipped_service.user_item_id)
+    body_part = equipped_entity
+    @equipment_model.send("#{equipped_entity.part_variable_name}=", equipped_entity.user_item_id)
   end
 
   def unequip_target_body_part(body_part)
     body_part.set_equipped(false)
     @modified[body_part.part_id] = body_part
-    send("#{body_part.part_variable_name}=", EquippedService.new(BodyRegion.get_by_variable_name(body_part.part_variable_name), nil))
+    send("#{body_part.part_variable_name}=", Entity::EquippedEntity.new(BodyRegion.get_by_variable_name(body_part.part_variable_name), nil))
     @equipment_model.send("#{body_part.part_variable_name}=", 0)
   end
 end

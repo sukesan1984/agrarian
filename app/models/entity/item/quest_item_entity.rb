@@ -1,4 +1,4 @@
-class Entity::Item::QuestItemEntity
+class Entity::Item::QuestItemEntity < Entity::ItemEntity
   attr_reader :item_id
   def initialize(quest_entity, item_id)
     @quest_entity = quest_entity

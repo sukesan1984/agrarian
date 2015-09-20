@@ -22,6 +22,12 @@ GIT
       thin
 
 GIT
+  remote: git://github.com/s-osa/random_bell.git
+  revision: bec0b8df6be0d0d591d6ab0da6f54bd2138bb6f7
+  specs:
+    random_bell (0.1.1)
+
+GIT
   remote: https://github.com/intridea/grape.git
   revision: b480feda7754a774848eb1ded7a7219f6bdecc3c
   specs:
@@ -448,6 +454,7 @@ DEPENDENCIES
   parallel
   pry-rails
   rails (= 4.2.0)
+  random_bell!
   redis-objects
   rspec-collection_matchers
   rspec-rails
@@ -467,3 +474,6 @@ DEPENDENCIES
   unicorn
   web-console (~> 2.0)
   websocket-rails!
+
+BUNDLED WITH
+   1.10.6

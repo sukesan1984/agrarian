@@ -1,4 +1,4 @@
-class Entity::Item::SoldierItemEntity
+class Entity::Item::SoldierItemEntity < Entity::ItemEntity
   attr_reader :item_id
   def initialize(player, soldier, item_id)
     @player  = player

@@ -1,10 +1,10 @@
 # アイテム投棄サービス
 class Item::ItemThrowService
   # プレイヤーがアイテムをどこに捨てるのか
-  def initialize(user_item, thrown_item, equipped_list_service)
+  def initialize(user_item, thrown_item, equipped_list_entity)
     @user_item = user_item
     @thrown_item = thrown_item
-    @equipped_list_service = equipped_list_service
+    @equipped_list_entity = equipped_list_entity
   end
 
   # 実際に捨てる

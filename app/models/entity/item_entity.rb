@@ -2,6 +2,10 @@ class Entity::ItemEntity
   def initialize
   end
 
+  def equipment?
+    return false
+  end
+
   def give
   end
 

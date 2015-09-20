@@ -1,10 +1,10 @@
 class Entity::SoldierCharacterEntity
   attr_reader :type
-  def initialize(user_soldier, equipped_list_service)
+  def initialize(user_soldier, equipped_list_entity)
     @type = 2
     @user_soldier = user_soldier
     @soldier = user_soldier.soldier
-    @equipped_list_service = equipped_list_service
+    @equipped_list_entity = equipped_list_entity
 
     @level = Level.get_level_from(user_soldier.exp)
     @level_max = Level.find_by(level: @soldier.level_max)
@@ -21,7 +21,7 @@ class Entity::SoldierCharacterEntity
 
     dodge_chance = StatusCalculationUtility.calculate(@soldier.dodge_chance_min, @soldier.dodge_chance_max, @soldier.level_max, @level.level)
 
-    @status = Status.new(attack, defense, critical_hit_chance, critical_hit_damage, dodge_chance, 0)
+    @status = Status.new(attack, defense, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0)
   end
 
   def id
@@ -41,23 +41,23 @@ class Entity::SoldierCharacterEntity
   end
 
   def attack
-    return (@status + @equipped_list_service.status).attack
+    return (@status + @equipped_list_entity.status).attack
   end
 
   def defense
-    return (@status + @equipped_list_service.status).defense
+    return (@status + @equipped_list_entity.status).defense
   end
 
   def critical_hit_chance
-    return (@status + @equipped_list_service.status).critical_hit_chance
+    return (@status + @equipped_list_entity.status).critical_hit_chance
   end 
 
   def critical_hit_damage
-    return (@status + @equipped_list_service.status).critical_hit_damage
+    return (@status + @equipped_list_entity.status).critical_hit_damage
   end
 
   def dodge_chance
-    return (@status + @equipped_list_service.status).dodge_chance
+    return (@status + @equipped_list_entity.status).dodge_chance
   end
 
   def hp

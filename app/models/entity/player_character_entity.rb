@@ -1,10 +1,10 @@
 class Entity::PlayerCharacterEntity
   attr_reader :player, :type
-  def initialize(player, equipped_list_service)
+  def initialize(player, equipped_list_entity)
     @player = player
     @type   = 1
-    @equipped_list_service = equipped_list_service
-    @status = Status.new(5, 3, 500, 50, 0, 0)
+    @equipped_list_entity = equipped_list_entity
+    @status = Status.new(5, 3, 500, 50, 0, 0, 0, 0, 0, 0, 0)
     @hp = StatusPoint.new(player.hp, player.hp_max)
   end
 
@@ -17,23 +17,23 @@ class Entity::PlayerCharacterEntity
   end
 
   def attack
-    return (@status + @equipped_list_service.status).attack
+    return (@status + @equipped_list_entity.status).attack
   end
 
   def defense
-    return (@status + @equipped_list_service.status).defense
+    return (@status + @equipped_list_entity.status).defense
   end
 
   def critical_hit_chance
-    return (@status + @equipped_list_service.status).critical_hit_chance
+    return (@status + @equipped_list_entity.status).critical_hit_chance
   end
 
   def critical_hit_damage
-    return (@status + @equipped_list_service.status).critical_hit_damage
+    return (@status + @equipped_list_entity.status).critical_hit_damage
   end
 
   def dodge_chance
-    return (@status + @equipped_list_service.status).dodge_chance
+    return (@status + @equipped_list_entity.status).dodge_chance
   end
 
   def id

@@ -83,19 +83,19 @@ class BattleController < ApplicationController
 
   def set_factories
     # factory
-    equipment_service_factory = EquipmentServiceFactory.new
-    equipped_service_factory = EquippedServiceFactory.new(equipment_service_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    equipment_entity_factory = EquipmentEntityFactory.new
+    equipped_entity_factory = EquippedEntityFactory.new(equipment_entity_factory)
+    equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
+    @player_character_factory = PlayerCharacterFactory.new(equipped_list_entity_factory)
 
-    @soldier_character_factory = SoldierCharacterFactory.new(equipped_list_service_factory)
+    @soldier_character_factory = SoldierCharacterFactory.new(equipped_list_entity_factory)
 
     item_lottery_component_factory = ItemLotteryComponentFactory.new
-    user_item_factory = UserItemFactory.new(equipped_list_service_factory)
+    user_item_factory = UserItemFactory.new(equipped_list_entity_factory)
 
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
-    item_entity_factory = ItemEntityFactory.new(@player_character_factory, user_item_factory, quest_entity_factory)
+    item_entity_factory = ItemEntityFactory.new(@player_character_factory, user_item_factory, quest_entity_factory, equipment_entity_factory)
     @enemy_character_factory = EnemyCharacterFactory.new(item_lottery_component_factory, item_entity_factory)
 
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)

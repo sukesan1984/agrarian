@@ -18,6 +18,7 @@
 #  critical_hit_damage   :integer          default(0), not null
 #  dodge_chance          :integer          default(0), not null
 #  damage_reduction      :integer          default(0), not null
+#  item_rarity           :integer
 #
 
 FactoryGirl.define do

@@ -8,7 +8,7 @@ class ShopController < ApplicationController
   def index
     redirect_to player_input_path if @player_character.nil?
 
-    user_item_factory = UserItemFactory.new(@equipped_list_service_factory)
+    user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
 
     @showcases = []
     @shop.showcases.each do |showcase|
@@ -28,8 +28,7 @@ class ShopController < ApplicationController
 
     resource_service = @resource_service_factory.build_by_target_id_and_resource(@area_node.id, @resource)
 
-    item_entity_factory = ItemEntityFactory.new(@player_character_factory, UserItemFactory.new(@player_character), @quest_entity_factory)
-    item_service = item_entity_factory.build_by_player_id_and_item_id_and_count(@player_character.id, resource_service.item.id, 1)
+    item_service = @item_entity_factory.build_by_player_id_and_item_id_and_count(@player_character.id, resource_service.item.id, 1)
 
     resource_purchase_service = ResourceAction::ResourcePurchaseService.new(resource_service, item_service, @player_character.player, showcase)
 
@@ -46,13 +45,14 @@ class ShopController < ApplicationController
 
   def set_factories
     @resource_service_factory      = ResourceServiceFactory.new
-    equipment_service_factory      = EquipmentServiceFactory.new
-    equipped_service_factory       = EquippedServiceFactory.new(equipment_service_factory)
-    @equipped_list_service_factory = EquippedListServiceFactory.new(equipped_service_factory)
-    @player_character_factory      = PlayerCharacterFactory.new(@equipped_list_service_factory)
-    user_item_factory = UserItemFactory.new(@equipped_list_service_factory)
+    equipment_entity_factory      = EquipmentEntityFactory.new
+    equipped_entity_factory       = EquippedEntityFactory.new(equipment_entity_factory)
+    @equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
+    @player_character_factory      = PlayerCharacterFactory.new(@equipped_list_entity_factory)
+    user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
     @quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     @quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, @quest_condition_entity_factory)
+    @item_entity_factory = ItemEntityFactory.new(@player_character_factory, UserItemFactory.new(@player_character), @quest_entity_factory, equipment_entity_factory)
   end
 
   def set_player_character
