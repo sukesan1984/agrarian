@@ -4,7 +4,7 @@ class Entity::PlayerCharacterEntity
     @player = player
     @type   = 1
     @equipped_list_entity = equipped_list_entity
-    @status = Status.new(5, 3, 500, 50, 0, 0)
+    @status = Status.new(5, 3, 500, 50, 0, 0, 0, 0, 0, 0, 0)
     @hp = StatusPoint.new(player.hp, player.hp_max)
   end
 

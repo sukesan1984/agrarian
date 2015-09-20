@@ -21,7 +21,7 @@ class Entity::SoldierCharacterEntity
 
     dodge_chance = StatusCalculationUtility.calculate(@soldier.dodge_chance_min, @soldier.dodge_chance_max, @soldier.level_max, @level.level)
 
-    @status = Status.new(attack, defense, critical_hit_chance, critical_hit_damage, dodge_chance, 0)
+    @status = Status.new(attack, defense, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0)
   end
 
   def id

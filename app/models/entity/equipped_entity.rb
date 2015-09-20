@@ -39,7 +39,7 @@ class Entity::EquippedEntity
   end
 
   def status
-    return Status.new(0, 0, 0, 0, 0, 0) if @equipment_entity.nil?
+    return Status.new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if @equipment_entity.nil?
     return @equipment_entity.status
   end
 
