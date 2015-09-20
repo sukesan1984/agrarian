@@ -19,6 +19,18 @@
 #
 
 class UserEquipmentAffix < ActiveRecord::Base
-  has_one :equipment_affix
+  belongs_to :equipment_affix
   belongs_to :user_item
+
+  def name
+    return self.equipment_affix.name
+  end
+
+  def prefix?
+    return self.equipment_affix.prefix?
+  end
+
+  def suffix?
+    return self.equipment_affix.suffix?
+  end
 end
