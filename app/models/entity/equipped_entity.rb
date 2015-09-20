@@ -1,4 +1,5 @@
 # 装備品
+# 装備されているものとして扱っている。
 class Entity::EquippedEntity
   def initialize(body_part, equipment_entity)
     @body_part = body_part

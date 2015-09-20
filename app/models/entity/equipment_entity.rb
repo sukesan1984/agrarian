@@ -1,4 +1,5 @@
 # 装備奴
+# 装備される前のやつ
 class Entity::EquipmentEntity
   attr_reader :status
   def initialize(user_item, equipment)
