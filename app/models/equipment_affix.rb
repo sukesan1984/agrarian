@@ -23,4 +23,16 @@
 #
 
 class EquipmentAffix < ActiveRecord::Base
+  module AffixType
+    Prefix = 1
+    Suffix = 2
+  end
+
+  def prefix?
+    return self.affix_type == AffixType::Prefix
+  end
+
+  def suffix?
+    return self.affix_type == AffixType::Suffix
+  end
 end

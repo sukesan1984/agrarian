@@ -25,5 +25,15 @@
 require 'rails_helper'
 
 RSpec.describe EquipmentAffix, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'prefix?' do
+    equipment_affix = build(:equipment_affix, affix_type: 1)
+    expect(equipment_affix.prefix?).to eq true
+    expect(equipment_affix.suffix?).to eq false 
+  end
+
+  it 'suffix?' do
+    equipment_affix = build(:equipment_affix, affix_type: 2)
+    expect(equipment_affix.prefix?).to eq false 
+    expect(equipment_affix.suffix?).to eq true
+  end
 end
