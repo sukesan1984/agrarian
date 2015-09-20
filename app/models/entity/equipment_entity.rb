@@ -4,12 +4,13 @@ class Entity::EquipmentEntity
   attr_reader :status
   def initialize(user_item, equipment)
     @user_item = user_item
+    @user_equipment_affix_list = Entity::UserEquipmentAffixListEntity.new(@user_item.user_equipment_affixes)
     @equipment = equipment
-    @status    = Status.new(equipment.attack, equipment.defense, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    @status    = Status.new(equipment.attack, equipment.defense, 0, 0, 0, 0, 0, 0, 0, 0, 0) + @user_equipment_affix_list.status
   end
 
   def name
-    return @user_item.item.name
+    return @user_equipment_affix_list.name + @user_item.item.name
   end
 
   def attack

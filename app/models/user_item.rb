@@ -17,6 +17,7 @@
 
 class UserItem < ActiveRecord::Base
   belongs_to :item
+  has_many :user_equipment_affixes, :dependent => :delete_all
 
   def increase(value)
     after_count = count + value
