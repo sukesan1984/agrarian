@@ -33,4 +33,12 @@ class UserEquipmentAffix < ActiveRecord::Base
   def suffix?
     return self.equipment_affix.suffix?
   end
+
+  def status
+    return @status if @status
+
+    @status = Status.new(0, 0, 0, 0, 0, 0, self.damage_perc, self.attack_rating_perc, self.defense_perc, self.hp, self.hp_steal_perc)
+
+    return @status
+  end
 end

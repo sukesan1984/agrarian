@@ -22,4 +22,7 @@ class Entity::UserEquipmentAffixListEntity
     return name
   end
 
+  def status
+    return @user_affixes.map(&:status).inject(:+)
+  end
 end

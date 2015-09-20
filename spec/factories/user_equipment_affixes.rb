@@ -20,13 +20,13 @@
 
 FactoryGirl.define do
   factory :user_equipment_affix do
-    user_item_id 1
-equipment_affix_id 1
-damage_perc 1
-attack_rating_perc 1
-defense_perc 1
-hp 1
-hp_steal_perc 1
+    user_item_id 0
+equipment_affix_id 0
+damage_perc 0
+attack_rating_perc 0
+defense_perc 0
+hp 0
+hp_steal_perc 0
   end
 
 end
