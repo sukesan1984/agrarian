@@ -31,4 +31,14 @@ class Entity::UserEquipmentAffixListEntity
     return zero_status unless statuses
     return statuses
   end
+
+  def has_affixes
+    return @user_affixes != nil && @user_affixes.count > 0
+  end
+
+  def save!
+    @user_affixes.each do |user_affix|
+      user_affix.save!
+    end
+  end
 end
