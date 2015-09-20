@@ -22,6 +22,10 @@ class EnemyCharacterFactory
     else
       drop_item = item_lottery_component.lot
       drop_item_entity = @item_entity_factory.build_by_player_id_and_item_id_and_count(player_id, drop_item.item_id, drop_item.count)
+      # 装備品ならば、色付けも行う
+      if drop_item_entity.equipment?
+        EquipmentColoringService::make_equipment_colored(drop_item_entity, enemy.item_rarity)
+      end
     end
 
     return Entity::EnemyCharacterEntity.new(enemy, user_progress, drop_item_entity)

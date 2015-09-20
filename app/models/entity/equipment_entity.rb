@@ -13,6 +13,10 @@ class Entity::EquipmentEntity < Entity::ItemEntity
     return true
   end 
 
+  def user_item_id
+    return @user_item.id
+  end
+
   def item_id
     return @user_item.item.id
   end
@@ -38,6 +42,7 @@ class Entity::EquipmentEntity < Entity::ItemEntity
     return if self.has_affixes
 
     @user_equipment_affix_list = Entity::UserEquipmentAffixListEntity.new(user_equipment_affixes)
+    @user_item.user_equipment_affixes = user_equipment_affixes
     self.update_affix_status
   end
 
@@ -55,10 +60,6 @@ class Entity::EquipmentEntity < Entity::ItemEntity
 
   def defense
     return @equipment.defense
-  end
-
-  def user_item_id
-    return @user_item.id
   end
 
   def set_equipped(value)

@@ -3,8 +3,8 @@
 # Table name: user_equipment_affixes
 #
 #  id                 :integer          not null, primary key
-#  user_item_id       :integer
-#  equipment_affix_id :integer
+#  user_item_id       :integer          not null
+#  equipment_affix_id :integer          not null
 #  damage_perc        :integer          default(0)
 #  attack_rating_perc :integer          default(0)
 #  defense_perc       :integer          default(0)

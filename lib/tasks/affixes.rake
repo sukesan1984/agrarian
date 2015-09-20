@@ -35,7 +35,7 @@ namespace :affix do
 
     equipment_entity = equipment_entity_factory.build_by_user_item(user_item)
 
-    MagicAffixCreationService.new(equipment_entity).apply_magic(item_rarity)
+    MagicAffixCreationService::apply_magic(equipment_entity, item_rarity)
 
     puts equipment_entity.name
     puts equipment_entity.descriptions
