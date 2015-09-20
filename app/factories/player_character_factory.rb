@@ -1,9 +1,9 @@
 # PlayerCharacterを生成する奴
 class PlayerCharacterFactory
-  def initialize(equipped_list_service_factory)
+  def initialize(equipped_list_entity_factory)
     @player_character_dictionary = {}
     @player_character_dictionary_for_player_id = {}
-    @equipped_list_service_factory = equipped_list_service_factory
+    @equipped_list_entity_factory = equipped_list_entity_factory
   end
 
   def build_by_user_id(user_id)
@@ -31,8 +31,8 @@ class PlayerCharacterFactory
   private
 
   def build_by_player(player)
-    equipped_list_service = @equipped_list_service_factory.build_by_player_id(player.id)
-    player_character = Entity::PlayerCharacterEntity.new(player, equipped_list_service)
+    equipped_list_entity = @equipped_list_entity_factory.build_by_player_id(player.id)
+    player_character = Entity::PlayerCharacterEntity.new(player, equipped_list_entity)
     @player_character_dictionary[player.user_id] = player_character
     @player_character_dictionary_for_player_id[player.id] = player_character
     return player_character

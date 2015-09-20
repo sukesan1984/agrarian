@@ -1,6 +1,6 @@
 class SoldierCharacterFactory
-  def initialize(equipped_list_service_factory)
-    @equipped_list_service_factory = equipped_list_service_factory
+  def initialize(equipped_list_entity_factory)
+    @equipped_list_entity_factory = equipped_list_entity_factory
   end
 
   def build_party_by_player_id(player_id)
@@ -26,8 +26,8 @@ class SoldierCharacterFactory
   private
 
   def build_by_user_soldier(user_soldier, player_id)
-    equipped_list_service = @equipped_list_service_factory.build_by_character_type_and_character_id_and_player_id(2, user_soldier.id, player_id)
-    return Entity::SoldierCharacterEntity.new(user_soldier, equipped_list_service)
+    equipped_list_entity = @equipped_list_entity_factory.build_by_character_type_and_character_id_and_player_id(2, user_soldier.id, player_id)
+    return Entity::SoldierCharacterEntity.new(user_soldier, equipped_list_entity)
   end
 
   def build_by_user_soldiers(user_soldiers, player_id)

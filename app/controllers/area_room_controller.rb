@@ -23,8 +23,8 @@ class AreaRoomController < WebsocketRails::BaseController
   def set_factories
     equipment_entity_factory      = EquipmentEntityFactory.new
     equipped_entity_factory       = EquippedEntityFactory.new(equipment_entity_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_entity_factory)
-    @player_character_factory      = PlayerCharacterFactory.new(equipped_list_service_factory)
+    equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
+    @player_character_factory      = PlayerCharacterFactory.new(equipped_list_entity_factory)
   end
 
   def set_player_character

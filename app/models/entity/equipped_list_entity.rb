@@ -1,5 +1,5 @@
 # ある人の装備全体
-class EquippedListService
+class Entity::EquippedListEntity
   attr_accessor :right_hand, :left_hand, :both_hand, :head, :body, :leg
   def initialize(equipment_model:, right_hand:, left_hand:, both_hand:, head:, body:, leg:)
     Rails.logger.debug(right_hand)

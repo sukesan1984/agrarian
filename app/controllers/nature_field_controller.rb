@@ -26,8 +26,8 @@ class NatureFieldController < ApplicationController
     # factory
     equipment_entity_factory = EquipmentEntityFactory.new
     equipped_entity_factory = EquippedEntityFactory.new(equipment_entity_factory)
-    equipped_list_service_factory = EquippedListServiceFactory.new(equipped_entity_factory)
-    @player_character_factory = PlayerCharacterFactory.new(equipped_list_service_factory)
+    equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
+    @player_character_factory = PlayerCharacterFactory.new(equipped_list_entity_factory)
     resource_service_action_factory =
       ResourceActionServiceFactory.new(@player_character_factory)
     resource_service_fatory = ResourceServiceFactory.new

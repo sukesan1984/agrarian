@@ -1,4 +1,4 @@
-class EquippedListServiceFactory
+class EquippedListEntityFactory
   def initialize(equipped_entity_factory)
     @equipped_entity_factory = equipped_entity_factory
   end
@@ -28,7 +28,7 @@ class EquippedListServiceFactory
   private
 
   def build_by_equipment_and_player_id(equipment_model, player_id)
-    return EquippedListService.new(
+    return Entity::EquippedListEntity.new(
       equipment_model: equipment_model,
       right_hand: @equipped_entity_factory.build_by_part_and_user_item_id(BodyRegion::Type::RightHand, equipment_model.right_hand, player_id),
       left_hand: @equipped_entity_factory.build_by_part_and_user_item_id(BodyRegion::Type::LeftHand, equipment_model.left_hand, player_id),
