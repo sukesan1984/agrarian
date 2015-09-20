@@ -1,4 +1,4 @@
-class Entity::Item::MoneyItemEntity
+class Entity::Item::MoneyItemEntity  < Entity::ItemEntity
   attr_reader :item_id
   def initialize(player, count, item_id)
     @player = player

@@ -1,6 +1,6 @@
 # 装備奴
 # 装備される前のやつ
-class Entity::EquipmentEntity
+class Entity::EquipmentEntity < Entity::ItemEntity
   attr_reader :status
   def initialize(user_item, equipment)
     @user_item = user_item
@@ -8,6 +8,10 @@ class Entity::EquipmentEntity
     @equipment = equipment
     self.update_affix_status
   end
+
+  def equipment?
+    return true
+  end 
 
   def item_id
     return @user_item.item.id
