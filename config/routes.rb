@@ -83,6 +83,11 @@ Rails.application.routes.draw do
     post 'unequip', to: 'equipment#unequip'
   end
 
+  # キャラ
+  resource :character do
+    get 'status/:character_type/:character_id', to: 'character#status'
+  end
+
   # クエストの奴
   resource :quest do
     get  '',      to: 'quest#index'
