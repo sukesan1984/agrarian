@@ -20,7 +20,9 @@ class Battle::Encounter
       # 遭遇しなかった
       return { is_encount: false, enemies: nil } unless lot
 
-      enemy_count = rand(1..3)
+      return { is_encount: false, enemies: nil } if @area.enemy_num <= 0
+
+      enemy_count = rand(1..@area.enemy_num)
       list = @enemies_lottery.lot(enemy_count)
 
       UserEncounterEnemy.delete_all(['player_id = ?', @player.id])
