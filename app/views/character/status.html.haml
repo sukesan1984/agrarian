@@ -1,10 +1,37 @@
 %h1
   = @character_entity.name
 
-%ul.uk-list.uk-list-striped
-  %li STR: #{@character_entity.strength}
-  %li DEX: #{@character_entity.dexterity}
-  %li VIT: #{@character_entity.vitality}
-  %li ENE: #{@character_entity.energy}
+- if @character_entity.remaining_points <= 0
+  %ul.uk-list.uk-list-striped
+    %li STR: #{@character_entity.strength}
+    %li DEX: #{@character_entity.dexterity}
+    %li VIT: #{@character_entity.vitality}
+    %li ENE: #{@character_entity.energy}
+- else
+  %ul.uk-list.uk-list-striped
+    %li STR: #{@character_entity.strength} 
+    = form_tag('/character/status/increase', method: 'post') do
+      \#{hidden_field_tag(:character_type, @character_entity.type)}
+      \#{hidden_field_tag(:character_id, @character_entity.id)}
+      \#{hidden_field_tag(:status_type, 1)}
+      \#{submit_tag("1上げる")}
+    %li DEX: #{@character_entity.dexterity}
+    = form_tag('/character/status/increase', method: 'post') do
+      \#{hidden_field_tag(:character_type, @character_entity.type)}
+      \#{hidden_field_tag(:character_id, @character_entity.id)}
+      \#{hidden_field_tag(:status_type, 2)}
+      \#{submit_tag("1上げる")}
+    %li VIT: #{@character_entity.vitality}
+    = form_tag('/character/status/increase', method: 'post') do
+      \#{hidden_field_tag(:character_type, @character_entity.type)}
+      \#{hidden_field_tag(:character_id, @character_entity.id)}
+      \#{hidden_field_tag(:status_type, 3)}
+      \#{submit_tag("1上げる")}
+    %li ENE: #{@character_entity.energy}
+    = form_tag('/character/status/increase', method: 'post') do
+      \#{hidden_field_tag(:character_type, @character_entity.type)}
+      \#{hidden_field_tag(:character_id, @character_entity.id)}
+      \#{hidden_field_tag(:status_type, 4)}
+      \#{submit_tag("1上げる")}
 
 = link_to('戻る', root_path)

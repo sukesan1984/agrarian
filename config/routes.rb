@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   # キャラ
   resource :character do
     get 'status/:character_type/:character_id', to: 'character#status'
+    post 'status/increase', to: 'character#increase'
   end
 
   # クエストの奴

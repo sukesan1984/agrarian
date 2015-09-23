@@ -1,15 +1,10 @@
-class Entity::SoldierCharacterEntity
-  attr_reader :type, :strength, :dexterity, :vitality, :energy, :remaining_points
+class Entity::SoldierCharacterEntity < Entity::CharacterEntity
+  attr_reader :type
   def initialize(user_soldier, equipped_list_entity)
     @type = 2
     @user_soldier = user_soldier
     @soldier = user_soldier.soldier
     @equipped_list_entity = equipped_list_entity
-    @strength = 0
-    @dexterity = 0
-    @vitality = 0
-    @energy = 0
-    @remaining_points = 0
 
     @level = Level.get_level_from(user_soldier.exp)
     @level_max = Level.find_by(level: @soldier.level_max)

@@ -1,4 +1,4 @@
-class Entity::PlayerCharacterEntity
+class Entity::PlayerCharacterEntity < Entity::CharacterEntity
   attr_reader :player, :type
   def initialize(player, equipped_list_entity)
     @player = player
@@ -28,16 +28,40 @@ class Entity::PlayerCharacterEntity
     return @player.str
   end
 
+  def increase_strength(value)
+    return if (@player.remaining_points < value)
+    @player.str += value
+    @player.remaining_points -= value
+  end
+
   def dexterity
     return @player.dex
+  end
+
+  def increase_dexterity(value)
+    return if (@player.remaining_points < value)
+    @player.dex += value
+    @player.remaining_points -= value
   end
 
   def vitality
     return @player.vit
   end
 
+  def increase_vitality(value)
+    return if (@player.remaining_points < value)
+    @player.vit += value
+    @player.remaining_points -= value
+  end
+
   def energy
     return @player.ene
+  end
+
+  def increase_energy(value)
+    return if (@player.remaining_points < value)
+    @player.ene += value
+    @player.remaining_points -= value
   end
 
   def remaining_points

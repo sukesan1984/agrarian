@@ -10,6 +10,16 @@ class CharacterController < ApplicationController
     @character_entity = @character_entity_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
   end
 
+  def increase
+    character_type = params[:character_type]
+    character_id   = params[:character_id]
+    status_type    = params[:status_type] #どのパラメータを上昇させるか
+
+    @character_entity = @character_entity_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
+    CharacterStatusIncreaseService.new(@character_entity).increase(status_type, 1)
+    render template: 'character/status'
+  end
+
   def set_factories
     equipment_entity = EquipmentEntityFactory.new
     equipped_entity_factory = EquippedEntityFactory.new(equipment_entity)
