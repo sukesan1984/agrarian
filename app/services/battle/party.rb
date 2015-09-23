@@ -86,7 +86,7 @@ class Battle::Party
   end
 
   def give_exp(exp)
-    given_exp = (exp / @unit_list.count).ceil
+    given_exp = exp.fdiv(@unit_list.count).ceil
     result = []
     @unit_list.each do |unit|
       result.push(unit.give_exp(given_exp))

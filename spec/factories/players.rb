@@ -15,6 +15,7 @@
 #  vit              :integer          default(3), not null
 #  ene              :integer          default(5), not null
 #  remaining_points :integer          default(0), not null
+#  exp              :integer          default(0), not null
 #
 # Indexes
 #

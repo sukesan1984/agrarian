@@ -1,11 +1,17 @@
 class Entity::PlayerCharacterEntity < Entity::CharacterEntity
   attr_reader :player, :type
+  PLAYER_MAX_LEVEL = 11
+  ADD_REMAINING_POINTS_WHEN_LEVELUP = 5
   def initialize(player, equipped_list_entity)
     @player = player
     @type   = 1
     @equipped_list_entity = equipped_list_entity
     @status = Status.new(@player.str * 5, 0, 500, 50, 0, 0, 0, 0, 0, 0, 0)
     @hp = StatusPoint.new(player.hp, @player.vit * 10)
+
+    @level = Level.get_level_from(player.exp)
+    @level_max = Level.find_by(level: PLAYER_MAX_LEVEL) 
+    @level = @level_max if @level.level > PLAYER_MAX_LEVEL
   end
 
   def level
@@ -138,12 +144,26 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
     @player.rails += value
   end
 
-  def give_exp(_exp)
+  def give_exp(exp)
+    after_exp = @player.exp + exp
+    after_exp = @level_max.exp_max if after_exp > @level_max.exp_max
+    @player.exp = after_exp
+    @after_level = Level.get_level_from(@player.exp)
+    is_max_level = @after_level == PLAYER_MAX_LEVEL
+    is_level_up = @after_level.level > @level.level
+    @level = is_level_up ? @after_level : @level
+
+    # レベルアップしたら
+    if is_level_up
+      @player.remaining_points += ADD_REMAINING_POINTS_WHEN_LEVELUP
+      self.recover_hp_all
+    end
+
     return {
       name: name,
-      level_up: false,
-      level: 1,
-      exp_for_next_level: 0
+      level_up: is_level_up,
+      level: @level.level,
+      exp_for_next_level: is_max_level ? 0 : @level.exp_for_next_level(@player.exp)
     }
   end
 
