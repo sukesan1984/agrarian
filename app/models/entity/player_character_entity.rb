@@ -24,6 +24,26 @@ class Entity::PlayerCharacterEntity
     return (@status + @equipped_list_entity.status).defense
   end
 
+  def strength
+    return @player.str
+  end
+
+  def dexterity
+    return @player.dex
+  end
+
+  def vitality
+    return @player.vit
+  end
+
+  def energy
+    return @player.ene
+  end
+
+  def remaining_points
+    return @player.remaining_points
+  end
+
   def critical_hit_chance
     return (@status + @equipped_list_entity.status).critical_hit_chance
   end
