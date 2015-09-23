@@ -19,7 +19,7 @@ class EquipmentController < ApplicationController
     @equipment_entitys = @equipment_entity_factory.build_list_by_player_id(@player_character.id)
     @equipped_list_entity = @equipped_list_entity_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
 
-    @character_service = @character_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
+    @character_entity = @character_entity_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
   end
 
   # 装備を外す
@@ -73,7 +73,7 @@ class EquipmentController < ApplicationController
     @equipped_list_entity_factory = EquippedListEntityFactory.new(@equipped_entity_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_entity_factory)
     @soldier_character_factory = SoldierCharacterFactory.new(@equipped_list_entity_factory)
-    @character_service_factory = CharacterServiceFactory.new(@player_character_factory, @soldier_character_factory)
+    @character_entity_factory = CharacterEntityFactory.new(@player_character_factory, @soldier_character_factory)
     @user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
   end
 

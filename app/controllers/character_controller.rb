@@ -7,7 +7,7 @@ class CharacterController < ApplicationController
   def status
     character_type = params[:character_type]
     character_id = params[:character_id]
-    @character_service = @character_service_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
+    @character_entity = @character_entity_factory.build_by_character_type_and_character_id_and_player_id(character_type, character_id, @player_character.id)
   end
 
   def set_factories
@@ -16,7 +16,7 @@ class CharacterController < ApplicationController
     equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_entity_factory)
     soldier_character_factory = SoldierCharacterFactory.new(equipped_list_entity_factory)
-    @character_service_factory = CharacterServiceFactory.new(@player_character_factory, soldier_character_factory)
+    @character_entity_factory = CharacterEntityFactory.new(@player_character_factory, soldier_character_factory)
   end
 
   def set_player_character

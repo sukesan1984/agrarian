@@ -1,4 +1,4 @@
-class CharacterServiceFactory
+class CharacterEntityFactory
   def initialize(player_character_factory, soldier_character_factory)
     @player_character_factory = player_character_factory
     @soldier_character_factory = soldier_character_factory
