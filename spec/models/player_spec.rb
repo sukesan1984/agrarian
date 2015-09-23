@@ -10,6 +10,10 @@
 #  hp         :integer          default(50)
 #  hp_max     :integer          default(50)
 #  rails      :integer          default(300)
+#  str        :integer          default(2), not null
+#  dex        :integer          default(5), not null
+#  vit        :integer          default(3), not null
+#  ene        :integer          default(5), not null
 #
 # Indexes
 #

@@ -4,8 +4,8 @@ class Entity::PlayerCharacterEntity
     @player = player
     @type   = 1
     @equipped_list_entity = equipped_list_entity
-    @status = Status.new(5, 3, 500, 50, 0, 0, 0, 0, 0, 0, 0)
-    @hp = StatusPoint.new(player.hp, player.hp_max)
+    @status = Status.new(@player.str * 5, 0, 500, 50, 0, 0, 0, 0, 0, 0, 0)
+    @hp = StatusPoint.new(player.hp, @player.vit * 10)
   end
 
   def level
