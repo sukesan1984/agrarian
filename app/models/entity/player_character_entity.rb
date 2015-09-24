@@ -1,6 +1,6 @@
 class Entity::PlayerCharacterEntity < Entity::CharacterEntity
   attr_reader :player, :type
-  PLAYER_MAX_LEVEL = 11
+  PLAYER_MAX_LEVEL = 30
   ADD_REMAINING_POINTS_WHEN_LEVELUP = 5
   def initialize(player, equipped_list_entity)
     @player = player
