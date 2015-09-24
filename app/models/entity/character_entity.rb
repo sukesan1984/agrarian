@@ -28,6 +28,10 @@ class Entity::CharacterEntity
     return 0
   end
 
+  def remaining_points
+    return 0
+  end
+
   def increase_energy(value)
   end
 end

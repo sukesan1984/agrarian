@@ -6,7 +6,7 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
     @player = player
     @type   = 1
     @equipped_list_entity = equipped_list_entity
-    @status = Status.new(@player.str * 5, 0, 500, 50, 0, 0, 0, 0, 0, 0, 0)
+    @status = Status.new(@player.str * 5, @player.dex * 5, 500, 50, 0, 0, 0, 0, 0, 0, 0)
     @hp = StatusPoint.new(player.hp, @player.vit * 10)
 
     @level = Level.get_level_from(player.exp)
@@ -15,7 +15,7 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
   end
 
   def level
-    return 1
+    return @level.level
   end
 
   def image

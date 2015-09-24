@@ -35,8 +35,9 @@ class Battle::Unit
     end
 
     target_defense = unit.defense
-    ave_damage = (@attack / 2.0 - target_defense / 4.0).ceil
-    range = -(ave_damage / 16.0).ceil..(ave_damage / 16.0).ceil
+    ave_damage = @attack - target_defense
+    ave_damage = 0 if (ave_damage < 0)
+    range = -ave_damage.fdiv(16).ceil..ave_damage.fdiv(16).ceil
     randomize = Random.rand(range)
     damage = ave_damage + randomize + 1
     damage = 1 if damage < 0 # 最低１はダメージを与える
