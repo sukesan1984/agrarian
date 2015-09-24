@@ -4,7 +4,7 @@
     #rows
       #column 名前
       #column
-        = status.name
+        = link_to(status.name, '/character/status/' + status.type.to_s + '/' + status.id.to_s)
     #rows
       #column level
       #column

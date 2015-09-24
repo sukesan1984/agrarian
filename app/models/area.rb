@@ -8,6 +8,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  enemy_rate :integer
+#  enemy_num  :integer
 #
 
 class Area < ActiveRecord::Base

@@ -19,6 +19,7 @@
 #  dodge_chance          :integer          default(0), not null
 #  damage_reduction      :integer          default(0), not null
 #  item_rarity           :integer
+#  level                 :integer          default(0), not null
 #
 
 class Enemy < ActiveRecord::Base

@@ -16,7 +16,7 @@ class PlayerController < ApplicationController
 
     # 新規の時だけ作成する。
     if @players.count == 0
-      @player = Player.create(name: name, user_id: current_user.id)
+      @player = Player.create(name: name, user_id: current_user.id, hp_max: 30, hp: 30)
     else
       @player = @players[0]
     end

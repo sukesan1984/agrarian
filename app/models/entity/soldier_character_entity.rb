@@ -1,4 +1,4 @@
-class Entity::SoldierCharacterEntity
+class Entity::SoldierCharacterEntity < Entity::CharacterEntity
   attr_reader :type
   def initialize(user_soldier, equipped_list_entity)
     @type = 2

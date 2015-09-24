@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920171349) do
+ActiveRecord::Schema.define(version: 20150923071422) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150920171349) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "enemy_rate", limit: 4
+    t.integer  "enemy_num",  limit: 4
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150920171349) do
     t.integer  "dodge_chance",          limit: 4,   default: 0, null: false
     t.integer  "damage_reduction",      limit: 4,   default: 0, null: false
     t.integer  "item_rarity",           limit: 4
+    t.integer  "level",                 limit: 4,   default: 0, null: false
   end
 
   create_table "enemy_maps", force: :cascade do |t|
@@ -200,13 +202,19 @@ ActiveRecord::Schema.define(version: 20150920171349) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.integer  "hp",         limit: 4,   default: 50
-    t.integer  "hp_max",     limit: 4,   default: 50
-    t.integer  "rails",      limit: 4,   default: 300
+    t.integer  "user_id",          limit: 4
+    t.string   "name",             limit: 255
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "hp",               limit: 4,   default: 50
+    t.integer  "hp_max",           limit: 4,   default: 50
+    t.integer  "rails",            limit: 4,   default: 300
+    t.integer  "str",              limit: 4,   default: 2,   null: false
+    t.integer  "dex",              limit: 4,   default: 5,   null: false
+    t.integer  "vit",              limit: 4,   default: 3,   null: false
+    t.integer  "ene",              limit: 4,   default: 5,   null: false
+    t.integer  "remaining_points", limit: 4,   default: 0,   null: false
+    t.integer  "exp",              limit: 4,   default: 0,   null: false
   end
 
   add_index "players", ["user_id"], name: "index_players_on_user_id", unique: true, using: :btree
