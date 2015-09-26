@@ -9,6 +9,12 @@ module Agrarian::V1
         Player.all.find(params[:id])
       end
 
+      get ':id/skill' do
+        skills = Skill.all
+        skill_ids = skills.map(&:id)
+        @user_skills = UserSkill.find_or_create(params[:id], skill_ids)
+      end
+
       get 'ranking/rails' do
         players = RankingAquisitionService.new.get_player_rails_all
         ranking = []
