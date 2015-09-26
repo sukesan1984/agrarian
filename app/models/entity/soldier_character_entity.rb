@@ -11,7 +11,8 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
 
     @level = @level_max if @level.level > @soldier.level_max
 
-    @hp = StatusPoint.new(@user_soldier.current_hp, @soldier.hp_min)
+    hp = StatusCalculationUtility.calculate(@soldier.hp_min, @soldier.hp_max, @soldier.level_max, @level.level)
+    @hp = StatusPoint.new(@user_soldier.current_hp, hp)
     attack = StatusCalculationUtility.calculate(@soldier.attack_min, @soldier.attack_max, @soldier.level_max, @level.level)
     defense = StatusCalculationUtility.calculate(@soldier.defense_min, @soldier.defense_max, @soldier.level_max, @level.level)
 

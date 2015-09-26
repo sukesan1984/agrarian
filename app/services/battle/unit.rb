@@ -92,6 +92,9 @@ class Battle::Unit
   end
 
   def give_exp(exp)
+    if(@is_dead)
+      return false
+    end
     return @battlize_character.give_exp(exp)
   end
 
