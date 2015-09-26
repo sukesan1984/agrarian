@@ -9,7 +9,7 @@
 
 class ChatRoom < ActiveRecord::Base
   include Redis::Objects
-  list :user_ids
+  list :player_ids
 
   def self.create_or_find(id)
     chat_room = ChatRoom.find_by(id: id)
