@@ -135,6 +135,8 @@ $ brew install redis
 redisを起動
 ```
 $ redis-server /usr/local/etc/redis.conf
+# あるいは、以下でもok
+$ make redis-start
 ```
 
 ### webサーバ起動
