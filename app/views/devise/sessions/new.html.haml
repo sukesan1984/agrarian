@@ -27,4 +27,7 @@
       .uk-form-row
         .uk-button-group
           %button{:class => 'uk-button uk-button-primary', :type => "submit"}
-            = fa_icon 'sign-in'
+            = fa_icon 'sign-in',  text: 'ログイン'
+          %a{:class => 'uk-button uk-button-danger', :href => new_user_password_path}
+            パスワードを忘れた時
+
