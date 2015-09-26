@@ -25,9 +25,9 @@ class AreaController < ApplicationController
     if user_area.area_node_id != @area_node_id
       logger.debug('room exit and enter')
       # 今いる場所のroomから抜ける
-      RoomEntranceService.exit(user_area.area_node_id, @player_character.name)
+      RoomEntranceService.exit(user_area.area_node_id, @player_character.id)
       # 新しいroomに入る
-      RoomEntranceService.enter(@area_node_id, @player_character.name)
+      RoomEntranceService.enter(@area_node_id, @player_character.id)
     end
 
     # 今いる位置からの移動できる場所 or 今いる位置
@@ -39,7 +39,12 @@ class AreaController < ApplicationController
     end
 
     chat_room = ChatRoom.create_or_find(@area_node_id)
-    @members = chat_room.user_ids
+    # TODO: 人が多くなったら数絞るとかする。
+    player_ids = chat_room.player_ids
+    Rails.logger.debug("player_ids")
+    Rails.logger.debug(player_ids)
+    @members = @player_character_factory.build_by_player_ids(player_ids)
+
 
     # その位置固有のアクションの実行
     @current.execute
