@@ -86,9 +86,11 @@ class Battle::Party
   end
 
   def give_exp(exp)
-    given_exp = exp.fdiv(@unit_list.count).ceil
+    # 生きている人だけで分配する。
+    alive_unit_list = @unit_list.select{|unit| !unit.is_dead }
+    given_exp = exp.fdiv(alive_unit_list.count).ceil
     result = []
-    @unit_list.each do |unit|
+    alive_unit_list.each do |unit|
       result.push(unit.give_exp(given_exp))
     end
     return result
