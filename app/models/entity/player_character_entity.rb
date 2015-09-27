@@ -183,6 +183,15 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
     return nil
   end
 
+  def reset_status_points
+    points = (self.level - 1) * ADD_REMAINING_POINTS_WHEN_LEVELUP
+    @player.str = 2
+    @player.dex = 5
+    @player.vit = 3
+    @player.ene = 5
+    @player.remaining_points = points
+  end
+
   def save!
     @player.hp = @hp.current
     @player.save!
