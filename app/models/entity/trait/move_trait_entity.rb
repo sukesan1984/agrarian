@@ -1,4 +1,4 @@
-class Trait::MoveTrait
+class Entity::Trait::MoveTraitEntity
   attr_reader :failed_message, :success_message
   def initialize(user_area, targets)
     @user_area = user_area
@@ -15,7 +15,7 @@ class Trait::MoveTrait
     @trait_targets = []
 
     @targets.each do |target|
-      @trait_targets.push(Trait::MoveTraitTarget.new(target))
+      @trait_targets.push(Entity::Trait::MoveTraitEntityTarget.new(target))
     end
 
     return @trait_targets
@@ -61,7 +61,7 @@ class Trait::MoveTrait
     @user_area.save!
   end
 
-  class Trait::MoveTraitTarget < Trait::TraitTargetBase
+  class Entity::Trait::MoveTraitEntityTarget < Entity::Trait::TraitTargetBaseEntity
     attr_reader :parameters
     def initialize(target)
       @target = target

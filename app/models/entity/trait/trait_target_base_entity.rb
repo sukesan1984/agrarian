@@ -1,4 +1,4 @@
-class Trait::TraitTargetBase
+class Entity::Trait::TraitTargetBaseEntity
   def initialize
   end
 
