@@ -10,10 +10,10 @@
 #  hp               :integer          default(50)
 #  hp_max           :integer          default(50)
 #  rails            :integer          default(300)
-#  str              :integer          default(2), not null
-#  dex              :integer          default(5), not null
-#  vit              :integer          default(3), not null
-#  ene              :integer          default(5), not null
+#  str              :integer          default(5), not null
+#  dex              :integer          default(2), not null
+#  vit              :integer          default(8), not null
+#  ene              :integer          default(3), not null
 #  remaining_points :integer          default(0), not null
 #  exp              :integer          default(0), not null
 #

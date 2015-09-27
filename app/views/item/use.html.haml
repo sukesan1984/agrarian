@@ -7,6 +7,7 @@
       = form_tag('/item/use_actual', method: 'post') do
         - target.parameters.each do |parameter|
           \#{hidden_field_tag(:user_item_id, @user_item_id)}
-          \#{hidden_field_tag(parameter[:name].to_sym, parameter[:value])}
+          - if parameter.key?(:name) && parameter.key?(:value)
+            \#{hidden_field_tag(parameter[:name].to_sym, parameter[:value])}
         \#{submit_tag(target.get_use_message)}
 = link_to('戻る', root_path)
