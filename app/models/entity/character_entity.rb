@@ -17,7 +17,7 @@ class Entity::CharacterEntity
   def increase_dexterity(value)
   end
 
-  def vitality 
+  def vitality
     return 0
   end
 
