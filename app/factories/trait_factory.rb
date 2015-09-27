@@ -13,7 +13,7 @@ class TraitFactory
       soldier_characters = @soldier_character_factory.build_by_player_id(player.id)
       targets.concat(soldier_characters)
       targets.push(player)
-      return Trait::RecoverHpTrait.new(targets, consumption.type_value)
+      return Entity::Trait::RecoverHpTraitEntity.new(targets, consumption.type_value)
     when (2)
       # 移動先のターゲットを取得する。
       # TODO: エンモルドがマップに登場したら、変更する。
@@ -21,7 +21,7 @@ class TraitFactory
       user_area = UserArea.get_or_create(player.id)
       fail 'no user area' unless user_area
 
-      return Trait::MoveTrait.new(user_area, targets)
+      return Entity::Trait::MoveTraitEntity.new(user_area, targets)
     end
   end
 end

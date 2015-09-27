@@ -1,5 +1,5 @@
 # targetのhpを回復する性質
-class Trait::RecoverHpTrait
+class Entity::Trait::RecoverHpTraitEntity
   attr_reader :failed_message
   def initialize(targets, recover_values)
     @targets = targets
@@ -48,12 +48,12 @@ class Trait::RecoverHpTrait
 
     @trait_targets = []
     @targets.each do |target|
-      @trait_targets.push(Trait::RecoverHpTraitTarget.new(target))
+      @trait_targets.push(Entity::Trait::RecoverHpTraitTarget.new(target))
     end
     return @trait_targets
   end
 
-  class Trait::RecoverHpTraitTarget < Trait::TraitTargetBase
+  class Entity::Trait::RecoverHpTraitTarget < Entity::Trait::TraitTargetBaseEntity
     attr_reader :parameters
     def initialize(target)
       @target = target
