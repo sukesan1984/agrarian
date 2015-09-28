@@ -4,8 +4,8 @@
 #
 #  id                    :integer          not null, primary key
 #  name                  :string(255)
-#  attack                :integer
-#  defense               :integer
+#  str                   :integer
+#  defense_rating        :integer
 #  hp                    :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null

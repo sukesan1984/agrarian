@@ -16,11 +16,11 @@ class Entity::EnemyCharacterEntity
   end
 
   def attack
-    return @enemy.attack
+    return @enemy.str
   end
 
   def defense
-    return @enemy.defense
+    return @enemy.defense_rating
   end
 
   def critical_hit_chance
