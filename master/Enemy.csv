@@ -1,4 +1,4 @@
-id,name,level,description,str,defense_rating,hp,critical_hit_chance,critical_hit_damage,dodge_chance,damage_reduction,rails,exp,drop_item_rate,item_rarity,item_lottery_group_id
+id,name,level,description,str,defense,hp,critical_hit_chance,critical_hit_damage,dodge_chance,damage_reduction,rails,exp,drop_item_rate,item_rarity,item_lottery_group_id
 1,ゴブリン,1,いたずら好きな魔物,10,6,12,0,50,0,0,28,10,20,1,100003
 2,野犬,2,野犬、犬の野生かしたもの,12,10,30,0,50,0,0,52,20,20,1,100003
 3,スライム,3,スライム状のよくいるモンスター,15,14,48,0,50,0,0,77,30,20,1,100001
