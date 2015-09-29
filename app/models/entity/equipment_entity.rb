@@ -55,7 +55,7 @@ class Entity::EquipmentEntity < Entity::ItemEntity
   end
 
   def attack
-    return @equipment.attack
+    return @equipment.damage_max
   end
 
   def defense
@@ -80,7 +80,7 @@ class Entity::EquipmentEntity < Entity::ItemEntity
   end
 
   def update_affix_status
-    @status    = Status.new(@equipment.attack, @equipment.defense, 0, 0, 0, 0, 0, 0, 0, 0, 0) + @user_equipment_affix_list.status
+    @status    = Status.new(@equipment.damage_max, @equipment.defense, 0, 0, 0, 0, 0, 0, 0, 0, 0) + @user_equipment_affix_list.status
   end
 end
 
