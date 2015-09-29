@@ -20,7 +20,7 @@ class Entity::EnemyCharacterEntity
   end
 
   def defense
-    return @enemy.defense_rating
+    return @enemy.defense
   end
 
   def critical_hit_chance
