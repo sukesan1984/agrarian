@@ -4,31 +4,31 @@
     #rows
       #column 名前
       #column
-        = link_to(status.name, '/character/status/' + status.type.to_s + '/' + status.id.to_s)
+        = link_to(character.name, '/character/status/' + character.type.to_s + '/' + character.id.to_s)
     #rows
       #column level
       #column
-        = status.level
+        = character.level
     #rows
       #column attack
       #column
-        = status.attack
+        = character.status.attack
     #rows
       #column defense
       #column
-        = status.defense
+        = character.status.defense
     #rows
       #column hit point
       #column
-        = status.hp
-        \/ #{status.hp_max}
+        = character.hp
+        \/ #{character.hp_max}
         .battle-character-gauge-all
-          .battle-character-gauge-current{:style => "width:#{status.hp_rate}px;"}
+          .battle-character-gauge-current{:style => "width:#{character.hp_rate}px;"}
     #rows
       #column お金
       #column
-        = status.rails
+        = character.rails
         rails
     #rows
-      = link_to('装備整える', '/equipment/' + status.type.to_s + '/' + status.id.to_s)
+      = link_to('装備整える', '/equipment/' + character.type.to_s + '/' + character.id.to_s)
 

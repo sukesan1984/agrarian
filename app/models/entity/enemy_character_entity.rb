@@ -1,10 +1,12 @@
 class Entity::EnemyCharacterEntity
+  attr_reader :status
   def initialize(enemy, progress, drop_item_entity)
     @enemy = enemy
     @hp = StatusPoint.new(@enemy.hp, @enemy.hp)
     @progress = progress
     @drop_item_entity = drop_item_entity
     @dropped_item_seed = rand(0...100)
+    @status = Status.new(@enemy.str * 5, @enemy.dex * 5, @enemy.critical_hit_chance, @enemy.critical_hit_damage, @enemy.dodge_chance, @enemy.damage_reduction, 0, 0, 0, 0, 0)
   end
 
   def name
@@ -13,26 +15,6 @@ class Entity::EnemyCharacterEntity
 
   def image
     return 'enemies/' + @enemy.id.to_s + '.png'
-  end
-
-  def attack
-    return @enemy.str
-  end
-
-  def defense
-    return @enemy.defense
-  end
-
-  def critical_hit_chance
-    return @enemy.critical_hit_chance
-  end
-
-  def critical_hit_damage
-    return @enemy.critical_hit_damage
-  end
-
-  def dodge_chance
-    return @enemy.dodge_chance
   end
 
   def hp
@@ -46,7 +28,6 @@ class Entity::EnemyCharacterEntity
   def hp_rate
     return (self.hp.to_f / self.hp_max.to_f * 100).to_i
   end
-
 
   def decrease_hp(value)
     @hp.decrease(value)

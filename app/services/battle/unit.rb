@@ -1,6 +1,6 @@
 class Battle::Unit
   attr_accessor :done_action
-  attr_reader :name, :is_dead, :defense, :attack, :dodge_chance
+  attr_reader :name, :is_dead, :status
   # battlize_character.name
   # battlize_character.attack
   # battlize_character.defense
@@ -8,9 +8,7 @@ class Battle::Unit
   def initialize(battlize_character)
     @battlize_character = battlize_character
     @name     = battlize_character.name
-    @attack   = battlize_character.attack
-    @defense  = battlize_character.defense
-    @dodge_chance = battlize_character.dodge_chance
+    @status = battlize_character.status
     @is_dead = false
     @done_action = false
   end
@@ -34,8 +32,8 @@ class Battle::Unit
       return Battle::Action.new(self, unit, 'ダメージ(避けた！)', 0)
     end
 
-    target_defense = unit.defense
-    ave_damage = @attack - target_defense
+    target_defense = unit.status.defense
+    ave_damage = @status.attack - target_defense
     ave_damage = 0 if (ave_damage < 0)
     range = -ave_damage.fdiv(16).ceil..ave_damage.fdiv(16).ceil
     randomize = Random.rand(range)
@@ -44,7 +42,7 @@ class Battle::Unit
 
     #critical_chance
     if has_critical_damage
-      critical_damage = damage + (damage * @battlize_character.critical_hit_damage.to_f / 100.to_f).to_i
+      critical_damage = damage + (damage * @status.critical_hit_damage.to_f / 100.to_f).to_i
       unit.take_damage(critical_damage)
       return Battle::Action.new(self, unit, 'クリティカルダメージを与えた!!', critical_damage)
     end
@@ -56,8 +54,8 @@ class Battle::Unit
   def has_critical_damage
     randomize = Random.rand(0...10000)
     # クリティカル発動せず。
-    Rails.logger.debug("randomize: #{randomize} / #{@battlize_character.critical_hit_chance}")
-    if randomize > @battlize_character.critical_hit_chance
+    Rails.logger.debug("randomize: #{randomize} / #{@status.critical_hit_chance}")
+    if randomize > @status.critical_hit_chance
       return false
     end
     return true
@@ -66,8 +64,8 @@ class Battle::Unit
   def is_dodged(target)
     randomize = Random.rand(0...10000)
 
-    Rails.logger.debug("dodge : #{randomize} / #{@battlize_character.dodge_chance}")
-    if randomize > target.dodge_chance
+    Rails.logger.debug("dodge : #{randomize} / #{@status.dodge_chance}")
+    if randomize > target.status.dodge_chance
       return false
     end
     return true
