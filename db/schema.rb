@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929144359) do
+ActiveRecord::Schema.define(version: 20150929153341) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150929144359) do
     t.integer  "damage_reduction",      limit: 4,   default: 0, null: false
     t.integer  "item_rarity",           limit: 4
     t.integer  "level",                 limit: 4,   default: 0, null: false
+    t.integer  "dex",                   limit: 4
   end
 
   create_table "enemy_maps", force: :cascade do |t|
