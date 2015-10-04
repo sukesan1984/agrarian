@@ -40,3 +40,5 @@ public/assets
 *.imi
 *.iml
 
+# ruby version
+.ruby-version
