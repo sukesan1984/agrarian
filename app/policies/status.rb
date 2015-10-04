@@ -1,8 +1,10 @@
 class Status
-  attr_reader :attack, :defense, :critical_hit_chance, :critical_hit_damage, :dodge_chance, :damage_reduction,
+  attr_reader :damage_min, :damage_max, :attack, :defense, :critical_hit_chance, :critical_hit_damage, :dodge_chance, :damage_reduction,
     :damage_perc, :attack_rating_perc, :defense_perc, :hp, :hp_steal_perc
 
   def initialize(
+    damage_min,
+    damage_max,
     attack,
     defense,
     critical_hit_chance,
@@ -14,6 +16,9 @@ class Status
     defense_perc,
     hp,
     hp_steal_perc)
+
+    @damage_min = damage_min
+    @damage_max = damage_max
 
     @attack = attack
     @defense = defense
@@ -82,6 +87,8 @@ class Status
   end
 
   def +(other)
+    new_damage_min = @damage_min + other.damage_min
+    new_damage_max = @damage_max + other.damage_max
     new_attack = @attack + other.attack
     new_defense = @defense + other.defense
     new_critical_hit_chance = @critical_hit_chance + other.critical_hit_chance
@@ -95,6 +102,8 @@ class Status
     new_hp_steal_perc = @hp_steal_perc + other.hp_steal_perc
 
     return Status.new(
+      new_damage_min,
+      new_damage_max,
       new_attack,
       new_defense,
       new_critical_hit_chance,

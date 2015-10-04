@@ -6,7 +6,8 @@ class Entity::EnemyCharacterEntity
     @progress = progress
     @drop_item_entity = drop_item_entity
     @dropped_item_seed = rand(0...100)
-    @status = Status.new(@enemy.str * 5, @enemy.dex * 5, @enemy.critical_hit_chance, @enemy.critical_hit_damage, @enemy.dodge_chance, @enemy.damage_reduction, 0, 0, 0, 0, 0)
+    # TODO: Enemy Masterから取得する。
+    @status = Status.new(1, 5, @enemy.str * 5, @enemy.dex * 5, @enemy.critical_hit_chance, @enemy.critical_hit_damage, @enemy.dodge_chance, @enemy.damage_reduction, 0, 0, 0, 0, 0)
   end
 
   def name

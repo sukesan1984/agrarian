@@ -25,7 +25,7 @@ class Entity::UserEquipmentAffixListEntity
   end
 
   def status
-    zero_status = Status.new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) 
+    zero_status = Status.new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) 
     return zero_status unless @user_affixes
     statuses =  @user_affixes.map(&:status).inject(:+)
     return zero_status unless statuses
