@@ -18,7 +18,9 @@ class DamageCalculation
   # 攻撃が当たるかどうか
   def dodge?
     dodge_seed = Random.rand(0...100)
-    return dodge_seed < self.get_chance_to_hit
+    chance_to_hit = self.get_chance_to_hit
+    Rails.logger.debug("chance_to_hit: #{chance_to_hit}")
+    return dodge_seed >= chance_to_hit
   end
 
   # クリティカルが発動するかどうか
