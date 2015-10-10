@@ -21,6 +21,8 @@
 #  item_rarity           :integer
 #  level                 :integer          default(0), not null
 #  dex                   :integer
+#  damage_min            :integer          default(0), not null
+#  damage_max            :integer          default(0), not null
 #
 
 FactoryGirl.define do
