@@ -39,6 +39,7 @@ class Battle::Unit
       damage = 1
     end
     unit.take_damage(damage)
+    Rails.logger.debug("Damage: {damage}")
     return Battle::Action.new(self, unit, 'ダメージを与えた', damage)
   end
 

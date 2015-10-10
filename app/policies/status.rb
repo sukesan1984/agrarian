@@ -29,7 +29,7 @@ class Status
     @ene = ene
     @vit = vit
 
-    @attack = attack + @str
+    @attack = attack + @str * 2
     @defense = defense + @dex / 4
 
     @critical_hit_chance = critical_hit_chance
