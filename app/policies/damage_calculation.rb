@@ -8,6 +8,14 @@ class DamageCalculation
 
   # 攻撃が当たるかどうか
   def dodge?()
+    dodge_seed = Random.rand(0...100)
+    return dodge_seed < self.get_chance_to_hit
+  end
+
+  def get_final_min_damage
+  end
+
+  def get_final_max_damage
   end
 
   def get_chance_to_hit

@@ -57,7 +57,7 @@ class Entity::EquippedListEntity
   end
 
   def status
-    return list.inject(Status.new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)) { |sum, equipment_entity| sum + equipment_entity.status }
+    return list.inject(Status.new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)) { |sum, equipment_entity| sum + equipment_entity.status }
   end
 
   def save!

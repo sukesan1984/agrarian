@@ -1,5 +1,5 @@
 class Status
-  attr_reader :damage_min, :damage_max, :attack, :defense, :critical_hit_chance, :critical_hit_damage, :dodge_chance, :damage_reduction,
+  attr_reader :damage_min, :damage_max, :attack, :defense, :str, :dex, :ene, :vit, :critical_hit_chance, :critical_hit_damage, :dodge_chance, :damage_reduction,
     :damage_perc, :attack_rating_perc, :defense_perc, :hp, :hp_steal_perc
 
   def initialize(
@@ -7,6 +7,10 @@ class Status
     damage_max,
     attack,
     defense,
+    str,
+    dex,
+    ene,
+    vit,
     critical_hit_chance,
     critical_hit_damage,
     dodge_chance,
@@ -22,6 +26,11 @@ class Status
 
     @attack = attack
     @defense = defense
+
+    @str = str
+    @dex = dex
+    @ene = ene
+    @vit = vit
 
     @critical_hit_chance = critical_hit_chance
     @critical_hit_damage = critical_hit_damage
@@ -91,6 +100,10 @@ class Status
     new_damage_max = @damage_max + other.damage_max
     new_attack = @attack + other.attack
     new_defense = @defense + other.defense
+    new_str = @str + other.str
+    new_dex = @dex + other.dex
+    new_ene = @ene + other.ene
+    new_vit = @vit + other.vit
     new_critical_hit_chance = @critical_hit_chance + other.critical_hit_chance
     new_critical_hit_damage = @critical_hit_damage + other.critical_hit_damage
     new_dodge_chance = @dodge_chance + other.dodge_chance
@@ -106,6 +119,10 @@ class Status
       new_damage_max,
       new_attack,
       new_defense,
+      new_str,
+      new_dex,
+      new_ene,
+      new_vit,
       new_critical_hit_chance,
       new_critical_hit_damage,
       new_dodge_chance,

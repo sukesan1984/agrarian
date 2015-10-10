@@ -16,6 +16,8 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
     str = StatusCalculationUtility.calculate(@soldier.str_min, @soldier.str_max, @soldier.level_max, @level.level)
     dex = StatusCalculationUtility.calculate(@soldier.dex_min, @soldier.dex_max, @soldier.level_max, @level.level)
 
+    ene = StatusCalculationUtility.calculate(@soldier.ene_min, @soldier.ene_max, @soldier.level_max, @level.level)
+
     critical_hit_chance = StatusCalculationUtility.calculate(@soldier.critical_hit_chance_min, @soldier.critical_hit_chance_max, @soldier.level_max, @level.level)
 
     critical_hit_damage = StatusCalculationUtility.calculate(@soldier.critical_hit_damage_min, @soldier.critical_hit_damage_max, @soldier.level_max, @level.level)
@@ -23,7 +25,7 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
     dodge_chance = StatusCalculationUtility.calculate(@soldier.dodge_chance_min, @soldier.dodge_chance_max, @soldier.level_max, @level.level)
 
     # TODO: Soldierのデフォルトのdamage_min, damage_maxを設定する。
-    @status = Status.new(1, 5, str * 5, dex * 5, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0) + @equipped_list_entity.status
+    @status = Status.new(1, 5, 0, 0, str, dex, ene, vit, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0) + @equipped_list_entity.status
   end
 
   def id
