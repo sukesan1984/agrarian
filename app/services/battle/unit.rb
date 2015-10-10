@@ -27,26 +27,17 @@ class Battle::Unit
     unit = party.get_attackable_unit
     return if unit.nil?
 
+    damage_calculation = DamageCalculation.new(@status, unit.status)
+
     # 対象が避けるかどうか
-    if is_dodged(unit)
+    if damage_calculation.dodge?
       return Battle::Action.new(self, unit, 'ダメージ(避けた！)', 0)
     end
 
-    target_defense = unit.status.defense
-    ave_damage = @status.attack - target_defense
-    ave_damage = 0 if (ave_damage < 0)
-    range = -ave_damage.fdiv(16).ceil..ave_damage.fdiv(16).ceil
-    randomize = Random.rand(range)
-    damage = ave_damage + randomize + 1
-    damage = 1 if damage < 0 # 最低１はダメージを与える
-
-    #critical_chance
-    if has_critical_damage
-      critical_damage = damage + (damage * @status.critical_hit_damage.to_f / 100.to_f).to_i
-      unit.take_damage(critical_damage)
-      return Battle::Action.new(self, unit, 'クリティカルダメージを与えた!!', critical_damage)
+    damage = damage_calculation.get_damage
+    if damage <= 0 
+      damage = 1
     end
-
     unit.take_damage(damage)
     return Battle::Action.new(self, unit, 'ダメージを与えた', damage)
   end

@@ -9,7 +9,7 @@ class DamageCalculation
   def get_damage
     final_damage = self.get_basic_damage
     if critical?
-      final_damage = basic_damage * (1 + self.critical_hit_damage.fdiv(100))
+      final_damage *= (1 + @attacker_status.critical_hit_damage.fdiv(100))
     end
     final_damage -= @defender_status.damage_reduction
     return final_damage
@@ -23,20 +23,23 @@ class DamageCalculation
 
   # クリティカルが発動するかどうか
   def critical?
-    return Random.rand(0..10000) < self.critical_hit_chance
+    return Random.rand(0..10000) < @attacker_status.critical_hit_chance
   end
 
   # 基本ダメージの取得
   def get_basic_damage
-    return Random.rand(self.get_final_min_damage..self.get_final_max_damage)
+    final_min_damage = self.get_final_min_damage
+    final_max_damage = self.get_final_max_damage
+    Rails.logger.debug("(#{final_min_damage}..#{final_max_damage})")
+    return Random.rand(final_min_damage..final_max_damage)
   end
 
   def get_final_min_damage
-    @attacker_status.damage_min * (1 + self.status_bonus + self.damage_perc_bonus)
+    @attacker_status.damage_min * (1 + self.status_bonus + self.damage_perc_bonus).to_i
   end
 
   def get_final_max_damage
-    @attacker_status.damage_max * (1 + self.status_bonus + self.damage_perc_bonus)
+    @attacker_status.damage_max * (1 + self.status_bonus + self.damage_perc_bonus).to_i
   end
 
   def get_chance_to_hit
