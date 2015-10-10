@@ -1,5 +1,5 @@
 class Entity::SoldierCharacterEntity < Entity::CharacterEntity
-  attr_reader :type
+  attr_reader :type, :status
   def initialize(user_soldier, equipped_list_entity)
     @type = 2
     @user_soldier = user_soldier
@@ -11,10 +11,12 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
 
     @level = @level_max if @level.level > @soldier.level_max
 
-    hp = StatusCalculationUtility.calculate(@soldier.hp_min, @soldier.hp_max, @soldier.level_max, @level.level)
-    @hp = StatusPoint.new(@user_soldier.current_hp, hp)
-    attack = StatusCalculationUtility.calculate(@soldier.attack_min, @soldier.attack_max, @soldier.level_max, @level.level)
-    defense = StatusCalculationUtility.calculate(@soldier.defense_min, @soldier.defense_max, @soldier.level_max, @level.level)
+    @vit = StatusCalculationUtility.calculate(@soldier.vit_min, @soldier.vit_max, @soldier.level_max, @level.level)
+    @hp = StatusPoint.new(@user_soldier.current_hp, @vit * 10)
+    @str = StatusCalculationUtility.calculate(@soldier.str_min, @soldier.str_max, @soldier.level_max, @level.level)
+    @dex = StatusCalculationUtility.calculate(@soldier.dex_min, @soldier.dex_max, @soldier.level_max, @level.level)
+
+    @ene = StatusCalculationUtility.calculate(@soldier.ene_min, @soldier.ene_max, @soldier.level_max, @level.level)
 
     critical_hit_chance = StatusCalculationUtility.calculate(@soldier.critical_hit_chance_min, @soldier.critical_hit_chance_max, @soldier.level_max, @level.level)
 
@@ -22,7 +24,8 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
 
     dodge_chance = StatusCalculationUtility.calculate(@soldier.dodge_chance_min, @soldier.dodge_chance_max, @soldier.level_max, @level.level)
 
-    @status = Status.new(attack, defense, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0)
+    # TODO: Soldierのデフォルトのdamage_min, damage_maxを設定する。
+    @status = Status.new(1, 5, 0, 0, @str, @dex, @ene, @vit, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0) + @equipped_list_entity.status
   end
 
   def id
@@ -39,26 +42,6 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
 
   def level
     return @level.level
-  end
-
-  def attack
-    return (@status + @equipped_list_entity.status).attack
-  end
-
-  def defense
-    return (@status + @equipped_list_entity.status).defense
-  end
-
-  def critical_hit_chance
-    return (@status + @equipped_list_entity.status).critical_hit_chance
-  end 
-
-  def critical_hit_damage
-    return (@status + @equipped_list_entity.status).critical_hit_damage
-  end
-
-  def dodge_chance
-    return (@status + @equipped_list_entity.status).dodge_chance
   end
 
   def hp
@@ -87,6 +70,22 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
 
   def exp
     return @user_soldier.exp
+  end
+
+  def strength
+    return @str
+  end
+
+  def dexterity
+    return @dex
+  end
+
+  def energy
+    return @ene
+  end
+
+  def vitality
+    return @vit
   end
 
   def is_in_party

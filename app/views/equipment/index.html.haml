@@ -22,8 +22,8 @@
 %h1 装備可能やつ
 - @equipment_entitys.each do |equipment_entity|
   = link_to(equipment_entity.name, "/equipment/show_detail/#{equipment_entity.user_item_id}")
-  attack: #{equipment_entity.attack}
-  defense: #{equipment_entity.defense}
+  ダメージ範囲: #{equipment_entity.status.damage_range}
+  Defense Rating: #{equipment_entity.status.defense}
   %br/
   = form_tag('/equipment/equip', method: "post") do
     \#{hidden_field_tag(:character_type, @character_entity.type)}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923071422) do
+ActiveRecord::Schema.define(version: 20150929153705) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150923071422) do
 
   create_table "enemies", force: :cascade do |t|
     t.string   "name",                  limit: 255
-    t.integer  "attack",                limit: 4
+    t.integer  "str",                   limit: 4
     t.integer  "defense",               limit: 4
     t.integer  "hp",                    limit: 4
     t.datetime "created_at",                                    null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150923071422) do
     t.integer  "damage_reduction",      limit: 4,   default: 0, null: false
     t.integer  "item_rarity",           limit: 4
     t.integer  "level",                 limit: 4,   default: 0, null: false
+    t.integer  "dex",                   limit: 4
   end
 
   create_table "enemy_maps", force: :cascade do |t|
@@ -86,7 +87,7 @@ ActiveRecord::Schema.define(version: 20150923071422) do
   create_table "equipment", force: :cascade do |t|
     t.integer  "item_id",             limit: 4
     t.integer  "body_region",         limit: 4
-    t.integer  "attack",              limit: 4
+    t.integer  "damage_max",          limit: 4
     t.integer  "defense",             limit: 4
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 20150923071422) do
     t.integer  "critical_hit_damage", limit: 4, default: 0, null: false
     t.integer  "dodge_chance",        limit: 4, default: 0, null: false
     t.integer  "damage_reduction",    limit: 4, default: 0, null: false
+    t.integer  "damage_min",          limit: 4, default: 0, null: false
   end
 
   create_table "equipment_affixes", force: :cascade do |t|
@@ -209,10 +211,10 @@ ActiveRecord::Schema.define(version: 20150923071422) do
     t.integer  "hp",               limit: 4,   default: 50
     t.integer  "hp_max",           limit: 4,   default: 50
     t.integer  "rails",            limit: 4,   default: 300
-    t.integer  "str",              limit: 4,   default: 2,   null: false
-    t.integer  "dex",              limit: 4,   default: 5,   null: false
-    t.integer  "vit",              limit: 4,   default: 3,   null: false
-    t.integer  "ene",              limit: 4,   default: 5,   null: false
+    t.integer  "str",              limit: 4,   default: 5,   null: false
+    t.integer  "dex",              limit: 4,   default: 2,   null: false
+    t.integer  "vit",              limit: 4,   default: 8,   null: false
+    t.integer  "ene",              limit: 4,   default: 3,   null: false
     t.integer  "remaining_points", limit: 4,   default: 0,   null: false
     t.integer  "exp",              limit: 4,   default: 0,   null: false
   end
@@ -336,14 +338,14 @@ ActiveRecord::Schema.define(version: 20150923071422) do
   create_table "soldiers", force: :cascade do |t|
     t.string   "name",                    limit: 255
     t.string   "description",             limit: 255
-    t.integer  "attack_min",              limit: 4
-    t.integer  "defense_min",             limit: 4
-    t.integer  "hp_min",                  limit: 4
+    t.integer  "str_min",                 limit: 4
+    t.integer  "dex_min",                 limit: 4
+    t.integer  "vit_min",                 limit: 4
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.integer  "attack_max",              limit: 4
-    t.integer  "defense_max",             limit: 4
-    t.integer  "hp_max",                  limit: 4
+    t.integer  "str_max",                 limit: 4
+    t.integer  "dex_max",                 limit: 4
+    t.integer  "vit_max",                 limit: 4
     t.integer  "level_max",               limit: 4
     t.integer  "critical_hit_chance_min", limit: 4,   default: 0, null: false
     t.integer  "critical_hit_chance_max", limit: 4,   default: 0, null: false
@@ -353,6 +355,8 @@ ActiveRecord::Schema.define(version: 20150923071422) do
     t.integer  "dodge_chance_max",        limit: 4,   default: 0, null: false
     t.integer  "damage_reduction_min",    limit: 4,   default: 0, null: false
     t.integer  "damage_reduction_max",    limit: 4,   default: 0, null: false
+    t.integer  "ene_min",                 limit: 4,   default: 0, null: false
+    t.integer  "ene_max",                 limit: 4,   default: 0, null: false
   end
 
   create_table "thrown_items", force: :cascade do |t|

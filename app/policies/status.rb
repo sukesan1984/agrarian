@@ -1,10 +1,16 @@
 class Status
-  attr_reader :attack, :defense, :critical_hit_chance, :critical_hit_damage, :dodge_chance, :damage_reduction,
+  attr_reader :damage_min, :damage_max, :attack, :defense, :str, :dex, :ene, :vit, :critical_hit_chance, :critical_hit_damage, :dodge_chance, :damage_reduction,
     :damage_perc, :attack_rating_perc, :defense_perc, :hp, :hp_steal_perc
 
   def initialize(
+    damage_min,
+    damage_max,
     attack,
     defense,
+    str,
+    dex,
+    ene,
+    vit,
     critical_hit_chance,
     critical_hit_damage,
     dodge_chance,
@@ -15,8 +21,16 @@ class Status
     hp,
     hp_steal_perc)
 
-    @attack = attack
-    @defense = defense
+    @damage_min = damage_min
+    @damage_max = damage_max
+
+    @str = str
+    @dex = dex
+    @ene = ene
+    @vit = vit
+
+    @attack = attack + @str * 2
+    @defense = defense + @dex / 4
 
     @critical_hit_chance = critical_hit_chance
     @critical_hit_damage = critical_hit_damage
@@ -81,9 +95,40 @@ class Status
     return description_list
   end
 
+  # 基本ダメージの取得
+  def get_basic_damage
+    return Random.rand(self.get_final_min_damage..self.get_final_max_damage)
+  end
+
+  def damage_range
+    return "#{self.get_final_min_damage} 〜 #{self.get_final_max_damage}"
+  end
+
+  def get_final_min_damage
+    self.damage_min * (1 + self.status_bonus + self.damage_perc_bonus).to_i
+  end
+
+  def get_final_max_damage
+    self.damage_max * (1 + self.status_bonus + self.damage_perc_bonus).to_i
+  end
+
+  def status_bonus
+    return self.str.fdiv(100)
+  end
+
+  def damage_perc_bonus
+    return self.damage_perc.fdiv(100)
+  end
+
   def +(other)
+    new_damage_min = @damage_min + other.damage_min
+    new_damage_max = @damage_max + other.damage_max
     new_attack = @attack + other.attack
     new_defense = @defense + other.defense
+    new_str = @str + other.str
+    new_dex = @dex + other.dex
+    new_ene = @ene + other.ene
+    new_vit = @vit + other.vit
     new_critical_hit_chance = @critical_hit_chance + other.critical_hit_chance
     new_critical_hit_damage = @critical_hit_damage + other.critical_hit_damage
     new_dodge_chance = @dodge_chance + other.dodge_chance
@@ -95,8 +140,14 @@ class Status
     new_hp_steal_perc = @hp_steal_perc + other.hp_steal_perc
 
     return Status.new(
+      new_damage_min,
+      new_damage_max,
       new_attack,
       new_defense,
+      new_str,
+      new_dex,
+      new_ene,
+      new_vit,
       new_critical_hit_chance,
       new_critical_hit_damage,
       new_dodge_chance,

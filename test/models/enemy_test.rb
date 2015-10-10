@@ -4,7 +4,7 @@
 #
 #  id                    :integer          not null, primary key
 #  name                  :string(255)
-#  attack                :integer
+#  str                   :integer
 #  defense               :integer
 #  hp                    :integer
 #  created_at            :datetime         not null
@@ -20,6 +20,7 @@
 #  damage_reduction      :integer          default(0), not null
 #  item_rarity           :integer
 #  level                 :integer          default(0), not null
+#  dex                   :integer
 #
 
 require 'test_helper'

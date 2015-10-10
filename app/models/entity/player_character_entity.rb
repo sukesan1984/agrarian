@@ -1,12 +1,13 @@
 class Entity::PlayerCharacterEntity < Entity::CharacterEntity
-  attr_reader :player, :type
+  attr_reader :player, :type, :status
   PLAYER_MAX_LEVEL = 30
   ADD_REMAINING_POINTS_WHEN_LEVELUP = 5
   def initialize(player, equipped_list_entity)
     @player = player
     @type   = 1
     @equipped_list_entity = equipped_list_entity
-    @status = Status.new(@player.str * 5, @player.dex * 5, 500, 50, 0, 0, 0, 0, 0, 0, 0)
+    # TODO: プレイヤーデフォルトのdamange_min, damage_maxを設定する
+    @status = Status.new(1, 5, 0, 0, @player.str, @player.dex, @player.ene, @player.vit, 500, 50, 0, 0, 0, 0, 0, 0, 0) + @equipped_list_entity.status
     @hp = StatusPoint.new(player.hp, @player.vit * 10)
 
     @level = Level.get_level_from(player.exp)
@@ -20,14 +21,6 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
 
   def image
     return nil
-  end
-
-  def attack
-    return (@status + @equipped_list_entity.status).attack
-  end
-
-  def defense
-    return (@status + @equipped_list_entity.status).defense
   end
 
   def strength
@@ -72,18 +65,6 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
 
   def remaining_points
     return @player.remaining_points
-  end
-
-  def critical_hit_chance
-    return (@status + @equipped_list_entity.status).critical_hit_chance
-  end
-
-  def critical_hit_damage
-    return (@status + @equipped_list_entity.status).critical_hit_damage
-  end
-
-  def dodge_chance
-    return (@status + @equipped_list_entity.status).dodge_chance
   end
 
   def id
