@@ -13,9 +13,9 @@ RSpec.describe DamageCalculation do
 
     # minimum以下
     attacker_status = Status.new(0, 0, 10, 10,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    defender_status = Status.new(0, 0, 10, 190, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    defender_status = Status.new(0, 0, 10, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     damage_calculation = DamageCalculation.new(attacker_status, defender_status)
-    expect(damage_calculation.get_chance_to_hit).to eq 20
+    expect(damage_calculation.get_chance_to_hit).to eq 5
 
     # dodge_chance設定されていたら。
     #

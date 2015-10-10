@@ -1,6 +1,6 @@
 class DamageCalculation
   MAX_CHANCE_TO_HIT     = 200
-  MINIMUM_CHANCE_TO_HIT = 20
+  MINIMUM_CHANCE_TO_HIT = 5
   def initialize(attacker_status, defender_status)
     @attacker_status = attacker_status
     @defender_status = defender_status

@@ -1,15 +1,14 @@
 %h1
   = @character_entity.name
 
-- if @character_entity.remaining_points <= 0
-  %ul.uk-list.uk-list-striped
+%ul.uk-list.uk-list-striped
+  - if @character_entity.remaining_points <= 0
     %li STR: #{@character_entity.strength}
     %li DEX: #{@character_entity.dexterity}
     %li VIT: #{@character_entity.vitality}
     %li ENE: #{@character_entity.energy}
-- else
-  残りステータスポイント: #{@character_entity.remaining_points}
-  %ul.uk-list.uk-list-striped
+  - else
+    残りステータスポイント: #{@character_entity.remaining_points}
     %li STR: #{@character_entity.strength} 
     = form_tag('/character/status/increase', method: 'post') do
       \#{hidden_field_tag(:character_type, @character_entity.type)}
@@ -34,5 +33,9 @@
       \#{hidden_field_tag(:character_id, @character_entity.id)}
       \#{hidden_field_tag(:status_type, 4)}
       \#{submit_tag("1上げる")}
+  %li Attack Rating: #{@character_entity.status.attack}
+  %li Defense Rating: #{@character_entity.status.defense}
+  %li クリティカル率: #{@character_entity.status.critical_hit_chance.fdiv(100)} %
+  %li クリティカルダメージ(%) : #{@character_entity.status.critical_hit_damage} %
 
 = link_to('戻る', root_path)

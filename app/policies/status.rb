@@ -24,13 +24,13 @@ class Status
     @damage_min = damage_min
     @damage_max = damage_max
 
-    @attack = attack
-    @defense = defense
-
     @str = str
     @dex = dex
     @ene = ene
     @vit = vit
+
+    @attack = attack + @str
+    @defense = defense + @dex / 4
 
     @critical_hit_chance = critical_hit_chance
     @critical_hit_damage = critical_hit_damage
