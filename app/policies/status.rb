@@ -95,6 +95,31 @@ class Status
     return description_list
   end
 
+  # 基本ダメージの取得
+  def get_basic_damage
+    return Random.rand(self.get_final_min_damage..self.get_final_max_damage)
+  end
+
+  def damage_range
+    return "#{self.get_final_min_damage} 〜 #{self.get_final_max_damage}"
+  end
+
+  def get_final_min_damage
+    self.damage_min * (1 + self.status_bonus + self.damage_perc_bonus).to_i
+  end
+
+  def get_final_max_damage
+    self.damage_max * (1 + self.status_bonus + self.damage_perc_bonus).to_i
+  end
+
+  def status_bonus
+    return self.str.fdiv(100)
+  end
+
+  def damage_perc_bonus
+    return self.damage_perc.fdiv(100)
+  end
+
   def +(other)
     new_damage_min = @damage_min + other.damage_min
     new_damage_max = @damage_max + other.damage_max
