@@ -33,10 +33,10 @@ class DamageCalculation
     if (chance_to_hit <= MINIMUM_CHANCE_TO_HIT)
       return MINIMUM_CHANCE_TO_HIT
     end
-    if (chance_to_hit > 100)
-      chance_to_hit = 100
+    if (chance_to_hit > 95)
+      chance_to_hit = 95
     end
 
-    return chance_to_hit - @defender_status.dodge_chance
+    return chance_to_hit - @defender_status.dodge_chance.fdiv(100)
   end
 end
