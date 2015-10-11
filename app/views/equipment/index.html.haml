@@ -2,15 +2,15 @@
   = @character_entity.name
 %h1 今装備してるやつ
 .equipment-status
-  攻撃力
-  = @equipped_list_entity.status.attack
+  ダメージ範囲: 
+  = @equipped_list_entity.status.damage_range
 .equipment-status
-  防御力
+  Defense Rating:
   = @equipped_list_entity.status.defense
 - @equipped_list_entity.list.each do |part|
   .equipped
     = part.part_name
-    = part.name
+    = link_to(part.name, "/equipment/show_detail/#{part.user_item_id}")
     - if part.equipped
       .equipment_unequip
         = form_tag('/equipment/unequip', method: 'post') do
