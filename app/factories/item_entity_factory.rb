@@ -17,7 +17,7 @@ class ItemEntityFactory
 
     case item.item_type
     when 1, 4
-      return Entity::Item::ConsumeItemEntity.new(user_item, count, item_id)
+      return Entity::Item::ConsumeItemEntity.new(user_item, count, user_item.item)
     when 2
       return @equipment_entity_factory.build_by_user_item(user_item)
     when 3
@@ -48,13 +48,30 @@ class ItemEntityFactory
   def build_by_user_item(user_item)
     case user_item.item.item_type
     when 1, 4
-      return Entity::Item::ConsumeItemEntity.new(user_item, 0, user_item.item_id)
+      return Entity::Item::ConsumeItemEntity.new(user_item, 0, user_item.item)
     when 2
       return @equipment_entity_factory.build_by_user_item(user_item)
     else
       # user_item系は、1, 4, 2
       fail "item_type must be 1, 4, 2 but: #{user_item.item.item_type}"
     end
+  end
+
+  def build_by_thrown_items(thrown_items)
+    item_entities = []
+    thrown_items.each do |thrown_item|
+      case thrown_item.item.item_type
+      when 1, 4
+        item_entities.push Entity::Item::ConsumeItemEntity.new(nil, thrown_item.count, thrown_item.item)
+      when 2
+        user_item = @user_item_factory.build_by_player_id_and_user_item_id(0, thrown_item.user_item_id)
+        item_entities.push @equipment_entity_factory.build_by_user_item(user_item)
+      else
+        # TODO: user_itemのみ捨てれるを修正する場合は、ここやれる
+        fail "item_type must be 1, 4, 2 but: #{user_item.item.item_type}"
+      end
+    end
+    return item_entities
   end
 end
 

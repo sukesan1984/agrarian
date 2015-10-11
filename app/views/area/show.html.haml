@@ -8,14 +8,14 @@
 
     / 落ちてるアイテム
     %h2 ここに落ちてるアイテム
-    - @thrown_items.each do |thrown_item|
+    - @item_entities.each do |item_entity|
       .area-thrown-item
-        = thrown_item.item.name
-        = thrown_item.count
+        = item_entity.name
+        = item_entity.count
         個
         = form_tag('/item/pickup', method: 'post') do
           \#{hidden_field_tag(:area_node_id, @area_node_id)}
-          \#{hidden_field_tag(:item_id, thrown_item.item.id)}
+          \#{hidden_field_tag(:item_id, item_entity.item_id)}
           \#{submit_tag('拾う')}
 
     / アイテム一覧へ

@@ -4,6 +4,11 @@ class Entity::EquipmentEntity < Entity::ItemEntity
   attr_reader :status
   def initialize(user_item, equipment)
     @user_item = user_item
+    if @user_item.id == 145
+      Rails.logger.debug('start##################')
+      Rails.logger.debug(@user_item.user_equipment_affixes)
+      Rails.logger.debug('end#################')
+    end
     @user_equipment_affix_list = Entity::UserEquipmentAffixListEntity.new(@user_item.user_equipment_affixes)
     @equipment = equipment
     self.update_affix_status
@@ -40,7 +45,7 @@ class Entity::EquipmentEntity < Entity::ItemEntity
 
   # 捨てる
   def throw
-    @user_item.count = 0
+    @user_item.count = 1
     @user_item.player_id = 0
     return true
   end

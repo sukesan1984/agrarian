@@ -1,9 +1,9 @@
 class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
-  attr_reader :item_id
-  def initialize(user_item, count, item_id)
+  attr_reader
+  def initialize(user_item, count, item)
     @user_item = user_item
     @count = count
-    @item_id = item_id
+    @item = item
   end
   
   def user_item_id
@@ -11,7 +11,7 @@ class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
   end
 
   def item_id
-    return @user_item.item.id
+    return @item.id
   end
 
   def count
@@ -39,7 +39,7 @@ class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
   end
 
   def name
-    return @user_item.item.name
+    return @item.name
   end
 
   def result

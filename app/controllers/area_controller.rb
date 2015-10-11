@@ -57,8 +57,9 @@ class AreaController < ApplicationController
     user_area.save
 
     # そのエリアに落ちてるアイテム
-    @thrown_items = ThrownItem.where(area_node_id: @area_node_id)
+    thrown_items = ThrownItem.where(area_node_id: @area_node_id)
                     .select(&:is_valid)
+    @item_entities = @item_entity_factory.build_by_thrown_items(thrown_items)
     @soldier_characters = @soldier_character_factory.build_party_by_player_id(@player_character.id)
   end
 
@@ -79,6 +80,10 @@ class AreaController < ApplicationController
     @resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     @resource_service_factory = ResourceServiceFactory.new
     @area_service_factory = AreaServiceFactory.new(@player_character_factory, @resource_service_factory, @resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory))
+    user_item_factory = UserItemFactory.new
+    quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
+    quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)
+    @item_entity_factory = ItemEntityFactory.new(@player_character_factory, user_item_factory, quest_entity_factory, equipment_entity_factory)
   end
 
   def set_player_character
