@@ -9,6 +9,10 @@ class Entity::EquipmentEntity < Entity::ItemEntity
     self.update_affix_status
   end
 
+  def equipped?
+    return @user_item.equipped?
+  end
+
   def equipment?
     return true
   end 

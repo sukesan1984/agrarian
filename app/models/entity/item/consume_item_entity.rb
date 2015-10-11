@@ -5,6 +5,10 @@ class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
     @count = count
     @item_id = item_id
   end
+  
+  def user_item_id
+    return @user_item.id
+  end
 
   def item_id
     return @user_item.item.id

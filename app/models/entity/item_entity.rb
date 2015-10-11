@@ -6,6 +6,10 @@ class Entity::ItemEntity
     return false
   end
 
+  def equipped?
+    return false
+  end
+
   def give
   end
 
