@@ -55,7 +55,7 @@ namespace :players do
       equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
       player_character_factory      = PlayerCharacterFactory.new(equipped_list_entity_factory)
 
-      user_item_factory = UserItemFactory.new(equipped_list_entity_factory)
+      user_item_factory = UserItemFactory.new()
 
       quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
       quest_entity_factory = Quest::QuestEntityFactory.new(player_character_factory, quest_condition_entity_factory)

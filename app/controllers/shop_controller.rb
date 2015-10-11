@@ -8,14 +8,12 @@ class ShopController < ApplicationController
   def index
     redirect_to player_input_path if @player_character.nil?
 
-    user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
-
     @showcases = []
     @shop.showcases.each do |showcase|
       @showcases.push(Shop::ShowcaseService.new(@resource_service_factory.build_by_target_id_and_resource(@area_node.id, showcase.resource), @area_node.id, showcase))
     end
 
-    @user_items = user_item_factory.build_unequipped_user_item_list_by_player_id(@player_character.id).select { |user_item| user_item.equipped == 0 }
+    @user_items = @user_item_factory.build_unequipped_user_item_list_by_player_id(@player_character.id).select { |user_item| user_item.equipped == 0 }
   end
 
   def buy
@@ -49,10 +47,10 @@ class ShopController < ApplicationController
     equipped_entity_factory       = EquippedEntityFactory.new(equipment_entity_factory)
     @equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
     @player_character_factory      = PlayerCharacterFactory.new(@equipped_list_entity_factory)
-    user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
-    @quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
+    @user_item_factory = UserItemFactory.new()
+    @quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(@user_item_factory)
     @quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, @quest_condition_entity_factory)
-    @item_entity_factory = ItemEntityFactory.new(@player_character_factory, UserItemFactory.new(@player_character), @quest_entity_factory, equipment_entity_factory)
+    @item_entity_factory = ItemEntityFactory.new(@player_character_factory, @user_item_factory, @quest_entity_factory, equipment_entity_factory)
   end
 
   def set_player_character

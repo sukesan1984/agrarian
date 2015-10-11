@@ -1,14 +1,11 @@
 class UserItemFactory
-  def initialize(equipped_list_entity_factory)
-    @equipped_list_entity_factory = equipped_list_entity_factory
+  def initialize()
   end
 
   # userが装備してないアイテムのリストを取得する。
   def build_unequipped_user_item_list_by_player_id(player_id)
-    equipped_list_entity = @equipped_list_entity_factory.build_by_player_id(player_id)
-    user_items = UserItem.where(player_id: player_id)
+    user_items = UserItem.where(player_id: player_id, equipped: 0)
                  .select { |user_item| user_item.count > 0 }
-                 .select { |user_item| !equipped_list_entity.equipped(user_item.id) }
     return user_items
   end
 
