@@ -55,7 +55,7 @@ class Entity::EquipmentEntity < Entity::ItemEntity
   end
 
   def attack
-    return @equipment.damage_max
+    return @status.attack
   end
 
   def defense
