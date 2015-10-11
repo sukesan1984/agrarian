@@ -24,7 +24,10 @@ class UserItemFactory
   def build_by_player_id_and_item(player_id, item)
     case item.item_type
     when 1, 4
-      user_item = UserItem.find_or_create(player_id, item.id)
+      user_item = nil
+      if player_id != 0
+        user_item = UserItem.find_or_create(player_id, item.id)
+      end
       return user_item
     when 2
       user_item = UserItem.new(

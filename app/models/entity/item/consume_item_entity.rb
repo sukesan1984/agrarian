@@ -7,6 +7,7 @@ class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
   end
   
   def user_item_id
+    return 0 unless @user_item
     return @user_item.id
   end
 
@@ -19,6 +20,7 @@ class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
   end
 
   def current_count
+    return @count unless @user_item
     return @user_item.count
   end
 

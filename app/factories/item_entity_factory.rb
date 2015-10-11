@@ -60,18 +60,23 @@ class ItemEntityFactory
   def build_by_thrown_items(thrown_items)
     item_entities = []
     thrown_items.each do |thrown_item|
+      item_entities.push self.build_by_player_id_and_thrown_item(0, thrown_item)
+    end
+    return item_entities
+  end
+
+  def build_by_player_id_and_thrown_item(player_id, thrown_item)
       case thrown_item.item.item_type
       when 1, 4
-        item_entities.push Entity::Item::ConsumeItemEntity.new(nil, thrown_item.count, thrown_item.item)
+        user_item = @user_item_factory.build_by_player_id_and_item_id(player_id, thrown_item.item_id)
+        return Entity::Item::ConsumeItemEntity.new(user_item, thrown_item.count, thrown_item.item)
       when 2
         user_item = @user_item_factory.build_by_player_id_and_user_item_id(0, thrown_item.user_item_id)
-        item_entities.push @equipment_entity_factory.build_by_user_item(user_item)
+        return @equipment_entity_factory.build_by_user_item(user_item)
       else
         # TODO: user_itemのみ捨てれるを修正する場合は、ここやれる
         fail "item_type must be 1, 4, 2 but: #{user_item.item.item_type}"
       end
-    end
-    return item_entities
   end
 end
 

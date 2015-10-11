@@ -16,6 +16,7 @@
         = form_tag('/item/pickup', method: 'post') do
           \#{hidden_field_tag(:area_node_id, @area_node_id)}
           \#{hidden_field_tag(:item_id, item_entity.item_id)}
+          \#{hidden_field_tag(:user_item_id, item_entity.user_item_id)}
           \#{submit_tag('拾う')}
 
     / アイテム一覧へ

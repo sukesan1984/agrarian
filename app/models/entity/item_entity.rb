@@ -13,6 +13,9 @@ class Entity::ItemEntity
   def give
   end
 
+  def transfer(player_id)
+  end
+
   def throw
   end
 

@@ -41,10 +41,7 @@ class AreaController < ApplicationController
     chat_room = ChatRoom.create_or_find(@area_node_id)
     # TODO: 人が多くなったら数絞るとかする。
     player_ids = chat_room.player_ids
-    Rails.logger.debug("player_ids")
-    Rails.logger.debug(player_ids)
     @members = @player_character_factory.build_by_player_ids(player_ids)
-
 
     # その位置固有のアクションの実行
     @current.execute

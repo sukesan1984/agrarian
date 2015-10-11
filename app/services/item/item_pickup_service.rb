@@ -1,8 +1,9 @@
 # アイテム拾得サービス
 class Item::ItemPickupService
-  def initialize(user_item, thrown_item)
-    @user_item = user_item
+  def initialize(item_entity, thrown_item, player_id)
+    @item_entity = item_entity
     @thrown_item = thrown_item
+    @player_id = player_id
   end
 
   # 拾う
@@ -11,13 +12,13 @@ class Item::ItemPickupService
       # thrown_itemから減らす
       return { success: false, message: 'アイテム落ちてないよ' } unless @thrown_item.is_valid
 
-      @thrown_item.decrease(1)
+      @thrown_item.destroy
       @thrown_item.save!
 
-      # user_itemに追加する。
-      @user_item.increase(1)
-      @user_item.save!
-      return { success: true, message: @user_item.item.name + 'を拾った。今:' + @user_item.count.to_s + '個持ってる' }
+      @item_entity.give
+      @item_entity.transfer(@player_id)
+      @item_entity.save!
+      return { success: true, message: @item_entity.name + 'を拾った。今:' + @item_entity.current_count.to_s + '個持ってる' }
     end
   rescue => e
     raise e
