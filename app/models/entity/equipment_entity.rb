@@ -9,6 +9,10 @@ class Entity::EquipmentEntity < Entity::ItemEntity
     self.update_affix_status
   end
 
+  def equipped?
+    return @user_item.equipped?
+  end
+
   def equipment?
     return true
   end 
@@ -31,6 +35,18 @@ class Entity::EquipmentEntity < Entity::ItemEntity
 
   def give
     @user_item.count = 1
+    return true
+  end
+
+  # 移す
+  def transfer(player_id)
+    @user_item.player_id = player_id
+  end
+
+  # 捨てる
+  def throw
+    @user_item.count = 0
+    @user_item.player_id = 0
     return true
   end
 

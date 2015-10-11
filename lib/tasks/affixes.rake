@@ -23,9 +23,7 @@ namespace :affix do
     item_rarity = data[:item_rarity]
 
     equipment_entity_factory     = EquipmentEntityFactory.new
-    equipped_entity_factory      = EquippedEntityFactory.new(equipment_entity_factory)
-    equipped_list_entity_factory = EquippedListEntityFactory.new(equipped_entity_factory)
-    user_item_factory = UserItemFactory.new(equipped_list_entity_factory)
+    user_item_factory = UserItemFactory.new()
 
     user_item = user_item_factory.build_by_player_id_and_user_item_id(player_id, user_item_id)
     unless user_item

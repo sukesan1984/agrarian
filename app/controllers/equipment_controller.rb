@@ -74,7 +74,7 @@ class EquipmentController < ApplicationController
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_entity_factory)
     @soldier_character_factory = SoldierCharacterFactory.new(@equipped_list_entity_factory)
     @character_entity_factory = CharacterEntityFactory.new(@player_character_factory, @soldier_character_factory)
-    @user_item_factory = UserItemFactory.new(@equipped_list_entity_factory)
+    @user_item_factory = UserItemFactory.new()
   end
 
   def set_player_character

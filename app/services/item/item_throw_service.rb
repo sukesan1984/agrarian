@@ -1,26 +1,21 @@
 # アイテム投棄サービス
 class Item::ItemThrowService
   # プレイヤーがアイテムをどこに捨てるのか
-  def initialize(user_item, thrown_item, equipped_list_entity)
-    @user_item = user_item
+  def initialize(item_entity, thrown_item, equipped_list_entity)
+    @item_entity = item_entity
     @thrown_item = thrown_item
     @equipped_list_entity = equipped_list_entity
   end
 
   # 実際に捨てる
   def throw
-    if @user_item.equipped == 1
+    if @item_entity.equipped?
       return { success: false, message: '装備してるやつは捨てられへんで' }
     end
     ActiveRecord::Base.transaction do
       # アイテムの削除
-      after_count = @user_item.count - 1
-      if (after_count <= 0)
-        @user_item.destroy!
-      else
-        @user_item.count = after_count
-        @user_item.save!
-      end
+      @item_entity.throw
+      @item_entity.save!
 
       # 捨てられたアイテムに登録
       # 有効期限内であればカウントを増やすけど、
@@ -33,7 +28,7 @@ class Item::ItemThrowService
 
       @thrown_item.thrown_at = Time.now
       @thrown_item.save!
-      return { success: true, message: @user_item.item.name + 'を捨てた。今:' + @user_item.count.to_s + '個持ってる' }
+      return { success: true, message: @item_entity.name + 'を捨てた。今:' + @item_entity.current_count.to_s + '個持ってる' }
     end
   rescue => e
     raise e

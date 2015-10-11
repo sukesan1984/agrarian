@@ -1,11 +1,11 @@
 %h2 アイテム一覧
-- @user_items.each do |user_item|
-  = user_item.item.name
-  - if user_item.equipped?
+- @item_entities.each do |item_entity|
+  = item_entity.name
+  - if item_entity.equipped?
     (装備中)
-  \: #{user_item.count}
+  \: #{item_entity.current_count}
   = form_tag('/item/throw', method: 'post') do
-    \#{hidden_field_tag(:user_item_id, user_item.id)}
+    \#{hidden_field_tag(:user_item_id, item_entity.user_item_id)}
     \#{submit_tag('捨てる')}
   %br/
 

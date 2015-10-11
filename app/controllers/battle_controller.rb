@@ -91,7 +91,7 @@ class BattleController < ApplicationController
     @soldier_character_factory = SoldierCharacterFactory.new(equipped_list_entity_factory)
 
     item_lottery_component_factory = ItemLotteryComponentFactory.new
-    user_item_factory = UserItemFactory.new(equipped_list_entity_factory)
+    user_item_factory = UserItemFactory.new()
 
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)

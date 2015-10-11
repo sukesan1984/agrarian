@@ -6,7 +6,17 @@ class Entity::ItemEntity
     return false
   end
 
+  def equipped?
+    return false
+  end
+
   def give
+  end
+
+  def transfer(player_id)
+  end
+
+  def throw
   end
 
   def count

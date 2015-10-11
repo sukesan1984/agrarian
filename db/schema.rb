@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010133202) do
+ActiveRecord::Schema.define(version: 20151011070017) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -369,9 +369,10 @@ ActiveRecord::Schema.define(version: 20151010133202) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "lock_version", limit: 4, default: 0, null: false
+    t.integer  "user_item_id", limit: 4, default: 0, null: false
   end
 
-  add_index "thrown_items", ["area_node_id", "item_id"], name: "index_thrown_items_on_area_node_id_and_item_id", unique: true, using: :btree
+  add_index "thrown_items", ["area_node_id", "item_id", "user_item_id"], name: "index_thrown_items_on_area_node_id_and_item_id_and_user_item_id", unique: true, using: :btree
 
   create_table "town_bulletin_boards", force: :cascade do |t|
     t.integer  "town_id",    limit: 4
