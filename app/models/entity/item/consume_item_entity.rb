@@ -27,6 +27,13 @@ class Entity::Item::ConsumeItemEntity < Entity::ItemEntity
     return true
   end
 
+  def throw
+    after_count = @user_item.count - 1
+    fail 'after count must be >= 0' if after_count < 0
+    @user_item.count = after_count
+    return true
+  end
+
   def save!
     @user_item.save!
   end

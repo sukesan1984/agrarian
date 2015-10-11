@@ -39,17 +39,22 @@ class ItemEntityFactory
   def build_by_user_items(user_items)
     item_entities = []
     user_items.each do |user_item|
-      case user_item.item.item_type
-      when 1, 4
-        item_entities.push Entity::Item::ConsumeItemEntity.new(user_item, 0, user_item.item_id)
-      when 2
-        item_entities.push @equipment_entity_factory.build_by_user_item(user_item)
-      else
-        # user_item系は、1, 4, 2
-        fail "item_type must be 1, 4, 2 but: #{user_item.item.item_type}"
-      end
+      item_entities.push self.build_by_user_item(user_item)
     end
+
     return item_entities
+  end
+
+  def build_by_user_item(user_item)
+    case user_item.item.item_type
+    when 1, 4
+      return Entity::Item::ConsumeItemEntity.new(user_item, 0, user_item.item_id)
+    when 2
+      return @equipment_entity_factory.build_by_user_item(user_item)
+    else
+      # user_item系は、1, 4, 2
+      fail "item_type must be 1, 4, 2 but: #{user_item.item.item_type}"
+    end
   end
 end
 

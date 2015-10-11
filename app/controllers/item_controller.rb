@@ -52,7 +52,7 @@ class ItemController < ApplicationController
     area_acquisition_service = Area::AreaAcquisitionService.new
     area_node = area_acquisition_service.get_current_area_node_by_player_id(@player_character.id)
 
-    item_throw_service = ItemThrowServiceFactory.new(@equipped_list_entity_factory).build_by_user_item_and_area_node_and_player_id(user_item, area_node, @player_character.id)
+    item_throw_service = ItemThrowServiceFactory.new(@equipped_list_entity_factory, @item_entity_factory).build_by_user_item_and_area_node_and_player_id(user_item, area_node, @player_character.id)
 
     @result = item_throw_service.throw
   end

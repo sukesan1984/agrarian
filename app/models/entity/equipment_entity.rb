@@ -38,6 +38,13 @@ class Entity::EquipmentEntity < Entity::ItemEntity
     return true
   end
 
+  # 捨てる
+  def throw
+    @user_item.count = 0
+    @user_item.player_id = 0
+    return true
+  end
+
   def has_affixes
     return @user_equipment_affix_list.has_affixes
   end

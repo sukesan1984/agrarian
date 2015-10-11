@@ -13,6 +13,9 @@ class Entity::ItemEntity
   def give
   end
 
+  def throw
+  end
+
   def count
   end
 

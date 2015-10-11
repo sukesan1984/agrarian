@@ -10,10 +10,11 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  lock_version :integer          default(0), not null
+#  user_item_id :integer          default(0), not null
 #
 # Indexes
 #
-#  index_thrown_items_on_area_node_id_and_item_id  (area_node_id,item_id) UNIQUE
+#  index_thrown_items_on_area_node_id_and_item_id_and_user_item_id  (area_node_id,item_id,user_item_id) UNIQUE
 #
 
 require 'rails_helper'
