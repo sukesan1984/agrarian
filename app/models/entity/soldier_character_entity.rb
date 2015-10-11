@@ -12,7 +12,6 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
     @level = @level_max if @level.level > @soldier.level_max
 
     @vit = StatusCalculationUtility.calculate(@soldier.vit_min, @soldier.vit_max, @soldier.level_max, @level.level)
-    @hp = StatusPoint.new(@user_soldier.current_hp, @vit * 10)
     @str = StatusCalculationUtility.calculate(@soldier.str_min, @soldier.str_max, @soldier.level_max, @level.level)
     @dex = StatusCalculationUtility.calculate(@soldier.dex_min, @soldier.dex_max, @soldier.level_max, @level.level)
 
@@ -26,6 +25,8 @@ class Entity::SoldierCharacterEntity < Entity::CharacterEntity
 
     # TODO: Soldierのデフォルトのdamage_min, damage_maxを設定する。
     @status = Status.new(1, 5, 0, 0, @str, @dex, @ene, @vit, critical_hit_chance, critical_hit_damage, dodge_chance, 0, 0, 0, 0, 0, 0) + @equipped_list_entity.status
+
+    @hp = StatusPoint.new(@user_soldier.current_hp, @status.hp_max)
   end
 
   def id

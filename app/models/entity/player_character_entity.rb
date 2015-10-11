@@ -8,7 +8,7 @@ class Entity::PlayerCharacterEntity < Entity::CharacterEntity
     @equipped_list_entity = equipped_list_entity
     # TODO: プレイヤーデフォルトのdamange_min, damage_maxを設定する
     @status = Status.new(1, 5, 0, 0, @player.str, @player.dex, @player.ene, @player.vit, 500, 50, 0, 0, 0, 0, 0, 0, 0) + @equipped_list_entity.status
-    @hp = StatusPoint.new(player.hp, @player.vit * 10)
+    @hp = StatusPoint.new(player.hp, @status.hp_max)
 
     @level = Level.get_level_from(player.exp)
     @level_max = Level.find_by(level: PLAYER_MAX_LEVEL) 

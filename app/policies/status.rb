@@ -95,6 +95,10 @@ class Status
     return description_list
   end
 
+  def hp_max 
+    return @vit * 10 + @hp
+  end
+
   # 基本ダメージの取得
   def get_basic_damage
     return Random.rand(self.get_final_min_damage..self.get_final_max_damage)
