@@ -15,4 +15,5 @@
 #
 
 class EnemyInstance < ActiveRecord::Base
+  belongs_to :enemy
 end

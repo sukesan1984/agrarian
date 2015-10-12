@@ -15,4 +15,8 @@
 #
 
 class EnemyGroup < ActiveRecord::Base
+  module Status
+    Alive = 0
+    Death = 1
+  end
 end

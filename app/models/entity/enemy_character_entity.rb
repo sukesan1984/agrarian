@@ -1,8 +1,8 @@
 class Entity::EnemyCharacterEntity
   attr_reader :status
-  def initialize(enemy, progress, drop_item_entity)
+  def initialize(enemy, progress, drop_item_entity, current_hp)
     @enemy = enemy
-    @hp = StatusPoint.new(@enemy.hp, @enemy.hp)
+    @hp = StatusPoint.new(current_hp, @enemy.hp)
     @progress = progress
     @drop_item_entity = drop_item_entity
     @dropped_item_seed = rand(0...100)

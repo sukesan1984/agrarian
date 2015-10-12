@@ -76,7 +76,8 @@ class AreaController < ApplicationController
     @player_character_factory = PlayerCharacterFactory.new(equipped_list_entity_factory)
     @resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     @resource_service_factory = ResourceServiceFactory.new
-    @area_service_factory = AreaServiceFactory.new(@player_character_factory, @resource_service_factory, @resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory))
+    area_node_factory = AreaNodeFactory.new
+    @area_service_factory = AreaServiceFactory.new(@player_character_factory, @resource_service_factory, @resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory))
     user_item_factory = UserItemFactory.new
     quest_condition_entity_factory = Quest::QuestConditionEntityFactory.new(user_item_factory)
     quest_entity_factory = Quest::QuestEntityFactory.new(@player_character_factory, quest_condition_entity_factory)

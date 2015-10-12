@@ -40,14 +40,14 @@ class AreaType::Road < AreaType::Base
     return {
       area_node_id: @area_node.id,
       encountered_enemy: @encountered_enemy,
-      enemies: @user_encounter_enemies
+      enemies: @encounter_enemy_instances
     }
   end
 
   def execute
     result = @battle_encounter.encount
     @encountered_enemy = result[:is_encount]
-    @user_encounter_enemies = result[:enemies]
+    @encounter_enemy_instances = result[:enemies]
   end
 
   def can_move_to_next

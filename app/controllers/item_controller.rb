@@ -49,7 +49,7 @@ class ItemController < ApplicationController
     user_item_id = params[:user_item_id]
     user_item = get_valid_user_item(@player_character.id, user_item_id)
 
-    area_acquisition_service = Area::AreaAcquisitionService.new
+    area_acquisition_service = AreaNodeFactory.new
     area_node = area_acquisition_service.get_current_area_node_by_player_id(@player_character.id)
 
     item_throw_service = ItemThrowServiceFactory.new(@equipped_list_entity_factory, @item_entity_factory).build_by_user_item_and_area_node_and_player_id(user_item, area_node, @player_character.id)
@@ -62,7 +62,7 @@ class ItemController < ApplicationController
     item_id = params[:item_id]
     user_item_id = params[:user_item_id] || 0
 
-    area_node = Area::AreaAcquisitionService.new.get_by_area_node_id(area_node_id)
+    area_node = AreaNodeFactory.new.get_by_area_node_id(area_node_id)
 
     thrown_item = ThrownItem.find_by(area_node_id: area_node.id, item_id: item_id, user_item_id: user_item_id)
 

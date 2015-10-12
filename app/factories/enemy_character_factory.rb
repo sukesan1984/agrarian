@@ -5,16 +5,31 @@ class EnemyCharacterFactory
     @item_entity_factory = item_entity_factory
   end
 
-  # enemyから生成する
-  def  build_by_enemy(player_id, enemy)
-    if @progress_cache.key?(enemy.id)
-      user_progress = @progress_cache[enemy.id]
-    else
-      user_progress = UserProgress.get_or_create(player_id, ProgressType::KillEnemy, enemy.id)
-      # cache
-      @progress_cache[enemy.id] = user_progress
-    end
+  def build_by_enemy_instance(player_id, enemy_instance)
+    user_progress = get_user_progress_by_enemy_id(player_id, enemy_instance.enemy.id)
+    drop_item_entity = get_drop_item_entity_by_enemy(player_id, enemy_instance.enemy)
+    return Entity::EnemyCharacterEntity.new(enemy_instance.enemy, user_progress, drop_item_entity, enemy_instance.current_hp)
+  end
 
+  # enemyから生成する
+  def build_by_enemy(player_id, enemy)
+    user_progress = get_user_progress_by_enemy_id(player_id, enemy.id)
+    drop_item_entity = get_drop_item_entity_by_enemy(player_id, enemy)
+    return Entity::EnemyCharacterEntity.new(enemy, user_progress, drop_item_entity, enemy.hp)
+  end
+
+  private
+  def get_user_progress_by_enemy_id(player_id, enemy_id)
+    if @progress_cache.key?(enemy_id)
+      user_progress = @progress_cache[enemy_id]
+    else
+      user_progress = UserProgress.get_or_create(player_id, ProgressType::KillEnemy, enemy_id)
+      # cache
+      @progress_cache[enemy_id] = user_progress
+    end
+  end
+
+  def get_drop_item_entity_by_enemy(player_id, enemy)
     item_lottery_component = @item_lottery_component_factory.build_by_group_id(enemy.item_lottery_group_id, nil)
     drop_item_entity = nil
     if item_lottery_component.nil?
@@ -27,8 +42,7 @@ class EnemyCharacterFactory
         EquipmentColoringService::make_equipment_colored(drop_item_entity, enemy.item_rarity)
       end
     end
-
-    return Entity::EnemyCharacterEntity.new(enemy, user_progress, drop_item_entity)
+    return drop_item_entity
   end
 end
 
