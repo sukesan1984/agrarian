@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011070017) do
+ActiveRecord::Schema.define(version: 20151012063847) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -75,6 +75,26 @@ ActiveRecord::Schema.define(version: 20151011070017) do
     t.integer  "damage_min",            limit: 4,   default: 0, null: false
     t.integer  "damage_max",            limit: 4,   default: 0, null: false
   end
+
+  create_table "enemy_groups", force: :cascade do |t|
+    t.integer  "area_node_id", limit: 4, default: 0, null: false
+    t.integer  "status",       limit: 4, default: 0, null: false
+    t.integer  "player_num",   limit: 4, default: 0, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "enemy_groups", ["area_node_id", "status", "player_num"], name: "index_enemy_groups_on_area_node_id_and_status_and_player_num", using: :btree
+
+  create_table "enemy_instances", force: :cascade do |t|
+    t.integer  "enemy_group_id", limit: 4, default: 0, null: false
+    t.integer  "enemy_id",       limit: 4, default: 0, null: false
+    t.integer  "current_hp",     limit: 4, default: 0, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "enemy_instances", ["enemy_group_id"], name: "index_enemy_instances_on_enemy_group_id", using: :btree
 
   create_table "enemy_maps", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -413,6 +433,27 @@ ActiveRecord::Schema.define(version: 20151011070017) do
   end
 
   add_index "user_encounter_enemies", ["player_id"], name: "index_user_encounter_enemies_on_player_id", using: :btree
+
+  create_table "user_encounter_enemy_groups", force: :cascade do |t|
+    t.integer  "player_id",      limit: 4, default: 0, null: false
+    t.integer  "enemy_group_id", limit: 4, default: 0, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "user_encounter_enemy_groups", ["enemy_group_id"], name: "index_user_encounter_enemy_groups_on_enemy_group_id", using: :btree
+  add_index "user_encounter_enemy_groups", ["player_id"], name: "index_user_encounter_enemy_groups_on_player_id", unique: true, using: :btree
+
+  create_table "user_enemy_histories", force: :cascade do |t|
+    t.integer  "enemy_instance_id", limit: 4, default: 0, null: false
+    t.integer  "player_id",         limit: 4, default: 0, null: false
+    t.integer  "damage",            limit: 4, default: 0, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "user_enemy_histories", ["enemy_instance_id", "player_id"], name: "index_user_enemy_histories_on_enemy_instance_id_and_player_id", unique: true, using: :btree
+  add_index "user_enemy_histories", ["enemy_instance_id"], name: "index_user_enemy_histories_on_enemy_instance_id", using: :btree
 
   create_table "user_equipment_affixes", force: :cascade do |t|
     t.integer  "user_item_id",       limit: 4,             null: false
