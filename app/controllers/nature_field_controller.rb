@@ -31,12 +31,13 @@ class NatureFieldController < ApplicationController
     resource_service_action_factory =
       ResourceActionServiceFactory.new(@player_character_factory)
     resource_service_fatory = ResourceServiceFactory.new
+    area_node_factory = AreaNodeFactory.new
     @area_service_factory =
       AreaServiceFactory.new(
         @player_character_factory,
         resource_service_fatory,
         resource_service_action_factory,
-        Battle::BattleEncounterFactory.new(@player_character_factory)
+        Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory)
       )
   end
 

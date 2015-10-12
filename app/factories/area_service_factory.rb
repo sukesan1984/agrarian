@@ -73,7 +73,7 @@ class AreaServiceFactory
   def build_road_service(area_node, player)
     road = Road.find_by(id: area_node.area.type_id)
     unless road.nil?
-      battle_encounter = @battle_encounter_factory.build_by_area_id_and_player_id(area_node.area.id, player.id)
+      battle_encounter = @battle_encounter_factory.build_by_area_node_id_and_player_id(area_node.id, player.id)
       return AreaType::Road.new(player, area_node.area.id, road, area_node, battle_encounter)
     end
     return AreaType::Null.new

@@ -1,4 +1,4 @@
-class Area::AreaAcquisitionService
+class AreaNodeFactory
   def initialize
   end
 
@@ -15,4 +15,3 @@ class Area::AreaAcquisitionService
     return area_node
   end
 end
-

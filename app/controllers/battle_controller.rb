@@ -14,10 +14,10 @@ class BattleController < ApplicationController
 
     @death_penalty = DeathPenalty.new(player_character, user_area)
 
-    user_encounter_enemies = UserEncounterEnemy.where('player_id = ?', player_character.id)
+    user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
     @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(area_node_id, player_character.id)
 
-    if user_encounter_enemies.count == 0
+    if user_encounter_enemy_group.enemy_group_id == 0
       render template: 'battle/no_enemy'
       return
     end
@@ -25,8 +25,10 @@ class BattleController < ApplicationController
     unit_list_a = []
     unit_list_b = []
 
-    user_encounter_enemies.each do |user_encounter_enemy|
-      unit_list_a.push(Battle::Unit.new(@enemy_character_factory.build_by_enemy(player_character.id, user_encounter_enemy.enemy)))
+    enemy_instances = EnemyInstanceFactory::get_by_enemy_group_id(user_encounter_enemy_group.enemy_group_id)
+
+    enemy_instances.each do |enemy_instance|
+      unit_list_a.push(Battle::Unit.new(@enemy_character_factory.build_by_enemy_instance(player_character.id, enemy_instance)))
     end
 
     unit_list_b.push(Battle::Unit.new(player_character))
@@ -44,7 +46,16 @@ class BattleController < ApplicationController
 
     begin
       ActiveRecord::Base.transaction do
-        UserEncounterEnemy.delete_all(['player_id = ?', player_character.id])
+        # TODO: 後で移す
+        user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
+        # 自分だけの時は消す 
+        if UserEncounterEnemyGroup.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id).count == 1
+          EnemyGroup.delete_all(id: user_encounter_enemy_group.enemy_group_id)
+          EnemyInstance.delete_all(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
+        end
+        user_encounter_enemy_group.enemy_group_id = 0
+        user_encounter_enemy_group.save!
+
         # 敵が勝利した
         if @result.is_winner(party_a)
           @death_penalty.execute
@@ -100,7 +111,8 @@ class BattleController < ApplicationController
 
     resource_service_action_factory = ResourceActionServiceFactory.new(@player_character_factory)
     resource_service_factory = ResourceServiceFactory.new
-    @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory))
+    area_node_factory = AreaNodeFactory.new
+    @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory))
   end
 end
 
