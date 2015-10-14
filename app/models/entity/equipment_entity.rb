@@ -96,7 +96,7 @@ class Entity::EquipmentEntity < Entity::ItemEntity
   end
 
   def update_affix_status
-    @status    = Status.new(@equipment.damage_min, @equipment.damage_max, 0, @equipment.defense, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) + @user_equipment_affix_list.status
+    @status    = Status.new(@equipment.damage_min, @equipment.damage_max, @equipment.attack, @equipment.defense, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) + @user_equipment_affix_list.status
   end
 end
 
