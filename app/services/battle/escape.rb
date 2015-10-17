@@ -9,10 +9,11 @@ class Battle::Escape
       # 
       if UserEncounterEnemyGroup.where(enemy_group_id: user_encouter_enemy_group.enemy_group_id).count == 0
         EnemyGroup.delete_all(id: user_encounter_enemy_group.enemy_group_id)
-        EnemyInstance.delete_all(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
-        user_encounter_enemy_group.enemy_group_id = 0
-        user_encounter_enemy_group.save!
+        enemy_instances = EnemyInstance.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
+        enemy_instances.each(&:destroy)
       end
+      user_encounter_enemy_group.enemy_group_id = 0
+      user_encounter_enemy_group.save!
       return true
     end
 

@@ -46,16 +46,6 @@ class BattleController < ApplicationController
 
     begin
       ActiveRecord::Base.transaction do
-        # TODO: 後で移す
-        user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
-        # 自分だけの時は消す 
-        if UserEncounterEnemyGroup.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id).count == 1
-          EnemyGroup.delete_all(id: user_encounter_enemy_group.enemy_group_id)
-          EnemyInstance.delete_all(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
-        end
-        user_encounter_enemy_group.enemy_group_id = 0
-        user_encounter_enemy_group.save!
-
         # 敵が勝利した
         if @result.is_winner(party_a)
           @death_penalty.execute
@@ -72,6 +62,17 @@ class BattleController < ApplicationController
           # この辺refactor
           party_a.save!
         end
+
+        # TODO: 後で移す
+        user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
+        # 自分だけの時は消す 
+        if UserEncounterEnemyGroup.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id).count == 1
+          EnemyGroup.delete_all(id: user_encounter_enemy_group.enemy_group_id)
+          enemy_instances = EnemyInstance.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
+          enemy_instances.each(&:destroy)
+        end
+        user_encounter_enemy_group.enemy_group_id = 0
+        user_encounter_enemy_group.save!
       end
     rescue => e
       raise e

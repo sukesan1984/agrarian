@@ -1,8 +1,10 @@
 class Entity::EnemyCharacterEntity
   attr_reader :status
-  def initialize(enemy, progress, drop_item_entity, current_hp)
+  def initialize(enemy, progress, drop_item_entity, enemy_instance, user_enemy_history) 
     @enemy = enemy
-    @hp = StatusPoint.new(current_hp, @enemy.hp)
+    @enemy_instance = enemy_instance
+    @user_enemy_history = user_enemy_history
+    @hp = StatusPoint.new(enemy_instance.current_hp, @enemy.hp)
     @progress = progress
     @drop_item_entity = drop_item_entity
     @dropped_item_seed = rand(0...100)
@@ -32,6 +34,8 @@ class Entity::EnemyCharacterEntity
 
   def decrease_hp(value)
     @hp.decrease(value)
+    @enemy_instance.current_hp = @hp.current
+    @user_enemy_history.damage += value
     @progress.count += 1 if @hp.current <= 0
   end
 
@@ -51,6 +55,8 @@ class Entity::EnemyCharacterEntity
 
   def save!
     @progress.save!
+    @user_enemy_history.save!
+    @enemy_instance.save!
   end
 end
 

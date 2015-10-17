@@ -16,4 +16,16 @@
 #
 
 class UserEnemyHistory < ActiveRecord::Base
+  belongs_to :enemy_instance
+  def self.find_or_create(enemy_instance_id, player_id)
+    user_enemy_history = UserEnemyHistory.find_by(enemy_instance_id: enemy_instance_id, player_id: player_id)
+    if user_enemy_history.nil?
+      user_enemy_history = UserEnemyHistory.create(
+        enemy_instance_id: enemy_instance_id,
+        player_id: player_id,
+        damage: 0
+      )
+    end
+    return user_enemy_history
+  end
 end
