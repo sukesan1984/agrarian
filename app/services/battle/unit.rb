@@ -1,6 +1,6 @@
 class Battle::Unit
   attr_accessor :done_action
-  attr_reader :name, :is_dead, :status
+  attr_reader :name, :status
   # battlize_character.name
   # battlize_character.attack
   # battlize_character.defense
@@ -13,13 +13,17 @@ class Battle::Unit
     @done_action = false
   end
 
+  def is_dead
+    @is_dead = @battlize_character.hp <= 0
+    return @is_dead
+  end
+
   def hp
     return @battlize_character.hp
   end
 
   def take_damage(damage)
     @battlize_character.decrease_hp(damage)
-    @is_dead = @battlize_character.hp == 0
   end
 
   # このユニットがターンで何をするか決める。
@@ -65,7 +69,7 @@ class Battle::Unit
 
   def get_current_state
     hp_rate = @battlize_character.hp_rate 
-    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, @is_dead, @battlize_character.image)
+    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, is_dead, @battlize_character.image)
   end
 
   # 状態を永続化する
@@ -82,7 +86,7 @@ class Battle::Unit
   end
 
   def give_exp(exp)
-    if(@is_dead)
+    if(is_dead)
       return false
     end
     return @battlize_character.give_exp(exp)

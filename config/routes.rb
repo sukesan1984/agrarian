@@ -43,8 +43,9 @@ Rails.application.routes.draw do
 
   # バトル
   resource :battle do
-    get ':area_node_id',        to: 'battle#index'
     get 'escape/:area_node_id', to: 'battle#escape'
+    get ':area_node_id',        to: 'battle#index'
+    get ':area_node_id/:turn_count',        to: 'battle#index'
   end
 
   # 宿屋

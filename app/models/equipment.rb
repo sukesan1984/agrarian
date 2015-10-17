@@ -14,6 +14,7 @@
 #  dodge_chance        :integer          default(0), not null
 #  damage_reduction    :integer          default(0), not null
 #  damage_min          :integer          default(0), not null
+#  attack              :integer
 #
 
 class Equipment < ActiveRecord::Base

@@ -16,4 +16,5 @@
 
 class EnemyInstance < ActiveRecord::Base
   belongs_to :enemy
+  has_many :user_enemy_histories, :dependent => :delete_all
 end

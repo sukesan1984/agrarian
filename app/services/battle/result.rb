@@ -8,5 +8,9 @@ class Battle::Result
   def is_winner(party)
     return party == @winner_party
   end
+
+  def is_draw()
+    return @winner_party.nil?
+  end
 end
 

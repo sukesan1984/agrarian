@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012063847) do
+ActiveRecord::Schema.define(version: 20151014150744) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20151012063847) do
     t.integer  "dodge_chance",        limit: 4, default: 0, null: false
     t.integer  "damage_reduction",    limit: 4, default: 0, null: false
     t.integer  "damage_min",          limit: 4, default: 0, null: false
+    t.integer  "attack",              limit: 4
   end
 
   create_table "equipment_affixes", force: :cascade do |t|

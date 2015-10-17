@@ -8,14 +8,15 @@ class EnemyCharacterFactory
   def build_by_enemy_instance(player_id, enemy_instance)
     user_progress = get_user_progress_by_enemy_id(player_id, enemy_instance.enemy.id)
     drop_item_entity = get_drop_item_entity_by_enemy(player_id, enemy_instance.enemy)
-    return Entity::EnemyCharacterEntity.new(enemy_instance.enemy, user_progress, drop_item_entity, enemy_instance.current_hp)
+    user_enemy_history = UserEnemyHistory.find_or_create(enemy_instance.id, player_id)
+    return Entity::EnemyCharacterEntity.new(enemy_instance.enemy, user_progress, drop_item_entity, enemy_instance, user_enemy_history)
   end
 
   # enemyから生成する
   def build_by_enemy(player_id, enemy)
     user_progress = get_user_progress_by_enemy_id(player_id, enemy.id)
     drop_item_entity = get_drop_item_entity_by_enemy(player_id, enemy)
-    return Entity::EnemyCharacterEntity.new(enemy, user_progress, drop_item_entity, enemy.hp)
+    return Entity::EnemyCharacterEntity.new(enemy, user_progress, drop_item_entity, enemy.hp, nil)
   end
 
   private
