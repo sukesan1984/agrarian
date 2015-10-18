@@ -15,6 +15,7 @@ class ItemConsumptionServiceFactory
       next if user_item.count <= 0
       # パフォーマンスはおいおい
       consumption = Consumption.find_by(item_id: user_item.item.id)
+      fail 'no consumption :' + user_item.item.id unless consumption
       trait = @trait_factory.build_by_comsumption_and_player_id(consumption, player_id)
       item_consumption_services.push(Item::ItemConsumptionService.new(user_item, trait))
     end
