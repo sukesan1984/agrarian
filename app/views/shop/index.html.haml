@@ -22,5 +22,6 @@
       今: #{user_item.count} 個
       \#{hidden_field_tag(:shop_id, @shop.id)}
       \#{hidden_field_tag(:user_item_id, user_item.id)}
+      \#{text_field(:shop, :item_count, value: 1)}
       \#{submit_tag('売りつける')}
 = link_to("戻る", "/")
