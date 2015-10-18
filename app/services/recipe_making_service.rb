@@ -23,6 +23,9 @@ class RecipeMakingService
 
       # 成功率の計算
       unless is_success(@user_skill.real_skill_point, @recipe.difficulty)
+        saved_array.each do |saved_object|
+          saved_object.save!
+        end
         return { success: false, message: '失敗しました。素材がなくなりました' }
       end
 
