@@ -49,11 +49,27 @@ class Status
   def descriptions
     description_list = []
     if @attack != 0
-      description_list.push("攻撃力: " + @attack.to_s)
+      description_list.push("Attack Rating: " + @attack.to_s)
     end
 
     if @defense != 0
-      description_list.push("防御力: " + @defense.to_s)
+      description_list.push("Defense Rating: " + @defense.to_s)
+    end
+
+    if @str != 0
+      description_list.push("STR: " + @str.to_s)
+    end
+
+    if @dex != 0
+      description_list.push("DEX: " + @dex.to_s)
+    end
+
+    if @ene != 0
+      description_list.push("ENE: " + @ene.to_s)
+    end
+
+    if @vit != 0
+      description_list.push("VIT: " + @vit.to_s)
     end
 
     if @critical_hit_chance != 0

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014150744) do
+ActiveRecord::Schema.define(version: 20151018054302) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -137,8 +137,16 @@ ActiveRecord::Schema.define(version: 20151014150744) do
     t.integer  "hp_max",                 limit: 4
     t.integer  "hp_steal_perc_min",      limit: 4
     t.integer  "hp_steal_perc_max",      limit: 4
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "str_min",                limit: 4,   default: 0, null: false
+    t.integer  "str_max",                limit: 4,   default: 0, null: false
+    t.integer  "dex_min",                limit: 4,   default: 0, null: false
+    t.integer  "dex_max",                limit: 4,   default: 0, null: false
+    t.integer  "vit_min",                limit: 4,   default: 0, null: false
+    t.integer  "vit_max",                limit: 4,   default: 0, null: false
+    t.integer  "ene_min",                limit: 4,   default: 0, null: false
+    t.integer  "ene_max",                limit: 4,   default: 0, null: false
   end
 
   create_table "establishments", force: :cascade do |t|
@@ -466,6 +474,10 @@ ActiveRecord::Schema.define(version: 20151014150744) do
     t.integer  "hp_steal_perc",      limit: 4, default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.integer  "str",                limit: 4, default: 0, null: false
+    t.integer  "dex",                limit: 4, default: 0, null: false
+    t.integer  "vit",                limit: 4, default: 0, null: false
+    t.integer  "ene",                limit: 4, default: 0, null: false
   end
 
   add_index "user_equipment_affixes", ["user_item_id"], name: "index_user_equipment_affixes_on_user_item_id", using: :btree

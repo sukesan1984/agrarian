@@ -20,6 +20,14 @@
 #  hp_steal_perc_max      :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  str_min                :integer          default(0), not null
+#  str_max                :integer          default(0), not null
+#  dex_min                :integer          default(0), not null
+#  dex_max                :integer          default(0), not null
+#  vit_min                :integer          default(0), not null
+#  vit_max                :integer          default(0), not null
+#  ene_min                :integer          default(0), not null
+#  ene_max                :integer          default(0), not null
 #
 
 require 'rails_helper'

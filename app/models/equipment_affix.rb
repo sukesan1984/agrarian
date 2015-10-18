@@ -20,6 +20,14 @@
 #  hp_steal_perc_max      :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  str_min                :integer          default(0), not null
+#  str_max                :integer          default(0), not null
+#  dex_min                :integer          default(0), not null
+#  dex_max                :integer          default(0), not null
+#  vit_min                :integer          default(0), not null
+#  vit_max                :integer          default(0), not null
+#  ene_min                :integer          default(0), not null
+#  ene_max                :integer          default(0), not null
 #
 
 class EquipmentAffix < ActiveRecord::Base
@@ -70,6 +78,26 @@ class EquipmentAffix < ActiveRecord::Base
     # hp_steal_perc
     if self.hp_steal_perc_min != 0 && self.hp_steal_perc_max != 0 
       hash[:hp_steal_perc] = EquipmentAffix::get_random_value_by_min_and_max(self.hp_steal_perc_min, self.hp_steal_perc_max)
+    end
+
+    # str
+    if self.str_min != 0 && self.str_max != 0 
+      hash[:str] = EquipmentAffix::get_random_value_by_min_and_max(self.str_min, self.str_max)
+    end
+
+    # dex
+    if self.dex_min != 0 && self.dex_max != 0 
+      hash[:dex] = EquipmentAffix::get_random_value_by_min_and_max(self.dex_min, self.dex_max)
+    end
+
+    # vit
+    if self.vit_min != 0 && self.vit_max != 0 
+      hash[:vit] = EquipmentAffix::get_random_value_by_min_and_max(self.vit_min, self.vit_max)
+    end
+
+    # ene
+    if self.ene_min != 0 && self.ene_max != 0 
+      hash[:ene] = EquipmentAffix::get_random_value_by_min_and_max(self.ene_min, self.ene_max)
     end
 
     return hash
