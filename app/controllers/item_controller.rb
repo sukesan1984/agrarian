@@ -38,11 +38,12 @@ class ItemController < ApplicationController
     # TODO: 将来的にはどの店に売ったかを記録してそれを販売するようにする。
     # shop_id      = params[:shop_id]
     user_item_id = params[:user_item_id]
+    item_count = params[:shop][:item_count].to_i
 
     item_sale_service_factory = ItemSaleServiceFactory.new(@player_character)
     @item_sale_service = item_sale_service_factory.build_by_user_item_id(user_item_id)
 
-    @result = @item_sale_service.sell
+    @result = @item_sale_service.sell(item_count)
   end
 
   def throw
