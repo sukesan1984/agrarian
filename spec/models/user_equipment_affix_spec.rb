@@ -12,6 +12,10 @@
 #  hp_steal_perc      :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  str                :integer          default(0), not null
+#  dex                :integer          default(0), not null
+#  vit                :integer          default(0), not null
+#  ene                :integer          default(0), not null
 #
 # Indexes
 #
