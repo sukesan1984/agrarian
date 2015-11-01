@@ -42,8 +42,17 @@ class Battle::Unit
     if damage <= 0 
       damage = 1
     end
+
+    recovery = damage_calculation.get_recovery(damage)
+
+    if(recovery > 0)
+      unit.take_damage(damage - recovery)
+      message =  "ダメージを与えて、%dHPを吸い取った" % [recovery]
+      return Battle::Action.new(self, unit, message, damage)
+    end
+    #Rails.logger.debug("Damage: {damage}")
+
     unit.take_damage(damage)
-    Rails.logger.debug("Damage: {damage}")
     return Battle::Action.new(self, unit, 'ダメージを与えた', damage)
   end
 

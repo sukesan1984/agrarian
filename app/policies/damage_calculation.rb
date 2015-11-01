@@ -15,6 +15,14 @@ class DamageCalculation
     return final_damage
   end
 
+  def get_recovery(damage)
+    Rails.logger.debug("HP_STEAL: #{@attacker_status.hp_steal_perc}")
+    if @attacker_status.hp_steal_perc <= 0
+      return 0 
+    end
+    return (damage * @attacker_status.hp_steal_perc.fdiv(100)).ceil
+  end
+
   # 攻撃が当たるかどうか
   def dodge?
     dodge_seed = Random.rand(0...100)
