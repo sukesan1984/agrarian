@@ -34,6 +34,10 @@ class RecipeMakingService
       end
 
       # 成功したら
+      if @product_item_entity.equipment?
+        # skill値の正の部分＋１のレアリティカラーが付く可能性
+        EquipmentColoringService::make_equipment_colored(@product_item_entity, @user_skill.skill_point.to_i + 1) 
+      end
       skill_increase = @user_skill.try_increase(@recipe.difficulty)
       @product_item_entity.give
       saved_array.push(@product_item_entity)
