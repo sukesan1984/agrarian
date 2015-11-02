@@ -20,6 +20,7 @@
     = form_tag('/item/sell', method: 'post') do
       = user_item.item.name
       今: #{user_item.count} 個
+      一つ: #{user_item.item.sell_price} rais
       \#{hidden_field_tag(:shop_id, @shop.id)}
       \#{hidden_field_tag(:user_item_id, user_item.id)}
       \#{text_field(:shop, :item_count, value: 1)}
