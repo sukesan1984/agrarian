@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018054302) do
+ActiveRecord::Schema.define(version: 20151103055723) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -49,8 +49,11 @@ ActiveRecord::Schema.define(version: 20151018054302) do
   create_table "dungeons", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "max_floor",   limit: 4,   default: 0, null: false
+    t.integer  "min_search",  limit: 4,   default: 0, null: false
+    t.integer  "max_search",  limit: 4,   default: 0, null: false
   end
 
   create_table "enemies", force: :cascade do |t|
@@ -433,6 +436,18 @@ ActiveRecord::Schema.define(version: 20151018054302) do
   end
 
   add_index "user_banks", ["player_id"], name: "index_user_banks_on_player_id", unique: true, using: :btree
+
+  create_table "user_dungeons", force: :cascade do |t|
+    t.integer  "player_id",      limit: 4, default: 0,     null: false
+    t.integer  "dungeon_id",     limit: 4, default: 0,     null: false
+    t.integer  "current_floor",  limit: 4, default: 0,     null: false
+    t.integer  "search_count",   limit: 4, default: 0,     null: false
+    t.boolean  "found_footstep", limit: 1, default: false, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "user_dungeons", ["player_id"], name: "index_user_dungeons_on_player_id", unique: true, using: :btree
 
   create_table "user_encounter_enemies", force: :cascade do |t|
     t.integer  "player_id",  limit: 4

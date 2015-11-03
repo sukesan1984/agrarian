@@ -7,6 +7,9 @@
 #  description :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  max_floor   :integer          default(0), not null
+#  min_search  :integer          default(0), not null
+#  max_search  :integer          default(0), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
