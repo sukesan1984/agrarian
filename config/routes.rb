@@ -121,5 +121,10 @@ Rails.application.routes.draw do
     post 'draw', to: 'bank#draw'
   end
 
+  # dungeon
+  resource :dungeon do
+    post 'enter', to: 'dungeon#enter'
+  end
+
   get  'chat', to: 'chat#index'
 end
