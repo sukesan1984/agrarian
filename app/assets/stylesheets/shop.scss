@@ -1,3 +1,20 @@
 // Place all the styles related to the shop controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+div.shop-layout{
+    display: -webkit-box;
+}
+
+div.shop-left-layout{
+    width: 500px;
+    mergin-left: 20px;
+}
+
+div.shop-player-status{
+    top: 100px;
+    left: 500px;
+    width: 200px;
+    height: 700px;
+}
+
+
