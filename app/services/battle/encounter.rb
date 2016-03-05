@@ -10,9 +10,9 @@ class Battle::Encounter
   def encount
     ActiveRecord::Base.transaction do
       # すでに遭遇してる。
-      if @user_encounter_enemy_group.enemy_group_id != 0 
-        enemy_instances = EnemyInstanceFactory::get_by_enemy_group_id(@user_encounter_enemy_group.enemy_group_id)
-        return { is_encount: true, enemies: enemy_instances }
+      current = self.get_current_encounter
+      if current[:is_encount]
+        return current
       end
 
       # 敵がいない
@@ -46,6 +46,14 @@ class Battle::Encounter
     end
   rescue => e
     raise e
+  end
+
+  def get_current_encounter
+    if @user_encounter_enemy_group.enemy_group_id != 0 
+      enemy_instances = EnemyInstanceFactory::get_by_enemy_group_id(@user_encounter_enemy_group.enemy_group_id)
+      return { is_encount: true, enemies: enemy_instances }
+    end
+    return { is_encount: false, enemies: nil }
   end
 
   # 出現するかどうかを返す

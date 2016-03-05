@@ -21,7 +21,11 @@ class ItemEntityFactory
     when 2
       return @equipment_entity_factory.build_by_user_item(user_item)
     when 3
-      return Entity::Item::SoldierItemEntity.new(player, user_item, item_id)
+      soldier = Soldier.find_by(id: item.item_type_id)
+      if soldier.nil?
+        fail 'no soldier: ' + item.item_type_id
+      end
+      return Entity::Item::SoldierItemEntity.new(player, soldier, item_id)
     when 5
       quest_entity = @quest_entity_factory.build_by_user_quest_and_player_id(user_item, player.id)
       return Entity::Item::QuestItemEntity.new(quest_entity, item_id)
