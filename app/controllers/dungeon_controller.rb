@@ -42,13 +42,13 @@ class DungeonController < ApplicationController
   end
 
   def create_dungeon_entity_by_dungeon_id(dungeon_id)
-    dungeon = Dungeon.find_by(id: dungeon_id)
-    if dungeon.nil?
+    @dungeon = Dungeon.find_by(id: dungeon_id)
+    if @dungeon.nil?
       fail "dungeon is not found: #{dungeon_id}"
     end
     
-    user_dungeon = UserDungeon.find_or_new(@player_character.id)
-    dungeon_entity = Entity::DungeonEntity.new(dungeon, user_dungeon)
+    @user_dungeon = UserDungeon.find_or_new(@player_character.id)
+    dungeon_entity = Entity::DungeonEntity.new(@dungeon, @user_dungeon)
     return dungeon_entity
   end
 
