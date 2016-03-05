@@ -6,18 +6,29 @@ class DungeonController < ApplicationController
   def enter
     @dungeon_id = params[:dungeon_id]
     @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id_and_dungeon_id(@player_character.id, @dungeon_id)
+    if @dungeon_entity.nil?
+      redirect_to '/'
+      return
+    end
     dungeon_entrance_service = Dungeon::DungeonEntranceService.new(@dungeon_entity)
     dungeon_entrance_service.enter()
   end
 
   def actions
-    # 現在入ってるダンジョンを取得する
-    user_dungeon = UserDungeon.find_by(player_id: @player_character.id)
+    @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id(@player_character.id)
+    if @dungeon_entity.nil?
+      redirect_to '/'
+      return
+    end
   end
 
   # ダンジョン探索
   def search
     @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id(@player_character.id)
+    if @dungeon_entity.nil?
+      redirect_to '/'
+      return
+    end
     dungeon_searching_service = Dungeon::DungeonSearchingService.new(@dungeon_entity)
     dungeon_searching_service.search
   end
@@ -25,8 +36,17 @@ class DungeonController < ApplicationController
   # 階段をおりる
   def ascend
     @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id(@player_character.id) 
+    if @dungeon_entity.nil?
+      redirect_to '/'
+      return
+    end
     dungeon_ascending_service = Dungeon::DungeonAscendingService.new(@dungeon_entity)
     dungeon_ascending_service.ascend
+
+    if !@dungeon_entity.is_entering_dungeon
+      redirect_to '/'
+      return
+    end
   end
 
   def set_factories

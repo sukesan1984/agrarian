@@ -16,12 +16,12 @@ class DungeonEntityFactory
   def create_by_player_id(player_id)
     user_dungeon = UserDungeon.find_by(player_id: player_id)
     if user_dungeon.nil? or user_dungeon.dungeon_id == 0
-      fail "user is not entering dungeon"
+      return nil
     end
 
     dungeon = Dungeon.find_by(id: user_dungeon.dungeon_id)
     if dungeon.nil?
-      fail "dungeon is not found: #{user_dungeon.dungeon_id}"
+      return nil
     end
 
     dungeon_entity = Entity::DungeonEntity.new(dungeon, user_dungeon)

@@ -25,6 +25,11 @@ class Entity::DungeonEntity
     @user_dungeon.current_floor
   end
 
+  # ダンジョンに入場しているかどうか
+  def is_entering_dungeon
+    return @user_dungeon.dungeon_id > 0
+  end
+
   # ダンジョンに入場する
   def enter
     if @user_dungeon.dungeon_id > 0

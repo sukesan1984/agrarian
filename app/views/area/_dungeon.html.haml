@@ -4,6 +4,3 @@
   = object[:dungeon].name
   \#{hidden_field_tag(:dungeon_id, object[:dungeon].id)}
   \#{submit_tag("入る")}
-=form_tag('/dungeon/search', method: "post") do
-  = object[:dungeon].name
-  \#{submit_tag("探索する")}
