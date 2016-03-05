@@ -1,2 +1,5 @@
 %h1 逃げるのに成功した！
-= render 'view_objects/target_routes', target_routes: @target_routes, current: @current
+- if @dungeon_entity && @dungeon_entity.is_entering_dungeon
+  = render 'dungeon/actions', object: { dungeon_entity: @dungeon_entity, current_encounter: nil, area_node_id: nil }
+- else
+  = render 'view_objects/target_routes', target_routes: @target_routes, current: @current

@@ -15,7 +15,7 @@ class Entity::Item::SoldierItemEntity < Entity::ItemEntity
     @gived_soldier = UserSoldier.new(
       player_id: @player.id,
       soldier_id: @soldier.id,
-      current_hp: @soldier.hp_min
+      current_hp: @soldier.vit_min * 10 #TODO: これ後で移動しよう
     )
 
     if UserSoldier.where(player_id: @player.id, is_in_party: 1).count < PartyAdditionService::MAX_PARTY_NUM
