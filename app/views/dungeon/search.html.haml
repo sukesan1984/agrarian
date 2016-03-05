@@ -1,0 +1,9 @@
+探索中
+フロア: #{@dungeon_entity.current_floor}/#{@dungeon_entity.max_floor}
+探索率: #{@dungeon_entity.search_count}/100
+- if @dungeon_entity.found_footstep
+  階段を見つけた
+  =form_tag('/dungeon/ascend', method: "post") do
+    \#{submit_tag("階段を降りる")}
+=form_tag('/dungeon/search', method: "post") do
+  \#{submit_tag("引続き探索する")}

@@ -121,5 +121,14 @@ Rails.application.routes.draw do
     post 'draw', to: 'bank#draw'
   end
 
+  # dungeon
+  resource :dungeon do
+    post 'enter', to: 'dungeon#enter'
+    post 'search', to: 'dungeon#search' # 探索する
+    post 'ascend', to: 'dungeon#ascend' # 先に進む(階段を降りる）
+    post 'escape', to: 'dungeon#escape'
+    get 'actions', to: 'dungeon#actions' # ダンジョンのアクションリスト
+  end
+
   get  'chat', to: 'chat#index'
 end

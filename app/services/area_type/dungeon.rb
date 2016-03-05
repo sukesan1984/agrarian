@@ -19,6 +19,9 @@ class AreaType::Dungeon < AreaType::Base
   end
 
   def get_render_object
+    return {
+      dungeon: @dungeon
+    }
   end
 end
 
