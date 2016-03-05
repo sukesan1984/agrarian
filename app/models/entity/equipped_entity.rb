@@ -28,6 +28,11 @@ class Entity::EquippedEntity
     return !@equipment_entity.nil?
   end
 
+  def descriptions
+    return [] if @equipment_entity.nil?
+    return @equipment_entity.descriptions
+  end
+
   def set_equipped(value)
     if @equipment_entity.nil?
       fail 'cant equip nil equipment' if value
