@@ -48,6 +48,10 @@ class Status
   # 説明文をリストで返す
   def descriptions
     description_list = []
+    if @damage_min !=0 && @damage_max != 0
+      description_list.push("Damage Range: " + self.damage_range)
+    end
+
     if @attack != 0
       description_list.push("Attack Rating: " + @attack.to_s)
     end

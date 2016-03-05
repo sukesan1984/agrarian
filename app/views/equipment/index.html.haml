@@ -9,25 +9,27 @@
   = @equipped_list_entity.status.defense
 - @equipped_list_entity.list.each do |part|
   .equipped
-    = part.part_name
-    = link_to(part.name, "/equipment/show_detail/#{part.user_item_id}")
-    - if part.equipped
-      .equipment_unequip
-        = form_tag('/equipment/unequip', method: 'post') do
-          \#{hidden_field_tag(:user_item_id, part.user_item_id)}
-          \#{hidden_field_tag(:character_type, @character_entity.type)}
-          \#{hidden_field_tag(:character_id, @character_entity.id)}
-          \#{submit_tag("外す")}
+    %div{"data-uk-tooltip" => "{pos:'top-left'}", :title => "#{part.descriptions.join("\n")}"}
+      = part.part_name
+      = link_to(part.name, "/equipment/show_detail/#{part.user_item_id}")
+      - if part.equipped
+        .equipment_unequip
+          = form_tag('/equipment/unequip', method: 'post') do
+            \#{hidden_field_tag(:user_item_id, part.user_item_id)}
+            \#{hidden_field_tag(:character_type, @character_entity.type)}
+            \#{hidden_field_tag(:character_id, @character_entity.id)}
+            \#{submit_tag("外す")}
 
 %h1 装備可能やつ
 - @equipment_entitys.each do |equipment_entity|
-  = link_to(equipment_entity.name, "/equipment/show_detail/#{equipment_entity.user_item_id}")
-  ダメージ範囲: #{equipment_entity.status.damage_range}
-  Defense Rating: #{equipment_entity.status.defense}
-  %br/
-  = form_tag('/equipment/equip', method: "post") do
-    \#{hidden_field_tag(:character_type, @character_entity.type)}
-    \#{hidden_field_tag(:character_id, @character_entity.id)}
-    \#{hidden_field_tag(:user_item_id, equipment_entity.user_item_id)}
-    \#{submit_tag("装備する")}
+  %div{"data-uk-tooltip" => "{pos:'top-left'}", :title => "#{equipment_entity.descriptions.join("\n")}"}
+    = link_to(equipment_entity.name, "/equipment/show_detail/#{equipment_entity.user_item_id}")
+    ダメージ範囲: #{equipment_entity.status.damage_range}
+    Defense Rating: #{equipment_entity.status.defense}
+    %br/
+    = form_tag('/equipment/equip', method: "post") do
+      \#{hidden_field_tag(:character_type, @character_entity.type)}
+      \#{hidden_field_tag(:character_id, @character_entity.id)}
+      \#{hidden_field_tag(:user_item_id, equipment_entity.user_item_id)}
+      \#{submit_tag("装備する")}
 = link_to("戻る", root_path)
