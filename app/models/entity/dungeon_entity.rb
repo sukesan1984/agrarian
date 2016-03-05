@@ -27,6 +27,7 @@ class Entity::DungeonEntity
 
   # ダンジョンに入場しているかどうか
   def is_entering_dungeon
+    Rails.logger.debug("dungeon_id: #{@user_dungeon.dungeon_id}")
     return @user_dungeon.dungeon_id > 0
   end
 
@@ -58,6 +59,7 @@ class Entity::DungeonEntity
   end
 
   def escape 
+    Rails.logger.debug('escape#######################')
     @user_dungeon.dungeon_id = 0
     @user_dungeon.found_footstep = false
     @user_dungeon.search_count = 0

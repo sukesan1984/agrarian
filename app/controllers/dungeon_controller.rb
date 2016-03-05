@@ -5,7 +5,7 @@ class DungeonController < ApplicationController
 
   def enter
     @dungeon_id = params[:dungeon_id]
-    @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id_and_dungeon_id(@player_character.id, @dungeon_id)
+    @dungeon_entity = @dungeon_entity_factory.create_by_player_id_and_dungeon_id(@player_character.id, @dungeon_id)
     if @dungeon_entity.nil?
       redirect_to '/'
       return
@@ -15,7 +15,7 @@ class DungeonController < ApplicationController
   end
 
   def actions
-    @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id(@player_character.id)
+    @dungeon_entity = @dungeon_entity_factory.create_by_player_id(@player_character.id)
     if @dungeon_entity.nil?
       redirect_to '/'
       return
@@ -24,7 +24,7 @@ class DungeonController < ApplicationController
 
   # ダンジョン探索
   def search
-    @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id(@player_character.id)
+    @dungeon_entity = @dungeon_entity_factory.create_by_player_id(@player_character.id)
     if @dungeon_entity.nil?
       redirect_to '/'
       return
@@ -35,7 +35,7 @@ class DungeonController < ApplicationController
 
   # 階段をおりる
   def ascend
-    @dungeon_entity = @dungeon_entitiy_factory.create_by_player_id(@player_character.id) 
+    @dungeon_entity = @dungeon_entity_factory.create_by_player_id(@player_character.id) 
     if @dungeon_entity.nil?
       redirect_to '/'
       return
@@ -49,12 +49,26 @@ class DungeonController < ApplicationController
     end
   end
 
+  # 脱出する
+  # 将来的には簡単に脱出できなくしてもいいかもしれない
+  def escape
+    @dungeon_entity = @dungeon_entity_factory.create_by_player_id(@player_character.id) 
+    if @dungeon_entity.nil?
+      redirect_to '/'
+      return
+    end
+
+    dungeon_escaping_service = Dungeon::DungeonEscapingService.new(@dungeon_entity)
+    dungeon_escaping_service.escape()
+    redirect_to '/'
+  end
+
   def set_factories
     @equipment_entity_factory = EquipmentEntityFactory.new
     @equipped_entity_factory = EquippedEntityFactory.new(@equipment_entity_factory)
     @equipped_list_entity_factory = EquippedListEntityFactory.new(@equipped_entity_factory)
     @player_character_factory = PlayerCharacterFactory.new(@equipped_list_entity_factory)
-    @dungeon_entitiy_factory = DungeonEntityFactory.new
+    @dungeon_entity_factory = DungeonEntityFactory.new
   end
 
   def set_player_character
