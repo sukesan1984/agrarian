@@ -1,5 +1,2 @@
 階段を降りた
-フロア: #{@dungeon_entity.current_floor}/#{@dungeon_entity.max_floor}
-探索率: #{@dungeon_entity.search_count}/100
-=form_tag('/dungeon/search', method: "post") do
-  \#{submit_tag("探索する")}
+= render 'actions', dungeon_entity: @dungeon_entity
