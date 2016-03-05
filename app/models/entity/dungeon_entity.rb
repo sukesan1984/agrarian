@@ -5,6 +5,26 @@ class Entity::DungeonEntity
     @user_dungeon = user_dungeon
   end
 
+  def name
+    @dungeon.name
+  end
+
+  def max_floor
+    @dungeon.max_floor
+  end
+
+  def search_count
+    @user_dungeon.search_count
+  end
+
+  def found_footstep
+    @user_dungeon.found_footstep
+  end
+
+  def current_floor
+    @user_dungeon.current_floor
+  end
+
   # ダンジョンに入場する
   def enter
     if @user_dungeon.dungeon_id > 0
