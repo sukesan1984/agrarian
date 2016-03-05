@@ -14,6 +14,7 @@ class DungeonController < ApplicationController
     dungeon_entrance_service.enter()
   end
 
+  # 行動リストを取得する
   def actions
     @dungeon_entity = @dungeon_entity_factory.create_by_player_id(@player_character.id)
     if @dungeon_entity.nil?
