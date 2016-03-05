@@ -1,0 +1,5 @@
+探索
+今: #{@user_dungeon.search_count}/100
+階段: #{@user_dungeon.found_footstep}
+=form_tag('/dungeon/search', method: "post") do
+  \#{submit_tag("引続き探索する")}

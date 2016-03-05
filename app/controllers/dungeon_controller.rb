@@ -15,6 +15,26 @@ class DungeonController < ApplicationController
     dungeon_entrance_service.enter()
   end
 
+  def actions
+    # 現在入ってるダンジョンを取得する
+    user_dungeon = UserDungeon.find_by(player_id: @player_character.id)
+  end
+
+  # ダンジョン探索
+  def search
+    @user_dungeon = UserDungeon.find_by(player_id: @player_character.id)
+    if @user_dungeon.nil?
+      fail "user is not entering dungeon"
+    end
+
+    dungeon = Dungeon.find_by(id: @user_dungeon.id)
+    if dungeon.nil?
+      fail "dungeon is not found: #{@user_dungeon.id}"
+    end
+    dungeon_searching_service = Dungeon::DungeonSearchingService.new(@user_dungeon, dungeon)
+    dungeon_searching_service.search
+  end
+
   def set_factories
     @equipment_entity_factory = EquipmentEntityFactory.new
     @equipped_entity_factory = EquippedEntityFactory.new(@equipment_entity_factory)
