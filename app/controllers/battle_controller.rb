@@ -13,7 +13,9 @@ class BattleController < ApplicationController
 
     @current = @area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, player_character.id)
 
-    @death_penalty = DeathPenalty.new(player_character, user_area)
+    dungeon_entity = @dungeon_entity_factory.create_by_player_id(player_character.id)
+
+    @death_penalty = DeathPenalty.new(player_character, user_area, dungeon_entity)
 
     user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
     @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(@area_node_id, player_character.id)
@@ -122,6 +124,9 @@ class BattleController < ApplicationController
     resource_service_factory = ResourceServiceFactory.new
     area_node_factory = AreaNodeFactory.new
     @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory))
+
+    @dungeon_entity_factory = DungeonEntityFactory.new
+
   end
 end
 

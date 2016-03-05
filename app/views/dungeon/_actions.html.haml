@@ -1,10 +1,19 @@
 フロア: #{dungeon_entity.current_floor}/#{dungeon_entity.max_floor}
 探索率: #{dungeon_entity.search_count}/100
-- if dungeon_entity.found_footstep
-  階段を見つけた
-  =form_tag('/dungeon/ascend', method: "post") do
-    \#{submit_tag("階段を降りる")}
-=form_tag('/dungeon/search', method: "post") do
-  \#{submit_tag("引続き探索する")}
-=form_tag('/dungeon/escape', method: "post") do
-  \#{submit_tag("#{dungeon_entity.name}を抜ける")}
+%br
+- if(@current_encounter[:is_encount])
+  - @current_encounter[:enemies].each do |enemy_instance|
+    = enemy_instance.enemy.name
+    %br/
+  が現れた
+  = render "area/enemy_appeared", area_node_id: @area_node_id
+  %br
+- else
+  - if dungeon_entity.found_footstep
+    階段を見つけた
+    =form_tag('/dungeon/ascend', method: "post") do
+      \#{submit_tag("階段を降りる")}
+  =form_tag('/dungeon/search', method: "post") do
+    \#{submit_tag("引続き探索する")}
+  =form_tag('/dungeon/escape', method: "post") do
+    \#{submit_tag("#{dungeon_entity.name}を抜ける")}

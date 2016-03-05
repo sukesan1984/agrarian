@@ -99,6 +99,11 @@ class Entity::DungeonEntity
     return search_rate
   end
 
+  def give_death_penalty
+    self.escape()
+    "#{@dungeon.name}を命からがら逃げ出した"
+  end
+
   def save!
     @user_dungeon.save!
   end
