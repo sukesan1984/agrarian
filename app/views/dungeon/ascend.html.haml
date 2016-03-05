@@ -1,0 +1,5 @@
+階段を降りた
+フロア: #{@user_dungeon.current_floor}/#{@dungeon.max_floor}
+探索率: #{@user_dungeon.search_count}/100
+=form_tag('/dungeon/search', method: "post") do
+  \#{submit_tag("探索する")}

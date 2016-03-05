@@ -24,8 +24,8 @@ class UserDungeon < ActiveRecord::Base
     self.found_footstep = false
   end
 
-  def self.find_or_new(player_id, dungeon_id)
-    user_dungeon = UserDungeon.find_by(player_id: player_id, dungeon_id: dungeon_id)
+  def self.find_or_new(player_id)
+    user_dungeon = UserDungeon.find_by(player_id: player_id)
     if user_dungeon.nil?
       user_dungeon = UserDungeon.new(
         player_id: player_id,

@@ -14,6 +14,31 @@ class Entity::DungeonEntity
     @user_dungeon.setup_to_dungeon_entrance(@dungeon.id)
   end
 
+  # ダンジョンを下に降りる
+  def ascend
+    # 降りれない
+    if !@user_dungeon.found_footstep
+      return
+    end
+
+    # 最下層ならダンジョンから出る
+    if @dungeon.max_floor <= @user_dungeon.current_floor
+      self.escape
+      return
+    end
+
+    @user_dungeon.found_footstep = false
+    @user_dungeon.current_floor += 1
+    @user_dungeon.search_count = 0
+  end
+
+  def escape 
+    @user_dungeon.dungeon_id = 0
+    @user_dungeon.found_footstep = false
+    @user_dungeon.search_count = 0
+    @user_dungeon.current_floor = 1
+  end
+
   # 探索率を上昇させる
   def countup_search_rate
     search_rate = self.get_search_rate

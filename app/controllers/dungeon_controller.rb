@@ -25,6 +25,8 @@ class DungeonController < ApplicationController
   # 階段をおりる
   def ascend
     dungeon_entity = self.create_dungeon_entity_from_user_dungeon
+    dungeon_ascending_service = Dungeon::DungeonAscendingService.new(dungeon_entity)
+    dungeon_ascending_service.ascend
   end
 
   def set_factories
@@ -45,7 +47,7 @@ class DungeonController < ApplicationController
       fail "dungeon is not found: #{dungeon_id}"
     end
     
-    user_dungeon = UserDungeon.find_or_new(@player_character.id, dungeon_id)
+    user_dungeon = UserDungeon.find_or_new(@player_character.id)
     dungeon_entity = Entity::DungeonEntity.new(dungeon, user_dungeon)
     return dungeon_entity
   end
@@ -56,12 +58,12 @@ class DungeonController < ApplicationController
       fail "user is not entering dungeon"
     end
 
-    dungeon = Dungeon.find_by(id: @user_dungeon.dungeon_id)
-    if dungeon.nil?
+    @dungeon = Dungeon.find_by(id: @user_dungeon.dungeon_id)
+    if @dungeon.nil?
       fail "dungeon is not found: #{@user_dungeon.dungeon_id}"
     end
 
-    dungeon_entity = Entity::DungeonEntity.new(dungeon, @user_dungeon)
+    dungeon_entity = Entity::DungeonEntity.new(@dungeon, @user_dungeon)
     return dungeon_entity
   end
 end
