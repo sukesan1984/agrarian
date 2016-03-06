@@ -23,6 +23,7 @@
 #  dex                   :integer
 #  damage_min            :integer          default(0), not null
 #  damage_max            :integer          default(0), not null
+#  max_player_num        :integer          default(1), not null
 #
 
 class Enemy < ActiveRecord::Base

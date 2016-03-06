@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103055723) do
+ActiveRecord::Schema.define(version: 20160306085513) do
 
   create_table "area_nodes", force: :cascade do |t|
     t.integer  "area_id",    limit: 4
@@ -77,14 +77,16 @@ ActiveRecord::Schema.define(version: 20151103055723) do
     t.integer  "dex",                   limit: 4
     t.integer  "damage_min",            limit: 4,   default: 0, null: false
     t.integer  "damage_max",            limit: 4,   default: 0, null: false
+    t.integer  "max_player_num",        limit: 4,   default: 1, null: false
   end
 
   create_table "enemy_groups", force: :cascade do |t|
-    t.integer  "area_node_id", limit: 4, default: 0, null: false
-    t.integer  "status",       limit: 4, default: 0, null: false
-    t.integer  "player_num",   limit: 4, default: 0, null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "area_node_id", limit: 4, default: 0,     null: false
+    t.integer  "status",       limit: 4, default: 0,     null: false
+    t.integer  "player_num",   limit: 4, default: 0,     null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "is_boss",      limit: 1, default: false, null: false
   end
 
   add_index "enemy_groups", ["area_node_id", "status", "player_num"], name: "index_enemy_groups_on_area_node_id_and_status_and_player_num", using: :btree

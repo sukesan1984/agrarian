@@ -8,6 +8,7 @@
 #  player_num   :integer          default(0), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  is_boss      :boolean          default(FALSE), not null
 #
 # Indexes
 #
