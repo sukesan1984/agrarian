@@ -95,7 +95,7 @@ class BattleController < ApplicationController
     @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory))
 
     @dungeon_entity_factory = DungeonEntityFactory.new
-    @enemy_group_entity_factory = EnemyGroupEntityFactory.new
+    @enemy_group_entity_factory = UserEncounterEnemyGroupEntityFactory.new
   end
 end
 

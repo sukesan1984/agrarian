@@ -1,4 +1,4 @@
-class EnemyGroupEntityFactory
+class UserEncounterEnemyGroupEntityFactory
   def initialize
   end
 
