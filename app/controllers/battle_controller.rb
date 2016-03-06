@@ -61,8 +61,7 @@ class BattleController < ApplicationController
 
         # 敵が勝利した
         if @result.is_winner(party_a)
-          @death_penalty.execute
-          @death_penalty.save!
+          @death_penalty.give_death_penalty
           # この辺refactor
           party_a.save!
           party_b.save!
