@@ -9,22 +9,24 @@ class BattleController < ApplicationController
     # player
     player_character = @player_character_factory.build_by_user_id(current_user.id)
 
-    user_area = UserArea.get_or_create(player_character.id)
-
+    # 移動先のリストを表示するため
     @current = @area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, player_character.id)
+    @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(@area_node_id, player_character.id)
 
+    # デスペナルティの生成
+    user_area = UserArea.get_or_create(player_character.id)
     @dungeon_entity = @dungeon_entity_factory.create_by_player_id(player_character.id)
-
     @death_penalty = DeathPenalty.new(player_character, user_area, @dungeon_entity)
 
+    # ユーザーが遭遇してる敵を取得する
     user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
-    @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(@area_node_id, player_character.id)
 
     if user_encounter_enemy_group.enemy_group_id == 0
       render template: 'battle/no_enemy'
       return
     end
 
+    # バトルの準備をする
     unit_list_a = []
     unit_list_b = []
 
@@ -45,8 +47,10 @@ class BattleController < ApplicationController
     executor = Battle::Executor.new
     party_a = Entity::Battle::PartyEntity.new(unit_list_a, 'モンスターたち')
     party_b = Entity::Battle::PartyEntity.new(unit_list_b, '俺のパーティ')
+
     @result = executor.do_battle(party_a, party_b, @turn_count)
 
+    # サービスの仕事だ
     begin
       ActiveRecord::Base.transaction do
         if @result.is_draw

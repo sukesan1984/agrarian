@@ -1,4 +1,4 @@
-class Battle::Turn
+class ViewModel::Battle::TurnResult
   def initialize(party_a, party_b)
     @party_a = party_a
     @party_b = party_b

@@ -1,4 +1,4 @@
-class Battle::Result
+class ViewModel::Battle::OverallResult
   attr_reader :turn_result_list
   def initialize(turn_result_list, winner_party)
     @turn_result_list = turn_result_list

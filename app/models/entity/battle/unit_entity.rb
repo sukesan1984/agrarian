@@ -35,7 +35,7 @@ class Entity::Battle::UnitEntity
 
     # 対象が避けるかどうか
     if damage_calculation.dodge?
-      return Battle::Action.new(self, unit, 'ダメージ(避けた！)', 0)
+      return ViewModel::Battle::UnitActionResult.new(self, unit, 'ダメージ(避けた！)', 0)
     end
 
     damage = damage_calculation.get_damage
@@ -48,12 +48,12 @@ class Entity::Battle::UnitEntity
     if(recovery > 0)
       unit.take_damage(damage - recovery)
       message =  "ダメージを与えて、%dHPを吸い取った" % [recovery]
-      return Battle::Action.new(self, unit, message, damage)
+      return ViewModel::Battle::UnitActionResult.new(self, unit, message, damage)
     end
     #Rails.logger.debug("Damage: {damage}")
 
     unit.take_damage(damage)
-    return Battle::Action.new(self, unit, 'ダメージを与えた', damage)
+    return ViewModel::Battle::UnitActionResult.new(self, unit, 'ダメージを与えた', damage)
   end
 
   def has_critical_damage
