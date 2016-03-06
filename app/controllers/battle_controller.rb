@@ -16,7 +16,7 @@ class BattleController < ApplicationController
     # デスペナルティの生成
     user_area = UserArea.get_or_create(player_character.id)
     @dungeon_entity = @dungeon_entity_factory.create_by_player_id(player_character.id)
-    @death_penalty = DeathPenalty.new(player_character, user_area, @dungeon_entity)
+    @death_penalty = Battle::GivingDeathPenaltyService.new(player_character, user_area, @dungeon_entity)
 
     # ユーザーが遭遇してる敵を取得する
     user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)

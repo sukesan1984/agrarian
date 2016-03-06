@@ -1,5 +1,5 @@
 # デスペナを扱うクラス
-class DeathPenalty
+class Battle::GivingDeathPenaltyService
   attr_reader :result_list, :executed
   def initialize(player_character, user_area, dungeon_entity)
     @player_character = player_character
