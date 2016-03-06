@@ -19,7 +19,7 @@ class Battle::BattleEncounterFactory
         enemy_group_id: 0)
     end
 
-    return Battle::Encounter.new(player, area_node, user_encounter_enemy_group, enemy_maps, enemies_lottery)
+    return Battle::EncounteringEnemiesService.new(player, area_node, user_encounter_enemy_group, enemy_maps, enemies_lottery)
   end
 end
 
