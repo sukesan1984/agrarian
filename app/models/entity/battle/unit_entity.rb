@@ -1,4 +1,4 @@
-class Battle::Unit
+class Entity::Battle::UnitEntity
   attr_accessor :done_action
   attr_reader :name, :status
   # battlize_character.name
@@ -78,7 +78,7 @@ class Battle::Unit
 
   def get_current_state
     hp_rate = @battlize_character.hp_rate 
-    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, is_dead, @battlize_character.image)
+    return Entity::Battle::UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, is_dead, @battlize_character.image)
   end
 
   # 状態を永続化する
@@ -106,7 +106,7 @@ class Battle::Unit
   end
 end
 
-class Battle::Unit::UnitStatus
+class Entity::Battle::UnitStatus
   attr_reader :hp, :name, :is_dead, :hp_rate, :image
   def initialize(hp, hp_rate, name, is_dead, image)
     @hp      = hp

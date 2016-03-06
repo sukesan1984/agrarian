@@ -31,20 +31,20 @@ class BattleController < ApplicationController
     enemy_instances = EnemyInstanceFactory::get_by_enemy_group_id(user_encounter_enemy_group.enemy_group_id)
 
     enemy_instances.each do |enemy_instance|
-      unit_list_a.push(Battle::Unit.new(@enemy_character_factory.build_by_enemy_instance(player_character.id, enemy_instance)))
+      unit_list_a.push(Entity::Battle::UnitEntity.new(@enemy_character_factory.build_by_enemy_instance(player_character.id, enemy_instance)))
     end
 
-    unit_list_b.push(Battle::Unit.new(player_character))
+    unit_list_b.push(Entity::Battle::UnitEntity.new(player_character))
 
     soldier_characters = @soldier_character_factory.build_party_by_player_id(player_character.id)
 
     soldier_characters.each do |soldier_character|
-      unit_list_b.push(Battle::Unit.new(soldier_character))
+      unit_list_b.push(Entity::Battle::UnitEntity.new(soldier_character))
     end
 
     executor = Battle::Executor.new
-    party_a = Battle::Party.new(unit_list_a, 'モンスターたち')
-    party_b = Battle::Party.new(unit_list_b, '俺のパーティ')
+    party_a = Entity::Battle::PartyEntity.new(unit_list_a, 'モンスターたち')
+    party_b = Entity::Battle::PartyEntity.new(unit_list_b, '俺のパーティ')
     @result = executor.do_battle(party_a, party_b, @turn_count)
 
     begin
