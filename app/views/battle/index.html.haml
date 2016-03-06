@@ -32,7 +32,7 @@
     .battle-end-item-list
       獲得アイテム 
       %br/
-      - if @battle_end.item_list.count > 0
+      - if @battle_end.item_list != nil && @battle_end.item_list.count > 0
         - @battle_end.item_list.each do |drop_item|
           %li #{drop_item.name} x #{drop_item.count}
       - else

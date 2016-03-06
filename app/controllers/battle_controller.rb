@@ -50,42 +50,8 @@ class BattleController < ApplicationController
 
     @result = executor.do_battle(party_a, party_b, @turn_count)
 
-    # サービスの仕事だ
-    begin
-      ActiveRecord::Base.transaction do
-        if @result.is_draw
-          party_a.save!
-          party_b.save!
-          return
-        end
-
-        # 敵が勝利した
-        if @result.is_winner(party_a)
-          @death_penalty.give_death_penalty
-          # この辺refactor
-          party_a.save!
-          party_b.save!
-        else
-          @battle_end = Battle::TerminatingBattleService.new(party_b, party_a, player_character)
-          @battle_end.terminate
-          # この辺refactor
-          party_a.save!
-        end
-
-        # TODO: 後で移す
-        user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
-        # 自分だけの時は消す 
-        if UserEncounterEnemyGroup.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id).count == 1
-          EnemyGroup.delete_all(id: user_encounter_enemy_group.enemy_group_id)
-          enemy_instances = EnemyInstance.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
-          enemy_instances.each(&:destroy)
-        end
-        user_encounter_enemy_group.enemy_group_id = 0
-        user_encounter_enemy_group.save!
-      end
-    rescue => e
-      raise e
-    end
+    @battle_end = Battle::TerminatingBattleService.new(@result, party_b, party_a, player_character, @death_penalty)
+    @battle_end.terminate
   end
 
   def escape
