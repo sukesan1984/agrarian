@@ -8,6 +8,7 @@ class Battle::TerminatingBattleService
 
     @player_character = player_character
     @enemy_group_entity = enemy_group_entity
+    @death_penalty = death_penalty
     @terminating_service = self.get_terminating_service
   end
 
