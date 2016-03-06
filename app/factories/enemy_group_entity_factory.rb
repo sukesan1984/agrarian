@@ -8,6 +8,6 @@ class EnemyGroupEntityFactory
     enemy_group = EnemyGroup.find_by(id: user_encounter_enemy_group.enemy_group_id)
     enemy_instances = EnemyInstance.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
 
-    return Entity::EnemyGroupEntity.new(user_encounter_enemy_group, user_encounter_enemy_groups, enemy_instances, enemy_group)
+    return Entity::UserEncounterEnemyGroupEntity.new(user_encounter_enemy_group, user_encounter_enemy_groups, enemy_instances, enemy_group)
   end
 end

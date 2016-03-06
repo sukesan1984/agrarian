@@ -1,4 +1,4 @@
-class Entity::EnemyGroupEntity
+class Entity::UserEncounterEnemyGroupEntity
   # 自分のレコード: user_encounter_enemy_group
   # 自分含めて他人のレコード（複数) : user_encounter_enemy_groups
   # グループに紐づくenemy: enemy_instances
