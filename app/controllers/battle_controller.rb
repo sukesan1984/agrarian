@@ -56,7 +56,7 @@ class BattleController < ApplicationController
 
   def escape
     @area_node_id = params[:area_node_id]
-    battle_escape_service = Battle::Escape.new
+    battle_escape_service = Battle::EscapingBattleService.new
     player_character = @player_character_factory.build_by_user_id(current_user.id)
     is_success_to_escape = battle_escape_service.execute(player_character.id)
 
