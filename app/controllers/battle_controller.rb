@@ -44,7 +44,7 @@ class BattleController < ApplicationController
       unit_list_b.push(Entity::Battle::UnitEntity.new(soldier_character))
     end
 
-    executor = Battle::Executor.new
+    executor = Battle::ProceedingBattleService.new
     party_a = Entity::Battle::PartyEntity.new(unit_list_a, 'モンスターたち')
     party_b = Entity::Battle::PartyEntity.new(unit_list_b, '俺のパーティ')
 
