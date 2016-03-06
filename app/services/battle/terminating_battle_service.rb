@@ -20,7 +20,7 @@ class Battle::TerminatingBattleService
     if @result.is_winner(@party_a)
       return TerminatingWinningService.new(@party_a, @party_b, @player_character, @enemy_group_entity)
     else
-      return TerminatingLosingService.new(@death_penalty, @enemy_group_entity)
+      return TerminatingLosingService.new(@party_a, @party_b, @death_penalty, @player_character, @enemy_group_entity)
     end
   end
 
