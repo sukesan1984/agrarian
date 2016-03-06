@@ -66,11 +66,8 @@ class BattleController < ApplicationController
           party_a.save!
           party_b.save!
         else
-          @battle_end = Battle::End.new(party_b, party_a, player_character)
-          @battle_end.give_rails
-          @battle_end.give_exp
-          @battle_end.give_items
-          @battle_end.save!
+          @battle_end = Battle::TerminatingBattleService.new(party_b, party_a, player_character)
+          @battle_end.terminate
           # この辺refactor
           party_a.save!
         end

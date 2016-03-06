@@ -1,5 +1,5 @@
 # バトル終了処理
-class Battle::End
+class Battle::TerminatingBattleService
   attr_reader :given_exp_result
   def initialize(winner_party, defeated_party, player_character)
     @winner_party = winner_party
@@ -7,6 +7,17 @@ class Battle::End
     @player_character = player_character
     @given_exp_result = []
     # @item_list = []
+  end
+
+  def terminate
+    ActiveRecord::Base.transaction do
+      self.give_rails
+      self.give_exp
+      self.give_items
+      self.save!
+    end
+  rescue => e
+    raise e
   end
 
   def give_rails
