@@ -1,4 +1,4 @@
-class Battle::Unit
+class Entity::Battle::UnitEntity
   attr_accessor :done_action
   attr_reader :name, :status
   # battlize_character.name
@@ -35,7 +35,7 @@ class Battle::Unit
 
     # 対象が避けるかどうか
     if damage_calculation.dodge?
-      return Battle::Action.new(self, unit, 'ダメージ(避けた！)', 0)
+      return ViewModel::Battle::UnitActionResult.new(self, unit, 'ダメージ(避けた！)', 0)
     end
 
     damage = damage_calculation.get_damage
@@ -48,12 +48,12 @@ class Battle::Unit
     if(recovery > 0)
       unit.take_damage(damage - recovery)
       message =  "ダメージを与えて、%dHPを吸い取った" % [recovery]
-      return Battle::Action.new(self, unit, message, damage)
+      return ViewModel::Battle::UnitActionResult.new(self, unit, message, damage)
     end
     #Rails.logger.debug("Damage: {damage}")
 
     unit.take_damage(damage)
-    return Battle::Action.new(self, unit, 'ダメージを与えた', damage)
+    return ViewModel::Battle::UnitActionResult.new(self, unit, 'ダメージを与えた', damage)
   end
 
   def has_critical_damage
@@ -78,7 +78,7 @@ class Battle::Unit
 
   def get_current_state
     hp_rate = @battlize_character.hp_rate 
-    return UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, is_dead, @battlize_character.image)
+    return Entity::Battle::UnitStatus.new(@battlize_character.hp.to_s, hp_rate.to_s, @name, is_dead, @battlize_character.image)
   end
 
   # 状態を永続化する
@@ -106,7 +106,7 @@ class Battle::Unit
   end
 end
 
-class Battle::Unit::UnitStatus
+class Entity::Battle::UnitStatus
   attr_reader :hp, :name, :is_dead, :hp_rate, :image
   def initialize(hp, hp_rate, name, is_dead, image)
     @hp      = hp

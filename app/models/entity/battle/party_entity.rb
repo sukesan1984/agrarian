@@ -1,4 +1,4 @@
-class Battle::Party
+class Entity::Battle::PartyEntity
   attr_reader :name
   def initialize(unit_list, name)
     @unit_list = unit_list

@@ -9,83 +9,49 @@ class BattleController < ApplicationController
     # player
     player_character = @player_character_factory.build_by_user_id(current_user.id)
 
-    user_area = UserArea.get_or_create(player_character.id)
-
+    # 移動先のリストを表示するため
     @current = @area_service_factory.build_by_area_node_id_and_player_id(@area_node_id, player_character.id)
-
-    @dungeon_entity = @dungeon_entity_factory.create_by_player_id(player_character.id)
-
-    @death_penalty = DeathPenalty.new(player_character, user_area, @dungeon_entity)
-
-    user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
     @target_routes = @area_service_factory.build_target_routes_by_area_node_id_and_player_id(@area_node_id, player_character.id)
+
+    # デスペナルティの生成
+    user_area = UserArea.get_or_create(player_character.id)
+    @dungeon_entity = @dungeon_entity_factory.create_by_player_id(player_character.id)
+    @death_penalty = Battle::GivingDeathPenaltyService.new(player_character, user_area, @dungeon_entity)
+
+    # ユーザーが遭遇してる敵を取得する
+    user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
 
     if user_encounter_enemy_group.enemy_group_id == 0
       render template: 'battle/no_enemy'
       return
     end
 
+    # バトルの準備をする
     unit_list_a = []
     unit_list_b = []
 
     enemy_instances = EnemyInstanceFactory::get_by_enemy_group_id(user_encounter_enemy_group.enemy_group_id)
 
     enemy_instances.each do |enemy_instance|
-      unit_list_a.push(Battle::Unit.new(@enemy_character_factory.build_by_enemy_instance(player_character.id, enemy_instance)))
+      unit_list_a.push(Entity::Battle::UnitEntity.new(@enemy_character_factory.build_by_enemy_instance(player_character.id, enemy_instance)))
     end
 
-    unit_list_b.push(Battle::Unit.new(player_character))
+    unit_list_b.push(Entity::Battle::UnitEntity.new(player_character))
 
     soldier_characters = @soldier_character_factory.build_party_by_player_id(player_character.id)
 
     soldier_characters.each do |soldier_character|
-      unit_list_b.push(Battle::Unit.new(soldier_character))
+      unit_list_b.push(Entity::Battle::UnitEntity.new(soldier_character))
     end
 
     executor = Battle::Executor.new
-    party_a = Battle::Party.new(unit_list_a, 'モンスターたち')
-    party_b = Battle::Party.new(unit_list_b, '俺のパーティ')
+    party_a = Entity::Battle::PartyEntity.new(unit_list_a, 'モンスターたち')
+    party_b = Entity::Battle::PartyEntity.new(unit_list_b, '俺のパーティ')
+
     @result = executor.do_battle(party_a, party_b, @turn_count)
 
-    begin
-      ActiveRecord::Base.transaction do
-        if @result.is_draw
-          party_a.save!
-          party_b.save!
-          return
-        end
-
-        # 敵が勝利した
-        if @result.is_winner(party_a)
-          @death_penalty.execute
-          @death_penalty.save!
-          # この辺refactor
-          party_a.save!
-          party_b.save!
-        else
-          @battle_end = Battle::End.new(party_b, party_a, player_character)
-          @battle_end.give_rails
-          @battle_end.give_exp
-          @battle_end.give_items
-          @battle_end.save!
-          # この辺refactor
-          party_a.save!
-        end
-
-        # TODO: 後で移す
-        user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_character.id)
-        # 自分だけの時は消す 
-        if UserEncounterEnemyGroup.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id).count == 1
-          EnemyGroup.delete_all(id: user_encounter_enemy_group.enemy_group_id)
-          enemy_instances = EnemyInstance.where(enemy_group_id: user_encounter_enemy_group.enemy_group_id)
-          enemy_instances.each(&:destroy)
-        end
-        user_encounter_enemy_group.enemy_group_id = 0
-        user_encounter_enemy_group.save!
-      end
-    rescue => e
-      raise e
-    end
+    @battle_end = Battle::TerminatingBattleService.new(@result, party_b, party_a, player_character, @death_penalty)
+    @battle_end.terminate
   end
 
   def escape

@@ -1,4 +1,4 @@
-class Battle::Action
+class ViewModel::Battle::UnitActionResult
   attr_reader :result
   # 主体, 客体
   def initialize(

@@ -1,5 +1,5 @@
 # デスペナを扱うクラス
-class DeathPenalty
+class Battle::GivingDeathPenaltyService
   attr_reader :result_list, :executed
   def initialize(player_character, user_area, dungeon_entity)
     @player_character = player_character
@@ -9,13 +9,18 @@ class DeathPenalty
     @executed = false
   end
 
-  def execute
-    @result_list.push(@player_character.give_death_penalty)
-    @result_list.push(@user_area.give_death_penalty)
-    if @dungeon_entity
-      @result_list.push(@dungeon_entity.give_death_penalty)
+  def give_death_penalty
+    ActiveRecord::Base.transaction do
+      @result_list.push(@player_character.give_death_penalty)
+      @result_list.push(@user_area.give_death_penalty)
+      if @dungeon_entity
+        @result_list.push(@dungeon_entity.give_death_penalty)
+      end
+      self.save!
+      @executed = true
     end
-    @executed = true
+  rescue => e
+    raise e
   end
 
   def save!

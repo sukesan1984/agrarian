@@ -2,7 +2,7 @@ class Battle::Executor
   # partyはcharacterで。
   # 指定ターン数戦う。
   def do_battle(party_a, party_b, turn_count)
-    turn = Battle::Turn.new(party_a, party_b)
+    turn = ViewModel::Battle::TurnResult.new(party_a, party_b)
     if turn_count
       turn_count = turn_count.to_i
       if turn_count <= 0
@@ -24,7 +24,7 @@ class Battle::Executor
       current_turn += 1
     end
 
-    return Battle::Result.new(turn_result_list, winner_party)
+    return ViewModel::Battle::OverallResult.new(turn_result_list, winner_party)
   end
 
   def is_battle_end(turn_result, current_turn, turn_count)
