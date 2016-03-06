@@ -1,5 +1,5 @@
 # 戦う敵を抽選するクラス
-class Battle::EnemiesLottery
+class Entity::Battle::EnemyMapEntity
   def initialize(enemy_maps)
     @enemy_maps = enemy_maps
     @total = @enemy_maps.inject(0) { |sum, hash| sum + hash[:weight] }
@@ -11,7 +11,6 @@ class Battle::EnemiesLottery
 
     count.times do
       enemy = lot_enemy
-      Rails.logger.debug(enemy)
       list.push(enemy)
     end
 

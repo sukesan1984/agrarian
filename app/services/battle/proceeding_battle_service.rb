@@ -1,4 +1,4 @@
-class Battle::Executor
+class Battle::ProceedingBattleService
   # partyはcharacterで。
   # 指定ターン数戦う。
   def do_battle(party_a, party_b, turn_count)

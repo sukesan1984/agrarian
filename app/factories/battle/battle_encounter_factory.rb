@@ -10,7 +10,7 @@ class Battle::BattleEncounterFactory
     player = @player_character_factory.build_by_player_id(player_id)
 
     enemy_maps = EnemyMap.where(area_id: area_node.area.id)
-    enemies_lottery = Battle::EnemiesLottery.new(enemy_maps)
+    enemies_lottery = Entity::Battle::EnemyMapEntity.new(enemy_maps)
 
     user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: player_id)
     if user_encounter_enemy_group.nil?
@@ -19,7 +19,7 @@ class Battle::BattleEncounterFactory
         enemy_group_id: 0)
     end
 
-    return Battle::Encounter.new(player, area_node, user_encounter_enemy_group, enemy_maps, enemies_lottery)
+    return Battle::EncounteringEnemiesService.new(player, area_node, user_encounter_enemy_group, enemy_maps, enemies_lottery)
   end
 end
 

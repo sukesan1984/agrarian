@@ -1,4 +1,4 @@
-class Battle::Encounter
+class Battle::EncounteringEnemiesService
   def initialize(player, area_node, user_encounter_enemy_group, enemy_maps, enemies_lottery)
     @player = player
     @area_node = area_node

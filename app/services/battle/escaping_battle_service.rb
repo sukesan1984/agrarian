@@ -1,4 +1,4 @@
-class Battle::Escape
+class Battle::EscapingBattleService
   def initialize
   end
 

@@ -44,19 +44,20 @@ class BattleController < ApplicationController
       unit_list_b.push(Entity::Battle::UnitEntity.new(soldier_character))
     end
 
-    executor = Battle::Executor.new
+    executor = Battle::ProceedingBattleService.new
     party_a = Entity::Battle::PartyEntity.new(unit_list_a, 'モンスターたち')
     party_b = Entity::Battle::PartyEntity.new(unit_list_b, '俺のパーティ')
 
     @result = executor.do_battle(party_a, party_b, @turn_count)
 
-    @battle_end = Battle::TerminatingBattleService.new(@result, party_b, party_a, player_character, @death_penalty)
+    enemy_group_entity = @enemy_group_entity_factory.create_by_player_id(player_character.id)
+    @battle_end = Battle::TerminatingBattleService.new(@result, party_b, party_a, player_character, @death_penalty, enemy_group_entity)
     @battle_end.terminate
   end
 
   def escape
     @area_node_id = params[:area_node_id]
-    battle_escape_service = Battle::Escape.new
+    battle_escape_service = Battle::EscapingBattleService.new
     player_character = @player_character_factory.build_by_user_id(current_user.id)
     is_success_to_escape = battle_escape_service.execute(player_character.id)
 
@@ -94,7 +95,7 @@ class BattleController < ApplicationController
     @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory))
 
     @dungeon_entity_factory = DungeonEntityFactory.new
-
+    @enemy_group_entity_factory = EnemyGroupEntityFactory.new
   end
 end
 
