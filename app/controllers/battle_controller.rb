@@ -50,7 +50,8 @@ class BattleController < ApplicationController
 
     @result = executor.do_battle(party_a, party_b, @turn_count)
 
-    @battle_end = Battle::TerminatingBattleService.new(@result, party_b, party_a, player_character, @death_penalty)
+    enemy_group_entity = @enemy_group_entity_factory.create_by_player_id(player_character.id)
+    @battle_end = Battle::TerminatingBattleService.new(@result, party_b, party_a, player_character, @death_penalty, enemy_group_entity)
     @battle_end.terminate
   end
 
@@ -94,7 +95,7 @@ class BattleController < ApplicationController
     @area_service_factory = AreaServiceFactory.new(@player_character_factory, resource_service_factory, resource_service_action_factory, Battle::BattleEncounterFactory.new(@player_character_factory, area_node_factory))
 
     @dungeon_entity_factory = DungeonEntityFactory.new
-
+    @enemy_group_entity_factory = EnemyGroupEntityFactory.new
   end
 end
 

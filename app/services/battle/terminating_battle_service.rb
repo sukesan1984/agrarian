@@ -1,12 +1,13 @@
 # バトルを終了させるサービス
 class Battle::TerminatingBattleService
-  def initialize(result, party_a, party_b, player_character, death_penalty)
+  def initialize(result, party_a, party_b, player_character, death_penalty, enemy_group_entity)
     @result = result
 
     @party_a = party_a
     @party_b = party_b
 
     @player_character = player_character
+    @enemy_group_entity = enemy_group_entity
     @terminating_service = self.get_terminating_service
   end
 
@@ -17,9 +18,9 @@ class Battle::TerminatingBattleService
     end
 
     if @result.is_winner(@party_a)
-      return TerminatingWinningService.new(@party_a, @party_b, @player_character)
+      return TerminatingWinningService.new(@party_a, @party_b, @player_character, @enemy_group_entity)
     else
-      return TerminatingLosingService.new(@death_penalty)
+      return TerminatingLosingService.new(@death_penalty, @enemy_group_entity)
     end
   end
 
@@ -73,24 +74,18 @@ class Battle::TerminatingBattleService
   end
 
   class TerminatingWinningService
-    def initialize(winner_party, defeated_party, player_character)
+    def initialize(winner_party, defeated_party, player_character, enemy_group_entity)
       @winner_party = winner_party
       @defeated_party = defeated_party
       @player_character = player_character
+      @enemy_group_entity = enemy_group_entity
     end
 
     def terminate
       self.give_rails
       self.give_exp
       self.give_items
-      @user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: @player_character.id)
-      # 自分だけの時は消す 
-      if UserEncounterEnemyGroup.where(enemy_group_id: @user_encounter_enemy_group.enemy_group_id).count == 1
-        EnemyGroup.delete_all(id: @user_encounter_enemy_group.enemy_group_id)
-        enemy_instances = EnemyInstance.where(enemy_group_id: @user_encounter_enemy_group.enemy_group_id)
-        enemy_instances.each(&:destroy)
-      end
-      @user_encounter_enemy_group.enemy_group_id = 0
+      @enemy_group_entity.make_unencountered
     end
 
     def give_rails
@@ -113,7 +108,7 @@ class Battle::TerminatingBattleService
       @player_character.save!
       @winner_party.save!
       @item_list.each(&:save!)
-      @user_encounter_enemy_group.save!
+      @enemy_group_entity.save!
     end
 
     def item_list
@@ -131,23 +126,17 @@ class Battle::TerminatingBattleService
   end
 
   class TerminatingLosingService
-    def initialize(party_a, party_b, death_penalty, player_character)
+    def initialize(party_a, party_b, death_penalty, player_character, enemy_group_entity)
       @party_a = party_a
       @party_b = party_b
       @player_character = player_character
       @death_penalty = death_penalty
+      @enemy_group_entity = enemy_group_entity
     end
 
     def terminate
       @death_penalty.give_death_penalty
-      @user_encounter_enemy_group = UserEncounterEnemyGroup.find_by(player_id: @player_character.id)
-      # 自分だけの時は消す 
-      if UserEncounterEnemyGroup.where(enemy_group_id: @user_encounter_enemy_group.enemy_group_id).count == 1
-        EnemyGroup.delete_all(id: @user_encounter_enemy_group.enemy_group_id)
-        enemy_instances = EnemyInstance.where(enemy_group_id: @user_encounter_enemy_group.enemy_group_id)
-        enemy_instances.each(&:destroy)
-      end
-      @user_encounter_enemy_group.enemy_group_id = 0
+      @enemy_group_entity.make_unencountered
     end
 
     def item_list
@@ -158,7 +147,7 @@ class Battle::TerminatingBattleService
       @party_a.save!
       @party_b.save!
       @death_penalty.save!
-      @user_encounter_enemy_group.save!
+      @enemy_group_entity.save!
     end
 
     def result
