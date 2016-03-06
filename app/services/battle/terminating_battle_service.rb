@@ -1,6 +1,5 @@
 # バトルを終了させるサービス
 class Battle::TerminatingBattleService
-  attr_reader :given_exp_result
   def initialize(result, party_a, party_b, player_character, death_penalty)
     @result = result
 
@@ -8,7 +7,6 @@ class Battle::TerminatingBattleService
     @party_b = party_b
 
     @player_character = player_character
-    @given_exp_result = []
     @terminating_service = self.get_terminating_service
   end
 
@@ -39,10 +37,12 @@ class Battle::TerminatingBattleService
   end
 
   def result
-    # TODO: この辺リファクタ
-    return @get_exp.to_s + 'の経験値と' + @added_rails.to_s + 'rails を獲得した'
+    return @terminating_service.result
   end
 
+  def given_exp_result
+    return @terminating_service.given_exp_result
+  end
 
   class TerminatingDrawService
     def initialize(party_a, party_b)
@@ -62,6 +62,14 @@ class Battle::TerminatingBattleService
       @party_a.save!
       @party_b.save!
     end
+
+    def given_exp_result
+      return []
+    end
+
+    def result
+      return ""
+    end 
   end
 
   class TerminatingWinningService
@@ -111,6 +119,15 @@ class Battle::TerminatingBattleService
     def item_list
       return @item_list
     end
+
+    def given_exp_result
+      return @given_exp_result
+    end
+
+    def result
+    # TODO: この辺リファクタ
+      return @get_exp.to_s + 'の経験値と' + @added_rails.to_s + 'rails を獲得した'
+    end
   end
 
   class TerminatingLosingService
@@ -142,6 +159,14 @@ class Battle::TerminatingBattleService
       @party_b.save!
       @death_penalty.save!
       @user_encounter_enemy_group.save!
+    end
+
+    def result
+      return ""
+    end
+
+    def given_exp_result
+      return []
     end
   end
 end
