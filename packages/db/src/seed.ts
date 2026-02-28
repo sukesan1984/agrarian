@@ -4,7 +4,7 @@ import { levels } from "./schema/levels";
 import { towns, establishments } from "./schema/towns";
 import { roads } from "./schema/roads";
 import { areas, areaNodes, routes } from "./schema/areas";
-import { items } from "./schema/items";
+import { items, itemLotteries } from "./schema/items";
 import { equipment } from "./schema/equipment";
 import { enemies, enemyMaps } from "./schema/enemies";
 import { shops, shopProducts, showcases } from "./schema/shops";
@@ -153,15 +153,15 @@ async function seed() {
     .onConflictDoNothing();
   console.log("  Inserted equipment");
 
-  // --- Enemies ---
+  // --- Enemies (itemLotteryGroupId links to itemLotteries.groupId) ---
   const insertedEnemies = await db
     .insert(enemies)
     .values([
-      { name: "スライム", description: "弱い魔物", str: 3, defense: 1, hp: 15, rails: 5, exp: 5, level: 1, dex: 1, damageMin: 1, damageMax: 4 },
-      { name: "ゴブリン", description: "小さな緑の魔物", str: 6, defense: 2, hp: 25, rails: 10, exp: 10, level: 2, dex: 3, damageMin: 3, damageMax: 7 },
-      { name: "オオカミ", description: "素早い獣", str: 8, defense: 3, hp: 30, rails: 15, exp: 15, level: 3, dex: 6, damageMin: 5, damageMax: 10, criticalHitChance: 10, criticalHitDamage: 150 },
-      { name: "オーク", description: "力の強い大型の魔物", str: 15, defense: 8, hp: 60, rails: 30, exp: 30, level: 5, dex: 3, damageMin: 10, damageMax: 20 },
-      { name: "トロール", description: "巨大な魔物", str: 20, defense: 12, hp: 100, rails: 50, exp: 50, level: 8, dex: 2, damageMin: 15, damageMax: 30, damageReduction: 5 },
+      { name: "スライム", description: "弱い魔物", str: 3, defense: 1, hp: 15, rails: 5, exp: 5, level: 1, dex: 1, damageMin: 1, damageMax: 4, dropItemRate: 50, itemLotteryGroupId: 1 },
+      { name: "ゴブリン", description: "小さな緑の魔物", str: 6, defense: 2, hp: 25, rails: 10, exp: 10, level: 2, dex: 3, damageMin: 3, damageMax: 7, dropItemRate: 45, itemLotteryGroupId: 2 },
+      { name: "オオカミ", description: "素早い獣", str: 8, defense: 3, hp: 30, rails: 15, exp: 15, level: 3, dex: 6, damageMin: 5, damageMax: 10, criticalHitChance: 10, criticalHitDamage: 150, dropItemRate: 40, itemLotteryGroupId: 3 },
+      { name: "オーク", description: "力の強い大型の魔物", str: 15, defense: 8, hp: 60, rails: 30, exp: 30, level: 5, dex: 3, damageMin: 10, damageMax: 20, dropItemRate: 35, itemLotteryGroupId: 4 },
+      { name: "トロール", description: "巨大な魔物", str: 20, defense: 12, hp: 100, rails: 50, exp: 50, level: 8, dex: 2, damageMin: 15, damageMax: 30, damageReduction: 5, dropItemRate: 30, itemLotteryGroupId: 5 },
     ])
     .onConflictDoNothing()
     .returning();
@@ -180,6 +180,31 @@ async function seed() {
     ])
     .onConflictDoNothing();
   console.log("  Inserted enemy maps");
+
+  // --- Item Lotteries (drop tables: groupId matches enemy.itemLotteryGroupId) ---
+  await db
+    .insert(itemLotteries)
+    .values([
+      // Group 1: スライム drops
+      { groupId: 1, itemId: insertedItems[7].id, count: 1, weight: 80, compositeGroupId: 1 },  // スライムゼリー
+      { groupId: 1, itemId: insertedItems[0].id, count: 1, weight: 20, compositeGroupId: 1 },  // 薬草
+      // Group 2: ゴブリン drops
+      { groupId: 2, itemId: insertedItems[8].id, count: 1, weight: 70, compositeGroupId: 2 },  // ゴブリンの牙
+      { groupId: 2, itemId: insertedItems[0].id, count: 1, weight: 30, compositeGroupId: 2 },  // 薬草
+      // Group 3: オオカミ drops
+      { groupId: 3, itemId: insertedItems[9].id, count: 1, weight: 70, compositeGroupId: 3 },  // 狼の毛皮
+      { groupId: 3, itemId: insertedItems[0].id, count: 2, weight: 30, compositeGroupId: 3 },  // 薬草 x2
+      // Group 4: オーク drops
+      { groupId: 4, itemId: insertedItems[10].id, count: 1, weight: 60, compositeGroupId: 4 }, // 鉄鉱石
+      { groupId: 4, itemId: insertedItems[8].id, count: 2, weight: 25, compositeGroupId: 4 },  // ゴブリンの牙 x2
+      { groupId: 4, itemId: insertedItems[1].id, count: 1, weight: 15, compositeGroupId: 4 },  // 回復薬
+      // Group 5: トロール drops
+      { groupId: 5, itemId: insertedItems[10].id, count: 2, weight: 50, compositeGroupId: 5 }, // 鉄鉱石 x2
+      { groupId: 5, itemId: insertedItems[9].id, count: 2, weight: 30, compositeGroupId: 5 },  // 狼の毛皮 x2
+      { groupId: 5, itemId: insertedItems[1].id, count: 2, weight: 20, compositeGroupId: 5 },  // 回復薬 x2
+    ])
+    .onConflictDoNothing();
+  console.log("  Inserted item lotteries (drop tables)");
 
   // --- Shops ---
   const insertedShops = await db
