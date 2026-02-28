@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_DB: agrarian_dev
+      POSTGRES_USER: agrarian
+      POSTGRES_PASSWORD: agrarian
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agrarian -d agrarian_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "16379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:

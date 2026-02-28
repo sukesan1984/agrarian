@@ -1,8 +1,0 @@
-/ 次いける部分表示する
-%h2 移動する(下から移動先を選んでね)
-- target_routes.each do |target|
-  %li
-    - if target.area_node.id == current.area_node.id
-      = link_to('移動せずに探索する', "/areas/" + target.area_node.id().to_s() )
-    - else
-      = link_to(target.get_name(), "/areas/" + target.area_node.id().to_s() )

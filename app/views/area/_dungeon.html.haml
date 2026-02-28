@@ -1,6 +1,0 @@
-ダンジョンは多分入り口とかあるよね
-%br
-=form_tag('/dungeon/enter', method: "post") do
-  = object[:dungeon].name
-  \#{hidden_field_tag(:dungeon_id, object[:dungeon].id)}
-  \#{submit_tag("入る")}

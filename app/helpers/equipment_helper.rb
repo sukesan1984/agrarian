@@ -1,3 +1,0 @@
-module EquipmentHelper
-end
-

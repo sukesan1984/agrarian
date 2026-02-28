@@ -1,9 +1,0 @@
-全プレイヤー数: #{@players.count}
-%table{:border => "1"}
-  %tr
-    %th ユーザーID
-    %th 名前
-  - @players.each do |player|
-    %tr
-      %td= player.id
-      %td= player.name

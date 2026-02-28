@@ -1,0 +1,21 @@
+{
+  "name": "agrarian",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "db:push": "pnpm --filter @agrarian/db db:push",
+    "db:seed": "pnpm --filter @agrarian/db db:seed",
+    "db:generate": "pnpm --filter @agrarian/db db:generate",
+    "db:studio": "pnpm --filter @agrarian/db db:studio"
+  },
+  "devDependencies": {
+    "turbo": "^2",
+    "typescript": "^5.7"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  }
+}
