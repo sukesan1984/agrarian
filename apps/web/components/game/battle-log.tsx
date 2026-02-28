@@ -33,7 +33,8 @@ export function BattleLog({ messages, className }: BattleLogProps) {
             msg.includes("倒した") && "text-primary font-bold",
             msg.includes("力尽きた") && "text-destructive font-bold",
             msg.includes("レベルアップ") && "text-exp font-bold",
-            msg.includes("回復") && "text-hp"
+            msg.includes("回復") && "text-hp",
+            msg.includes("ドロップ") && "text-gold font-bold"
           )}
         >
           {`> ${msg}`}
