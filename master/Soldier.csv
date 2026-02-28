@@ -1,4 +1,0 @@
-id,name,description,str_min,str_max,dex_min,dex_max,vit_min,vit_max,ene_min,ene_max,critical_hit_chance_min,critical_hit_chance_max,critical_hit_damage_min,critical_hit_damage_max,dodge_chance_min,dodge_chance_max,damage_reduction_min,damage_reduction_max,level_max
-1,へっぽこ傭兵,最初に仲間にできるへっぽこ傭兵,6,60,6,20,2,26,10,10,0,0,0,0,0,0,0,0,30
-2,おじいちゃんちのブリキロボット,おじいちゃんの家で見つけたブリキでできたロボット,5,50,10,30,6,40,10,10,0,0,0,0,0,0,0,0,30
-3,めろんぐま,メロンと熊が一体化している。夕張地域に多く生息していて、たまにメロンの部分が腐っている奴がいる。,5,50,4,50,10,60,10,10,0,0,0,0,0,0,0,0,30

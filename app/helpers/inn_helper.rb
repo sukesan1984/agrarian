@@ -1,3 +1,0 @@
-module InnHelper
-end
-

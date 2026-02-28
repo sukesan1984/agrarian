@@ -1,3 +1,0 @@
-module BattleHelper
-end
-

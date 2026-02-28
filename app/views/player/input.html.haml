@@ -1,5 +1,0 @@
-%h1 プレイヤー情報入力ページ
-= form_tag('/player/create', method: "post") do
-  = label_tag(:q, "ニックネームを入力してください:")
-  %div= text_field :player, :name
-  = submit_tag("作成")

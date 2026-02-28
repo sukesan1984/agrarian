@@ -1,7 +1,0 @@
-- if(object[:encountered_enemy])
-  - object[:enemies].each do |enemy_instance|
-    = enemy_instance.enemy.name
-    %br/
-  が現れた
-  = render "area/enemy_appeared", area_node_id: object[:area_node_id]
-  %br/
